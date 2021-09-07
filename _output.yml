@@ -11,11 +11,11 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">BIO4558 Manuel de laboratoire</a></li>
+        <li><a href="./">BIO4158 Laboratory manual</a></li>
       after: |
-        <li><a href="https://bookdown.org" target="_blank">Publié avec bookdown</a></li>
+        <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
     download: [pdf, epub, mobi]
-    edit: https://github.com/JulienGAMartin/BIO4558_uOttawa_lab_manual/%s
+    edit: https://github.com/Bio4158-4558-uottawa/lab_manual/%s
     sharing: false
 #      github: no
 #      facebook: no
