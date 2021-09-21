@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>BIO4158 Applied biostats with R</title>
+  <title>1.4 Creating data subsets | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="1.4 Creating data subsets | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="1.4 Creating data subsets | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="preliminary-examination-of-data.html"/>
+<link rel="next" href="data-transformation.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,15 +197,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">BIO4158 Applied biostats with R</h1>
-<h2 class="subtitle"><em>Laboratory manual</em></h2>
-<p class="author"><em>Julien Martin</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>21-09-2021</em></p>
+<div id="creating-data-subsets" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Creating data subsets</h2>
+<p>You will frequently want to do analyses on some subset of your data.
+The command <code>subset()</code> is what you need to isolate cases meeting some criteria.
+For example, to create a subset of the sturgeon data frame that contains only females caught in 1978, you could write:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="creating-data-subsets.html#cb23-1" aria-hidden="true"></a>sturgeon_female_<span class="dv">1978</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(sturgeon, sex <span class="op">==</span><span class="st"> &quot;FEMALE&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">==</span><span class="st"> &quot;1978&quot;</span>)</span>
+<span id="cb23-2"><a href="creating-data-subsets.html#cb23-2" aria-hidden="true"></a>sturgeon_female_<span class="dv">1978</span></span></code></pre></div>
+<pre><code>##      fklngth totlngth  drlngth rdwght age girth    sex   location year
+## 2   50.19685 54.13386 31.49606     NA  24  53.5 FEMALE    THE_PAS 1978
+## 4   50.19685 53.14961 32.28346     NA  23  52.5 FEMALE    THE_PAS 1978
+## 6   49.60630 53.93701 31.10236  35.86  23  54.2 FEMALE    THE_PAS 1978
+## 7   47.71654 51.37795 33.97638  33.88  20  48.0 FEMALE    THE_PAS 1978
+## 15  48.89764 53.93701 29.92126  35.86  23  52.5 FEMALE    THE_PAS 1978
+## 105 46.85039       NA 28.34646  23.90  24    NA FEMALE CUMBERLAND 1978
+## 106 40.74803       NA 24.80315  17.50  18    NA FEMALE CUMBERLAND 1978
+## 107 40.35433       NA 25.59055  20.90  21    NA FEMALE CUMBERLAND 1978
+## 109 43.30709       NA 27.95276  24.10  19    NA FEMALE CUMBERLAND 1978
+## 113 53.54331       NA 33.85827  48.90  20    NA FEMALE CUMBERLAND 1978
+## 114 51.77165       NA 31.49606  35.30  26    NA FEMALE CUMBERLAND 1978
+## 116 45.27559       NA 26.57480  23.70  24    NA FEMALE CUMBERLAND 1978
+## 118 53.14961       NA 32.67717  45.30  25    NA FEMALE CUMBERLAND 1978
+## 119 50.19685       NA 32.08661  33.90  26    NA FEMALE CUMBERLAND 1978
+## 123 49.01575       NA 29.13386  37.50  22    NA FEMALE CUMBERLAND 1978</code></pre>
+
+<div class="rmdcaution">
+When using criteria to select cases, be careful of the <code>==</code> syntax to mean equal to.
+In this context, if you use a single <code>=</code>, you will not get what you want.
+The following table lists the most common criteria to create expressions and their R syntax.
 </div>
-<div id="note" class="section level1 unnumbered" number="">
-<h1>Note</h1>
-<p>Development version. Lab material will appear slowly during the Fall 2021 term.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operateur</th>
+<th>Explication</th>
+<th>Operateur</th>
+<th>Explication</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>Equal to</td>
+<td>!=</td>
+<td>Not equal to</td>
+</tr>
+<tr class="even">
+<td>&gt;</td>
+<td>Larger than</td>
+<td>&lt;</td>
+<td>Lower than</td>
+</tr>
+<tr class="odd">
+<td>&gt;=</td>
+<td>Larger than or equal to</td>
+<td>&lt;=</td>
+<td>Lower than or equal to</td>
+</tr>
+<tr class="even">
+<td>&amp;</td>
+<td>And (vectorized)</td>
+<td>|</td>
+<td>Or (vectorized)</td>
+</tr>
+<tr class="odd">
+<td>&amp;&amp;</td>
+<td>And (control)</td>
+<td>||</td>
+<td>Or (control)</td>
+</tr>
+<tr class="even">
+<td>!</td>
+<td>Not</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<div class="rmdcode">
+Using the commands <code>subset()</code> and <code>hist()</code> , create a histogram for females caught in 1979 and 1980 (hint: <code>sex=="FEMALE" &amp; (year =="1979" | year=="1980")</code>)
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb25-1"><a href="creating-data-subsets.html#cb25-1" aria-hidden="true"></a>sub_female_<span class="dv">7980</span> &lt;-<span class="st"> </span><span class="kw">subset</span>(sturgeon, sex <span class="op">==</span><span class="st"> &quot;FEMALE&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(year <span class="op">==</span><span class="st"> &quot;1979&quot;</span> <span class="op">|</span><span class="st"> </span>year <span class="op">==</span><span class="st"> &quot;1980&quot;</span>))</span>
+<span id="cb25-2"><a href="creating-data-subsets.html#cb25-2" aria-hidden="true"></a><span class="kw">hist</span>(sub_female_<span class="dv">7980</span><span class="op">$</span>fklngth)</span></code></pre></div>
+<div class="figure"><span id="fig:intror-subex"></span>
+<img src="Labs_BIO4158_files/figure-html/intror-subex-1.svg" alt="Distibution of fluke length of female sturgeons in 1979 and 1980" width="672" />
+<p class="caption">
+Figure 1.4: Distibution of fluke length of female sturgeons in 1979 and 1980
+</p>
+</div>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -213,8 +293,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="preliminary-examination-of-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-transformation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -236,7 +316,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/01-introR_4.Rmd",
 "text": "Edit"
 },
 "history": {

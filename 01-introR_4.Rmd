@@ -1,24 +1,46 @@
-## Gérer les données
+<!-- # (PART) Introduction à R {-} -->
 
-### Importer et exporter des données
+# Introduction to R
 
-Il existe de multiple format four sauvegarder les données, les 2 plus utiles sont `.csv` et `.Rdata`.
-Les fichiers `.csv` sont utilisés pour stocker des données.
-Ils sont ouvrables par les éditeurs de texte (e.g. Word, Writer, atom, ...) et les tableurs (e.g. MS Excel, LO Calc).
-Ils sont lus avec la fonction `read.csv` et créés avec `write.csv`.
-Les fichiers `.Rdata` sont utilisés pour stocker n'importe quel objet R pas uniquement des données.
-Cependant, ces fichiers ne peuvent être lus et utilisés que par R.
-Ces fichiers sont lus avec la fonction `load` et créés avec la fonction `save`.
+After completing this laboratory exercise, you should be able to:
 
-Les données pour les exercices de laboratoire et pour les devoirs vous sont fournies en format `.csv`.
+- Open R data files
+- Import rectangular data sets
+- Export R data to text files
+- Verify that data were imported correctly
+- Examine the distribution of a variable
+- Examine visually and test for normality of a variable
+- Calculate descriptive statistics for a variable
+- Transform data
+
+## Packages and data needed for the lab {#set-intro}
+
+This labs needs the following:
+
+* R packages:
+  * ggplot2
+* data files
+  * ErablesGatineau.csv
+  * sturgeon.csv
+
+## Importing and exporting data
+
+There are multiple format to save data. The 2 most used formats with R are `.csv` and `.Rdata`.
+
+- `.csv` files are used to store data in a simple format and are editable using any text editor (e.g. Word, Writer, atom, ...) and spreadsheets (e.g. MS Excel, LO Calc).
+They can be read using the function `read.csv()` and created in R with `write.csv()`.
+- `.Rdata` files are used to store not only data but any R object, however, those files can only be used in R. They are created using the `save()` function and read using the `load()` function.
+
+Data for exercises and labs are provides in `.csv`.
 
 
-#### Répertoire de travail
+### Working directory
 
 ```{block2, type='rmdwarning'}
-Une des erreurs les plus communes lorsque l'on débute avec R est lié au chargement des données et la lecture de fichier externe à R.
+Potentially the most frequent error when starting with R is link to loading data or reading data from an external file in R.
 ```
-Un message d'erreur typique est:
+
+A typical error message is:
 
 ```
 Error in file(file, "rt") : cannot open the connection
@@ -27,53 +49,50 @@ In file(file, "rt") :
   cannot open file 'ou_est_mon_fichier.csv': No such file or directory
 ```
 
-L'erreur est du au fait que R ne sache pas où trouver le fichier. Par défaut lorsqu'on ouvre R, R utilise le dossier utilisateur sur l'ordinateur comme dossier de travail. Cela signifie que R va cherhcer à lire les fichiers dans ce dossier et écrire les nouveaux fichiers dans ce dossier. Ceci n'est pas toujours pratique surtout lorsque l'on débute avec R.
-Pour lire/écrire un fichier dans un endroit particulier sur l'ordinateur, il faut spécifier à R le chemin de cet endroit. Cela peut ce faire de 3 manières différentes:
+This type of error simply means that R cannot find the file you specified. By default, when R starts, a folder is define as the based folder for R. This is the working directory. R by default will save any files in this folder and will start looking for files in this folder. So you need to specify to R where to look for files and where to save your files. This can be done in 3 different ways:
 
-1. avec la fonction `file.choose()`. La fonction ouvrira une boîte de dialogue vous permettant d’aller choisir un fichier sur votre ordinateur. Si cette option semble très attirante de part sa simplicité, je ne recommande pas de s'en servir car elle ne permet pas de reproduire l'analyse facilement. En effet, elle nécessite de choisir le document chaque fois que l'on souhaite l'utiliser.
-2. en spécifiant le chemin complet du fichier dans la commande. Par example `"/home/julien/Documents/cours/BIO4558/labo/data/monfichier.csv"`. C'est assez long à taper et surtout cela ne permet pas de facilement utliser le code sur un autre ordinateur.
-3. en spécifiant un répertoire de travail avec la fonction `setwd()`. Ceci indique à R de chercher et d'écrire les fichiers dans un dossier en particulier. Le chemin des fichiers est toujours interprété de manière relative au répertoire de travail. Cela à l'avantage de pouvoir facilement utiliser le même code sur plusieurs ordinateur ssi la structure du dossier est la même.
+1. `file.choose()`. (not recommended, because not reproducible). This function will open a dialog box allowing you to click on the file you want. This is not recommended and can be long because you will have to do it absolutely every time you use R. 
+2. specify the complete path in the function. For example `read.csv("/home/julien/Documents/cours/BIO4558/labo/data/monfichier.csv")`. This is longer to type the first time and a bit tricky to get the correct path but after you can run the line of code and it works every time without trying to remember were you saved that damned file. However, this is specific to your own computer and would not work elsewhere.
+3. specify a working directory with `setwd()`. This simplify tells R where to look for files and where to save files. (This is automatically done when using .Rmd files). Just set the working directory to where you want and after that all path will be relative to this working directory. The big advantage is that if you keep a similar folder structure for you R project it will be compatible and reproducible across all computer and OS 
 
-POur connaitre le répertoire de travail de R il faut utiliser la fonction `getwd()`. La fonction `setwd()` permet de spécifier le chemin du dossier à utiliser comme répertoire de travail.
+To know which folder is the workind directory simply type `getwd()`
 
 ```{block2, type='rmdtip'}
-Si vous ouvrez `RStudio` en double-cliquant sur un fichier `.R` alors `Rstudio` utlisera le dossier où ce fichier est présent comme répertoire de travail. Plutôt pratique car cela évite d'avoir à utiliser la fonction `setwd()`.
+When opening Rstudio by double-clicking on a file, it will automatically set the working irectory to the folder where this file is located. This can be super handy.
 ```
 
 ```{block2, type = "rmdimportant"}
-Pour l'ensemble des laboratoire du cours, je suggère de créer un dossier dans lequel seront sauvegardés tous les scripts d'analyses et de sauvegardés tous les fichiers de données dans un sous dossier `data`. Le code du labo est structuré de cette manière. C'est pourquoi tous les codes de chargement ou d'écriture de données seront du type `data/mon_fichier.xxx`.
+For all labs, I strongly recommend you to make a folder where you will save all your R scripts and data and use it as your working directory in R. For better organisation I suggest to save your data in a subfolder named `data All R code for data loading in the manual is based on that structure. This is why dat loading or saving code look like `data/my_file.xxx`. If you follow it also all code for data loading can be simply copy-pasted and should work.
 ```
 
-#### Ouvrir un fichier de données en format `.Rdata`
+### Opening a `.Rdata` file
 
-Pour ouvrir ces fichiers, vous pouvez cliquer dessus et laisser votre système d’exploitation démarrer une nouvelle session de R ou encore, à partir de la console de R, utliser la fonction `load` avec le nom et le chemin du fichier de données.
-Par example, pour ouvrir le fichier `ErablesGatineau.Rdata` qui se situe dans le dossier `data` du dossier de travail, il faut taper:
+You can double-click on the file and R/Rstudio should open. Alternatively, you can use `load()` function and specify the names (and path) of the file. For example to load the data `ErablesGatineau.Rdata` in R which is located in the folder `data` in the working directory you can use:
 
 ```{r load, eval = FALSE}
 load("data/ErablesGatineau.Rdata")
 ```
 
 
-#### Ouvrir un fichier de données en format `.csv`
+### Open a `.csv` file
 
-Pour importer ces données en format `.csv` dans R, il faut utiliser la commande `read.csv()`.
-Par exemple, pour créer un objet R `erables` qui contient les données du fichier `ErablesGatineau.csv`, il faut utiliser la commande suivant.
+To import data saved in a `.csv` file, you need to use the `read.csv()` function.
+For example, to create a R object named `erables` which contain the data from the file `ErablesGatineau.csv`, you need to use:
 
 ```{r erables}
 erables <- read.csv("data/ErablesGatineau.csv")
 ```
 
 ```{block2, type='rmdwarning'}
-Attention si vous travaillez dans une langue utilisant la virgule au lieu du point décimal.
-Par défaut, R utilise le point décimal et vous n’obtiendrez pas le résultat escompté.
-Il existe une version modifiée de `read.csv()` appelée `read.csv2()` qui règle ce problème.
-Googlez-la si vous en avez besoin.
+Beware of the coma. If you are working in adifferent language (other than english), be careful because the decimal symbol might ot be the same.
+By default R use the point for the decimal sign. If the dat use the coma for the decimal then R would not be able to read the file correctly. In this case you can use `read.csv2()` or `read.data()` which should solve the problem.
 ```
 
-Pour vérifier si les données ont bel et bien été lues, vous pouvez lister les objets en mémoire avec la fonction `ls()` ou en obtenir une liste avec une description plus détaillée avec `ls.str()`.
+To verify that the data were read and loaded properly, you can list all objects in memory with the `ls()` function, or get a more detailed description with `ls.str()`:
 
 ```{block2, type = "rmdtip"}
-Je vous déconseille cependant, la fonction `ls.str()` car elle peut produire des sorties extrèmementn longue si vous avez beaucoup d'objet dans l'environnement R. Je vous suggère donc d'utliser `ls()` et ensuite `str()` sur l'objet qui vous intéresse.
+I do not recommend to use `ls.str()` since it can produce really long R ouputs when you have multiple R object loaded.
+I suggest instead to use the combination of `ls()` to get the list of all R objects and then `str()` only for the objects you want to look at.
 ```
 
 ```{r ls}
@@ -81,119 +100,113 @@ ls()
 str(erables)
 ```
 
-R confirme avoir en mémoire l’objet `erables`.
-`erables` est un tableau de données rectangulaire (data.frame) contenant 100 observations (lignes) de 3 variables (colonnes): `station`, une variable de type Facteur avec 2 niveaux, et `diam` et `biom` qui sont 2 variables numériques.
+R confirms that the object `erables`.
+`erables` is a data.frame that contains 100 observations (lines) of 3 variables (columns) : `station` , a variable of type Factor with 2
+levels, and `diam` and `biom` that are 2 numeric variables.
 
 
-#### Entrer des données
+### Entering data in R
 
-R n’est pas un environnement idéal pour entrer des données.
-C’est possible, mais la syntaxe est lourde et peut inciter à s'arracher les cheveux.
-Utilisez votre chiffrier préféré pour faire l’entrée de données.
-Ce sera plus efficace et moins frustrant.
+R is not the ideal environment to input data. It is possible, but the syntax is heavy and makes most people upset. Use your preferred worksheet program instead. It will be more efficient and less frustrating.
 
 
-#### Nettoyer/corriger des données
+### Cleaning up / correcting data
 
-Une autre opération qui peut être frustrante en R.
-Mon conseil : ne le faites pas là.
-Retournez au fichier original, faites la correction, puis re-exportez les données vers R.
-Il est finalement plus simple de refaire exécuter les quelques lignes de code par la machine.
-Vous aurez à la fin une seule version (corrigée) de vos données et un code qui vous permet de refaire votre analyse.
+Another operation that can be frustrating in R. Our advice: unless you want to keep track of all corrections made (so that you can go back to the original data), do not change data in R. Return to the original data file (in a worksheet or database), correct the data there, and then reimport into R. It is simple to resubmit the few lines of code to reimport data. Doing things this way will leave you with a single version of your data file that has all corrections, and the code that allows you to repeat the analysis exactly.
 
 
-#### Exporter des données à partir de R.
+### Exporting data from R
 
-Vous pouvez utiliser la fonction,
+You have 2 options: export data in `.csv` or in `.Rdata`
+
+To export in `.Rdata` use the function `save()` to export in `.csv` use `write.csv()`
+
+For example, to save teh object `mydata` in a file `wonderful_data.csv`that will be saved in your working directory you can type:
 
 ```{r write, eval =FALSE}
-write.csv(mydata, file = "outfilename.csv", row.names = FALSE)
+write.csv(mydata, file = "wonderful_data.csv", row.names = FALSE)
 ```
 
-où `mydata` est le nom du base de données à exporter et `outfilename.csv` est le nom du fichier à produire.
-Notez que ce fichier sera créé dans le répertoire de travail (qui peut être changé par le menu à `File>Change dir`, ou par la commande `setwd()`)
 
 
-### Examen préliminaire des données
+## Preliminary examination of data
 
-La première étape de toute analyse est l’examen des données.
-Elle nous permet de découvrir si on a bien importé les données, si les nombres enregistrés sont possibles, si toutes les données ont bien été lues, etc.
-L’examen préliminaire des données permet souvent aussi d’identifier des observations suspectes, possiblement dûes à des erreurs d’entrée de donnée.
-Finalement, l’examen graphique préliminaire permet en général de visualiser les tendances principales qui seront confirmées par l’analyse statistique en tant que telle.
-Le fichier `sturgeon.csv` contient les données d’une étude effectuée sur les esturgeons de la rivière Saskatchewan.
-Ces données ont été récoltées, entre autres, pour examiner comment la taille des esturgeons varie entre les sexes (sex), les sites (location), et les années (year).
+The first step of data analysis is to examine the data at hand. This examination will tell you if the data were correctly imported, whether the numbers are credible, whether all data came in, etc. This initial data examination often will allow you to detect unlikely observations, possibly due to errors at the data entry stage. Finally, the initial plotting of the data will allow you to visualize the major trends that will be confirmed later by your statistical analysis.
+
+The file `sturgeon.csv` contains data on sturgeons from the Saskatchewan River. These data were collected to examine how sturgeon size varies among sexes ( `sex` ), sites ( `location` ), and years( `year` ).
 
 <!-- - Pour recommencer avec une ardoise vide, videz la mémoire de R de tout son contenu en tapant la commande `rm(list=ls())`-->
 
-- Chargez les données du fichier `sturgeon.csv` dans un objet `sturgeon`.
-- Pour obtenir un aperçu des éléments du fichier qui ont été chargés en mémoire, taper la commande `str(sturgeon)`.
+- Load the data from `sturgeon.csv` in a R object named `sturgeon`.
+- use the function `str()` to check that the data was loaded and read correctly.
 
 ```{r load-stur}
 sturgeon <- read.csv("data/sturgeon.csv")
 str(sturgeon)
 ```
 
-#### Sommaire statistique
+### Summary statistics
 
-Pour un sommaire du contenu du base de données appelé sturgeon qui est en mémoire, taper la commande
+To get summary statistics on the contents of the data frame sturgeon, type the command:
 
 ```{r sum-stur}
 summary(sturgeon)
 ```
 
-Pour chaque variable, R donne le minimum, le maximum, la médiane qui est la valeur au milieu de la liste des observations ordonnées (appelée le 50 ième percentile), ici, la 93 ième valeur des 186 observations, les valeurs au premier (25%) et troisième quartile (75%), et si il y a des valeurs manquantes dans la colonne.
-Notez que plusieurs des variables ont des observations manquantes (NA).
-Donc, seules les variables fklngth (longueur à la fourche), sex, location et year ont 186 observations.
+For each variable, R lists:
+
+- the minimum
+- the maximum
+- the median that is the $50^{th}$ percentile, here the $93^{rd}$ value of the 186 observations ordered in ascending order
+- values at the first (25%) and third quartile (75%)
+- the number of missing values in the column.
+
+Note that several variables have missing values (NA). Only the variables `fklngth` (fork length), `sex` , `location` , and `year` have 186 observations.
 
 ```{block2, type='rmdwarning'}
-**Attention aux valeurs manquantes**
-Plusieurs fonctions de R y réagissent mal et on doit souvent faire les analyses sur des sous- ensembles sans valeur manquante, par des commandes ou des options dans les commandes.
-On y reviendra, mais prenez l’habitude de noter mentalement si il y a des données manquantes et de vous en rappeler en faisant l’analyse.
+**Beware of missing values**
+
+Several R functions are sensitive to missing values and you will frequently have to do your analyses on data subsets without missing data, or by using optional parameters in various commands. We will get back to this, but you should always pay attention and take note of missing data when you do analyses.
 ```
 
-#### Histogramme, densité de probabilité empirique, boxplot et examen visuel de la normalité
+### Histogram, empirical probability density, boxplot, and visual assessment of normality
 
-Examinons maintenant de plus près la distribution de fklngth.
-La commande `hist()` permet de tracer un histogramme de la variable fklngth dans le base de données sturgeon.
+Let’s look more closely at the distribution of `fklngth`.
+The command `hist()` will create a histogram. For the histogram of `fklngth` in the `sturgeon` data frame, type the command:
 
-```{r hist-stur}
+```{r hist-stur, fig.cap= "Histogram of fluke length of sturgeons"}
 hist(sturgeon$fklngth)
 ```
 
-Les données semblent suivre approximativement une distribution normale.
+The data appear to be approximately normal. This is good to know.
 
 ```{block2, type = "rmdnote"}
-Cette syntaxe peut paraître un peu lourde puisqu’on doit ajouter le préfixe `sturgeon$` devant chaque nom de variable.
-On pourrait se faciliter la tâche en utilisant la commande `attach()` **mais cela est fortement déconseillé** et jamais utilisé dans ce document.
+
+Note that this syntax is a bit heavy as you need to prefix variable names by the data frame name `sturgeon$`. You can lighten the syntax by making the variables directly accessible by commands by typing the command `attach()`.
+However, I **strongly recommend not to use** it because it can lead to many problems hard to detect compare to the little benfit is provides
 ```
 
-Cet histogramme est la représentation classique.
-Mais les histogrammes ne sont pas parfaits.
-Leur forme dépend en partie du nombre de catégories utilisées, surtout pour les petits échantillons.
-On peut faire mieux, particulièrement si on est intéressé à comparer visuellement la distribution des observations à une distribution normale.
-Mais il faut programmer un peu (ou savoir copier-coller...).
-Le code suivant est un histogramme fait avec l'extension `ggplot2`.
+This histogram (Fig. \@ref(fig:hist-stur)) is a very classical representation of the distribution. Histograms are not perfect however because their shape partly depends on the number of bins used, more so for small samples. One can do better, especially if you want to visually compare the observed distribution to a normal distribution. But you need to come up with a bit of extra R code based on the `ggplot2` `r emo::ji("package")`.
 
-```{block2, type = "rmdcode"}
-Copiez-collez le code suivant dans une nouvelle fenêtre script (File->New script, ou Ctrl-n dans Windows), puis exécutez le.
-```
-
-```{r stur-g1, warning = FALSE, message =  FALSE}
-## Chargez l'extension ggplot si besoin
+```{r stur-g1, fig.cap = "Distribution of fluke length in sturgeon plotted with ggplot",warning = FALSE, message =  FALSE}
+## load ggplot2 if needed
 library(ggplot2)
-##  créer un graphique `mygraph` utilisant les données de "sturgeon"
-## et définir l'axe des X comme la longueur `fklngth`
+
+## use "sturgeon" dataframe to make plot called mygraph
+# and define x axis as representing fklngth
 mygraph <- ggplot(data = sturgeon, aes(x = fklngth))
 
-## ajouter différentes parties au graphique
+## add data to the mygraph ggplot
 mygraph <- mygraph +
-  ## histogramme semi-transparent
-  geom_histogram(aes(y = ..density..), bins = 30, color = "black", alpha = 0.3) +
-  ##  line de densité
+  ## add semitransparent histogram
+  geom_histogram(aes(y = ..density..),
+    bins = 30, color = "black", alpha = 0.3
+  ) +
+  ##  add density smooth
   geom_density() +
-  ##  localisation des observations
+  ## add observations positions or rug bars
   geom_rug() +
-  ##  courbe de distribution normale approximé au données
+  ## add Gaussian curve adjusted to the data with mean and sd from fklngth
   stat_function(
     fun = dnorm,
     args = list(
@@ -203,155 +216,167 @@ mygraph <- mygraph +
     color = "red"
   )
 
-## montrer le graphique
+## display graph
 mygraph
 ```
 
-Chaque observation est représentée par une barre sous l’axe des x (rug).
-En rouge est la distribution normale de données avec la même moyenne et écart-type que les observations.
-Et l’autre ligne est la densité de probabilité empirique, « lissée » à partir des observations.
-Si vous êtes plus aventureux, vous pouvez examiner la distribution des observations de fklngth par sous-groupes (par exemple sex et year) avec :
+Each observation is represented by a short vertical bar below the x- axis (rug). The red line is the normal distribution with the same mean and standard deviation as the data. The other line is the empirical distribution, smoothed from the observations.
+
+The ggplot object you just created (`mygraph`) can be further manipulated. For example, you can plot the distribution of `fklngth` per `sex` and `year` groups simply by adding a `facet_grid()` statement:
 
 ```{r aventure}
 mygraph + facet_grid(year ~ sex)
 ```
 
-Chaque panneau illustre la distribution pour un sexe cette année-là, et la courbe en rouge récurrente représente la distribution normale pour l’ensemble des données.
-Cette courbe peut servir à mieux évaluer visuellement les différences entre les panneaux.
-Une autre façon d’évaluer la normalité de données visuellement est de faire un QQ plot avec la paire de commandes `qqnorm()` et `qqline()`.
+Each panel contains the data distribution for one sex that year, and the recurring red curve is the normal distribution for the entire data set. It can serve as a reference to help visually evaluate differences among panels.
+
+Another way to visually assess normality of data is the QQ plot that is
+obtained by the pair of commands `qqnorm()` and `qqline()`.
+
 ```{r stur-norm}
 qqnorm(sturgeon$fklngth)
 qqline(sturgeon$fklngth)
 ```
+ Perfectly normal data would follow the straight diagonal line. Here there are deviations in the tails of the distribution and a bit to the right of the center.
+ Compare this representation to the two preceding graphs.
+ You will probably agree that it is easier to visualize how data deviate from normality by looking at a histogram of an empirical probability density than by looking at the QQ plots.
+ However, QQ plots are often automatically produced by various statistical routines and you should be able to interpret them.
+ In addition, one can easily run a formal test of normality in R with the command `shapiro.test()` that computes a statistic (`W`) that measures how tightly data fall around the straight diagonal line of the QQ plot. If data fall perfectly on the line, then `W = 1`. If `W` is much less than 1, then data are not normal.
 
-Des données parfaitement normales suivraient la ligne droite diagonale.
-Ici, il y a des déviations dans les queues de la distribution, et un peu à droite du centre.
-Comparez cette représentation à celle des deux graphiques précédents.
-Vous conviendrez sans doute avec moi qu’il est plus facile de visualiser comment la distribution dévie de la normalité sur les histogrammes et les graphiques de la densité empirique de probabilité que sur les QQ plots.
-Ceci dit, les QQ plots sont souvent utilisés et vous devriez être capable de les interpréter.
-De plus, on peut facilement éprouver statistiquement l’hypothèse que les données sont distribuées normalement avec R par la commande `shapiro.test()` qui calcule une statistique (W) qui est une mesure de la tendance des points d’un QQ plot à former une ligne parfaite.
-Si oui, alors W=1.
-Si W s’éloigne de 1 (vers 0), alors les données s’éloignent de la normalité.
-Ici,
+For the `fklngth` data:
+
 ```{r shapito-stur}
 shapiro.test(sturgeon$fklngth)
 ```
 
-W n’est pas très loin de 1, mais suffisamment pour que la différence soit significative.
-L’examen visuel des grands échantillons est souvent compliqué par le fait que plusieurs points se superposent et qu’il devient plus difficile de bien visualiser la tendance centrale.
-Les boxplots avec "moustaches" (box and whiskers plots) offrent une alternative intéressante.
-La commande `boxplot()` peut produire un boxplot de fklngth pour chaque niveau de sex, et ajoute les coches.
+W is close to 1, but far enough to indicate a statistically significant deviation from normality.
 
-```{r boxplot-stur}
+Visual examination of very large data sets is often made difficult by the superposition of data points. Boxplots are an interesting alternative.
+The command `boxplot(fklngth~sex, notch=TRUE)` produces a boxplot of `fklngth` for each `sex` , and adds whiskers.
+
+```{r boxplot-stur, fig.cap = "Boxplot of fluke length in strugeon by sex"}
 boxplot(fklngth ~ sex, data = sturgeon, notch = TRUE)
 ```
 
-La ligne un peu plus épaisse dans la boîte de la Figure indique la médiane.
-La coche est proportionnelle à l’incertitude quant à la position de la médiane.
-On peut visuellement interpréter approximativement les différences entre médianes en examinant si il y a chevauchement entre les coches (ici, il n’y a pas chevauchement, et on conclurait provisoirement que la médiane de fklngth pour les femelles est supérieure à celle des mâles).
-Les boîtes s’étendent du premier au troisième quartile (du 25ième au 75ième percentile si vous préférez), Les barres (moustaches ou whiskers) au-dessus et en dessous des boîtes s’étendent soit de la valeur minimum à la valeur maximum, ou, si il y a des valeurs extrêmes, de la plus petite à la plus grande valeur à l’intérieur de 1.5x la largeur de l’étendue interquartile .
-Enfin, les observations qui excèdent les limites des moustaches (donc à plus de 1.5x l’étendue interquartile de chaque côté de la médiane) sont indiquées par des symboles.Ce sont des valeurs qui pourraient être considérées comme extrêmes et possiblement aberrantes.
+The slightly thicker line inside the box of figure \@ref(fig:boxplot-stur) indicates the median.
+The width of the notch is proportional to the uncertainty around the median estimate.
+One can visually assess the approximate statistical significance of differences among medians by looking at the overlap of the notches (here there is no overlap and one could tentatively conclude that the median female size is larger than the median male size).
+Boxes extend from the first to third quartile (the 25^th^ to 75^th^ percentile if you prefer).
+Bars (whiskers) extend above and below the boxes from the minimum to the maximum observed value or, if there are extreme values, from the smallest to the largest observed value within 1.5x the interquartile range from the median. Observations exceeding the limits of the whiskers (hence further away from the median than 1.5x the interquartile range, the range between the 25^th^ and 75^th^ percentile) are plotted as circles. These are outliers, possibly aberrant data.
 
-#### Diagrammes de dispersion bivariés
+### Scatterplots
 
-En plus des graphiques pour chacune des variables séparément, il est très souvent intéressant de jeter un coup d’oeil aux diagrammes de dispersion .
-La commande `plot(y~x)` permet de faire le graphique de y sur l’axe vertical (l’ordonnée) en fonction de x sur l’axe horizontal (l’abscisse).
+In addition to histograms and other univariate plots, it is often informative to examine scatter plots.
+The command `plot(y~x)` produces a scatter plot of y on the vertical axis (the ordinate) vs x on the horizontal axis (abscissa).
 
 ```{block2, type = "rmdcode"}
- Faites un graphique de fklngth en fonction de age avec la commande plot.
+ Create a scatterplot of fklngth vs age using the plot() command.
 ```
 
-Vous devriez obtenir:
+You should obtain:
 
 ```{r stur-biv-plot}
 plot(fklngth ~ age, data = sturgeon)
 ```
 
-R a une fonction qui permet la création des graphiques de dispersion de toutes les paires de variables (`pairs()`).
-Une des option de ¬ est l’ajout d’une trace lowess qui indique la tendance de la relation entre les variables.
-Pour obtenir la matrice de ces graphiques avec la trace lowess pour toutes les variable dans sturgeon, entrer la commande `pairs(sturgeon[,1:6], panel=panel.smooth)` et vous devriez obtenir
+R has a function to create all pairwise scatterplots rapidly called
+`pairs()` . One of `pairs()` options is the addition of a lowess trace on
+each plot to that is a smoothed trend in the data.
+To get the plot matrix with the lowess smooth for all variables in the
+sturgeon data frame, execute the command
+`pairs(sturgeon, panel=panel.smooth)`. Howeber given the large number of variable in `sturgeon` we can limit the plot to the first 6 columns in the data.
 
 ```{r pairs-stur}
 pairs(sturgeon[, 1:6], panel = panel.smooth)
 ```
 
-### Créer des sous-ensembles de cas
+## Creating data subsets
 
-Il arrive fréquemment qu'une analyse se concentre sur un sous-ensemble des observations contenues dans un fichier de données.
-Les cas sont d’habitude sélectionnés selon un critère en particulier.
-Pour utiliser un sous-ensemble de vos données en créant un graphique ou en performant une analyse, on peut utiliser la commande `subset()`.
-Par exemple, pour créer un sous ensemble des données du tableau sturgeon qui ne contient que les femelles capturées en 1978, on peut écrire :
+You will frequently want to do analyses on some subset of your data.
+The command `subset()` is what you need to isolate cases meeting some criteria.
+For example, to create a subset of the sturgeon data frame that contains only females caught in 1978, you could write:
 
 ```{r stur-subset}
-sturgeon.female.1978 <- subset(sturgeon, sex == "FEMALE" & year == "1978")
-sturgeon.female.1978
+sturgeon_female_1978 <- subset(sturgeon, sex == "FEMALE" & year == "1978")
+sturgeon_female_1978
 ```
 
 ```{block2, type = "rmdcaution"}
-Dans ces comparaisons, il faut toujours utiliser `==` pour égal à.
-Dans ce contexte, si vous utilisez `=` seulement, vous n’obtiendrez pas ce que vous désirez.
-Dans le tableau qui suit se trouve une liste de commandes communes que vous allez probablement utiliser pour créer des expressions en R.
+When using criteria to select cases, be careful of the `==` syntax to mean equal to.
+In this context, if you use a single `=`, you will not get what you want.
+The following table lists the most common criteria to create expressions and their R syntax.
 ```
 
 Operateur | Explication | Operateur | Explication
 ----------|----------|----------|----------
- ==       | Égal à   | !=       | Pas égal à
- \>       | Plus que | <        | Moins que
- \>=      | Plus que ou égal à | <= | Moins que ou égal à
- \& | Et vectorisé | \| | Ou vectorisé
- \&\& | Et contrôle | \|\| | Ou contrôle
- ! | Pas | |
+ ==       | Equal to   | !=       | Not equal to
+ \>       | Larger than | <        | Lower than
+ \>=      | Larger than or equal to | <= | Lower than or equal to
+ \& | And (vectorized) | \| | Or (vectorized)
+ \&\& | And (control) | \|\| | Or (control)
+ ! | Not | |
 
 ```{block2, type ="rmdcode"}
-En utilisant les commandes `subset()` et `hist()`, essayez de faire un histogramme pour le sous-ensemble de cas correspondant aux femelles capturées en 1979 et 1980 (donc `sex == "FEMALE" & (year == "1979" | year == "1980")`)
+Using the commands `subset()` and `hist()` , create a histogram for females caught in 1979 and 1980 (hint: `sex=="FEMALE" & (year
+=="1979" | year=="1980")`)
 ```
 
 
-### Transformations de données
+```{r intror-subex, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution of fluke length of female sturgeons in 1979 and 1980"}
 
-Il est très fréquemment nécessaire d’effectuer des transformations mathématiques sur les données brutes pour mieux satisfaire aux conditions d’application de tests statistiques.
-R étant aussi un langage de programmation complet, il peut donc effectuer les transformations désirées.
-Les fonctions les plus fréquemment utilisées sont:
+sub_female_7980 <- subset(sturgeon, sex == "FEMALE" & (year == "1979" | year == "1980"))
+hist(sub_female_7980$fklngth)
+```
+
+## Data transformation
+
+You will frequently transform raw data to better satisfy assumptions of statistical tests. R will allow you to do that easily.
+The most used functions are probably:
 
 - `log()`
 - `sqrt()`
 - `ifelse()`
 
-On peut employer ces fonctions directement dans les lignes de commandes, ou encore créer de nouvelles variables orphelines ou faisant partie d’un data.frame.
-Par exemple, pour faire un graphique du logarithme décimal de fklngth en fonction de l’âge, on peut écrire
+You can use these functions directly within commands, create vector variables, or add columns in data frames.
+To do a plot of the decimal log of fklngth vs age, you can simply use the `log10()` function within the plot command:
 
 ```{r plot-translog-stur-plot, eval = FALSE}
-plot(log(fklngth) ~ age, data = sturgeon)
+plot(log10(fklngth)~age, data = sturgeon)
 ```
 
- Pour créer une variable orpheline (i.e. non incluse dans le data.frame) appelée logfklngth et contenant le logarithme décimal de fklngth, on peut écrire
+To create a vector variable, an orphan variable if you wish, one that is not part of a data frame, called `lfklngth` and corresponding too the decimal log of `fklngth`, simply enter:
 
- ```{r translog-stur-orph, eval = FALSE}
+```{r translog-stur-orph, eval = FALSE}
 logfklngth <- log10(sturgeon$fklngth)
- ```
+```
 
-Si on veut ajouter cette variable transformée à un tableau de données (data.frame), alors, on doit préfixer le nom de la variable par le nom du base de données et du symbole `$`, par exemple, pour ajouter une variable nommée `lfkl` contenant le log10 de fklngth au tableau sturgeon, on peut écrire:
+If you want this new variable to be added to a data frame, then you must prefix the variable name by the data frame name and the `$` symbol.
+For example to add the variable `lfkl` containing the decimal log of `fklngth` to the `sturgeon` data frame, enter:
 
 ```{r translog-stur-dat, eval = FALSE}
-sturgeon$logfkl <- log10(sturgeon$fklngth)
+sturgeon$lfkl <- log10(sturgeon$fklngth)
 ```
 
-N’oubliez pas de sauvegarder ce tableau modifié si vous voulez avoir accès à cette nouvelle variable dans le futur.
-Pour les transformations conditionnelles, on peut utiliser la fonction `ifelse()`.
-Par exemple, pour créer une nouvelle variable appelée dummy qui sera égale à 1 pour les mâles et 0 pour les femelles, on peut écrire:
+`lfkl` will be added to the data frame `sturgeon` for the R session.
+Do not forget to save the modified data frame if you want to keep the modified version. Or better, save you Rscript and do not forget to run the line of code again next time you need it.
+
+For conditional transformations, you can use the function `ifelse()`.
+For example, to create a new variable called dummy with a value of 1 for males and 0 for females, you can use:
 
 ```{r translog-stur-dummy, eval = FALSE}
 sturgeon$dummy <- ifelse(sturgeon$sex == "MALE", 1, 0)
 ```
 
 
-### Exercice sur R
+## Exercice
 
-Vous trouverez dans le fichier `salmonella.csv`, des valeurs numériques du ratio d'infection des cellules par la salmonelle dans deux milieux (IN VITRO et IN VIVO) et pour trois souches différentes de salmonelles.
-Examinez les données pour le ratio et faites des graphiques pour évaluer la normalité de la distribution des ratios pour la souche SAUVAGE dans les 2 milieux combinés et produire un graphique.
+The file `salmonella.csv` contains numerical values for the variable
+called ratio for two environments (`milieu`: `IN VITRO` or `IN VIVO`)
+and for 3 strains (`souche`).
+Examine the ratio variable and make a graph to visually assess normality for the wild (SAUVAGE) strain.
 
 
-```{r intror-exer, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution des ratios d'infections par la souche sauvage de salmonelle"}
+```{r intror-exer, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella"}
 ## Charger les données
 salmonella <- read.csv("data/salmonella.csv")
 
@@ -363,13 +388,13 @@ mygraph <- mygraph +
   geom_density() +
   # position des observations
   geom_rug() +
-  # histogramme
+  # histogram
   geom_histogram(aes(y = ..density..),
     bins = 30,
     color = "black",
     alpha = 0.3
   ) +
-  # distribution normal ajustée
+  # ajusted Gaussian distribution
   stat_function(
     fun = dnorm,
     args = list(
@@ -378,6 +403,6 @@ mygraph <- mygraph +
     ),
     color = "red"
   )
-## faire le graphique
+## plot the graph
 mygraph
 ```

@@ -1,25 +1,25 @@
 <!-- # (PART) Introduction à R {-} -->
 
-# Introduction à R
+# Introduction to R
 
-Après avoir complété cet exercice de laboratoire, vous pourrez :
-- Ouvrir des fichiers de données R déjà existants
-- Importer des ensembles de données rectangulaires
-- Exporter des donnes de R vers un fichier texte
-- Vérifier si les données ont été correctement importées
-- Examiner la distribution des observations d’une variable
-- Examiner visuellement et tester la normalité d’une variable
-- Calculer des statistiques descriptives d’une variable
-- Effectuer des transformations de données
+After completing this laboratory exercise, you should be able to:
 
-## Paquets et données requises pour le labo {#set-intro}
+- Open R data files
+- Import rectangular data sets
+- Export R data to text files
+- Verify that data were imported correctly
+- Examine the distribution of a variable
+- Examine visually and test for normality of a variable
+- Calculate descriptive statistics for a variable
+- Transform data
 
-Ce laboratoire nécessite:
+## Packages and data needed for the lab {set-intro}
 
-* les paquets R:
-  * questionr
+This labs needs the following:
+
+* R packages:
   * ggplot2
-* les fichiers de données
+* data files
   * ErablesGatineau.csv
   * sturgeon.csv
 

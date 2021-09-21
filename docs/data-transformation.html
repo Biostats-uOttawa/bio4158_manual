@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>BIO4158 Applied biostats with R</title>
+  <title>1.5 Data transformation | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="1.5 Data transformation | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="1.5 Data transformation | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="creating-data-subsets.html"/>
+<link rel="next" href="exercice.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,15 +197,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">BIO4158 Applied biostats with R</h1>
-<h2 class="subtitle"><em>Laboratory manual</em></h2>
-<p class="author"><em>Julien Martin</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>21-09-2021</em></p>
-</div>
-<div id="note" class="section level1 unnumbered" number="">
-<h1>Note</h1>
-<p>Development version. Lab material will appear slowly during the Fall 2021 term.</p>
+<div id="data-transformation" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Data transformation</h2>
+<p>You will frequently transform raw data to better satisfy assumptions of statistical tests. R will allow you to do that easily.
+The most used functions are probably:</p>
+<ul>
+<li><code>log()</code></li>
+<li><code>sqrt()</code></li>
+<li><code>ifelse()</code></li>
+</ul>
+<p>You can use these functions directly within commands, create vector variables, or add columns in data frames.
+To do a plot of the decimal log of fklngth vs age, you can simply use the <code>log10()</code> function within the plot command:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-transformation.html#cb26-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">log10</span>(fklngth)<span class="op">~</span>age, <span class="dt">data =</span> sturgeon)</span></code></pre></div>
+<p>To create a vector variable, an orphan variable if you wish, one that is not part of a data frame, called <code>lfklngth</code> and corresponding too the decimal log of <code>fklngth</code>, simply enter:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="data-transformation.html#cb27-1" aria-hidden="true"></a>logfklngth &lt;-<span class="st"> </span><span class="kw">log10</span>(sturgeon<span class="op">$</span>fklngth)</span></code></pre></div>
+<p>If you want this new variable to be added to a data frame, then you must prefix the variable name by the data frame name and the <code>$</code> symbol.
+For example to add the variable <code>lfkl</code> containing the decimal log of <code>fklngth</code> to the <code>sturgeon</code> data frame, enter:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-transformation.html#cb28-1" aria-hidden="true"></a>sturgeon<span class="op">$</span>lfkl &lt;-<span class="st"> </span><span class="kw">log10</span>(sturgeon<span class="op">$</span>fklngth)</span></code></pre></div>
+<p><code>lfkl</code> will be added to the data frame <code>sturgeon</code> for the R session.
+Do not forget to save the modified data frame if you want to keep the modified version. Or better, save you Rscript and do not forget to run the line of code again next time you need it.</p>
+<p>For conditional transformations, you can use the function <code>ifelse()</code>.
+For example, to create a new variable called dummy with a value of 1 for males and 0 for females, you can use:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="data-transformation.html#cb29-1" aria-hidden="true"></a>sturgeon<span class="op">$</span>dummy &lt;-<span class="st"> </span><span class="kw">ifelse</span>(sturgeon<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;MALE&quot;</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -213,8 +226,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-data-subsets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercice.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -236,7 +249,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/01-introR_4.Rmd",
 "text": "Edit"
 },
 "history": {

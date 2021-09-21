@@ -1,6 +1,6 @@
 <!-- # (PART) Analyse de puissance {-} -->
 
-# Analyse de puissance avec R et G\*Power
+# Power Analysis with R and G\*Power
 
 Après avoir complété cet exercice de laboratoire, vous devriez :
 

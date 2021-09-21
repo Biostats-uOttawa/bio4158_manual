@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>BIO4158 Applied biostats with R</title>
+  <title>1.2 Importing and exporting data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="1.2 Importing and exporting data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="1.2 Importing and exporting data | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="preface.html"/>
+<link rel="prev" href="set-intro.html"/>
+<link rel="next" href="preliminary-examination-of-data.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,15 +197,89 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">BIO4158 Applied biostats with R</h1>
-<h2 class="subtitle"><em>Laboratory manual</em></h2>
-<p class="author"><em>Julien Martin</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>21-09-2021</em></p>
+<div id="importing-and-exporting-data" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Importing and exporting data</h2>
+<p>There are multiple format to save data. The 2 most used formats with R are <code>.csv</code> and <code>.Rdata</code>.</p>
+<ul>
+<li><code>.csv</code> files are used to store data in a simple format and are editable using any text editor (e.g. Word, Writer, atom, …) and spreadsheets (e.g. MS Excel, LO Calc).
+They can be read using the function <code>read.csv()</code> and created in R with <code>write.csv()</code>.</li>
+<li><code>.Rdata</code> files are used to store not only data but any R object, however, those files can only be used in R. They are created using the <code>save()</code> function and read using the <code>load()</code> function.</li>
+</ul>
+<p>Data for exercises and labs are provides in <code>.csv</code>.</p>
+<div id="working-directory" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Working directory</h3>
+
+<div class="rmdwarning">
+Potentially the most frequent error when starting with R is link to loading data or reading data from an external file in R.
 </div>
-<div id="note" class="section level1 unnumbered" number="">
-<h1>Note</h1>
-<p>Development version. Lab material will appear slowly during the Fall 2021 term.</p>
+<p>A typical error message is:</p>
+<pre><code>Error in file(file, &quot;rt&quot;) : cannot open the connection
+In addition: Warning message:
+In file(file, &quot;rt&quot;) :
+  cannot open file &#39;ou_est_mon_fichier.csv&#39;: No such file or directory</code></pre>
+<p>This type of error simply means that R cannot find the file you specified. By default, when R starts, a folder is define as the based folder for R. This is the working directory. R by default will save any files in this folder and will start looking for files in this folder. So you need to specify to R where to look for files and where to save your files. This can be done in 3 different ways:</p>
+<ol style="list-style-type: decimal">
+<li><code>file.choose()</code>. (not recommended, because not reproducible). This function will open a dialog box allowing you to click on the file you want. This is not recommended and can be long because you will have to do it absolutely every time you use R.</li>
+<li>specify the complete path in the function. For example <code>read.csv("/home/julien/Documents/cours/BIO4558/labo/data/monfichier.csv")</code>. This is longer to type the first time and a bit tricky to get the correct path but after you can run the line of code and it works every time without trying to remember were you saved that damned file. However, this is specific to your own computer and would not work elsewhere.</li>
+<li>specify a working directory with <code>setwd()</code>. This simplify tells R where to look for files and where to save files. (This is automatically done when using .Rmd files). Just set the working directory to where you want and after that all path will be relative to this working directory. The big advantage is that if you keep a similar folder structure for you R project it will be compatible and reproducible across all computer and OS</li>
+</ol>
+<p>To know which folder is the workind directory simply type <code>getwd()</code></p>
+
+<div class="rmdtip">
+When opening Rstudio by double-clicking on a file, it will automatically set the working irectory to the folder where this file is located. This can be super handy.
+</div>
+
+<div class="rmdimportant">
+For all labs, I strongly recommend you to make a folder where you will save all your R scripts and data and use it as your working directory in R. For better organisation I suggest to save your data in a subfolder named <code>data All R code for data loading in the manual is based on that structure. This is why dat loading or saving code look like</code>data/my_file.xxx`. If you follow it also all code for data loading can be simply copy-pasted and should work.
+</div>
+</div>
+<div id="opening-a-.rdata-file" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Opening a <code>.Rdata</code> file</h3>
+<p>You can double-click on the file and R/Rstudio should open. Alternatively, you can use <code>load()</code> function and specify the names (and path) of the file. For example to load the data <code>ErablesGatineau.Rdata</code> in R which is located in the folder <code>data</code> in the working directory you can use:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="importing-and-exporting-data.html#cb3-1" aria-hidden="true"></a><span class="kw">load</span>(<span class="st">&quot;data/ErablesGatineau.Rdata&quot;</span>)</span></code></pre></div>
+</div>
+<div id="open-a-.csv-file" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Open a <code>.csv</code> file</h3>
+<p>To import data saved in a <code>.csv</code> file, you need to use the <code>read.csv()</code> function.
+For example, to create a R object named <code>erables</code> which contain the data from the file <code>ErablesGatineau.csv</code>, you need to use:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="importing-and-exporting-data.html#cb4-1" aria-hidden="true"></a>erables &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ErablesGatineau.csv&quot;</span>)</span></code></pre></div>
+
+<div class="rmdwarning">
+Beware of the coma. If you are working in adifferent language (other than english), be careful because the decimal symbol might ot be the same.
+By default R use the point for the decimal sign. If the dat use the coma for the decimal then R would not be able to read the file correctly. In this case you can use <code>read.csv2()</code> or <code>read.data()</code> which should solve the problem.
+</div>
+<p>To verify that the data were read and loaded properly, you can list all objects in memory with the <code>ls()</code> function, or get a more detailed description with <code>ls.str()</code>:</p>
+
+<div class="rmdtip">
+I do not recommend to use <code>ls.str()</code> since it can produce really long R ouputs when you have multiple R object loaded.
+I suggest instead to use the combination of <code>ls()</code> to get the list of all R objects and then <code>str()</code> only for the objects you want to look at.
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="importing-and-exporting-data.html#cb5-1" aria-hidden="true"></a><span class="kw">ls</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;erables&quot; &quot;params&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="importing-and-exporting-data.html#cb7-1" aria-hidden="true"></a><span class="kw">str</span>(erables)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    100 obs. of  3 variables:
+##  $ station: chr  &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; ...
+##  $ diam   : num  22.4 36.1 44.4 24.6 17.7 ...
+##  $ biom   : num  732 1171 673 1552 504 ...</code></pre>
+<p>R confirms that the object <code>erables</code>.
+<code>erables</code> is a data.frame that contains 100 observations (lines) of 3 variables (columns) : <code>station</code> , a variable of type Factor with 2
+levels, and <code>diam</code> and <code>biom</code> that are 2 numeric variables.</p>
+</div>
+<div id="entering-data-in-r" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Entering data in R</h3>
+<p>R is not the ideal environment to input data. It is possible, but the syntax is heavy and makes most people upset. Use your preferred worksheet program instead. It will be more efficient and less frustrating.</p>
+</div>
+<div id="cleaning-up-correcting-data" class="section level3" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Cleaning up / correcting data</h3>
+<p>Another operation that can be frustrating in R. Our advice: unless you want to keep track of all corrections made (so that you can go back to the original data), do not change data in R. Return to the original data file (in a worksheet or database), correct the data there, and then reimport into R. It is simple to resubmit the few lines of code to reimport data. Doing things this way will leave you with a single version of your data file that has all corrections, and the code that allows you to repeat the analysis exactly.</p>
+</div>
+<div id="exporting-data-from-r" class="section level3" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> Exporting data from R</h3>
+<p>You have 2 options: export data in <code>.csv</code> or in <code>.Rdata</code></p>
+<p>To export in <code>.Rdata</code> use the function <code>save()</code> to export in <code>.csv</code> use <code>write.csv()</code></p>
+<p>For example, to save teh object <code>mydata</code> in a file <code>wonderful_data.csv</code>that will be saved in your working directory you can type:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="importing-and-exporting-data.html#cb9-1" aria-hidden="true"></a><span class="kw">write.csv</span>(mydata, <span class="dt">file =</span> <span class="st">&quot;wonderful_data.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+</div>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -213,8 +287,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-
-<a href="preface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="set-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preliminary-examination-of-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -236,7 +310,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/01-introR_4.Rmd",
 "text": "Edit"
 },
 "history": {
