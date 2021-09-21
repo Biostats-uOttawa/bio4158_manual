@@ -1,7 +1,3 @@
-\cleardoublepage
-
-# (APPENDIX) Appendice {-}
-
 # Note sur les devoirs et Rmarkdown
 
 Pour les devoirs, veuillez soumettre les rapports en utilisant le fichier Rmarkdown fourni.
