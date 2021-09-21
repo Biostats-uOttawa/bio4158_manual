@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>General points to keep in mind | BIO4158 Applied biostats with R</title>
+  <title>2.5 Important points to remember | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="General points to keep in mind | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="2.5 Important points to remember | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="General points to keep in mind | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="2.5 Important points to remember | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="preface.html"/>
-<link rel="next" href="what-is-r-and-why-use-it-in-this-course.html"/>
+<link rel="prev" href="power-analysis-for-a-t-test-on-two-independent-means.html"/>
+<link rel="next" href="software-tools.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -227,35 +227,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="general-points-to-keep-in-mind" class="section level2 unnumbered" number="">
-<h2>General points to keep in mind</h2>
+<div id="important-points-to-remember" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Important points to remember</h2>
 <ul>
-<li><p>Before attempting any statistical procedure, you must familiarize yourself with what the procedure is actually doing. This does not mean you actually have to know the underlying mathematics (although this certainly helps!), but you should at least understand the principles involved in the analysis. Therefore, before doing a laboratory exercise, read the appropriate section(s) in the lecture notes. Otherwise, the output from your analyses - even if done correctly - will seem like drivel.</p></li>
-<li><p>The laboratories are designed to complement the lectures, and vice versa. Owing to scheduling constraints, it may not be possible to synchronize the two perfectly. But feel free to bring questions about the laboratories to class, or questions about the lectures to the labs.</p></li>
-<li><p>Work on the laboratories at your own speed: some can be donemuch more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratorieswe have allotted two laboratory sessions. Although you will notbe “graded” on the laboratories per se, be aware that completingthe labs is essential. If you do not complete the labs, it is veryunlikely that you will be able to complete the assignments and thefinal exam/term paper. So take these laboratories seriously!</p></li>
-<li><p>The objective of the first lab is to allow you to acquire or reviewthe minimum knowledge required to complete the following laboratory exercises with R. There are always several methods toaccomplish something in R, but you will only find simple ways inthis manual. Those amongst you that want to go further will easilyfind many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:</p>
-<ul>
-<li>R for beginners
-<a href="http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf" class="uri">http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf</a></li>
-<li>An introduction to R
-<a href="http://cran.r-project.org/doc/manuals/R-intro.html" class="uri">http://cran.r-project.org/doc/manuals/R-intro.html</a></li>
-<li>If you prefer paper books, the CRAN web site has a commented list at :
-<a href="http://www.r-project.org/doc/bib/R-books.html" class="uri">http://www.r-project.org/doc/bib/R-books.html</a></li>
-<li>Excellent list of R books
-<a href="https://www.bigbookofr.com/" class="uri">https://www.bigbookofr.com/</a></li>
-<li>R reference card by Tom Short
-<a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf" class="uri">http://cran.r-project.org/doc/contrib/Short-refcard.pdf</a></li>
-</ul></li>
+<li>Post hoc power analyses are relevant only when the null hypothesis is accepted because it is impossible to make a <em>type II error</em> when rejecting <span class="math inline">\(H_0\)</span> .</li>
+<li>With very large samples, power is very high and minute differences can be statistically detected, even if they are not biologically significant.</li>
+<li>When using a stricter significance criteria (<span class="math inline">\(\alpha &lt; 0.05\)</span>) power is reduced.</li>
+<li>Maximizing power implies more sampling effort, unless you use a more liberal statistical criteria (<span class="math inline">\(\alpha &gt; 0.05\)</span>)</li>
+<li>The choice of <span class="math inline">\(\beta\)</span> is somewhat arbitrary. <span class="math inline">\(\beta=0.2\)</span> (power of 80%) is considered relatively high by most.</li>
 </ul>
+<!--
+## Exercice {#ex-power}
+
+\BeginKnitrBlock{rmdcode}<div class="rmdcode"></div>\EndKnitrBlock{rmdcode}
+
+Les larves de mouches noires (Diptera: Simuliidae) ont été échantillonnées en février à l’émissaire de deux lacs des Cantons de l’Est (lacs Orford et Lovering).
+La longueur de chaque larve a été mesurée.
+Les données sont dans le fichier simulies.RData   La relation entre la longueur (L, en mm) et la masse (M, en $\mu$g) pour l’espèce dominante (*P. mixtum/fuscum*) est:
+
+$$
+M = 1.36 L^3.05
+$$
+
+1. Calculer la masse moyenne et l’écart-type à chaque site.
+2. En utilisant la masse moyenne de *P. mixtum/fuscum* à Lovering comme référence et les écarts-types observés aux 2 sites, calculer la puissance d’un test de t bilatéral pour moyennes indépendantes
+    a) si la différence de masse est de 5 $\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
+    b) si la différence de masse est de 20 $\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
+    c) si la différence de masse est de 50$\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
+    d) Comment est-ce que la puissance varie avec la taille de l'effet?
+
+3. Calculer la taille d’échantillon requis pour pouvoir détecter, par un test de t bilatéral pour moyennes indépendantes en tenant compte des écarts-types observés, une différence de 50 $\mu$g entre les moyennes
+    a) avec une puissance de 80% et $\alpha$ = 0.05
+    b) avec une puissance de 80% et $\alpha$ = 0.001
+    c) avec une puissance de 95% et $\alpha$ = 0.05
+    d) Comment est-ce que la taille d'échantillon requise varie avec $\alpha$ et $\beta$?
+
+4. Calculer la taille d’effet détectable (d) par un test de t bilatéral pour moyennes indépendantes, compte tenu des écarts-types observés
+    a) avec une puissance de 80%, $\alpha$ = 0.05, et des mesures sur 10 larves de chaque site
+    b) avec une puissance de 80%, $\alpha$ = 0.05, et des mesures sur 200 larves à chaque site
+    c) avec une puissance de 80%, $\alpha$ =0.05, et des mesures sur 20 larves d’un site et sur 380 larves au second site
+    d) Comment est-ce que la taille d'effet détectable dépend de la taille d'échantillon dans les 2 groupes?
+
+5. Calculer la différence de masse, en $\mu$g, qui est détectable d’après vos estimés de la taille minimale d’effet détectable à 4a, b, et c. -->
+
 </div>
+<!-- </div> -->
+
+
+
 <script src="js/solution.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="preface.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-r-and-why-use-it-in-this-course.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="power-analysis-for-a-t-test-on-two-independent-means.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="software-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -277,7 +304,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/02-Gpower.Rmd",
 "text": "Edit"
 },
 "history": {

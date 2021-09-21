@@ -1050,6 +1050,686 @@ Examine the ratio variable and make a graph to visually assess normality for the
 \caption{\label{fig:intror-exer}Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella}
 \end{figure}
 
+\hypertarget{power-analysis-with-r-and-gpower}{%
+\chapter{Power Analysis with R and G*Power}\label{power-analysis-with-r-and-gpower}}
+
+After completing this laboratory, you should :
+
+\begin{itemize}
+\tightlist
+\item
+  be able to compute the power of a t-test with G*Power and R
+\item
+  be able to calculate the required sample size to achieve a desired power level with a t-test
+\item
+  be able to calculate the detectable effect size by a t-test given the sample size, the power and \(\alpha\)
+\item
+  understand how power changes when sample size increases, the effect size changes, or when \(\alpha\) decreases
+\item
+  understand how power is affected when you change from a two-tailed to a one-tailed test.
+\end{itemize}
+
+\hypertarget{the-theory}{%
+\section{The theory}\label{the-theory}}
+
+\hypertarget{what-is-power}{%
+\subsection{What is power?}\label{what-is-power}}
+
+\emph{Power is the probability of rejecting the null hypothesis when it is false}
+
+\hypertarget{why-do-a-power-analysis}{%
+\subsection{Why do a power analysis?}\label{why-do-a-power-analysis}}
+
+\hypertarget{assess-the-strength-of-evidence}{%
+\subsubsection*{Assess the strength of evidence}\label{assess-the-strength-of-evidence}}
+\addcontentsline{toc}{subsubsection}{Assess the strength of evidence}
+
+Power analysis, performed after accepting a null hypothesis, can help assess the probability of rejecting the null if it were false, and if the magnitude of the effect was equal to that observed (or to any other given magnitude). This type of \emph{a posteriori} analysis is very common.
+
+\hypertarget{design-better-experiments}{%
+\subsubsection*{Design better experiments}\label{design-better-experiments}}
+\addcontentsline{toc}{subsubsection}{Design better experiments}
+
+Power analysis, performed prior to conducting an experiment (but most often after a preliminary experiment), can be used to determine the number of observations required to detect an effect of a given magnitude with some probability (the power). This type of \emph{a priori} experiment should be more common.
+
+\hypertarget{estimate-minimum-detectable-effect}{%
+\subsubsection*{Estimate minimum detectable effect}\label{estimate-minimum-detectable-effect}}
+\addcontentsline{toc}{subsubsection}{Estimate minimum detectable effect}
+
+Sampling effort is often predetermined (when you are handed data of an experiment already completed), or extremely constrained (when logistics dictates what can be done). Whether it is \emph{a priori} or \emph{a posteriori}, power analysis can help you estimate, for a fixed sample size and a given power, what is the minimum effect size that can be detected.
+
+\hypertarget{factors-affecting-power}{%
+\subsection{Factors affecting power}\label{factors-affecting-power}}
+
+For a given statistical test, there are 3 factors that affect power.
+
+\hypertarget{decision-criteria}{%
+\subsubsection*{Decision criteria}\label{decision-criteria}}
+\addcontentsline{toc}{subsubsection}{Decision criteria}
+
+Power is related to \(\alpha\), the probability level at which one rejects the null hypothesis. If this decision criteria is made very strict (i.e.~if critical \(\alpha\) is set to a very low value, like 0.1\% or \(p = 0.001\)), then power will be lower than if the critical \(\alpha\) was less strict.
+
+\hypertarget{sample-size}{%
+\subsubsection*{Sample size}\label{sample-size}}
+\addcontentsline{toc}{subsubsection}{Sample size}
+
+The larger the sample size, the larger the power. As sample size increases, one's ability to detect small effect sizes as being statistically significant gets better.
+
+\hypertarget{effect-sizze}{%
+\subsubsection*{Effect sizze}\label{effect-sizze}}
+\addcontentsline{toc}{subsubsection}{Effect sizze}
+
+The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.
+
+\hypertarget{what-is-gpower}{%
+\section{What is G*Power?}\label{what-is-gpower}}
+
+G*Power is free software developed by quantitative psychologists from the University of Dusseldorf in Germany.
+It is available in MacOS and Windows versions.
+It can be run under Linux using Wine or a virtual machine.
+
+G*Power will allow you to do power analyses for the majority of statistical tests we will cover during the term without making lengthy calculations and looking up long tables and figures of power curves. It is a really useful tool that you need to master.
+
+It is possible to perform all analysis made by G*Power in R, but it requires a bit more code, and a better understanding of the process since everything should be coded by hand. In simple cases, R code is also provided.
+
+\begin{rmdcode}
+Download the software \textbf{\href{https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html}{here}} and install it on your computer and your workstation (if it is not there already).
+\end{rmdcode}
+
+\hypertarget{how-to-use-gpower}{%
+\section{How to use G*Power}\label{how-to-use-gpower}}
+
+\hypertarget{general-principle}{%
+\subsection{General Principle}\label{general-principle}}
+
+Using G*Power generally involves 3 steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Choosing the appropriate test
+\item
+  Choosing one of the 5 types of available power analyses
+\item
+  Enter parameter values and press the \textbf{Calculate} button
+\end{enumerate}
+
+\hypertarget{types-of-power-analyses}{%
+\subsection{Types of power analyses}\label{types-of-power-analyses}}
+
+First, \(\alpha\) is define as the probability level at which
+one rejects the null hypothesis, and \(\beta\) is \(1 - power\).
+
+\hypertarget{a-priori}{%
+\subsubsection*{A priori}\label{a-priori}}
+\addcontentsline{toc}{subsubsection}{A priori}
+
+Computes the sample size required given \(\beta\), \(\alpha\), and the effect size. This type of analysis is useful when planning experiments.
+
+\hypertarget{compromise}{%
+\subsubsection*{Compromise}\label{compromise}}
+\addcontentsline{toc}{subsubsection}{Compromise}
+
+Computes \(\alpha\) and \(\beta\) for a given \(\alpha\)/\(\beta\) ratio, sample size, and effect size. Less commonly used (I have never used it myself) although it can be useful when the \(\alpha\)/\(\beta\) ratio has meaning, for example when the cost of type I and type II errors can be quantified.
+
+\hypertarget{criterion}{%
+\subsubsection*{Criterion}\label{criterion}}
+\addcontentsline{toc}{subsubsection}{Criterion}
+
+Computes \(\alpha\) for a given \(\beta\), sample size, and effect size. In practice, I see little interest in this. Let me know if you see something I don't!
+
+\hypertarget{post-hoc}{%
+\subsubsection*{Post-hoc}\label{post-hoc}}
+\addcontentsline{toc}{subsubsection}{Post-hoc}
+
+Computes the power for a given \(\alpha\), effect size, and
+sample size. Used frequently to help in the interpretation of a test
+that is not statistically significant, but only if an effect size that is
+biologically significant is used (and not the observed effect size). Not
+relevant when the test is significant.
+Sensitivity. Computes the detectable effect size for a given \(\beta\) ,\(\alpha\), and
+sample size. Very useful at the planning stage of an experiment.
+
+\hypertarget{how-to-calculate-effect-size}{%
+\subsection{How to calculate effect size}\label{how-to-calculate-effect-size}}
+
+G*Power can perform power analyses for several statistical tests.
+The metric for effect size depends on the test. Note that other
+software packages often use different effect size metrics and that it is
+important to use the correct one for each package. G\emph{Power has an
+effect size calculator for many tests that only requires you to enter
+the relevant values. The following table lists the effect size metrics
+used by G}Power for the various tests.
+
+\begin{longtable}[]{@{}lcl@{}}
+\toprule
+\begin{minipage}[b]{0.11\columnwidth}\raggedright
+Test\strut
+\end{minipage} & \begin{minipage}[b]{0.35\columnwidth}\centering
+Taille d'effet\strut
+\end{minipage} & \begin{minipage}[b]{0.46\columnwidth}\raggedright
+Formule\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+t-test on means\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+d\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(d = \frac{|\mu_1 - \mu_2|}{\sqrt{({s_1}^2 + {s_2}^2)/2}}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+t-test on correlations\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+r\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+other t-tests\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+f\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(f = \frac{\mu_1}{\sigma}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+F-test (ANOVA)\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+f\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(f = \frac{\frac{\sqrt{\sum_{i=1}^k (\mu_i - \mu)^2}}{k}}{\sigma}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+other F-tests\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+\(f^2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(f^2 = \frac{{R_p}^2}{1-{R_p}^2}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\({R_p}\) is the squared partial correlation coefficient\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+Chi-square test\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+w\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2 }{ p_{0i}} }\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
+\strut
+\end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
+\strut
+\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(p_{0i}\) and \(p_{1i}\) are theporportion in category \(i\) predicted by the null, \(_0\), and alternative, \(_1\), hypothesis\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{power-analysis-for-a-t-test-on-two-independent-means}{%
+\section{Power analysis for a t-test on two independent means}\label{power-analysis-for-a-t-test-on-two-independent-means}}
+
+The objective of this lab is to learn to use G*Power and understand how the 4 parameters of power analyses (\(\alpha\), \(\beta\), sample size and effect size) are related to each other. For this, you will only use the standard t-test to compare two independent means. This is the test most used by biologists, you have all used it, and it will serve admirably for this lab. What you will learn today will be applicable to all other power analyses.
+
+Jaynie Stephenson studied the productivity of streams in the Ottawa region. She has measured fish biomass in 36 streams, 18 on the Shield and 18 in the Ottawa Valley. She found that fish biomass was lower in streams from the valley (2.64 \(g/m^2\) , standard deviation = 3.28) than from the Shield (3.31 \(g/m^2\) , standard deviation = 2.79.).
+
+When she tested the null hypothesis that fish biomass is the same in the two regions by a t-test, she obtained:
+
+\begin{verbatim}
+Pooled-Variance Two-Sample t-Test
+t = -0.5746, df = 34, p-value = 0.5693
+\end{verbatim}
+
+She therefore accepted the null hypothesis (since p is much larger than 0.05) and concluded that fish biomass is the same in the two regions.
+
+\hypertarget{post-hoc-analysis}{%
+\subsection{Post-hoc analysis}\label{post-hoc-analysis}}
+
+Using the observed means and standard deviations, we can use G*Power to calculate the power of the two-tailed t-test for two independent means, using the observed effect size (the difference between the two means, weighted by the standard deviations) for \(\alpha\) = 0.05.
+
+Start G*Power.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In *\textbf{Test family} , choose: t tests
+\item
+  For \textbf{Statistical test} , choose: Means: Difference between two independent means (two groups)
+\item
+  For \textbf{Type of power analysis} , choose: Post hoc: Compute achieved power - given \(\alpha\), sample size, and effect size
+\item
+  At \textbf{Input Parameters} ,
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  in the box \textbf{Tail(s)} , chose: Two,
+\item
+  check that \(\alpha\) \textbf{err prob} is equal to 0.05
+\item
+  Enter 18 for the \textbf{Sample size} of group 1 and of group 2
+\item
+  then, to calculate effect size (d), click on \textbf{Determine =\textgreater{}}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  In the window that opens,
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  select \textbf{n1 = n2} , then
+\item
+  enter the two means (\textbf{Mean group} 1 et 2)
+\item
+  the two standard deviations(\textbf{SD group} 1 et 2)
+\item
+  click on \textbf{Calculate} and \textbf{transfer to main window}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  After you click on the \textbf{Calculate button} in the main window, you
+  should get the following:
+\end{enumerate}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/gpower_1} \caption{Post-hoc analysis with estimated effect size}\label{fig:gpower-1}
+\end{figure}
+
+Similar analysis can be done in R. You first need to calculate the effect size \texttt{d} for a t-test comparing 2 means, and then use the \texttt{pwr.t.test()} function from the \texttt{pwr} 📦.
+The easiest is to create anew function in R to estimate the effect size \texttt{d}since we are going to reuse it multiple times during the lab.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load package pwr}
+\KeywordTok{library}\NormalTok{(pwr)}
+\CommentTok{\# define d for a 2 sample t{-}test}
+\NormalTok{d \textless{}{-}}\StringTok{ }\ControlFlowTok{function}\NormalTok{(u1, u2, sd1, sd2) \{}
+  \KeywordTok{abs}\NormalTok{(u1 }\OperatorTok{{-}}\StringTok{ }\NormalTok{u2) }\OperatorTok{/}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((sd1}\OperatorTok{\^{}}\DecValTok{2} \OperatorTok{+}\StringTok{ }\NormalTok{sd2}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\# power analysis}
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 18
+##               d = 0.220042
+##       sig.level = 0.05
+##           power = 0.09833902
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot similar to G*Power}
+\NormalTok{x \textless{}{-}}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DataTypeTok{length =} \DecValTok{200}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(x, }\KeywordTok{dnorm}\NormalTok{(x), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\NormalTok{qc \textless{}{-}}\StringTok{ }\KeywordTok{qt}\NormalTok{(}\FloatTok{0.025}\NormalTok{, }\DecValTok{16}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =}\NormalTok{ qc, }\DataTypeTok{col =} \StringTok{"green"}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{v =} \OperatorTok{{-}}\NormalTok{qc, }\DataTypeTok{col =} \StringTok{"green"}\NormalTok{)}
+\KeywordTok{lines}\NormalTok{(x, }\KeywordTok{dnorm}\NormalTok{(x, }\DataTypeTok{mean =}\NormalTok{ (}\FloatTok{3.31} \OperatorTok{{-}}\StringTok{ }\FloatTok{2.64}\NormalTok{)), }\DataTypeTok{type =} \StringTok{"l"}\NormalTok{, }\DataTypeTok{col =} \StringTok{"blue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+
+\CommentTok{\# power corresponds to the shaded area}
+\NormalTok{y \textless{}{-}}\StringTok{ }\KeywordTok{dnorm}\NormalTok{(x, }\DataTypeTok{mean =}\NormalTok{ (}\FloatTok{3.31} \OperatorTok{{-}}\StringTok{ }\FloatTok{2.64}\NormalTok{))}
+\KeywordTok{polygon}\NormalTok{(}\KeywordTok{c}\NormalTok{(x[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\OperatorTok{{-}}\NormalTok{qc), }\KeywordTok{c}\NormalTok{(y[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\DecValTok{0}\NormalTok{), }\DataTypeTok{col =} \KeywordTok{rgb}\NormalTok{(}\DataTypeTok{red =} \DecValTok{0}\NormalTok{, }\DataTypeTok{green =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{blue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/r-power-1.pdf}
+\caption{\label{fig:r-power}Post-hoc analysis with estimated effect size in R}
+\end{figure}
+
+Let's examine the figure \ref{fig:gpower-1}.
+
+\begin{itemize}
+\tightlist
+\item
+  The curve on the left, in red, corresponds to the expected distri- bution of the t-statistics when \(H_0\) is true (\emph{i.e.} when the two means are equal) given the sample size (18 per region) and the observed standard deviations.
+\item
+  The vertical green lines correspond to the critical values of t for \(\alpha = 0.05\) and a total sample size of 36 (2x18).
+\item
+  The shaded pink regions correspond to the rejection zones for \(H_0\). If Jaynie had obtained a \emph{t-value} outside the interval delimited by the critical values ranging from -2.03224 to 2.03224, she would then have rejected \(H_0\) , the null hypothesis of equal means. In fact, she obtained a t-value of -0.5746 and concluded that the biomass is equal in the two regions.
+\item
+  The curve on the right, in blue, corresponds to the expected dis- tribution of the t-statistics if \(H_1\) is true (here \(H_1\) is that there is a difference in biomass between the two regions equal to \(3.33 - 2.64 = 0.69 g/m^2\) , given the observed standard deviations). This distribution is what we should observe if \(H_1\) was true and we repeated a large number of times the experiment using random samples of 18 streams in each of the two regions and calculated a t-statistic for each sample. On average, we would obtain a t-statistic of about 0.6.
+\item
+  Note that there is considerable overlap of the two distributions and that a large fraction of the surface under the right curve is within the interval where \(H_0\) is accepted between the two vertical green lines at -2.03224 and 2.03224. This proportion, shaded in blue under the distribution on the right is labeled \(\beta\) and corresponds to the risk of \emph{type II error} (accept \(H_0\) when \(H_1\) is true).
+\item
+  Power is simply \(1-\beta\), and is here 0.098339. Therefore, if the mean biomass differed by \(0.69 g/m^2\) between the two regions, Jaynie had only 9.8\% chance of being able to detect it as a statistically significant difference at =5\% with a sample size of 18 streams in each region.
+\end{itemize}
+
+\textbf{Let's recapitulate}: The difference in biomass between regions is not statistically significant according to the t-test. It is because the difference is relatively small relative to the precision of the measurements. It is therefore not surprising that that power, i.e.~the probability of detecting a statistically significant difference, is small. Therefore, this analysis is not very informative.
+
+\textbf{Indeed, a post hoc power analysis using the observed effect size is not useful}. It is much more informative to conduct a post hoc power analysis for an effect size that is different from the observed effect size. But what effect size to use? It is the biology of the system under study that will guide you. For example, with respect to fish biomass in streams, one could argue that a two fold change in biomass (say from 2.64 to 5.28 g/m\textsuperscript{2} ) has ecologically significant repercussions. We would therefore want to know if Jaynie had a good chance of detecting a difference as large as this before accepting her conclusion that the biomass is the same in the two regions. So, what were the odds that Jaynie could detect a difference of 2.64 g/m\textsuperscript{2} between the two regions? G*Power can tell you if you cajole it the right way.
+
+\begin{rmdcode}
+Change the mean of group 2 to 5.28, recalculate effect size, and click on Calculate to obtain figure \ref{fig:gpower-2}.
+\end{rmdcode}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/gpower_2} \caption{Post-hoc analysis using an effect size different from the one estimated}\label{fig:gpower-2}
+\end{figure}
+
+Same analysis using R (without all the code for the interesting but not really useful plot)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{5.28}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 18
+##               d = 0.8670313
+##       sig.level = 0.05
+##           power = 0.7146763
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+\end{verbatim}
+
+The power is 0.71, therefore Jaynie had a reasonable chance (71\%) of detecting a doubling of biomass with 18 streams in each region.
+
+Note that this post hoc power analysis, done for an effect size considered biologically meaningful, is much more informative than the preceeding one done with the observed effect size (which is what too many students do because it is the default of so many power calculation programs). Jaynie did not detect a difference between the two regions. There are two possibilities: 1) there is really no difference between the regions, or 2) the precision of measurements is so low (because the sample size is small and/or there is large variability within a region) that it is very unlikely to be able to detect even large differences. The second power analysis can eliminate this second possibility because Jaynie had 71\% chances of detecting a doubling of biomass.
+
+\hypertarget{a-priori-analysis}{%
+\subsection{A priori analysis}\label{a-priori-analysis}}
+
+Suppose that a difference in biomass of \(3.31-2.64 = 0.67 g/m^2\) can be ecologically significant. The next field season should be planned so that Jaynie would have a good chance of detecting such a difference in fish biomass between regions. How many streams should Jaynie sample in each region to have 80\% of detecting such a difference (given the observed variability)?
+
+\begin{rmdcode}
+Change the type of power analysis in G*Power to \textbf{A priori: Compute sample size - given \(\alpha\) , power, and effect size}. Ensure that the values for means and standard deviations are those obtained by Jaynie. Recalculate the effect size metric and enter 0.8 for power and you will obtain (\ref{fig:gpower-3}.
+\end{rmdcode}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/gpower_3} \caption{A priori analysis}\label{fig:gpower-3}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 325.1723
+##               d = 0.220042
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+\end{verbatim}
+
+\textbf{Ouch!} The required sample would be of 326 streams in each region! It would cost a fortune and require several field teams otherwise only a few dozen streams could be sampled over the summer and it would be very unlikely that such a small difference in biomass could be detected. Sampling fewer streams would probably be in vain and could be considered as a waste of effort and time: why do the work on several dozens of streams if the odds of success are that low?
+
+If we recalculate for a power of 95\%, we find that 538 streams would be required from each region. Increasing power means more work!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 537.7286
+##               d = 0.220042
+##       sig.level = 0.05
+##           power = 0.95
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+\end{verbatim}
+
+\hypertarget{sensitivity-analysis---calculate-the-detectable-effect-size}{%
+\subsection{Sensitivity analysis - Calculate the detectable effect size}\label{sensitivity-analysis---calculate-the-detectable-effect-size}}
+
+Given the observed variability, a sampling effort of 18 streams per region, and with \(\alpha\) = 0.05, what effect size could Jaynie detect with 80\% probability \(\beta=0.2\))?
+
+\begin{rmdcode}
+Change analysis type in G*Power to \textbf{Sensitivity: Compute required effect size - given \(\alpha\) , power, and sample size} and size is 18 in each region.
+\end{rmdcode}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/gpower_4} \caption{Analyse de sensitivité}\label{fig:gpower-4}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Two-sample t test power calculation 
+## 
+##               n = 18
+##               d = 0.9612854
+##       sig.level = 0.05
+##           power = 0.8
+##     alternative = two.sided
+## 
+## NOTE: n is number in *each* group
+\end{verbatim}
+
+The detectable effect size for this sample size, \(\alpha = 0.05\) and \(\beta = 0.2\) (or power of 80\%) is 0.961296.
+
+\begin{rmdcaution}
+Attention, this effect size is the metric \texttt{d} and is dependent on sampling variability.
+\end{rmdcaution}
+
+Here, \texttt{d} is approximately equal to
+
+\[ d = \frac{| \bar{X_1} \bar{X_2} |} {\sqrt{\frac{{s_1}^2 +{s_2}^2}{2}}}\]
+
+To convert this d value without units into a value for the detectable difference in biomass between the two regions, you need to multiply \texttt{d} by the denominator of the equation.
+
+\[
+| \bar{X_1} - \bar{X_2} | = d * \sqrt{\frac{{s_1}^2 +{s_2}^2}{2}}
+\]
+
+In R this can be done with the following code
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}\OperatorTok{$}\NormalTok{d }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((}\FloatTok{3.28}\OperatorTok{\^{}}\DecValTok{2} \OperatorTok{+}\StringTok{ }\FloatTok{2.79}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.926992
+\end{verbatim}
+
+Therefore, with 18 streams per region, \(\alpha\) = 0.05 and \(\beta\) = 0.2 (so power of 80\%), Jaynie could detect a difference of 2.93 g/m\textsuperscript{2} between regions, a bit more than a doubling of biomass.
+
+\hypertarget{important-points-to-remember}{%
+\section{Important points to remember}\label{important-points-to-remember}}
+
+\begin{itemize}
+\tightlist
+\item
+  Post hoc power analyses are relevant only when the null hypothesis is accepted because it is impossible to make a \emph{type II error} when rejecting \(H_0\) .
+\item
+  With very large samples, power is very high and minute differences can be statistically detected, even if they are not biologically significant.
+\item
+  When using a stricter significance criteria (\(\alpha < 0.05\)) power is reduced.
+\item
+  Maximizing power implies more sampling effort, unless you use a more liberal statistical criteria (\(\alpha > 0.05\))
+\item
+  The choice of \(\beta\) is somewhat arbitrary. \(\beta=0.2\) (power of 80\%) is considered relatively high by most.
+\end{itemize}
+
+\cleardoublepage
+
+\hypertarget{appendix-appendix}{%
+\appendix \addcontentsline{toc}{chapter}{\appendixname}}
+
+
+\hypertarget{software-tools}{%
+\chapter{Software Tools}\label{software-tools}}
+
+For those who are not familiar with software packages required for using R Markdown, we give a brief introduction to the installation and maintenance of these packages.
+
+\hypertarget{r-and-r-packages}{%
+\section{R and R packages}\label{r-and-r-packages}}
+
+R can be downloaded and installed from any CRAN (the Comprehensive R Archive Network) mirrors, e.g., \url{https://cran.rstudio.com}. Please note that there will be a few new releases of R every year, and you may want to upgrade R occasionally.
+
+To install the \textbf{bookdown} package, you can type this in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+This installs all required R packages. You can also choose to install all optional packages as well, if you do not care too much about whether these packages will actually be used to compile your book (such as \textbf{htmlwidgets}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"bookdown"}\NormalTok{, }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you want to test the development version of \textbf{bookdown} on GitHub, you need to install \textbf{devtools} first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{requireNamespace}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)) }\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install\_github}\NormalTok{(}\StringTok{"rstudio/bookdown"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+R packages are also often constantly updated on CRAN or GitHub, so you may want to update them once in a while:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Although it is not required, the RStudio IDE can make a lot of things much easier when you work on R-related projects. The RStudio IDE can be downloaded from \url{https://www.rstudio.com}.
+
+\hypertarget{pandoc}{%
+\section{Pandoc}\label{pandoc}}
+
+An R Markdown document (\texttt{*.Rmd}) is first compiled to Markdown (\texttt{*.md}) through the \textbf{knitr} package, and then Markdown is compiled to other output formats (such as LaTeX or HTML) through Pandoc.\index{Pandoc} This process is automated by the \textbf{rmarkdown} package. You do not need to install \textbf{knitr} or \textbf{rmarkdown} separately, because they are the required packages of \textbf{bookdown} and will be automatically installed when you install \textbf{bookdown}. However, Pandoc is not an R package, so it will not be automatically installed when you install \textbf{bookdown}. You can follow the installation instructions on the Pandoc homepage (\url{http://pandoc.org}) to install Pandoc, but if you use the RStudio IDE, you do not really need to install Pandoc separately, because RStudio includes a copy of Pandoc. The Pandoc version number can be obtained via:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rmarkdown}\OperatorTok{::}\KeywordTok{pandoc\_version}\NormalTok{()}
+\CommentTok{\#\# [1] \textquotesingle{}2.9.2.1\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+If you find this version too low and there are Pandoc features only in a later version, you can install the later version of Pandoc, and \textbf{rmarkdown} will call the newer version instead of its built-in version.
+
+\hypertarget{latex}{%
+\section{LaTeX}\label{latex}}
+
+LaTeX\index{LaTeX} is required only if you want to convert your book to PDF. You may see \url{https://www.latex-project.org/get/} for more information about LaTeX and its installation, but we strongly recommend that you install the lightweight and cross-platform LaTeX distribution named \href{https://yihui.org/tinytex/}{TinyTeX} and based on TeX Live. TinyTeX can be easily installed through the R package \textbf{tinytex} (which should be automatically installed when you install \textbf{bookdown}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tinytex}\OperatorTok{::}\KeywordTok{install\_tinytex}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+With TinyTeX, you should never see error messages like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{! LaTeX Error: File \textasciigrave{}titling.sty\textquotesingle{} not found.}
+
+\NormalTok{Type X to quit or \textless{}RETURN\textgreater{} to proceed,}
+\NormalTok{or enter new name. (Default extension: sty)}
+
+\NormalTok{Enter file name:}
+\NormalTok{! Emergency stop.}
+\NormalTok{\textless{}read *\textgreater{}}
+
+\NormalTok{l.107 \^{}\^{}M}
+
+\NormalTok{pandoc: Error producing PDF}
+\NormalTok{Error: pandoc document conversion failed with error 43}
+\NormalTok{Execution halted}
+\end{Highlighting}
+\end{Shaded}
+
+The above error means you used a package that contains \texttt{titling.sty}, but it was not installed. LaTeX package names are often the same as the \texttt{*.sty} filenames, so in this case, you can try to install the \texttt{titling} package. If you use TinyTeX with R Markdown, missing LaTeX packages will be installed automatically, so you never need to worry about such problems.
+
+LaTeX distributions and packages are also updated from time to time, and you may consider updating them especially when you run into LaTeX problems. You can find out the version of your LaTeX distribution by:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{system}\NormalTok{(}\StringTok{"pdflatex {-}{-}version"}\NormalTok{)}
+\CommentTok{\#\# pdfTeX 3.14159265{-}2.6{-}1.40.21 (TeX Live 2020/Debian)}
+\CommentTok{\#\# kpathsea version 6.3.2}
+\CommentTok{\#\# Copyright 2020 Han The Thanh (pdfTeX) et al.}
+\CommentTok{\#\# There is NO warranty.  Redistribution of this software is}
+\CommentTok{\#\# covered by the terms of both the pdfTeX copyright and}
+\CommentTok{\#\# the Lesser GNU General Public License.}
+\CommentTok{\#\# For more information about these matters, see the file}
+\CommentTok{\#\# named COPYING and the pdfTeX source.}
+\CommentTok{\#\# Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.}
+\CommentTok{\#\# Compiled with libpng 1.6.37; using libpng 1.6.37}
+\CommentTok{\#\# Compiled with zlib 1.2.11; using zlib 1.2.11}
+\CommentTok{\#\# Compiled with xpdf version 4.02}
+\end{Highlighting}
+\end{Shaded}
+
+To update TinyTeX, you may run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tinytex}\OperatorTok{::}\KeywordTok{tlmgr\_update}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+From year to year, you may need to upgrade TinyTeX, too (otherwise you cannot install or update any LaTeX packages), in which case you may reinstall TinyTeX:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tinytex}\OperatorTok{::}\KeywordTok{reinstall\_tinytex}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+
 \printindex
 
 \end{document}
