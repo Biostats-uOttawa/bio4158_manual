@@ -241,34 +241,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 \BeginKnitrBlock{rmdcode}<div class="rmdcode"></div>\EndKnitrBlock{rmdcode}
 
-Les larves de mouches noires (Diptera: Simuliidae) ont été échantillonnées en février à l’émissaire de deux lacs des Cantons de l’Est (lacs Orford et Lovering).
-La longueur de chaque larve a été mesurée.
-Les données sont dans le fichier simulies.RData   La relation entre la longueur (L, en mm) et la masse (M, en $\mu$g) pour l’espèce dominante (*P. mixtum/fuscum*) est:
+Black fly larvae (Diptera: Simuliidae) were sampled in February at the outlet of two lakes of the Eastern Townships (Lakes Orford and Lovering). The body length of each larva was measured. The data are in the file simulies.csv
+The relationship between body length (L, in mm) and dry mass (M, in $\mu$g) for the dominant species (*P. mixtum/fuscum*) is:
 
 $$
 M = 1.36 L^3.05
 $$
 
-1. Calculer la masse moyenne et l’écart-type à chaque site.
-2. En utilisant la masse moyenne de *P. mixtum/fuscum* à Lovering comme référence et les écarts-types observés aux 2 sites, calculer la puissance d’un test de t bilatéral pour moyennes indépendantes
-    a) si la différence de masse est de 5 $\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
-    b) si la différence de masse est de 20 $\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
-    c) si la différence de masse est de 50$\mu$g, $\alpha$ = 0.05, et qu’on échantillonnait 100 larves à chaque site
-    d) Comment est-ce que la puissance varie avec la taille de l'effet?
-
-3. Calculer la taille d’échantillon requis pour pouvoir détecter, par un test de t bilatéral pour moyennes indépendantes en tenant compte des écarts-types observés, une différence de 50 $\mu$g entre les moyennes
-    a) avec une puissance de 80% et $\alpha$ = 0.05
-    b) avec une puissance de 80% et $\alpha$ = 0.001
-    c) avec une puissance de 95% et $\alpha$ = 0.05
-    d) Comment est-ce que la taille d'échantillon requise varie avec $\alpha$ et $\beta$?
-
-4. Calculer la taille d’effet détectable (d) par un test de t bilatéral pour moyennes indépendantes, compte tenu des écarts-types observés
-    a) avec une puissance de 80%, $\alpha$ = 0.05, et des mesures sur 10 larves de chaque site
-    b) avec une puissance de 80%, $\alpha$ = 0.05, et des mesures sur 200 larves à chaque site
-    c) avec une puissance de 80%, $\alpha$ =0.05, et des mesures sur 20 larves d’un site et sur 380 larves au second site
-    d) Comment est-ce que la taille d'effet détectable dépend de la taille d'échantillon dans les 2 groupes?
-
-5. Calculer la différence de masse, en $\mu$g, qui est détectable d’après vos estimés de la taille minimale d’effet détectable à 4a, b, et c. -->
+1. Calculate the mean mass and its standard deviation at each site.
+2. Using the mean mass of *P. mixtum/fuscum* at Lovering as a reference and the standard deviations observed at each site, calculate the power of a two-tailed t test for independent means
+  a) if the mass difference was 5 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
+  b) if the mass difference was 20 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
+  c) if the mass difference was 50 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
+  d) comment on how changing the mass difference affects power.
+3. Calculate the required sample size to detect, with a two-tailed t-test for independent means, a difference of 50 $\mu$g between the means
+  a) with a power of 80% and $\alpha$=0.05
+  b) with a power of 80% and $\alpha$=0.001
+  c) with a power of 95% and $\alpha$=0.05
+  d) comment on how changing power and $\alpha$ affects the required sample size.
+4. Calculate the detectable effect size (`d`) with a two-tailed t-test on independent means, given the observed standard deviations
+  a) with a power of 80%, $\alpha$=0.05, and measurements on 10 larvae at each site
+  b) with a power of 80%, $\alpha$=0.05, and measurements on 200 larvae at each site
+  c) with a power of 80%, $\alpha$=0.05, and measurements on 20 larvae at one site and 380 larvae at the second site
+  d) comment on how changing sample sizes affect `d`.
+5. Calculate the difference in average mass, in $\mu$g, that can be detected given your estimate of the minimum detectable effect size (`d`) at 4a, b, and c.
+-->
 
 </div>
 <!-- </div> -->
