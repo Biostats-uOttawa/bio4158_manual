@@ -49,7 +49,7 @@ In file(file, "rt") :
   cannot open file 'ou_est_mon_fichier.csv': No such file or directory
 ```
 
-This type of error simply means that R cannot find the file you specified. By default, when R starts, a folder is define as the based folder for R. This is the working directory. R by default will save any files in this folder and will start looking for files in this folder. So you need to specify to R where to look for files and where to save your files. This can be done in 3 different ways:
+This type of error simply means that R cannot find the file you specified. By default, when R starts, a folder is defined as the base folder for R. This is the working directory. R by default will save any files in this folder and will start looking for files in this folder. So you need to specify to R where to look for files and where to save your files. This can be done in 3 different ways:
 
 1. `file.choose()`. (not recommended, because not reproducible). This function will open a dialog box allowing you to click on the file you want. This is not recommended and can be long because you will have to do it absolutely every time you use R. 
 2. specify the complete path in the function. For example `read.csv("/home/julien/Documents/cours/BIO4558/labo/data/monfichier.csv")`. This is longer to type the first time and a bit tricky to get the correct path but after you can run the line of code and it works every time without trying to remember were you saved that damned file. However, this is specific to your own computer and would not work elsewhere.
@@ -307,7 +307,7 @@ In this context, if you use a single `=`, you will not get what you want.
 The following table lists the most common criteria to create expressions and their R syntax.
 ```
 
-Operateur | Explication | Operateur | Explication
+Operator | Explanation | Operator | Explanation
 ----------|----------|----------|----------
  ==       | Equal to   | !=       | Not equal to
  \>       | Larger than | <        | Lower than
@@ -377,16 +377,16 @@ Examine the ratio variable and make a graph to visually assess normality for the
 
 
 ```{r intror-exer, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella"}
-## Charger les données
+## load the data
 salmonella <- read.csv("data/salmonella.csv")
 
-## creer le graph en utilisant juste la souche sauvage et définir x
+## create the base for the graph defining data and x
 mygraph <- ggplot(subset(salmonella, souche == "SAUVAGE"), aes(x = ratio))
-## ajouter des composants graphiques
+## add graph components
 mygraph <- mygraph +
-  # line densité
+  # density smooth
   geom_density() +
-  # position des observations
+  # obersations positions
   geom_rug() +
   # histogram
   geom_histogram(aes(y = ..density..),
