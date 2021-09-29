@@ -42,7 +42,7 @@ Power is related to $\alpha$, the probability level at which one rejects the nul
 
 The larger the sample size, the larger the power. As sample size increases, one’s ability to detect small effect sizes as being statistically significant gets better.
 
-#### Effect sizze {-}
+#### Effect size {-}
 
 The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.
 
@@ -288,37 +288,3 @@ Therefore, with 18 streams per region, $\alpha$ = 0.05 and $\beta$ = 0.2 (so pow
 - When using a stricter significance criteria ($\alpha < 0.05$) power is reduced.
 - Maximizing power implies more sampling effort, unless you use a more liberal statistical criteria ($\alpha > 0.05$)
 - The choice of $\beta$ is somewhat arbitrary. $\beta=0.2$ (power of 80%) is considered relatively high by most.
-
-
-<!--
-## Exercice {#ex-power}
-
-```{block2, type = "rmdcode"}
-
-```
-
-Black fly larvae (Diptera: Simuliidae) were sampled in February at the outlet of two lakes of the Eastern Townships (Lakes Orford and Lovering). The body length of each larva was measured. The data are in the file simulies.csv
-The relationship between body length (L, in mm) and dry mass (M, in $\mu$g) for the dominant species (*P. mixtum/fuscum*) is:
-
-$$
-M = 1.36 L^3.05
-$$
-
-1. Calculate the mean mass and its standard deviation at each site.
-2. Using the mean mass of *P. mixtum/fuscum* at Lovering as a reference and the standard deviations observed at each site, calculate the power of a two-tailed t test for independent means
-  a) if the mass difference was 5 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
-  b) if the mass difference was 20 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
-  c) if the mass difference was 50 $\mu$g, $\alpha$=0.05, and that 100 larvae were sampled at each site
-  d) comment on how changing the mass difference affects power.
-3. Calculate the required sample size to detect, with a two-tailed t-test for independent means, a difference of 50 $\mu$g between the means
-  a) with a power of 80% and $\alpha$=0.05
-  b) with a power of 80% and $\alpha$=0.001
-  c) with a power of 95% and $\alpha$=0.05
-  d) comment on how changing power and $\alpha$ affects the required sample size.
-4. Calculate the detectable effect size (`d`) with a two-tailed t-test on independent means, given the observed standard deviations
-  a) with a power of 80%, $\alpha$=0.05, and measurements on 10 larvae at each site
-  b) with a power of 80%, $\alpha$=0.05, and measurements on 200 larvae at each site
-  c) with a power of 80%, $\alpha$=0.05, and measurements on 20 larvae at one site and 380 larvae at the second site
-  d) comment on how changing sample sizes affect `d`.
-5. Calculate the difference in average mass, in $\mu$g, that can be detected given your estimate of the minimum detectable effect size (`d`) at 4a, b, and c.
--->
