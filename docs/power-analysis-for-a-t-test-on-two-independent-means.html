@@ -280,7 +280,11 @@ The easiest is to create anew function in R to estimate the effect size <code>d<
 <span id="cb32-6"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-6" aria-hidden="true"></a>}</span>
 <span id="cb32-7"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-7" aria-hidden="true"></a></span>
 <span id="cb32-8"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-8" aria-hidden="true"></a><span class="co"># power analysis</span></span>
-<span id="cb32-9"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-9" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>), <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<span id="cb32-9"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-9" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb32-10"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-10" aria-hidden="true"></a>  <span class="dt">n =</span> <span class="dv">18</span>,</span>
+<span id="cb32-11"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-11" aria-hidden="true"></a>  <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>),</span>
+<span id="cb32-12"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-12" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb32-13"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb32-13" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -301,7 +305,9 @@ The easiest is to create anew function in R to estimate the effect size <code>d<
 <span id="cb34-8"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-8" aria-hidden="true"></a></span>
 <span id="cb34-9"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-9" aria-hidden="true"></a><span class="co"># power corresponds to the shaded area</span></span>
 <span id="cb34-10"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-10" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="kw">dnorm</span>(x, <span class="dt">mean =</span> (<span class="fl">3.31</span> <span class="op">-</span><span class="st"> </span><span class="fl">2.64</span>))</span>
-<span id="cb34-11"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-11" aria-hidden="true"></a><span class="kw">polygon</span>(<span class="kw">c</span>(x[x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>qc], <span class="op">-</span>qc), <span class="kw">c</span>(y[x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>qc], <span class="dv">0</span>), <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dt">red =</span> <span class="dv">0</span>, <span class="dt">green =</span> <span class="fl">0.2</span>, <span class="dt">blue =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<span id="cb34-11"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-11" aria-hidden="true"></a><span class="kw">polygon</span>(</span>
+<span id="cb34-12"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-12" aria-hidden="true"></a>  <span class="kw">c</span>(x[x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>qc], <span class="op">-</span>qc), <span class="kw">c</span>(y[x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>qc], <span class="dv">0</span>),</span>
+<span id="cb34-13"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb34-13" aria-hidden="true"></a>  <span class="dt">col =</span> <span class="kw">rgb</span>(<span class="dt">red =</span> <span class="dv">0</span>, <span class="dt">green =</span> <span class="fl">0.2</span>, <span class="dt">blue =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <div class="figure"><span id="fig:r-power"></span>
 <img src="Labs_BIO4158_files/figure-html/r-power-1.svg" alt="Post-hoc analysis with estimated effect size in R" width="672" />
 <p class="caption">
@@ -330,7 +336,11 @@ Figure 2.3: Post-hoc analysis using an effect size different from the one estima
 </p>
 </div>
 <p>Same analysis using R (without all the code for the interesting but not really useful plot)</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">5.28</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>), <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb35-2"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-2" aria-hidden="true"></a>  <span class="dt">n =</span> <span class="dv">18</span>,</span>
+<span id="cb35-3"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-3" aria-hidden="true"></a>  <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">5.28</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>),</span>
+<span id="cb35-4"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-4" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb35-5"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb35-5" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -357,7 +367,11 @@ Change the type of power analysis in G*Power to <strong>A priori: Compute sample
 Figure 2.4: A priori analysis
 </p>
 </div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.8</span>, <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>), <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb37-2"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-2" aria-hidden="true"></a>  <span class="dt">power =</span> <span class="fl">0.8</span>,</span>
+<span id="cb37-3"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-3" aria-hidden="true"></a>  <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>),</span>
+<span id="cb37-4"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-4" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb37-5"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb37-5" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -370,7 +384,11 @@ Figure 2.4: A priori analysis
 ## NOTE: n is number in *each* group</code></pre>
 <p><strong>Ouch!</strong> The required sample would be of 326 streams in each region! It would cost a fortune and require several field teams otherwise only a few dozen streams could be sampled over the summer and it would be very unlikely that such a small difference in biomass could be detected. Sampling fewer streams would probably be in vain and could be considered as a waste of effort and time: why do the work on several dozens of streams if the odds of success are that low?</p>
 <p>If we recalculate for a power of 95%, we find that 538 streams would be required from each region. Increasing power means more work!</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.95</span>, <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>), <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb39-2"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-2" aria-hidden="true"></a>  <span class="dt">power =</span> <span class="fl">0.95</span>,</span>
+<span id="cb39-3"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-3" aria-hidden="true"></a>  <span class="dt">d =</span> <span class="kw">d</span>(<span class="dt">u1 =</span> <span class="fl">2.64</span>, <span class="dt">sd1 =</span> <span class="fl">3.28</span>, <span class="dt">u2 =</span> <span class="fl">3.31</span>, <span class="dt">sd2 =</span> <span class="fl">2.79</span>),</span>
+<span id="cb39-4"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-4" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb39-5"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb39-5" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -395,7 +413,11 @@ Change analysis type in G*Power to <strong>Sensitivity: Compute required effect 
 Figure 2.5: Analyse de sensitivité
 </p>
 </div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.8</span>, <span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb41-2"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-2" aria-hidden="true"></a>  <span class="dt">power =</span> <span class="fl">0.8</span>,</span>
+<span id="cb41-3"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-3" aria-hidden="true"></a>  <span class="dt">n =</span> <span class="dv">18</span>,</span>
+<span id="cb41-4"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-4" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb41-5"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb41-5" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -418,7 +440,11 @@ Attention, this effect size is the metric <code>d</code> and is dependent on sam
 | \bar{X_1} - \bar{X_2} | = d * \sqrt{\frac{{s_1}^2 +{s_2}^2}{2}}
 \]</span></p>
 <p>In R this can be done with the following code</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.8</span>, <span class="dt">n =</span> <span class="dv">18</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)<span class="op">$</span>d <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="fl">3.28</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">2.79</span><span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-1" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(</span>
+<span id="cb43-2"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-2" aria-hidden="true"></a>  <span class="dt">power =</span> <span class="fl">0.8</span>,</span>
+<span id="cb43-3"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-3" aria-hidden="true"></a>  <span class="dt">n =</span> <span class="dv">18</span>,</span>
+<span id="cb43-4"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-4" aria-hidden="true"></a>  <span class="dt">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb43-5"><a href="power-analysis-for-a-t-test-on-two-independent-means.html#cb43-5" aria-hidden="true"></a>  <span class="dt">type =</span> <span class="st">&quot;two.sample&quot;</span>)<span class="op">$</span>d <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="fl">3.28</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="fl">2.79</span><span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 2.926992</code></pre>
 <p>Therefore, with 18 streams per region, <span class="math inline">\(\alpha\)</span> = 0.05 and <span class="math inline">\(\beta\)</span> = 0.2 (so power of 80%), Jaynie could detect a difference of 2.93 g/m<sup>2</sup> between regions, a bit more than a doubling of biomass.</p>
 </div>

@@ -239,7 +239,7 @@
 \makeatother
 \subtitle{Laboratory manual}
 \author{Julien Martin}
-\date{24-09-2021}
+\date{05-10-2021}
 
 \begin{document}
 \maketitle
@@ -1115,9 +1115,9 @@ Power is related to \(\alpha\), the probability level at which one rejects the n
 
 The larger the sample size, the larger the power. As sample size increases, one's ability to detect small effect sizes as being statistically significant gets better.
 
-\hypertarget{effect-sizze}{%
-\subsubsection*{Effect sizze}\label{effect-sizze}}
-\addcontentsline{toc}{subsubsection}{Effect sizze}
+\hypertarget{effect-size}{%
+\subsubsection*{Effect size}\label{effect-size}}
+\addcontentsline{toc}{subsubsection}{Effect size}
 
 The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.
 
@@ -1366,7 +1366,11 @@ The easiest is to create anew function in R to estimate the effect size \texttt{
 \NormalTok{\}}
 
 \CommentTok{\# power analysis}
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{n =} \DecValTok{18}\NormalTok{,}
+  \DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{),}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1395,7 +1399,9 @@ The easiest is to create anew function in R to estimate the effect size \texttt{
 
 \CommentTok{\# power corresponds to the shaded area}
 \NormalTok{y \textless{}{-}}\StringTok{ }\KeywordTok{dnorm}\NormalTok{(x, }\DataTypeTok{mean =}\NormalTok{ (}\FloatTok{3.31} \OperatorTok{{-}}\StringTok{ }\FloatTok{2.64}\NormalTok{))}
-\KeywordTok{polygon}\NormalTok{(}\KeywordTok{c}\NormalTok{(x[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\OperatorTok{{-}}\NormalTok{qc), }\KeywordTok{c}\NormalTok{(y[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\DecValTok{0}\NormalTok{), }\DataTypeTok{col =} \KeywordTok{rgb}\NormalTok{(}\DataTypeTok{red =} \DecValTok{0}\NormalTok{, }\DataTypeTok{green =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{blue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{))}
+\KeywordTok{polygon}\NormalTok{(}
+  \KeywordTok{c}\NormalTok{(x[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\OperatorTok{{-}}\NormalTok{qc), }\KeywordTok{c}\NormalTok{(y[x }\OperatorTok{\textless{}=}\StringTok{ }\OperatorTok{{-}}\NormalTok{qc], }\DecValTok{0}\NormalTok{),}
+  \DataTypeTok{col =} \KeywordTok{rgb}\NormalTok{(}\DataTypeTok{red =} \DecValTok{0}\NormalTok{, }\DataTypeTok{green =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{blue =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.5}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1439,7 +1445,11 @@ Same analysis using R (without all the code for the interesting but not really u
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{5.28}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{n =} \DecValTok{18}\NormalTok{,}
+  \DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{5.28}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{),}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1475,7 +1485,11 @@ Change the type of power analysis in G*Power to \textbf{A priori: Compute sample
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{power =} \FloatTok{0.8}\NormalTok{,}
+  \DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{),}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1498,7 +1512,11 @@ If we recalculate for a power of 95\%, we find that 538 streams would be require
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.95}\NormalTok{, }\DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{), }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{power =} \FloatTok{0.95}\NormalTok{,}
+  \DataTypeTok{d =} \KeywordTok{d}\NormalTok{(}\DataTypeTok{u1 =} \FloatTok{2.64}\NormalTok{, }\DataTypeTok{sd1 =} \FloatTok{3.28}\NormalTok{, }\DataTypeTok{u2 =} \FloatTok{3.31}\NormalTok{, }\DataTypeTok{sd2 =} \FloatTok{2.79}\NormalTok{),}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1530,7 +1548,11 @@ Change analysis type in G*Power to \textbf{Sensitivity: Compute required effect 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{power =} \FloatTok{0.8}\NormalTok{,}
+  \DataTypeTok{n =} \DecValTok{18}\NormalTok{,}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1567,7 +1589,11 @@ In R this can be done with the following code
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{pwr.t.test}\NormalTok{(}\DataTypeTok{power =} \FloatTok{0.8}\NormalTok{, }\DataTypeTok{n =} \DecValTok{18}\NormalTok{, }\DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{, }\DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}\OperatorTok{$}\NormalTok{d }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((}\FloatTok{3.28}\OperatorTok{\^{}}\DecValTok{2} \OperatorTok{+}\StringTok{ }\FloatTok{2.79}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
+\KeywordTok{pwr.t.test}\NormalTok{(}
+  \DataTypeTok{power =} \FloatTok{0.8}\NormalTok{,}
+  \DataTypeTok{n =} \DecValTok{18}\NormalTok{,}
+  \DataTypeTok{sig.level =} \FloatTok{0.05}\NormalTok{,}
+  \DataTypeTok{type =} \StringTok{"two.sample"}\NormalTok{)}\OperatorTok{$}\NormalTok{d }\OperatorTok{*}\StringTok{ }\KeywordTok{sqrt}\NormalTok{((}\FloatTok{3.28}\OperatorTok{\^{}}\DecValTok{2} \OperatorTok{+}\StringTok{ }\FloatTok{2.79}\OperatorTok{\^{}}\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

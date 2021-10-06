@@ -171,7 +171,11 @@ d <- function(u1, u2, sd1, sd2) {
 }
 
 # power analysis
-pwr.t.test(n = 18, d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79), sig.level = 0.05, type = "two.sample")
+pwr.t.test(
+  n = 18,
+  d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79),
+  sig.level = 0.05,
+  type = "two.sample")
 
 # plot similar to G*Power
 x <- seq(-4, 4, length = 200)
@@ -183,7 +187,9 @@ lines(x, dnorm(x, mean = (3.31 - 2.64)), type = "l", col = "blue", lwd = 2)
 
 # power corresponds to the shaded area
 y <- dnorm(x, mean = (3.31 - 2.64))
-polygon(c(x[x <= -qc], -qc), c(y[x <= -qc], 0), col = rgb(red = 0, green = 0.2, blue = 1, alpha = 0.5))
+polygon(
+  c(x[x <= -qc], -qc), c(y[x <= -qc], 0),
+  col = rgb(red = 0, green = 0.2, blue = 1, alpha = 0.5))
 ```
 
 Let’s examine the figure \@ref(fig:gpower-1).
@@ -210,7 +216,11 @@ knitr::include_graphics("images/gpower_2.png")
 Same analysis using R (without all the code for the interesting but not really useful plot)
 
 ```{r}
-pwr.t.test(n = 18, d = d(u1 = 2.64, sd1 = 3.28, u2 = 5.28, sd2 = 2.79), sig.level = 0.05, type = "two.sample")
+pwr.t.test(
+  n = 18,
+  d = d(u1 = 2.64, sd1 = 3.28, u2 = 5.28, sd2 = 2.79),
+  sig.level = 0.05,
+  type = "two.sample")
 ```
 
 The power is 0.71, therefore Jaynie had a reasonable chance (71%) of detecting a doubling of biomass with 18 streams in each region.
@@ -230,7 +240,11 @@ knitr::include_graphics("images/gpower_3.png")
 ```
 
 ```{r}
-pwr.t.test(power = 0.8, d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79), sig.level = 0.05, type = "two.sample")
+pwr.t.test(
+  power = 0.8,
+  d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79),
+  sig.level = 0.05,
+  type = "two.sample")
 ```
 
 **Ouch!** The required sample would be of 326 streams in each region! It would cost a fortune and require several field teams otherwise only a few dozen streams could be sampled over the summer and it would be very unlikely that such a small difference in biomass could be detected. Sampling fewer streams would probably be in vain and could be considered as a waste of effort and time: why do the work on several dozens of streams if the odds of success are that low?
@@ -238,7 +252,11 @@ pwr.t.test(power = 0.8, d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79), sig
 If we recalculate for a power of 95%, we find that 538 streams would be required from each region. Increasing power means more work!
 
 ```{r}
-pwr.t.test(power = 0.95, d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79), sig.level = 0.05, type = "two.sample")
+pwr.t.test(
+  power = 0.95,
+  d = d(u1 = 2.64, sd1 = 3.28, u2 = 3.31, sd2 = 2.79),
+  sig.level = 0.05,
+  type = "two.sample")
 ```
 
 
@@ -254,7 +272,11 @@ knitr::include_graphics("images/gpower_4.png")
 ```
 
 ```{r}
-pwr.t.test(power = 0.8, n = 18, sig.level = 0.05, type = "two.sample")
+pwr.t.test(
+  power = 0.8,
+  n = 18,
+  sig.level = 0.05,
+  type = "two.sample")
 ```
 
 The detectable effect size for this sample size, $\alpha = 0.05$ and $\beta = 0.2$ (or power of 80%) is 0.961296.
@@ -276,7 +298,11 @@ $$
 In R this can be done with the following code
 
 ```{r}
-pwr.t.test(power = 0.8, n = 18, sig.level = 0.05, type = "two.sample")$d * sqrt((3.28^2 + 2.79^2) / 2)
+pwr.t.test(
+  power = 0.8,
+  n = 18,
+  sig.level = 0.05,
+  type = "two.sample")$d * sqrt((3.28^2 + 2.79^2) / 2)
 ```
 
 Therefore, with 18 streams per region, $\alpha$ = 0.05 and $\beta$ = 0.2 (so power of 80%), Jaynie could detect a difference of 2.93 g/m^2^ between regions, a bit more than a doubling of biomass.
