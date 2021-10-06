@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Software installation | BIO4158 Applied biostats with R</title>
+  <title>3.5 Non-parametric correlations: Spearman’s rank and Kendall’s \(\tau\) | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="3.5 Non-parametric correlations: Spearman’s rank and Kendall’s \(\tau\) | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="3.5 Non-parametric correlations: Spearman’s rank and Kendall’s \(\tau\) | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-r-and-why-use-it-in-this-course.html"/>
-<link rel="next" href="general-laboratory-instructions.html"/>
+<link rel="prev" href="testing-the-significance-of-correlations-and-bonferroni-probabilities.html"/>
+<link rel="next" href="simple-linear-regression.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -248,39 +248,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="software-installation" class="section level2 unnumbered" number="">
-<h2>Software installation</h2>
-<div id="r" class="section level3 unnumbered" number="">
-<h3>R</h3>
-<p>To install R on a computer, go to <a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a>. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).</p>
-<p>Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).</p>
-</div>
-<div id="rstudio-or-vs-code" class="section level3 unnumbered" number="">
-<h3>Rstudio or VS code</h3>
-<p>RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux</p>
+<div id="non-parametric-correlations-spearmans-rank-and-kendalls-tau" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Non-parametric correlations: Spearman’s rank and Kendall’s <span class="math inline">\(\tau\)</span></h2>
+<p>The analysis done with the sturgeon data in the section above suggests that one of the assumptions of correlation, namely, bivariate normality, may not be valid for <code>fklngth</code> and <code>rdwght</code> nor for the log transforms of these variables. Finding an appropriate transformation is sometimes like looking for a needle in a haystack; indeed, it can be much worse simply because for some distributions, there is no transformation that will normalize the data. In such cases, the best option may be to go to a non-parametric analysis that does not assume bivariate normality or linearity. All such correlations are based on the ranks rather than the data themselves: two options available in
+R are Spearman and Kendall’s <span class="math inline">\(\tau\)</span> (tau).</p>
 <ul>
-<li>RStudio: <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></li>
-<li>VScode: <a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></li>
+<li>Test the correlation between <code>fklngth</code> and <code>rdwght</code> using both the Spearman and Kendall’s tau. The following commands will produce the correlations:</li>
 </ul>
-</div>
-<div id="r-libraries" class="section level3 unnumbered" number="">
-<h3>R libraries</h3>
-<p>R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.</p>
-<ul>
-<li>Rmarkdown</li>
-<li>tinytex</li>
-</ul>
-<p>Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="software-installation.html#cb1-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;tinytex&quot;</span>))</span></code></pre></div>
-</div>
-<div id="gpower" class="section level3 unnumbered" number="">
-<h3>G*Power</h3>
-<p>G*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
-Le programme existe en version Mac et Windows.
-Il peut cependant être utilisé sous linux via Wine.
-G*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.</p>
-<p>Téléchargez le programme sur le site <a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html" class="uri">https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a></p>
-</div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb60-1" aria-hidden="true"></a><span class="kw">cor.test</span>(</span>
+<span id="cb60-2"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb60-2" aria-hidden="true"></a>  sturgeon<span class="op">$</span>lfklngth, sturgeon<span class="op">$</span>rdwght,</span>
+<span id="cb60-3"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb60-3" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb60-4"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb60-4" aria-hidden="true"></a>  <span class="dt">method =</span> <span class="st">&quot;spearman&quot;</span></span>
+<span id="cb60-5"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb60-5" aria-hidden="true"></a>)</span></code></pre></div>
+<pre><code>## Warning in cor.test.default(sturgeon$lfklngth, sturgeon$rdwght, alternative =
+## &quot;two.sided&quot;, : Cannot compute exact p-value with ties</code></pre>
+<pre><code>## 
+##  Spearman&#39;s rank correlation rho
+## 
+## data:  sturgeon$lfklngth and sturgeon$rdwght
+## S = 47971, p-value &lt; 2.2e-16
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+## 0.9522546</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb63-1" aria-hidden="true"></a><span class="kw">cor.test</span>(</span>
+<span id="cb63-2"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb63-2" aria-hidden="true"></a>  sturgeon<span class="op">$</span>lfklngth, sturgeon<span class="op">$</span>rdwght,</span>
+<span id="cb63-3"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb63-3" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb63-4"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb63-4" aria-hidden="true"></a>  <span class="dt">method =</span> <span class="st">&quot;kendall&quot;</span></span>
+<span id="cb63-5"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html#cb63-5" aria-hidden="true"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Kendall&#39;s rank correlation tau
+## 
+## data:  sturgeon$lfklngth and sturgeon$rdwght
+## z = 16.358, p-value &lt; 2.2e-16
+## alternative hypothesis: true tau is not equal to 0
+## sample estimates:
+##       tau 
+## 0.8208065</code></pre>
+<p>Contrast these results with those obtained using the Pearson product-moment correlation. Why the difference?</p>
+<p>Test the non-parametric correlations on pairs of the transformed variables. You should immediately note that the non-parametric correlations are identical for untransformed and transformed variables. This is because we are using the ranks, rather than the raw data, and the rank ordering of the data does not change when a transformation is applied to the raw values.</p>
+<p>Note that the correlations for Kendall’s tau (0.820) are lower than for the Spearman rank (0.952) correlation. This is because Kendall’s gives more weight to ranks that are far apart, whereas Spearman’s weights each rank equally. Generally, Kendalls’s is more appropriate when there is more uncertainty about the reliability of close ranks.</p>
+<p>The sturgeons in this sample were collected using nets and baited hooks of a certain size. What impact do you think this method of collection had on the shapes of the distributions of <code>fklngth</code> and <code>rdwght</code> ? Under these circumstances, do you think correlation analysis is appropriate at all?</p>
+<p>Note that correlation analysis assumes that each variable is <em>randomly sampled</em>. In the case of sturgeon, this is not the case: baited hooks and nets will only catch sturgeon above a certain minimum size. Note that in the sample, there are no small sturgeons, since the fishing gear targets only larger fish. Thus, we should be very wary of the correlation coefficients associated with our analysis, as the inclusion of smaller fish may well change our estimate of these correlations.</p>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -288,8 +297,8 @@ G*Power vous permettra d’effectuer une analyse de puissance pour la majorité 
           </div>
         </div>
       </div>
-<a href="what-is-r-and-why-use-it-in-this-course.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general-laboratory-instructions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="testing-the-significance-of-correlations-and-bonferroni-probabilities.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +320,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/03-reg_lin.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Software installation | BIO4158 Applied biostats with R</title>
+  <title>3.7 Data transformations in regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="3.7 Data transformations in regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="3.7 Data transformations in regression | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-r-and-why-use-it-in-this-course.html"/>
-<link rel="next" href="general-laboratory-instructions.html"/>
+<link rel="prev" href="simple-linear-regression.html"/>
+<link rel="next" href="dealing-with-outliers.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -248,39 +248,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="software-installation" class="section level2 unnumbered" number="">
-<h2>Software installation</h2>
-<div id="r" class="section level3 unnumbered" number="">
-<h3>R</h3>
-<p>To install R on a computer, go to <a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a>. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).</p>
-<p>Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).</p>
-</div>
-<div id="rstudio-or-vs-code" class="section level3 unnumbered" number="">
-<h3>Rstudio or VS code</h3>
-<p>RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux</p>
-<ul>
-<li>RStudio: <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></li>
-<li>VScode: <a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></li>
-</ul>
-</div>
-<div id="r-libraries" class="section level3 unnumbered" number="">
-<h3>R libraries</h3>
-<p>R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.</p>
-<ul>
-<li>Rmarkdown</li>
-<li>tinytex</li>
-</ul>
-<p>Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="software-installation.html#cb1-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;tinytex&quot;</span>))</span></code></pre></div>
-</div>
-<div id="gpower" class="section level3 unnumbered" number="">
-<h3>G*Power</h3>
-<p>G*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
-Le programme existe en version Mac et Windows.
-Il peut cependant être utilisé sous linux via Wine.
-G*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.</p>
-<p>Téléchargez le programme sur le site <a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html" class="uri">https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a></p>
-</div>
+<div id="data-transformations-in-regression" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Data transformations in regression</h2>
+<p>The analysis above revealed that the linearity assumption underlying regression analysis is not met by the <code>fklngth</code> - <code>age</code> data. If we want to use regression analysis, data transformations are required:</p>
+<p>Let’s plot the log-transformed data</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="data-transformations-in-regression.html#cb81-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">las =</span> <span class="dv">1</span>)</span>
+<span id="cb81-2"><a href="data-transformations-in-regression.html#cb81-2" aria-hidden="true"></a><span class="kw">ggplot</span>(</span>
+<span id="cb81-3"><a href="data-transformations-in-regression.html#cb81-3" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon.male,</span>
+<span id="cb81-4"><a href="data-transformations-in-regression.html#cb81-4" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">log10</span>(age), <span class="dt">y =</span> <span class="kw">log10</span>(fklngth))</span>
+<span id="cb81-5"><a href="data-transformations-in-regression.html#cb81-5" aria-hidden="true"></a>) <span class="op">+</span></span>
+<span id="cb81-6"><a href="data-transformations-in-regression.html#cb81-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb81-7"><a href="data-transformations-in-regression.html#cb81-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span></span>
+<span id="cb81-8"><a href="data-transformations-in-regression.html#cb81-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="Labs_BIO4158_files/figure-html/sturtr-1-1.svg" width="672" /></p>
+<p>We can fit the linear regression model on the log-transformed variables.</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="data-transformations-in-regression.html#cb82-1" aria-hidden="true"></a>RegModel<span class="fl">.2</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(age), <span class="dt">data =</span> sturgeon.male)</span>
+<span id="cb82-2"><a href="data-transformations-in-regression.html#cb82-2" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log10(fklngth) ~ log10(age), data = sturgeon.male)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.082794 -0.016837 -0.000719  0.021102  0.087446 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.19199    0.02723   43.77   &lt;2e-16 ***
+## log10(age)   0.34086    0.02168   15.72   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.03015 on 73 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.772,  Adjusted R-squared:  0.7688 
+## F-statistic: 247.1 on 1 and 73 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Note that by using the log transformed data, the proportion of variation explained by the regression has increased by 10% (from 0.664 to 0.772), a substantial increase. So the relationship has become more linear. Good. Let’s look at the residual diagnostic plots:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="data-transformations-in-regression.html#cb84-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">las =</span> <span class="dv">1</span>)</span>
+<span id="cb84-2"><a href="data-transformations-in-regression.html#cb84-2" aria-hidden="true"></a><span class="kw">plot</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<p><img src="Labs_BIO4158_files/figure-html/sturtr-3-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="data-transformations-in-regression.html#cb85-1" aria-hidden="true"></a><span class="kw">check_model</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<p><img src="Labs_BIO4158_files/figure-html/sturtr-3-2.svg" width="672" /></p>
+<p>So things appear a little better than before, although still not ideal. For example, the Residual vs fitted plot still suggests a potential nonlinearity. The QQ plot is nicer than before, indicating that residuals are more normally distributed after the log-log transformation. There is no indication of heteroscedasticity. And, although there are still a few points with somewhat high leverage, none have a Cook’s distance above 0.5. It thus seems that transforming data improved things: more linear, more normal, less dependence on extreme data. Do the formal tests support this visual assessment?</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-transformations-in-regression.html#cb86-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  RegModel.2
+## BP = 0.14282, df = 1, p-value = 0.7055</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-transformations-in-regression.html#cb88-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+##  Durbin-Watson test
+## 
+## data:  RegModel.2
+## DW = 2.1777, p-value = 0.6134
+## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="data-transformations-in-regression.html#cb90-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+##  RESET test
+## 
+## data:  RegModel.2
+## RESET = 4.4413, df1 = 2, df2 = 71, p-value = 0.01523</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="data-transformations-in-regression.html#cb92-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.2</span>))</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(RegModel.2)
+## W = 0.98998, p-value = 0.8246</code></pre>
+<p>Indeed, they do: residuals are still homoscedastic (Breusch-Pagan test), show no autocorrelation (Durbin-Watson test), are normal (Shapiro-Wilk test), and they are more linear (p value of the RESET test is now 0.015, instead of 0.000005). Linearity has improved, but is still violated somewhat.</p>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -288,8 +323,8 @@ G*Power vous permettra d’effectuer une analyse de puissance pour la majorité 
           </div>
         </div>
       </div>
-<a href="what-is-r-and-why-use-it-in-this-course.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general-laboratory-instructions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dealing-with-outliers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +346,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/03-reg_lin.Rmd",
 "text": "Edit"
 },
 "history": {

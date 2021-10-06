@@ -200,6 +200,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="important-points-to-remember.html"><a href="important-points-to-remember.html"><i class="fa fa-check"></i><b>2.5</b> Important points to remember</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>3</b> Correlation and simple linear regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="set-lm.html"><a href="set-lm.html"><i class="fa fa-check"></i><b>3.1</b> R packages and data</a></li>
+<li class="chapter" data-level="3.2" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>3.2</b> Scatter plots</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformations-and-the-product-moment-correlation.html"><a href="data-transformations-and-the-product-moment-correlation.html"><i class="fa fa-check"></i><b>3.3</b> Data transformations and the product-moment correlation</a></li>
+<li class="chapter" data-level="3.4" data-path="testing-the-significance-of-correlations-and-bonferroni-probabilities.html"><a href="testing-the-significance-of-correlations-and-bonferroni-probabilities.html"><i class="fa fa-check"></i><b>3.4</b> Testing the significance of correlations and Bonferroni probabilities</a></li>
+<li class="chapter" data-level="3.5" data-path="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"><i class="fa fa-check"></i><b>3.5</b> Non-parametric correlations: Spearman’s rank and Kendall’s <span class="math inline">\(\tau\)</span></a></li>
+<li class="chapter" data-level="3.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>3.6</b> Simple linear regression</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#testing-regression-assumptions"><i class="fa fa-check"></i><b>3.6.1</b> Testing regression assumptions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#formal-tests-of-regression-assumptions"><i class="fa fa-check"></i><b>3.6.2</b> Formal tests of regression assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-transformations-in-regression.html"><a href="data-transformations-in-regression.html"><i class="fa fa-check"></i><b>3.7</b> Data transformations in regression</a></li>
+<li class="chapter" data-level="3.8" data-path="dealing-with-outliers.html"><a href="dealing-with-outliers.html"><i class="fa fa-check"></i><b>3.8</b> Dealing with outliers</a></li>
+<li class="chapter" data-level="3.9" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html"><i class="fa fa-check"></i><b>3.9</b> Quantifying effect size in regression and power analysis</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#power-to-detect-a-given-slope"><i class="fa fa-check"></i><b>3.9.1</b> Power to detect a given slope</a></li>
+<li class="chapter" data-level="3.9.2" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#sample-size-required-to-achieve-desired-power"><i class="fa fa-check"></i><b>3.9.2</b> Sample size required to achieve desired power</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -227,11 +248,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pandoc" class="section level2" number="3.2">
+<div id="pandoc" class="section level2" number="4.2">
 <h2><span class="header-section-number">A.2</span> Pandoc</h2>
 <p>An R Markdown document (<code>*.Rmd</code>) is first compiled to Markdown (<code>*.md</code>) through the <strong>knitr</strong> package, and then Markdown is compiled to other output formats (such as LaTeX or HTML) through Pandoc. This process is automated by the <strong>rmarkdown</strong> package. You do not need to install <strong>knitr</strong> or <strong>rmarkdown</strong> separately, because they are the required packages of <strong>bookdown</strong> and will be automatically installed when you install <strong>bookdown</strong>. However, Pandoc is not an R package, so it will not be automatically installed when you install <strong>bookdown</strong>. You can follow the installation instructions on the Pandoc homepage (<a href="http://pandoc.org" class="uri">http://pandoc.org</a>) to install Pandoc, but if you use the RStudio IDE, you do not really need to install Pandoc separately, because RStudio includes a copy of Pandoc. The Pandoc version number can be obtained via:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="pandoc.html#cb49-1" aria-hidden="true"></a>rmarkdown<span class="op">::</span><span class="kw">pandoc_version</span>()</span>
-<span id="cb49-2"><a href="pandoc.html#cb49-2" aria-hidden="true"></a><span class="co">## [1] &#39;2.9.2.1&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="pandoc.html#cb127-1" aria-hidden="true"></a>rmarkdown<span class="op">::</span><span class="kw">pandoc_version</span>()</span>
+<span id="cb127-2"><a href="pandoc.html#cb127-2" aria-hidden="true"></a><span class="co">## [1] &#39;2.9.2.1&#39;</span></span></code></pre></div>
 <p>If you find this version too low and there are Pandoc features only in a later version, you can install the later version of Pandoc, and <strong>rmarkdown</strong> will call the newer version instead of its built-in version.</p>
 </div>
 <script src="js/solution.js"></script>

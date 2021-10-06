@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Software installation | BIO4158 Applied biostats with R</title>
+  <title>3 Correlation and simple linear regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="3 Correlation and simple linear regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="3 Correlation and simple linear regression | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-r-and-why-use-it-in-this-course.html"/>
-<link rel="next" href="general-laboratory-instructions.html"/>
+<link rel="prev" href="important-points-to-remember.html"/>
+<link rel="next" href="set-lm.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -248,39 +248,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="software-installation" class="section level2 unnumbered" number="">
-<h2>Software installation</h2>
-<div id="r" class="section level3 unnumbered" number="">
-<h3>R</h3>
-<p>To install R on a computer, go to <a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a>. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).</p>
-<p>Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).</p>
-</div>
-<div id="rstudio-or-vs-code" class="section level3 unnumbered" number="">
-<h3>Rstudio or VS code</h3>
-<p>RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux</p>
+<div id="correlation-and-simple-linear-regression" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Correlation and simple linear regression</h1>
+<p>After completing this laboratory exercise, you should be able to:</p>
 <ul>
-<li>RStudio: <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></li>
-<li>VScode: <a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></li>
+<li>Use R to produce a scatter plot of the relationship between two
+variables.</li>
+<li>Use R to carry out some simple data transformations.</li>
+<li>Use R to compute the Pearson product-moment correlation
+between two variables and assess its statistical significance.</li>
+<li>Use R to compute the correlation between pairs of ranked vari-
+ables using the Spearman rank correlation and Kendall’s tau.</li>
+<li>Use R to assess the significance of pairwise comparisons from a
+generalized correlation matrix using Bonferroni-adjusted proba-
+bilities.</li>
+<li>Use R do a simple linear regression</li>
+<li>Use R to test the validity of the assumptions underlying simple lin-
+ear regression</li>
+<li>Use R to assess significance of a regression by the bootstrap
+method</li>
+<li>Quantify effect size in simple regression and perform a power
+analysis using G*Power</li>
 </ul>
-</div>
-<div id="r-libraries" class="section level3 unnumbered" number="">
-<h3>R libraries</h3>
-<p>R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.</p>
-<ul>
-<li>Rmarkdown</li>
-<li>tinytex</li>
-</ul>
-<p>Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="software-installation.html#cb1-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;tinytex&quot;</span>))</span></code></pre></div>
-</div>
-<div id="gpower" class="section level3 unnumbered" number="">
-<h3>G*Power</h3>
-<p>G*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
-Le programme existe en version Mac et Windows.
-Il peut cependant être utilisé sous linux via Wine.
-G*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.</p>
-<p>Téléchargez le programme sur le site <a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html" class="uri">https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a></p>
-</div>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -288,8 +277,8 @@ G*Power vous permettra d’effectuer une analyse de puissance pour la majorité 
           </div>
         </div>
       </div>
-<a href="what-is-r-and-why-use-it-in-this-course.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general-laboratory-instructions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="important-points-to-remember.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="set-lm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +300,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/03-reg_lin.Rmd",
 "text": "Edit"
 },
 "history": {

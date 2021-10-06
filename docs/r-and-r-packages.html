@@ -200,6 +200,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="important-points-to-remember.html"><a href="important-points-to-remember.html"><i class="fa fa-check"></i><b>2.5</b> Important points to remember</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="correlation-and-simple-linear-regression.html"><a href="correlation-and-simple-linear-regression.html"><i class="fa fa-check"></i><b>3</b> Correlation and simple linear regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="set-lm.html"><a href="set-lm.html"><i class="fa fa-check"></i><b>3.1</b> R packages and data</a></li>
+<li class="chapter" data-level="3.2" data-path="scatter-plots.html"><a href="scatter-plots.html"><i class="fa fa-check"></i><b>3.2</b> Scatter plots</a></li>
+<li class="chapter" data-level="3.3" data-path="data-transformations-and-the-product-moment-correlation.html"><a href="data-transformations-and-the-product-moment-correlation.html"><i class="fa fa-check"></i><b>3.3</b> Data transformations and the product-moment correlation</a></li>
+<li class="chapter" data-level="3.4" data-path="testing-the-significance-of-correlations-and-bonferroni-probabilities.html"><a href="testing-the-significance-of-correlations-and-bonferroni-probabilities.html"><i class="fa fa-check"></i><b>3.4</b> Testing the significance of correlations and Bonferroni probabilities</a></li>
+<li class="chapter" data-level="3.5" data-path="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"><a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"><i class="fa fa-check"></i><b>3.5</b> Non-parametric correlations: Spearman’s rank and Kendall’s <span class="math inline">\(\tau\)</span></a></li>
+<li class="chapter" data-level="3.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>3.6</b> Simple linear regression</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#testing-regression-assumptions"><i class="fa fa-check"></i><b>3.6.1</b> Testing regression assumptions</a></li>
+<li class="chapter" data-level="3.6.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#formal-tests-of-regression-assumptions"><i class="fa fa-check"></i><b>3.6.2</b> Formal tests of regression assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-transformations-in-regression.html"><a href="data-transformations-in-regression.html"><i class="fa fa-check"></i><b>3.7</b> Data transformations in regression</a></li>
+<li class="chapter" data-level="3.8" data-path="dealing-with-outliers.html"><a href="dealing-with-outliers.html"><i class="fa fa-check"></i><b>3.8</b> Dealing with outliers</a></li>
+<li class="chapter" data-level="3.9" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html"><i class="fa fa-check"></i><b>3.9</b> Quantifying effect size in regression and power analysis</a>
+<ul>
+<li class="chapter" data-level="3.9.1" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#power-to-detect-a-given-slope"><i class="fa fa-check"></i><b>3.9.1</b> Power to detect a given slope</a></li>
+<li class="chapter" data-level="3.9.2" data-path="quantifying-effect-size-in-regression-and-power-analysis.html"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#sample-size-required-to-achieve-desired-power"><i class="fa fa-check"></i><b>3.9.2</b> Sample size required to achieve desired power</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -227,18 +248,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-and-r-packages" class="section level2" number="3.1">
+<div id="r-and-r-packages" class="section level2" number="4.1">
 <h2><span class="header-section-number">A.1</span> R and R packages</h2>
 <p>R can be downloaded and installed from any CRAN (the Comprehensive R Archive Network) mirrors, e.g., <a href="https://cran.rstudio.com" class="uri">https://cran.rstudio.com</a>. Please note that there will be a few new releases of R every year, and you may want to upgrade R occasionally.</p>
 <p>To install the <strong>bookdown</strong> package, you can type this in R:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="r-and-r-packages.html#cb45-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="r-and-r-packages.html#cb123-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
 <p>This installs all required R packages. You can also choose to install all optional packages as well, if you do not care too much about whether these packages will actually be used to compile your book (such as <strong>htmlwidgets</strong>):</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r-and-r-packages.html#cb46-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="r-and-r-packages.html#cb124-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>If you want to test the development version of <strong>bookdown</strong> on GitHub, you need to install <strong>devtools</strong> first:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="r-and-r-packages.html#cb47-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb47-2"><a href="r-and-r-packages.html#cb47-2" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="r-and-r-packages.html#cb125-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb125-2"><a href="r-and-r-packages.html#cb125-2" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span></code></pre></div>
 <p>R packages are also often constantly updated on CRAN or GitHub, so you may want to update them once in a while:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r-and-r-packages.html#cb48-1" aria-hidden="true"></a><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="r-and-r-packages.html#cb126-1" aria-hidden="true"></a><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>Although it is not required, the RStudio IDE can make a lot of things much easier when you work on R-related projects. The RStudio IDE can be downloaded from <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>.</p>
 </div>
 <script src="js/solution.js"></script>

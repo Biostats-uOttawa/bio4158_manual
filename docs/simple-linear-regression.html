@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Software installation | BIO4158 Applied biostats with R</title>
+  <title>3.6 Simple linear regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="3.6 Simple linear regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Software installation | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="3.6 Simple linear regression | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-r-and-why-use-it-in-this-course.html"/>
-<link rel="next" href="general-laboratory-instructions.html"/>
+<link rel="prev" href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"/>
+<link rel="next" href="data-transformations-in-regression.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -248,38 +248,140 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="software-installation" class="section level2 unnumbered" number="">
-<h2>Software installation</h2>
-<div id="r" class="section level3 unnumbered" number="">
-<h3>R</h3>
-<p>To install R on a computer, go to <a href="http://cran.r-project.org/" class="uri">http://cran.r-project.org/</a>. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).</p>
-<p>Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).</p>
-</div>
-<div id="rstudio-or-vs-code" class="section level3 unnumbered" number="">
-<h3>Rstudio or VS code</h3>
-<p>RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux</p>
+<div id="simple-linear-regression" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Simple linear regression</h2>
+<p>In correlation analysis we are interested in how pairs of variables covary: However, in regression analysis, we are attempting to estimate a model that predicts a variable (the dependent variable) from another variable (the independent variable).</p>
+<p>As with any statistical analysis, the best way to begin is by looking at your data.
+If you are interested in the relationship between two variables, say, Y and X, produce a plot of Y versus X just to get a “feel” for the relationship.</p>
 <ul>
-<li>RStudio: <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></li>
-<li>VScode: <a href="https://code.visualstudio.com/download" class="uri">https://code.visualstudio.com/download</a></li>
+<li>The data file <code>sturgeon.csv</code> contains data for sturgeons collected from 1978-1980 at Cumberland House, Saskatchewan and The Pas, Manitoba. Make a scatterplot of <code>fklngth</code> (the dependent variable) versus <code>age</code> (the independent variable) for males and add a linear regression and a loess smoother. What do you conclude from this plot?</li>
 </ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="simple-linear-regression.html#cb65-1" aria-hidden="true"></a>sturgeon.male &lt;-<span class="st"> </span><span class="kw">subset</span>(sturgeon, <span class="dt">subset =</span> sex <span class="op">==</span><span class="st"> &quot;MALE&quot;</span>)</span>
+<span id="cb65-2"><a href="simple-linear-regression.html#cb65-2" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
+<span id="cb65-3"><a href="simple-linear-regression.html#cb65-3" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon.male, <span class="co"># source of data</span></span>
+<span id="cb65-4"><a href="simple-linear-regression.html#cb65-4" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> fklngth)</span>
+<span id="cb65-5"><a href="simple-linear-regression.html#cb65-5" aria-hidden="true"></a>) <span class="co"># aesthetics: y=fklngth, x=rdwght</span></span>
+<span id="cb65-6"><a href="simple-linear-regression.html#cb65-6" aria-hidden="true"></a><span class="co"># plot data points, regression, loess trace</span></span>
+<span id="cb65-7"><a href="simple-linear-regression.html#cb65-7" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span>mygraph <span class="op">+</span></span>
+<span id="cb65-8"><a href="simple-linear-regression.html#cb65-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">color =</span> <span class="st">&quot;green&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add linear regression, but no SE shading</span></span>
+<span id="cb65-9"><a href="simple-linear-regression.html#cb65-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">color =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># add loess</span></span>
+<span id="cb65-10"><a href="simple-linear-regression.html#cb65-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="co"># add data points</span></span>
+<span id="cb65-11"><a href="simple-linear-regression.html#cb65-11" aria-hidden="true"></a>mygraph <span class="co"># display graph</span></span></code></pre></div>
+<p><img src="Labs_BIO4158_files/figure-html/sturlm-1-1.svg" width="672" /></p>
+<p>This suggests that the relationship between age and fork length is not linear.</p>
+<p>Suppose that we want to know the growth rate of male sturgeon. One estimate (perhaps not a very good one) of the growth rate is given by the slope of the fork length - age regression.</p>
+<p>First, let’s run the regression with the lm() command, and save its
+results in an object called <code>RegModel.1</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="simple-linear-regression.html#cb66-1" aria-hidden="true"></a>RegModel<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(fklngth <span class="op">~</span><span class="st"> </span>age, <span class="dt">data =</span> sturgeon.male)</span></code></pre></div>
+<p>Nothing appears on the screen, but don’t worry, it all got saved in memory.
+To see the statistical results, type:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="simple-linear-regression.html#cb67-1" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = fklngth ~ age, data = sturgeon.male)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.4936 -2.2263  0.1849  1.7526 10.8234 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 28.50359    1.16873   24.39   &lt;2e-16 ***
+## age          0.70724    0.05888   12.01   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.307 on 73 degrees of freedom
+##   (5 observations deleted due to missingness)
+## Multiple R-squared:  0.664,  Adjusted R-squared:  0.6594 
+## F-statistic: 144.3 on 1 and 73 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>R output gives you:</p>
+<ol style="list-style-type: decimal">
+<li><code>Call:</code> A friendly reminder of the model fitted and the data used.</li>
+<li><code>Residuals:</code> General statistics about the residuals around the fitted model.</li>
+<li><code>Coefficients:</code> Fitted model parameter estimates, standard errors, t values and associated probabilities.</li>
+<li><code>Residual standard error:</code> Square root of the residual variance.</li>
+<li><code>Multiple R-squared:</code> Coefficient of determination. It corresponds to the proportion of the total variance of the dependent variable that is accounted for by the regression (i.e. by the independent variable)</li>
+<li><code>Adjusted R-squared:</code> The adjusted R-squared accounts for the number of parameters in the model. If you want to compare the performance of several models with different numbers of parameters, this is the one to use</li>
+<li><code>F-statistic:</code> This is the test of the overall significance of the model. In the simple regression case, this is the same as the test of the slope of the
+regression.</li>
+</ol>
+<p>The estimated regression equation is therefore:</p>
+<p><span class="math display">\[ Fklngth = 28.50359 + 0.70724 * age\]</span></p>
+<p>Given the highly significant F-value of the model (or equivalently the highly significant t-value for the slope of the line), we reject the null hypothesis that there is no relationship between fork length and age.</p>
+<div id="testing-regression-assumptions" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Testing regression assumptions</h3>
+<p>Simple model I regression makes four assumptions:</p>
+<ol style="list-style-type: decimal">
+<li>the X variable is measured without error;</li>
+<li>the relationship between Y and X is linear;</li>
+<li>that for any value of X, the Y’s are independently and normally distributed;</li>
+<li>the variance of Y for fixed X is independent of X.</li>
+</ol>
+<p>Having done the regression, we can now test the assumptions.
+For most biological data, the first assumption is almost never valid; usually there is error in both Y and X. This means that in general, slope estimates are biased, but predicted values are unbiased. However, so long as the error in X is small relative to the range of X in your data, the fact that X has an associated error is not likely to influence the outcome dramatically. On the other hand, if there is substantial error in X, regression results based on a model I regression may give poor estimates of the functional relationship between Y and X. In this case, more sophisticated regression procedures must be employed which are, unfortunately, beyond the scope of this course.</p>
+<p>The other assumptions of a model I regression can, however, be tested, or at least evaluated visually. The <code>plot()</code> command can display diagnostics for linear models.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="simple-linear-regression.html#cb69-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">las =</span> <span class="dv">1</span>)</span>
+<span id="cb69-2"><a href="simple-linear-regression.html#cb69-2" aria-hidden="true"></a><span class="kw">plot</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<p>The <code>par()</code> command is used here to tell R to display 2 rows and 2 columns of graphs per page (there are 4 diagnostic graphs for linear models generated automatically), and the last statement is to tell R to rotate the labels of the Y axis so that they are perpendicular to the Y axis. (Yes, I know, this is not at all obvious.)</p>
+<p>You will get:
+<img src="Labs_BIO4158_files/figure-html/sturlmv-1eval-1.svg" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li><strong>Upper left</strong> tell you about linearity, normality, and homoscedasticity of the residuals. It shows the deviations around the regression vs the predicted values. Remember that the scatterplot ( fklngth vs age ) suggested that the relationship between fork length and age is not linear. Very young and very old sturgeons tended to fall under the line, and fish of average age tended to be a bit above the line. This is exactly what the residual vs fitted plot shows. The red line is a lowess trace through these data. If the relationship was linear, it would be approximately flat and close to 0. The scatter of residuals tells you a bit about their normality and homoscedasticity, although this graph is not the best way to look at these properties. The next two are better.</li>
+<li><strong>Upper right</strong> is to assess the normality of the residuals. It is a QQ plot of the residuals . If the residuals were normally distributed, they would fall very close to the diagonal line. Here, we see it is mostly the case, except in the tails</li>
+<li><strong>Bottom left</strong> titled Scale-Location, helps with assessing homoscedasticity. It plots the square root of the absolute value of the standardized residual (residual divided by the standard error of the residuals, this scales the residuals so that their variance is 1 ) as a function of the fitted value. This graph can help you visualize whether the spread of the residuals is constant or not. If residuals are homoscedastic, then the average will not change with increasing fitted values. Here, there is slight variability, but it is not monotonous (i.e. it does not increase or decrease systematically) and there is no strong evidence against the assumption of homoscedasticity.</li>
+<li><strong>Bottom right</strong> plots the residuals as a function of leverage and can help detecting the presence of outliers or points that have a very strong influence on the regression results. The leverage of a point measures how far it is from the other points, but only with respect to the independent variable. In the case of simple linear regression, it is a function of the difference between the observation and the mean of the independent variable. You should look more closely at any observation with a leverage value that is greater than: <span class="math inline">\(2(k+1)/n\)</span>, where $<span class="math inline">\(k\)</span> is the number of independent variables (here 1), and <span class="math inline">\(n\)</span> is the number of observations. In this case there is 1 independent variable, 75 observations, and points with a leverage higher than 0.053 may warrant particular scrutiny. The plot also gives you information about how the removal of a point from the data set would change the predictions. This is measured by the Cook’s distance, illustrated by the red lines on the plot. A data point with a Cook distance larger than 1 has a large influence.</li>
+</ol>
+
+<div class="rmdwarning">
+Note that R automatically labels the most extreme cases on each of these 4 plots. It does not mean that these cases are outliers, or that you necessarily need be concerned with them. In any data set, there will always be a minimum and a maximum residual.
 </div>
-<div id="r-libraries" class="section level3 unnumbered" number="">
-<h3>R libraries</h3>
-<p>R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.</p>
-<ul>
-<li>Rmarkdown</li>
-<li>tinytex</li>
-</ul>
-<p>Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="software-installation.html#cb1-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;rmarkdown&quot;</span>, <span class="st">&quot;tinytex&quot;</span>))</span></code></pre></div>
+<p>The R package <code>performance</code> offers a new and updated version of those graphs with colours and more plots to help visually assess the assumptions with the function <code>model_check()</code></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="simple-linear-regression.html#cb70-1" aria-hidden="true"></a><span class="kw">check_model</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## Loading required namespace: qqplotr</code></pre>
+<p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-29-1.svg" width="672" /></p>
+<p>So, what is the verdict about the linear regression between <code>fklngth</code> and <code>age</code> ? It fails the linearity, possibly fails the normality, passes homoscedasticity, and this does not seem to be too strongly affected by some bizarre points.</p>
 </div>
-<div id="gpower" class="section level3 unnumbered" number="">
-<h3>G*Power</h3>
-<p>G*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
-Le programme existe en version Mac et Windows.
-Il peut cependant être utilisé sous linux via Wine.
-G*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.</p>
-<p>Téléchargez le programme sur le site <a href="https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html" class="uri">https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html</a></p>
+<div id="formal-tests-of-regression-assumptions" class="section level3" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Formal tests of regression assumptions</h3>
+<p>In my practice, I seldom use formal tests of regression assumptions and mostly rely on graphs of the residuals to guide my decisions. To my knowledge, this is what most biologists and data analysts do. However, in my early analyst life I was not always confident that I was interpreting these graphs correctly and wished that I had a formal test or a statistic quantifying the degree of deviation from the regression assumptions.</p>
+<p>The <code>lmtest</code> R package, not part of the base R installation, but available from CRAN, contains a number of tests for linearity and homoscedasticity. And one can test for normality using the Shapiro-Wilk test seen previously.</p>
+<p>First, you need to load (and maybe install) the <code>lmtest</code> package.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="simple-linear-regression.html#cb72-1" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span></code></pre></div>
+
+<div class="rmdcode">
+Run the following commands
+</div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="simple-linear-regression.html#cb73-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+##  studentized Breusch-Pagan test
+## 
+## data:  RegModel.1
+## BP = 1.1765, df = 1, p-value = 0.2781</code></pre>
+<p>The Breusch-Pagan test examines whether the variability of the residuals is constant with respect to increasing fitted values. A low p value is indicative of heteroscedasticity. Here, the p value is high, and supports my visual assessment that the homoscedasticity assumption is met by these data.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="simple-linear-regression.html#cb75-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+##  Durbin-Watson test
+## 
+## data:  RegModel.1
+## DW = 2.242, p-value = 0.8489
+## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+<p>The Durbin-Watson test can detect serial autocorrelation in the residuals. Under the assumption of no autocorrelation, the D statistic is 2. This test can detect violation of independence of observations (residuals), although it is not foolproof. Here there is no problem identified.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="simple-linear-regression.html#cb77-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+##  RESET test
+## 
+## data:  RegModel.1
+## RESET = 14.544, df1 = 2, df2 = 71, p-value = 5.082e-06</code></pre>
+<p>The RESET test is a test of the assumption of linearity. If the linearity assumption is met, the RESET statistic will be close to 1. Here, the statistic is much larger (14.54), and very highly significant. This confirms our visual assessment that the relationship is not linear.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="simple-linear-regression.html#cb79-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.1</span>))</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(RegModel.1)
+## W = 0.98037, p-value = 0.2961</code></pre>
+<p>The Shapiro-Wilk normality test on the residual confirms that
+the deviation from normality of the residuals is not large.</p>
 </div>
 </div>
 <script src="js/solution.js"></script>
@@ -288,8 +390,8 @@ G*Power vous permettra d’effectuer une analyse de puissance pour la majorité 
           </div>
         </div>
       </div>
-<a href="what-is-r-and-why-use-it-in-this-course.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="general-laboratory-instructions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-transformations-in-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -311,7 +413,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/03-reg_lin.Rmd",
 "text": "Edit"
 },
 "history": {
