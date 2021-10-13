@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="quantifying-effect-size-in-regression-and-power-analysis.html"/>
-<link rel="next" href="software-tools.html"/>
+<link rel="next" href="two-sample-comparisons.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -221,6 +221,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
+<li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
+<li class="chapter" data-level="4.3" data-path="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"><i class="fa fa-check"></i><b>4.3</b> Comparing means of two independent samples: parametric and non-parametric comparisons</a></li>
+<li class="chapter" data-level="4.4" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html"><i class="fa fa-check"></i><b>4.4</b> Bootstrap and permutation tests to compare 2 means</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#bootstrap"><i class="fa fa-check"></i><b>4.4.1</b> Bootstrap</a></li>
+<li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
+<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -278,8 +291,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Bootstrap Statistics :
 ##      original        bias    std. error
-## t1* 1.1919926  0.0009348612  0.03321659
-## t2* 0.3408557 -0.0006963425  0.02642032</code></pre>
+## t1* 1.1919926  0.0003408879  0.03363301
+## t2* 0.3408557 -0.0002752741  0.02686959</code></pre>
 <p>For each parameter in the model (here the intercept is labeled <code>t1\*</code> and the slope of the regression line is labeled <code>t2\*</code>) , you obtain:</p>
 <p>Pour chaque paramètre du modèle (ici l’ordonnée à l’origine est
 appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
@@ -306,10 +319,10 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.126,  1.256 )   ( 1.123,  1.256 )  
+## 95%   ( 1.126,  1.258 )   ( 1.125,  1.254 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.128,  1.261 )   ( 1.117,  1.250 )  
+## 95%   ( 1.130,  1.259 )   ( 1.121,  1.255 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="bootstrapping-the-simple-linear-regression.html#cb120-1" aria-hidden="true"></a><span class="co"># intervalle de confiance pour la pente</span></span>
 <span id="cb120-2"><a href="bootstrapping-the-simple-linear-regression.html#cb120-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
@@ -323,18 +336,15 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2898,  0.3933 )   ( 0.2891,  0.3945 )  
+## 95%   ( 0.2885,  0.3938 )   ( 0.2909,  0.3938 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2872,  0.3926 )   ( 0.2957,  0.4013 )  
+## 95%   ( 0.2880,  0.3908 )   ( 0.2908,  0.3994 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p>Here the 4 types of CI that R managed to calculate are essentially the same. Had data been violating more strongly the standard assumptions (normality, homoscedasticity), then the different methods (Normal, Basic, Percentile, and BCa) would have diverged more. In that case, which one is best? BCa has the favor of most, currently.</p>
 
 </div>
 <!-- </div> -->
-
-
-
 <script src="js/solution.js"></script>
             </section>
 
@@ -342,7 +352,7 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
         </div>
       </div>
 <a href="quantifying-effect-size-in-regression-and-power-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="software-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="two-sample-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

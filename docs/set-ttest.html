@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Notes about the manual | BIO4158 Applied biostats with R</title>
+  <title>4.1 R packages and data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="4.1 R packages and data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="4.1 R packages and data | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="general-laboratory-instructions.html"/>
-<link rel="next" href="introduction-to-r.html"/>
+<link rel="prev" href="two-sample-comparisons.html"/>
+<link rel="next" href="visual-examination-of-sample-data.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,58 +261,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="notes-about-the-manual" class="section level2 unnumbered" number="">
-<h2>Notes about the manual</h2>
-<p>You will find explanations on the theory, R code and functions, IDE best practice and exercises with R.</p>
-<p>The manual tries to highlight some part of the text using the following boxes and icons.</p>
-
-<div class="rmdcode">
-Exercises,
+<div id="set-ttest" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> R packages and data</h2>
+<p>For this la b you need:</p>
+<ul>
+<li>R packages:
+<ul>
+<li>car</li>
+<li>lmtest</li>
+<li>boot</li>
+<li>pwr</li>
+<li>ggplot</li>
+<li>performance</li>
+</ul></li>
+<li>data:
+<ul>
+<li>sturgeon.csv</li>
+<li>skulldat_2020.csv</li>
+</ul></li>
+</ul>
+<p>You need to load the packages in R with <code>library()</code> and if need needed install them first with <code>install.packages()</code>
+For the data, load them using the <code>read.csv()</code> function.</p>
 </div>
-
-<div class="rmdcaution">
-warnings,
-</div>
-
-<div class="rmdwarning">
-warnings,
-</div>
-
-<div class="rmdimportant">
-important points
-</div>
-
-<div class="rmdnote">
-notes
-</div>
-
-<div class="rmdtip">
-and tips
-</div>
-<div id="resources" class="section level3 unnumbered" number="">
-<h3>Resources</h3>
-<p>This document was developped using the excellent <a href="https://bookdown.org/">bookdown</a> 📦 de <a href="https://yihui.name/">Yihui Xie</a>. The manual is based on the previous lab manual <em>Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158</em>.</p>
-</div>
-<div id="license" class="section level3 unnumbered" number="">
-<h3>License</h3>
-<p>The document is available follwoing the license <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">License Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>.</p>
-<div class="figure">
-<img src="images/icons/license_cc.png" alt="" />
-<p class="caption">License Creative Commons</p>
-</div>
-
-<!-- # (PART) Introduction à R {-} -->
-</div>
-</div>
-<!-- </div> -->
 <script src="js/solution.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="general-laboratory-instructions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="two-sample-comparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visual-examination-of-sample-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -334,7 +312,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/04-t_test.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -221,6 +221,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
+<li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
+<li class="chapter" data-level="4.3" data-path="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"><i class="fa fa-check"></i><b>4.3</b> Comparing means of two independent samples: parametric and non-parametric comparisons</a></li>
+<li class="chapter" data-level="4.4" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html"><i class="fa fa-check"></i><b>4.4</b> Bootstrap and permutation tests to compare 2 means</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#bootstrap"><i class="fa fa-check"></i><b>4.4.1</b> Bootstrap</a></li>
+<li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
+<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -248,44 +261,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="latex" class="section level2" number="4.3">
+<div id="latex" class="section level2" number="5.3">
 <h2><span class="header-section-number">A.3</span> LaTeX</h2>
 <p>LaTeX is required only if you want to convert your book to PDF. You may see <a href="https://www.latex-project.org/get/" class="uri">https://www.latex-project.org/get/</a> for more information about LaTeX and its installation, but we strongly recommend that you install the lightweight and cross-platform LaTeX distribution named <a href="https://yihui.org/tinytex/">TinyTeX</a> and based on TeX Live. TinyTeX can be easily installed through the R package <strong>tinytex</strong> (which should be automatically installed when you install <strong>bookdown</strong>):</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="latex.html#cb128-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="latex.html#cb173-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">install_tinytex</span>()</span></code></pre></div>
 <p>With TinyTeX, you should never see error messages like this:</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb129-1"><a href="latex.html#cb129-1" aria-hidden="true"></a>! LaTeX Error: File `titling.sty&#39; not found.</span>
-<span id="cb129-2"><a href="latex.html#cb129-2" aria-hidden="true"></a></span>
-<span id="cb129-3"><a href="latex.html#cb129-3" aria-hidden="true"></a>Type X to quit or &lt;RETURN&gt; to proceed,</span>
-<span id="cb129-4"><a href="latex.html#cb129-4" aria-hidden="true"></a>or enter new name. (Default extension: sty)</span>
-<span id="cb129-5"><a href="latex.html#cb129-5" aria-hidden="true"></a></span>
-<span id="cb129-6"><a href="latex.html#cb129-6" aria-hidden="true"></a>Enter file name:</span>
-<span id="cb129-7"><a href="latex.html#cb129-7" aria-hidden="true"></a>! Emergency stop.</span>
-<span id="cb129-8"><a href="latex.html#cb129-8" aria-hidden="true"></a>&lt;read *&gt;</span>
-<span id="cb129-9"><a href="latex.html#cb129-9" aria-hidden="true"></a></span>
-<span id="cb129-10"><a href="latex.html#cb129-10" aria-hidden="true"></a>l.107 ^^M</span>
-<span id="cb129-11"><a href="latex.html#cb129-11" aria-hidden="true"></a></span>
-<span id="cb129-12"><a href="latex.html#cb129-12" aria-hidden="true"></a>pandoc: Error producing PDF</span>
-<span id="cb129-13"><a href="latex.html#cb129-13" aria-hidden="true"></a>Error: pandoc document conversion failed with error 43</span>
-<span id="cb129-14"><a href="latex.html#cb129-14" aria-hidden="true"></a>Execution halted</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb174-1"><a href="latex.html#cb174-1" aria-hidden="true"></a>! LaTeX Error: File `titling.sty&#39; not found.</span>
+<span id="cb174-2"><a href="latex.html#cb174-2" aria-hidden="true"></a></span>
+<span id="cb174-3"><a href="latex.html#cb174-3" aria-hidden="true"></a>Type X to quit or &lt;RETURN&gt; to proceed,</span>
+<span id="cb174-4"><a href="latex.html#cb174-4" aria-hidden="true"></a>or enter new name. (Default extension: sty)</span>
+<span id="cb174-5"><a href="latex.html#cb174-5" aria-hidden="true"></a></span>
+<span id="cb174-6"><a href="latex.html#cb174-6" aria-hidden="true"></a>Enter file name:</span>
+<span id="cb174-7"><a href="latex.html#cb174-7" aria-hidden="true"></a>! Emergency stop.</span>
+<span id="cb174-8"><a href="latex.html#cb174-8" aria-hidden="true"></a>&lt;read *&gt;</span>
+<span id="cb174-9"><a href="latex.html#cb174-9" aria-hidden="true"></a></span>
+<span id="cb174-10"><a href="latex.html#cb174-10" aria-hidden="true"></a>l.107 ^^M</span>
+<span id="cb174-11"><a href="latex.html#cb174-11" aria-hidden="true"></a></span>
+<span id="cb174-12"><a href="latex.html#cb174-12" aria-hidden="true"></a>pandoc: Error producing PDF</span>
+<span id="cb174-13"><a href="latex.html#cb174-13" aria-hidden="true"></a>Error: pandoc document conversion failed with error 43</span>
+<span id="cb174-14"><a href="latex.html#cb174-14" aria-hidden="true"></a>Execution halted</span></code></pre></div>
 <p>The above error means you used a package that contains <code>titling.sty</code>, but it was not installed. LaTeX package names are often the same as the <code>*.sty</code> filenames, so in this case, you can try to install the <code>titling</code> package. If you use TinyTeX with R Markdown, missing LaTeX packages will be installed automatically, so you never need to worry about such problems.</p>
 <p>LaTeX distributions and packages are also updated from time to time, and you may consider updating them especially when you run into LaTeX problems. You can find out the version of your LaTeX distribution by:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="latex.html#cb130-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;pdflatex --version&quot;</span>)</span>
-<span id="cb130-2"><a href="latex.html#cb130-2" aria-hidden="true"></a><span class="co">## pdfTeX 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian)</span></span>
-<span id="cb130-3"><a href="latex.html#cb130-3" aria-hidden="true"></a><span class="co">## kpathsea version 6.3.2</span></span>
-<span id="cb130-4"><a href="latex.html#cb130-4" aria-hidden="true"></a><span class="co">## Copyright 2020 Han The Thanh (pdfTeX) et al.</span></span>
-<span id="cb130-5"><a href="latex.html#cb130-5" aria-hidden="true"></a><span class="co">## There is NO warranty.  Redistribution of this software is</span></span>
-<span id="cb130-6"><a href="latex.html#cb130-6" aria-hidden="true"></a><span class="co">## covered by the terms of both the pdfTeX copyright and</span></span>
-<span id="cb130-7"><a href="latex.html#cb130-7" aria-hidden="true"></a><span class="co">## the Lesser GNU General Public License.</span></span>
-<span id="cb130-8"><a href="latex.html#cb130-8" aria-hidden="true"></a><span class="co">## For more information about these matters, see the file</span></span>
-<span id="cb130-9"><a href="latex.html#cb130-9" aria-hidden="true"></a><span class="co">## named COPYING and the pdfTeX source.</span></span>
-<span id="cb130-10"><a href="latex.html#cb130-10" aria-hidden="true"></a><span class="co">## Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.</span></span>
-<span id="cb130-11"><a href="latex.html#cb130-11" aria-hidden="true"></a><span class="co">## Compiled with libpng 1.6.37; using libpng 1.6.37</span></span>
-<span id="cb130-12"><a href="latex.html#cb130-12" aria-hidden="true"></a><span class="co">## Compiled with zlib 1.2.11; using zlib 1.2.11</span></span>
-<span id="cb130-13"><a href="latex.html#cb130-13" aria-hidden="true"></a><span class="co">## Compiled with xpdf version 4.02</span></span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="latex.html#cb175-1" aria-hidden="true"></a><span class="kw">system</span>(<span class="st">&quot;pdflatex --version&quot;</span>)</span>
+<span id="cb175-2"><a href="latex.html#cb175-2" aria-hidden="true"></a><span class="co">## pdfTeX 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian)</span></span>
+<span id="cb175-3"><a href="latex.html#cb175-3" aria-hidden="true"></a><span class="co">## kpathsea version 6.3.2</span></span>
+<span id="cb175-4"><a href="latex.html#cb175-4" aria-hidden="true"></a><span class="co">## Copyright 2020 Han The Thanh (pdfTeX) et al.</span></span>
+<span id="cb175-5"><a href="latex.html#cb175-5" aria-hidden="true"></a><span class="co">## There is NO warranty.  Redistribution of this software is</span></span>
+<span id="cb175-6"><a href="latex.html#cb175-6" aria-hidden="true"></a><span class="co">## covered by the terms of both the pdfTeX copyright and</span></span>
+<span id="cb175-7"><a href="latex.html#cb175-7" aria-hidden="true"></a><span class="co">## the Lesser GNU General Public License.</span></span>
+<span id="cb175-8"><a href="latex.html#cb175-8" aria-hidden="true"></a><span class="co">## For more information about these matters, see the file</span></span>
+<span id="cb175-9"><a href="latex.html#cb175-9" aria-hidden="true"></a><span class="co">## named COPYING and the pdfTeX source.</span></span>
+<span id="cb175-10"><a href="latex.html#cb175-10" aria-hidden="true"></a><span class="co">## Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.</span></span>
+<span id="cb175-11"><a href="latex.html#cb175-11" aria-hidden="true"></a><span class="co">## Compiled with libpng 1.6.37; using libpng 1.6.37</span></span>
+<span id="cb175-12"><a href="latex.html#cb175-12" aria-hidden="true"></a><span class="co">## Compiled with zlib 1.2.11; using zlib 1.2.11</span></span>
+<span id="cb175-13"><a href="latex.html#cb175-13" aria-hidden="true"></a><span class="co">## Compiled with xpdf version 4.02</span></span></code></pre></div>
 <p>To update TinyTeX, you may run:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="latex.html#cb131-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">tlmgr_update</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="latex.html#cb176-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">tlmgr_update</span>()</span></code></pre></div>
 <p>From year to year, you may need to upgrade TinyTeX, too (otherwise you cannot install or update any LaTeX packages), in which case you may reinstall TinyTeX:</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="latex.html#cb132-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">reinstall_tinytex</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="latex.html#cb177-1" aria-hidden="true"></a>tinytex<span class="op">::</span><span class="kw">reinstall_tinytex</span>()</span></code></pre></div>
 
 </div>
 <!-- </div> -->

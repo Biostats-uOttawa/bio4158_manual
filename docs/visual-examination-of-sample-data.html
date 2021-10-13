@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Notes about the manual | BIO4158 Applied biostats with R</title>
+  <title>4.2 Visual examination of sample data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="4.2 Visual examination of sample data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="4.2 Visual examination of sample data | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="general-laboratory-instructions.html"/>
-<link rel="next" href="introduction-to-r.html"/>
+<link rel="prev" href="set-ttest.html"/>
+<link rel="next" href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,58 +261,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="notes-about-the-manual" class="section level2 unnumbered" number="">
-<h2>Notes about the manual</h2>
-<p>You will find explanations on the theory, R code and functions, IDE best practice and exercises with R.</p>
-<p>The manual tries to highlight some part of the text using the following boxes and icons.</p>
-
-<div class="rmdcode">
-Exercises,
+<div id="visual-examination-of-sample-data" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Visual examination of sample data</h2>
+<p>One of the first steps in any type of data analysis is to visualize your data with plots and summary statistics, to get an idea of underlying distributions, possible outliers, and trends in your data. This often begins with plots of the data, such as histograms, probability plots, and box plots, that allow you to get a feel for whether your data are normally distributed, whether they are correlated one to the other, or whether there are any suspicious looking points that may lead you to go back to the original data file to check for errors.</p>
+<p>Suppose we want to test the null hypothesis that the size, as indexed by fork length ( <code>fklngth</code> in file <code>sturgeon.csv</code> - the length, in cm, from the tip of the nose to the base of the fork in the caudal fin), of sturgeon at The Pas and Cumberland House is the same. To begin, we have a look at the underlying distributions of the sample data to get a feel for whether the data are normally distributed in each sample. We will not actually test for normality at this point; the assumption of normality in parametric analyses refers always to the residuals and not the raw data themselves. However, if the raw data are non-normally distributed, then you usually have good reason to suspect that the residuals also will be non-normally distributed.</p>
+<p>An excellent way to visually compare a data distribution to a normal distribution is to superimpose a histogram of the data and a normal curve. To do so, we must proceed in two steps:</p>
+<ol style="list-style-type: decimal">
+<li>tell R that we want to make a histogram with a density curve superimposed</li>
+<li>tell R that we want this to be done for both locations.</li>
+</ol>
+<ul>
+<li>Using the data file <code>sturgeon.csv</code> , generate histograms for <code>fklngth</code> data at The Pas and Cumberland House.</li>
+</ul>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="visual-examination-of-sample-data.html#cb123-1" aria-hidden="true"></a><span class="co"># use &quot;sturgeon&quot; dataframe to make plot called mygraph</span></span>
+<span id="cb123-2"><a href="visual-examination-of-sample-data.html#cb123-2" aria-hidden="true"></a><span class="co"># and define x axis as representing fklngth</span></span>
+<span id="cb123-3"><a href="visual-examination-of-sample-data.html#cb123-3" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
+<span id="cb123-4"><a href="visual-examination-of-sample-data.html#cb123-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb123-5"><a href="visual-examination-of-sample-data.html#cb123-5" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> fklngth)</span>
+<span id="cb123-6"><a href="visual-examination-of-sample-data.html#cb123-6" aria-hidden="true"></a>) <span class="op">+</span></span>
+<span id="cb123-7"><a href="visual-examination-of-sample-data.html#cb123-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fork length (cm)&quot;</span>)</span>
+<span id="cb123-8"><a href="visual-examination-of-sample-data.html#cb123-8" aria-hidden="true"></a><span class="co"># add data to the mygraph ggplot</span></span>
+<span id="cb123-9"><a href="visual-examination-of-sample-data.html#cb123-9" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span>mygraph <span class="op">+</span></span>
+<span id="cb123-10"><a href="visual-examination-of-sample-data.html#cb123-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add data density smooth</span></span>
+<span id="cb123-11"><a href="visual-examination-of-sample-data.html#cb123-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add rug (bars at the bottom of the plot)</span></span>
+<span id="cb123-12"><a href="visual-examination-of-sample-data.html#cb123-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>( <span class="co"># add black semitransparent histogram</span></span>
+<span id="cb123-13"><a href="visual-examination-of-sample-data.html#cb123-13" aria-hidden="true"></a>    <span class="kw">aes</span>(<span class="dt">y =</span> ..density..),</span>
+<span id="cb123-14"><a href="visual-examination-of-sample-data.html#cb123-14" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span></span>
+<span id="cb123-15"><a href="visual-examination-of-sample-data.html#cb123-15" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb123-16"><a href="visual-examination-of-sample-data.html#cb123-16" aria-hidden="true"></a><span class="st">  </span><span class="co"># add normal curve in red, with mean and sd from fklength</span></span>
+<span id="cb123-17"><a href="visual-examination-of-sample-data.html#cb123-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_function</span>(</span>
+<span id="cb123-18"><a href="visual-examination-of-sample-data.html#cb123-18" aria-hidden="true"></a>    <span class="dt">fun =</span> dnorm,</span>
+<span id="cb123-19"><a href="visual-examination-of-sample-data.html#cb123-19" aria-hidden="true"></a>    <span class="dt">args =</span> <span class="kw">list</span>(</span>
+<span id="cb123-20"><a href="visual-examination-of-sample-data.html#cb123-20" aria-hidden="true"></a>      <span class="dt">mean =</span> <span class="kw">mean</span>(sturgeon<span class="op">$</span>fklngth),</span>
+<span id="cb123-21"><a href="visual-examination-of-sample-data.html#cb123-21" aria-hidden="true"></a>      <span class="dt">sd =</span> <span class="kw">sd</span>(sturgeon<span class="op">$</span>fklngth)</span>
+<span id="cb123-22"><a href="visual-examination-of-sample-data.html#cb123-22" aria-hidden="true"></a>    ),</span>
+<span id="cb123-23"><a href="visual-examination-of-sample-data.html#cb123-23" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb123-24"><a href="visual-examination-of-sample-data.html#cb123-24" aria-hidden="true"></a>  )</span>
+<span id="cb123-25"><a href="visual-examination-of-sample-data.html#cb123-25" aria-hidden="true"></a><span class="co"># display graph, by location</span></span>
+<span id="cb123-26"><a href="visual-examination-of-sample-data.html#cb123-26" aria-hidden="true"></a>mygraph <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>location)</span></code></pre></div>
+<div class="figure"><span id="fig:t-1"></span>
+<img src="Labs_BIO4158_files/figure-html/t-1-1.svg" alt="Distribution of sturgeon length at 2 locations" width="672" />
+<p class="caption">
+Figure 4.1: Distribution of sturgeon length at 2 locations
+</p>
 </div>
-
-<div class="rmdcaution">
-warnings,
+<p>Based on your visual inspection, are the two samples normally distributed?
+Visual inspection of these plots suggests that this variable is approximately normally distributed in each sample.</p>
+<p>Since we are interested in finding out if mean fish size differs among the two locations, it is probably also a good idea to generate a graph that compares the two groups of data. A box plot works well for this.</p>
+<ul>
+<li>Generate a box plot of <code>fklngth</code> grouped by <code>location</code> . What do you conclude about differences in size among the two locations?</li>
+</ul>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="visual-examination-of-sample-data.html#cb124-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> sturgeon, <span class="kw">aes</span>(</span>
+<span id="cb124-2"><a href="visual-examination-of-sample-data.html#cb124-2" aria-hidden="true"></a>  <span class="dt">x =</span> location,</span>
+<span id="cb124-3"><a href="visual-examination-of-sample-data.html#cb124-3" aria-hidden="true"></a>  <span class="dt">y =</span> fklngth</span>
+<span id="cb124-4"><a href="visual-examination-of-sample-data.html#cb124-4" aria-hidden="true"></a>)) <span class="op">+</span></span>
+<span id="cb124-5"><a href="visual-examination-of-sample-data.html#cb124-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">notch =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:t-2"></span>
+<img src="Labs_BIO4158_files/figure-html/t-2-1.svg" alt="Boxplot of sturgeon legnth at 2 locations" width="672" />
+<p class="caption">
+Figure 4.2: Boxplot of sturgeon legnth at 2 locations
+</p>
 </div>
-
-<div class="rmdwarning">
-warnings,
+<p>It would appear as though there are not big differences in fish size among the two locations, although fish size at The Pas looks to be more variable, with a bigger range in size and outliers (defined as values &gt; 1.5 * inter-quartile range) at both ends of the distribution.</p>
 </div>
-
-<div class="rmdimportant">
-important points
-</div>
-
-<div class="rmdnote">
-notes
-</div>
-
-<div class="rmdtip">
-and tips
-</div>
-<div id="resources" class="section level3 unnumbered" number="">
-<h3>Resources</h3>
-<p>This document was developped using the excellent <a href="https://bookdown.org/">bookdown</a> 📦 de <a href="https://yihui.name/">Yihui Xie</a>. The manual is based on the previous lab manual <em>Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158</em>.</p>
-</div>
-<div id="license" class="section level3 unnumbered" number="">
-<h3>License</h3>
-<p>The document is available follwoing the license <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">License Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>.</p>
-<div class="figure">
-<img src="images/icons/license_cc.png" alt="" />
-<p class="caption">License Creative Commons</p>
-</div>
-
-<!-- # (PART) Introduction à R {-} -->
-</div>
-</div>
-<!-- </div> -->
 <script src="js/solution.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="general-laboratory-instructions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="set-ttest.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -334,7 +353,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/04-t_test.Rmd",
 "text": "Edit"
 },
 "history": {

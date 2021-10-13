@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Notes about the manual | BIO4158 Applied biostats with R</title>
+  <title>4.4 Bootstrap and permutation tests to compare 2 means | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="4.4 Bootstrap and permutation tests to compare 2 means | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Notes about the manual | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="4.4 Bootstrap and permutation tests to compare 2 means | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="general-laboratory-instructions.html"/>
-<link rel="next" href="introduction-to-r.html"/>
+<link rel="prev" href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html"/>
+<link rel="next" href="comparing-the-means-of-paired-samples.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,58 +261,105 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="notes-about-the-manual" class="section level2 unnumbered" number="">
-<h2>Notes about the manual</h2>
-<p>You will find explanations on the theory, R code and functions, IDE best practice and exercises with R.</p>
-<p>The manual tries to highlight some part of the text using the following boxes and icons.</p>
-
-<div class="rmdcode">
-Exercises,
+<div id="bootstrap-and-permutation-tests-to-compare-2-means" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Bootstrap and permutation tests to compare 2 means</h2>
+<div id="bootstrap" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Bootstrap</h3>
+<p>Bootstrap and permutation tests can be used to compare means (or other statistics) between pairs of samples. The general idea is simple, and it can be implemented in more ways than I can count. Here, I use existing tools and the fact that a comparison of means can be construed as a test of a linear model. We will be able to use similar code later on when we fit more complex (but fun!) models.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb139-1" aria-hidden="true"></a><span class="kw">library</span>(boot)</span></code></pre></div>
+<p>The first section defines the function that I called bs that simply extracts coefficients from a fitted model:</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-1" aria-hidden="true"></a><span class="co"># function to obtain model coefficients for each iteration</span></span>
+<span id="cb140-2"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-2" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
+<span id="cb140-3"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-3" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ]</span>
+<span id="cb140-4"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-4" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
+<span id="cb140-5"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-5" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
+<span id="cb140-6"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb140-6" aria-hidden="true"></a>}</span></code></pre></div>
+<p>The second section with the <code>boot()</code> command is where the real work is done: take data in sturgeon, bootstrap <span class="math inline">\(R = 1000\)</span> times, each time fit the model <code>fklngth</code> vs <code>location</code>, and keep the values calculated by the <code>bs()</code> function.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-1" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
+<span id="cb141-2"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-2" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(</span>
+<span id="cb141-3"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-3" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon, <span class="dt">statistic =</span> bs, <span class="dt">R =</span> <span class="dv">1000</span>,</span>
+<span id="cb141-4"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-4" aria-hidden="true"></a>  <span class="dt">formula =</span> fklngth <span class="op">~</span><span class="st"> </span>location</span>
+<span id="cb141-5"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-5" aria-hidden="true"></a>)</span>
+<span id="cb141-6"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-6" aria-hidden="true"></a><span class="co"># view results</span></span>
+<span id="cb141-7"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb141-7" aria-hidden="true"></a>results</span></code></pre></div>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = sturgeon, statistic = bs, R = 1000, formula = fklngth ~ 
+##     location)
+## 
+## 
+## Bootstrap Statistics :
+##      original       bias    std. error
+## t1* 45.084391 -0.017861054   0.4267869
+## t2* -1.714546 -0.003216993   0.7703065</code></pre>
+<p>So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb143-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure"><span id="fig:tb-3"></span>
+<img src="Labs_BIO4158_files/figure-html/tb-3-1.svg" alt="Distribution of bootstrapped mean difference" width="672" />
+<p class="caption">
+Figure 4.4: Distribution of bootstrapped mean difference
+</p>
 </div>
-
-<div class="rmdcaution">
-warnings,
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb144-1" aria-hidden="true"></a><span class="co"># get 95% confidence intervals</span></span>
+<span id="cb144-2"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb144-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = results, type = &quot;bca&quot;, index = 2)
+## 
+## Intervals : 
+## Level       BCa          
+## 95%   (-3.299, -0.210 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<p>The 95% CI for the difference between the two means does not include 0. Hence, the bootstrap test indicates that the two means are not equals.</p>
 </div>
-
-<div class="rmdwarning">
-warnings,
+<div id="permutation" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Permutation</h3>
+<p>Permutation tests for linear models can easily be done using the <code>lmPerm</code> package 📦.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb146-1" aria-hidden="true"></a>m1Perm &lt;-<span class="st"> </span><span class="kw">lmp</span>(</span>
+<span id="cb146-2"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb146-2" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
+<span id="cb146-3"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb146-3" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb146-4"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb146-4" aria-hidden="true"></a>  <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span></span>
+<span id="cb146-5"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb146-5" aria-hidden="true"></a>)</span></code></pre></div>
+<pre><code>## [1] &quot;Settings:  unique SS &quot;</code></pre>
+<p>The <code>lmp()</code> function does all the work for us. Here it is run with the option perm to control the stopping rule used. Option Prob stops the sampling when the estimated standard deviation of the p-value falls below some fraction of the estimated. It is one of many stopping rules that one could use to do permutations on a subset of all the possibilities (because it would take foreeeever to do them all, even on your fast machine).</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb148-1" aria-hidden="true"></a><span class="kw">summary</span>(m1Perm)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lmp(formula = fklngth ~ location, data = sturgeon, perm = &quot;Prob&quot;)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -18.40921  -3.75370  -0.08439   3.76598  23.48055 
+## 
+## Coefficients:
+##           Estimate Iter Pr(Prob)  
+## location1   0.8573 2893   0.0335 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.454 on 184 degrees of freedom
+## Multiple R-Squared: 0.02419, Adjusted R-squared: 0.01889 
+## F-statistic: 4.562 on 1 and 184 DF,  p-value: 0.03401</code></pre>
+<ol style="list-style-type: decimal">
+<li><code>Iter</code> coefficient: the Prob stopping rule stopped after 1117 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.</li>
+<li><code>Pr(Prob)</code> coefficient: The estimated probability associated to H0 is 0.0824 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1-0.0824=about 92%) of the 1117 cases. Mind you, 1117 permutations is not a large number, so small p values can’t be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p. Default 0.1.</li>
+<li><code>F-statistic</code>: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.</li>
+</ol>
 </div>
-
-<div class="rmdimportant">
-important points
 </div>
-
-<div class="rmdnote">
-notes
-</div>
-
-<div class="rmdtip">
-and tips
-</div>
-<div id="resources" class="section level3 unnumbered" number="">
-<h3>Resources</h3>
-<p>This document was developped using the excellent <a href="https://bookdown.org/">bookdown</a> 📦 de <a href="https://yihui.name/">Yihui Xie</a>. The manual is based on the previous lab manual <em>Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158</em>.</p>
-</div>
-<div id="license" class="section level3 unnumbered" number="">
-<h3>License</h3>
-<p>The document is available follwoing the license <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">License Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>.</p>
-<div class="figure">
-<img src="images/icons/license_cc.png" alt="" />
-<p class="caption">License Creative Commons</p>
-</div>
-
-<!-- # (PART) Introduction à R {-} -->
-</div>
-</div>
-<!-- </div> -->
 <script src="js/solution.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="general-laboratory-instructions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introduction-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparing-the-means-of-paired-samples.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -334,7 +381,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/index.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/04-t_test.Rmd",
 "text": "Edit"
 },
 "history": {
