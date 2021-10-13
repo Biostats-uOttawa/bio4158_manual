@@ -229,9 +229,9 @@ The `lmp()` function does all the work for us. Here it is run with the option pe
 summary(m1Perm)
 ```
 
-1. `Iter` coefficient: the Prob stopping rule stopped after 1117 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
-2. `Pr(Prob)` coefficient: The estimated probability associated to H0 is 0.0824 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1-0.0824=about 92%) of the 1117 cases. Mind you, 1117 permutations is not a large number, so small p values can’t be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p. Default 0.1.
-3.  `F-statistic`: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.
+1. `Iter` coefficient: the Prob stopping rule stopped after `r summary(m1Perm)$coefficients[2, 2]` iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
+2. `Pr(Prob)` coefficient: The estimated probability associated to H0 is `r round(summary(m1Perm)$coefficients[2, 3], 4)` . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - `r round(summary(m1Perm)$coefficients[2, 3],4)`= about `r round(1 - summary(m1Perm)$coefficients[2, 3], 3)*100`%) of the `r summary(m1Perm)$coefficients[2,2]` cases. Mind you, `r summary(m1Perm)$coefficients[2,2]` permutations is not a large number, so small p values can’t be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p. Default 0.1.
+3.  `F-statistic`: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is `r round(with(as.data.frame(t(summary(m1Perm)$fstatistic)), pf(value,numdf,dendf, lower.tail = FALSE)), 4)`.
 
 
 ## Comparing the means of paired samples
