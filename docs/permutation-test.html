@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 The theory | BIO4158 Applied biostats with R</title>
+  <title>5.5 Permutation test | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 The theory | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="5.5 Permutation test | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 The theory | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="5.5 Permutation test | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="power-analysis-with-r-and-gpower.html"/>
-<link rel="next" href="what-is-gpower.html"/>
+<link rel="prev" href="dealing-with-outliers-1.html"/>
+<link rel="next" href="software-tools.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,52 +275,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-theory" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> The theory</h2>
-<div id="what-is-power" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> What is power?</h3>
-<p><em>Power is the probability of rejecting the null hypothesis when it is false</em></p>
+<div id="permutation-test" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Permutation test</h2>
+<p>This is an example for a more complex way of doing permutation that we used when <code>lmPerm</code> was not available.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="permutation-test.html#cb208-1" aria-hidden="true"></a><span class="co">#############################################################</span></span>
+<span id="cb208-2"><a href="permutation-test.html#cb208-2" aria-hidden="true"></a><span class="co"># Permutation Test for one-way ANOVA</span></span>
+<span id="cb208-3"><a href="permutation-test.html#cb208-3" aria-hidden="true"></a><span class="co"># modified from code written by David C. Howell</span></span>
+<span id="cb208-4"><a href="permutation-test.html#cb208-4" aria-hidden="true"></a><span class="co"># http://www.uvm.edu/~dhowell/StatPages/</span></span>
+<span id="cb208-5"><a href="permutation-test.html#cb208-5" aria-hidden="true"></a><span class="co"># More_Stuff/Permutation%20Anova/PermTestsAnova.html</span></span>
+<span id="cb208-6"><a href="permutation-test.html#cb208-6" aria-hidden="true"></a><span class="co"># set desired number of permutations</span></span>
+<span id="cb208-7"><a href="permutation-test.html#cb208-7" aria-hidden="true"></a>nreps &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb208-8"><a href="permutation-test.html#cb208-8" aria-hidden="true"></a><span class="co"># to simplify reuse of this code, copy desired dataframe to mydata</span></span>
+<span id="cb208-9"><a href="permutation-test.html#cb208-9" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
+<span id="cb208-10"><a href="permutation-test.html#cb208-10" aria-hidden="true"></a><span class="co"># copy model formula to myformula</span></span>
+<span id="cb208-11"><a href="permutation-test.html#cb208-11" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
+<span id="cb208-12"><a href="permutation-test.html#cb208-12" aria-hidden="true"></a><span class="co"># copy dependent variable vector to mydep</span></span>
+<span id="cb208-13"><a href="permutation-test.html#cb208-13" aria-hidden="true"></a>mydep &lt;-<span class="st"> </span>mydata<span class="op">$</span>fklngth</span>
+<span id="cb208-14"><a href="permutation-test.html#cb208-14" aria-hidden="true"></a><span class="co"># copy independent variable vector to myindep</span></span>
+<span id="cb208-15"><a href="permutation-test.html#cb208-15" aria-hidden="true"></a>myindep &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mydata<span class="op">$</span>year)</span>
+<span id="cb208-16"><a href="permutation-test.html#cb208-16" aria-hidden="true"></a><span class="co">################################################</span></span>
+<span id="cb208-17"><a href="permutation-test.html#cb208-17" aria-hidden="true"></a><span class="co"># You should not need to modify code chunk below</span></span>
+<span id="cb208-18"><a href="permutation-test.html#cb208-18" aria-hidden="true"></a><span class="co">################################################</span></span>
+<span id="cb208-19"><a href="permutation-test.html#cb208-19" aria-hidden="true"></a><span class="co"># Compute observed F value for original sample</span></span>
+<span id="cb208-20"><a href="permutation-test.html#cb208-20" aria-hidden="true"></a>mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata) <span class="co"># Standard Anova</span></span>
+<span id="cb208-21"><a href="permutation-test.html#cb208-21" aria-hidden="true"></a>sum_anova &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod1)) <span class="co"># Save summary to variable</span></span>
+<span id="cb208-22"><a href="permutation-test.html#cb208-22" aria-hidden="true"></a>obs_f &lt;-<span class="st"> </span>sum_anova[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># Save observed F value</span></span>
+<span id="cb208-23"><a href="permutation-test.html#cb208-23" aria-hidden="true"></a><span class="co"># Print standard ANOVA results</span></span>
+<span id="cb208-24"><a href="permutation-test.html#cb208-24" aria-hidden="true"></a><span class="kw">cat</span>(</span>
+<span id="cb208-25"><a href="permutation-test.html#cb208-25" aria-hidden="true"></a>  <span class="st">&quot; The standard ANOVA for these data follows &quot;</span>,</span>
+<span id="cb208-26"><a href="permutation-test.html#cb208-26" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb208-27"><a href="permutation-test.html#cb208-27" aria-hidden="true"></a>)</span>
+<span id="cb208-28"><a href="permutation-test.html#cb208-28" aria-hidden="true"></a></span>
+<span id="cb208-29"><a href="permutation-test.html#cb208-29" aria-hidden="true"></a><span class="kw">print</span>(sum_anova, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb208-30"><a href="permutation-test.html#cb208-30" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb208-31"><a href="permutation-test.html#cb208-31" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb208-32"><a href="permutation-test.html#cb208-32" aria-hidden="true"></a><span class="kw">print</span>(<span class="st">&quot;Resampling as in Manly with unrestricted sampling of observations. &quot;</span>)</span>
+<span id="cb208-33"><a href="permutation-test.html#cb208-33" aria-hidden="true"></a></span>
+<span id="cb208-34"><a href="permutation-test.html#cb208-34" aria-hidden="true"></a><span class="co"># Now start resampling</span></span>
+<span id="cb208-35"><a href="permutation-test.html#cb208-35" aria-hidden="true"></a>boot_f &lt;-<span class="st"> </span><span class="kw">numeric</span>(nreps) <span class="co"># initalize vector to receive permuted</span></span>
+<span id="cb208-36"><a href="permutation-test.html#cb208-36" aria-hidden="true"></a>values</span>
+<span id="cb208-37"><a href="permutation-test.html#cb208-37" aria-hidden="true"></a>boot_f[<span class="dv">1</span>] &lt;-<span class="st"> </span>obs_f</span>
+<span id="cb208-38"><a href="permutation-test.html#cb208-38" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>nreps) {</span>
+<span id="cb208-39"><a href="permutation-test.html#cb208-39" aria-hidden="true"></a>  newdependent &lt;-<span class="st"> </span><span class="kw">sample</span>(mydep, <span class="kw">length</span>(mydep)) <span class="co"># randomize dep</span></span>
+<span id="cb208-40"><a href="permutation-test.html#cb208-40" aria-hidden="true"></a>  var</span>
+<span id="cb208-41"><a href="permutation-test.html#cb208-41" aria-hidden="true"></a>  mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(newdependent <span class="op">~</span><span class="st"> </span>myindep) <span class="co"># refit model</span></span>
+<span id="cb208-42"><a href="permutation-test.html#cb208-42" aria-hidden="true"></a>  b &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod2))</span>
+<span id="cb208-43"><a href="permutation-test.html#cb208-43" aria-hidden="true"></a>  boot_f[i] &lt;-<span class="st"> </span>b[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># store F stats</span></span>
+<span id="cb208-44"><a href="permutation-test.html#cb208-44" aria-hidden="true"></a>}</span>
+<span id="cb208-45"><a href="permutation-test.html#cb208-45" aria-hidden="true"></a>permprob &lt;-<span class="st"> </span><span class="kw">length</span>(boot_f[boot_f <span class="op">&gt;=</span><span class="st"> </span>obs_f]) <span class="op">/</span><span class="st"> </span>nreps</span>
+<span id="cb208-46"><a href="permutation-test.html#cb208-46" aria-hidden="true"></a><span class="kw">cat</span>(</span>
+<span id="cb208-47"><a href="permutation-test.html#cb208-47" aria-hidden="true"></a>  <span class="st">&quot; The permutation probability value is: &quot;</span>, permprob,</span>
+<span id="cb208-48"><a href="permutation-test.html#cb208-48" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb208-49"><a href="permutation-test.html#cb208-49" aria-hidden="true"></a>)</span>
+<span id="cb208-50"><a href="permutation-test.html#cb208-50" aria-hidden="true"></a><span class="co"># end of code chunk for permutation</span></span></code></pre></div>
+<p>Version <code>lmPerm</code> du test de permutation.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="permutation-test.html#cb209-1" aria-hidden="true"></a><span class="co">## lmPerm version of permutation test</span></span>
+<span id="cb209-2"><a href="permutation-test.html#cb209-2" aria-hidden="true"></a><span class="kw">library</span>(lmPerm)</span>
+<span id="cb209-3"><a href="permutation-test.html#cb209-3" aria-hidden="true"></a><span class="co"># for generality, copy desired dataframe to mydata</span></span>
+<span id="cb209-4"><a href="permutation-test.html#cb209-4" aria-hidden="true"></a><span class="co"># and model formula to myformula</span></span>
+<span id="cb209-5"><a href="permutation-test.html#cb209-5" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
+<span id="cb209-6"><a href="permutation-test.html#cb209-6" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
+<span id="cb209-7"><a href="permutation-test.html#cb209-7" aria-hidden="true"></a><span class="co"># Fit desired model on the desired dataframe</span></span>
+<span id="cb209-8"><a href="permutation-test.html#cb209-8" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata)</span>
+<span id="cb209-9"><a href="permutation-test.html#cb209-9" aria-hidden="true"></a><span class="co"># Calculate permutation p-value</span></span>
+<span id="cb209-10"><a href="permutation-test.html#cb209-10" aria-hidden="true"></a><span class="kw">anova</span>(<span class="kw">lmp</span>(myformula, <span class="dt">data =</span> mydata, <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span>, <span class="dt">center =</span> <span class="ot">FALSE</span>, <span class="dt">Ca =</span> <span class="fl">0.001</span>))</span></code></pre></div>
+
 </div>
-<div id="why-do-a-power-analysis" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Why do a power analysis?</h3>
-<div id="assess-the-strength-of-evidence" class="section level4 unnumbered" number="">
-<h4>Assess the strength of evidence</h4>
-<p>Power analysis, performed after accepting a null hypothesis, can help assess the probability of rejecting the null if it were false, and if the magnitude of the effect was equal to that observed (or to any other given magnitude). This type of <em>a posteriori</em> analysis is very common.</p>
-</div>
-<div id="design-better-experiments" class="section level4 unnumbered" number="">
-<h4>Design better experiments</h4>
-<p>Power analysis, performed prior to conducting an experiment (but most often after a preliminary experiment), can be used to determine the number of observations required to detect an effect of a given magnitude with some probability (the power). This type of <em>a priori</em> experiment should be more common.</p>
-</div>
-<div id="estimate-minimum-detectable-effect" class="section level4 unnumbered" number="">
-<h4>Estimate minimum detectable effect</h4>
-<p>Sampling effort is often predetermined (when you are handed data of an experiment already completed), or extremely constrained (when logistics dictates what can be done). Whether it is <em>a priori</em> or <em>a posteriori</em>, power analysis can help you estimate, for a fixed sample size and a given power, what is the minimum effect size that can be detected.</p>
-</div>
-</div>
-<div id="factors-affecting-power" class="section level3" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Factors affecting power</h3>
-<p>For a given statistical test, there are 3 factors that affect power.</p>
-<div id="decision-criteria" class="section level4 unnumbered" number="">
-<h4>Decision criteria</h4>
-<p>Power is related to <span class="math inline">\(\alpha\)</span>, the probability level at which one rejects the null hypothesis. If this decision criteria is made very strict (i.e. if critical <span class="math inline">\(\alpha\)</span> is set to a very low value, like 0.1% or <span class="math inline">\(p = 0.001\)</span>), then power will be lower than if the critical <span class="math inline">\(\alpha\)</span> was less strict.</p>
-</div>
-<div id="sample-size" class="section level4 unnumbered" number="">
-<h4>Sample size</h4>
-<p>The larger the sample size, the larger the power. As sample size increases, one’s ability to detect small effect sizes as being statistically significant gets better.</p>
-</div>
-<div id="effect-size" class="section level4 unnumbered" number="">
-<h4>Effect size</h4>
-<p>The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.</p>
-</div>
-</div>
-</div>
+<!-- </div> -->
+
+
+
 <script src="js/solution.js"></script>
             </section>
 
           </div>
         </div>
       </div>
-<a href="power-analysis-with-r-and-gpower.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-gpower.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dealing-with-outliers-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="software-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -342,7 +374,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/02-Gpower.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/05-anova.Rmd",
 "text": "Edit"
 },
 "history": {

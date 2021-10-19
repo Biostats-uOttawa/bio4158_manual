@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.1 The theory | BIO4158 Applied biostats with R</title>
+  <title>5.3 Data transformations and non-parametric ANOVA | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.1 The theory | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="5.3 Data transformations and non-parametric ANOVA | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.1 The theory | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="5.3 Data transformations and non-parametric ANOVA | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="power-analysis-with-r-and-gpower.html"/>
-<link rel="next" href="what-is-gpower.html"/>
+<link rel="prev" href="one-way-anova-with-multiple-comparisons.html"/>
+<link rel="next" href="dealing-with-outliers-1.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -275,43 +275,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-theory" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> The theory</h2>
-<div id="what-is-power" class="section level3" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> What is power?</h3>
-<p><em>Power is the probability of rejecting the null hypothesis when it is false</em></p>
+<div id="data-transformations-and-non-parametric-anova" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Data transformations and non-parametric ANOVA</h2>
+<p>In the above example to examine differences in fklngth among years , we detected evidence of non-normality and variance heterogeneity. If the assumptions underlying a parametric ANOVA are not valid, there are several options:</p>
+<ol style="list-style-type: decimal">
+<li>if sample sizes in each group are reasonably large, parametric ANOVA is reasonably robust with respect to the normality assumption, for the same reason that the t-test is, so the results are probably not too bad;</li>
+<li>we can transform the data;</li>
+<li>we can go the non-parametric route.</li>
+</ol>
+<ul>
+<li>Repeat the one-way ANOVA in the section above, but this time run the analysis on the log 10 fklngth . With this transformation, do some of the problems encountered previously disappear?</li>
+</ul>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="data-transformations-and-non-parametric-anova.html#cb197-1" aria-hidden="true"></a><span class="co"># Fit anova model on log10 of fklngth and plot residual diagnostics</span></span>
+<span id="cb197-2"><a href="data-transformations-and-non-parametric-anova.html#cb197-2" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb197-3"><a href="data-transformations-and-non-parametric-anova.html#cb197-3" aria-hidden="true"></a>anova.model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span>
+<span id="cb197-4"><a href="data-transformations-and-non-parametric-anova.html#cb197-4" aria-hidden="true"></a><span class="kw">plot</span>(anova.model2)</span></code></pre></div>
+<div class="figure"><span id="fig:ano-16"></span>
+<img src="Labs_BIO4158_files/figure-html/ano-16-1.svg" alt="Diagnostic plots for the ANOVA of sturgeon length by year" width="672" />
+<p class="caption">
+Figure 5.7: Diagnostic plots for the ANOVA of sturgeon length by year
+</p>
 </div>
-<div id="why-do-a-power-analysis" class="section level3" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Why do a power analysis?</h3>
-<div id="assess-the-strength-of-evidence" class="section level4 unnumbered" number="">
-<h4>Assess the strength of evidence</h4>
-<p>Power analysis, performed after accepting a null hypothesis, can help assess the probability of rejecting the null if it were false, and if the magnitude of the effect was equal to that observed (or to any other given magnitude). This type of <em>a posteriori</em> analysis is very common.</p>
-</div>
-<div id="design-better-experiments" class="section level4 unnumbered" number="">
-<h4>Design better experiments</h4>
-<p>Power analysis, performed prior to conducting an experiment (but most often after a preliminary experiment), can be used to determine the number of observations required to detect an effect of a given magnitude with some probability (the power). This type of <em>a priori</em> experiment should be more common.</p>
-</div>
-<div id="estimate-minimum-detectable-effect" class="section level4 unnumbered" number="">
-<h4>Estimate minimum detectable effect</h4>
-<p>Sampling effort is often predetermined (when you are handed data of an experiment already completed), or extremely constrained (when logistics dictates what can be done). Whether it is <em>a priori</em> or <em>a posteriori</em>, power analysis can help you estimate, for a fixed sample size and a given power, what is the minimum effect size that can be detected.</p>
-</div>
-</div>
-<div id="factors-affecting-power" class="section level3" number="2.1.3">
-<h3><span class="header-section-number">2.1.3</span> Factors affecting power</h3>
-<p>For a given statistical test, there are 3 factors that affect power.</p>
-<div id="decision-criteria" class="section level4 unnumbered" number="">
-<h4>Decision criteria</h4>
-<p>Power is related to <span class="math inline">\(\alpha\)</span>, the probability level at which one rejects the null hypothesis. If this decision criteria is made very strict (i.e. if critical <span class="math inline">\(\alpha\)</span> is set to a very low value, like 0.1% or <span class="math inline">\(p = 0.001\)</span>), then power will be lower than if the critical <span class="math inline">\(\alpha\)</span> was less strict.</p>
-</div>
-<div id="sample-size" class="section level4 unnumbered" number="">
-<h4>Sample size</h4>
-<p>The larger the sample size, the larger the power. As sample size increases, one’s ability to detect small effect sizes as being statistically significant gets better.</p>
-</div>
-<div id="effect-size" class="section level4 unnumbered" number="">
-<h4>Effect size</h4>
-<p>The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.</p>
-</div>
-</div>
+<p>Looking at the residuals, things look barely better than before without the log transformation. Running the Wilks-Shapiro
+test for normality on the residuals, we get:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-transformations-and-non-parametric-anova.html#cb198-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model2))</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(anova.model2)
+## W = 0.96199, p-value = 0.002048</code></pre>
+<p>So, it would appear that we still have some problems with the assumption of normality and are just on the border line of meeting the assumption of homogeneity of variances. You have several choices here:</p>
+<ol style="list-style-type: decimal">
+<li>try to find a different transformation to satisfy the assumptions,</li>
+<li>assume the data are close enough to meeting the assumptions, or</li>
+<li>perform a non-parametric ANOVA.</li>
+</ol>
+<ul>
+<li>The most commonly used non-parametric analog of the parametric one-way ANOVA is the Kruskall-Wallis one-way ANOVA. Perform a Kruskall-Wallis one-way ANOVA of <code>fklngth</code> , and compare these results to the parametric analysis above. What do you conclude?</li>
+</ul>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="data-transformations-and-non-parametric-anova.html#cb200-1" aria-hidden="true"></a><span class="kw">kruskal.test</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  fklngth by year
+## Kruskal-Wallis chi-squared = 15.731, df = 3, p-value = 0.001288</code></pre>
+<p>So, the conclusion is the same as with the parametric ANOVA: we reject the null that the mean rank is the same for each year. Thus, despite violation of one or more assumptions, the parametric analysis is telling us the same thing as the non-parametric analysis: the conclusion is, therefore, quite robust.</p>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -319,8 +327,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="power-analysis-with-r-and-gpower.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="what-is-gpower.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="one-way-anova-with-multiple-comparisons.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dealing-with-outliers-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -342,7 +350,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/02-Gpower.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/05-anova.Rmd",
 "text": "Edit"
 },
 "history": {

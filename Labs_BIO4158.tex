@@ -239,7 +239,7 @@
 \makeatother
 \subtitle{Laboratory manual}
 \author{Julien Martin}
-\date{13-10-2021}
+\date{19-10-2021}
 
 \begin{document}
 \maketitle
@@ -2716,9 +2716,9 @@ A non-parametric test for the intercept and slope of a linear regression can be 
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 1.1919926  0.001850216  0.03346385
-## t2* 0.3408557 -0.001162455  0.02660344
+##      original        bias    std. error
+## t1* 1.1919926 -0.0001148875  0.03322507
+## t2* 0.3408557  0.0002948147  0.02629906
 \end{verbatim}
 
 For each parameter in the model (here the intercept is labeled \texttt{t1\textbackslash{}*} and the slope of the regression line is labeled \texttt{t2\textbackslash{}*}) , you obtain:
@@ -2777,10 +2777,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.125,  1.256 )   ( 1.126,  1.257 )  
+## 95%   ( 1.127,  1.257 )   ( 1.129,  1.256 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.127,  1.258 )   ( 1.120,  1.254 )  
+## 95%   ( 1.128,  1.255 )   ( 1.116,  1.248 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -2805,10 +2805,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2899,  0.3942 )   ( 0.2900,  0.3923 )  
+## 95%   ( 0.2890,  0.3921 )   ( 0.2878,  0.3908 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2894,  0.3917 )   ( 0.2926,  0.4021 )  
+## 95%   ( 0.2909,  0.3939 )   ( 0.2958,  0.3980 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -2853,7 +2853,7 @@ For this la b you need:
   \item
     pwr
   \item
-    ggplot
+    ggplot2
   \item
     performance
   \end{itemize}
@@ -3186,9 +3186,9 @@ The second section with the \texttt{boot()} command is where the real work is do
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original      bias    std. error
-## t1* 45.084391  0.02301701   0.4272076
-## t2* -1.714546 -0.01057610   0.7625979
+##      original       bias    std. error
+## t1* 45.084391 -0.007566011   0.4422655
+## t2* -1.714546 -0.013615039   0.7657404
 \end{verbatim}
 
 So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.
@@ -3221,7 +3221,7 @@ So we get the original estimates for the two coefficients in this model: the mea
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   (-3.233, -0.284 )  
+## 95%   (-3.154, -0.167 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3265,7 +3265,7 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 ## 
 ## Coefficients:
 ##           Estimate Iter Pr(Prob)  
-## location1   0.8573 1357   0.0693 .
+## location1   0.8573 2214   0.0434 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3278,9 +3278,9 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \texttt{Iter} coefficient: the Prob stopping rule stopped after 1357 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
+  \texttt{Iter} coefficient: the Prob stopping rule stopped after 2214 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
 \item
-  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0693 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0693= about 93.1\%) of the 1357 cases. Mind you, 1357 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
+  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0434 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0434= about 95.7\%) of the 2214 cases. Mind you, 2214 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
 \item
   \texttt{F-statistic}: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.
 \end{enumerate}
@@ -3522,6 +3522,736 @@ Note that instead of rerunning the t-test specifying a one-tailed test, you can:
 Bumpus, H.C. (1898) The elimination of the unfit as illustrated by the introduced sparrow, Passer domesticus. Biological Lectures, Woods Hole Biology Laboratory, Woods Hole, 11 th Lecture: 209 - 226.
 
 Newman, K.J. and H.V. Meredith. (1956) Individual growth in skele- tal bigonial diameter during the childhood period from 5 to 11 years of age. Amer. J. Anat. 99: 157 - 187.
+
+\hypertarget{one-way-anova}{%
+\chapter{One-way ANOVA}\label{one-way-anova}}
+
+After completing this laboratory exercise, you should be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Use R to do a one-way parametric ANOVA with multiple comparisons
+\item
+  Use R to test the validity of the parametric ANOVA assumptions
+\item
+  Use R to perform a one-way non-parametric ANOVA
+\item
+  Use R to transform your data so that the assumptions of parametric ANOVA are met.
+\end{itemize}
+
+\hypertarget{set-ano}{%
+\section{R packages and data}\label{set-ano}}
+
+For this lab you need:
+
+\begin{itemize}
+\tightlist
+\item
+  R packages:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    ggplot2
+  \item
+    multcomp
+  \item
+    car
+  \end{itemize}
+\item
+  data
+
+  \begin{itemize}
+  \tightlist
+  \item
+    dam10dat.csv
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(car)}
+\KeywordTok{library}\NormalTok{(multcomp)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{one-way-anova-with-multiple-comparisons}{%
+\section{One-way ANOVA with multiple comparisons}\label{one-way-anova-with-multiple-comparisons}}
+
+The one-way ANOVA is the multi-group analog of the \emph{t}-test, which is used to compare two groups/levels. It makes essentially the same assumptions, and in the case of two groups/levels, is in fact mathematically equivalent to the \emph{t}-test.
+
+In 1960-1962, the Grand Rapids Dam was built on the Saskatchewan River upstream of Cumberland House. There are anecdotal reports that during dam construction, a number of large sturgeon were stranded and died in shallow pools. Surveys of sturgeon were carried out in 1954, 1958, 1965 and 1966 with fork length (\texttt{fklngth}) and round weight (\texttt{rdwght}) being recorded (not necessarily both measurements for each individual). These data are in the data file \texttt{Dam10dat.csv}.
+
+\hypertarget{visualiser-les-donnuxe9es}{%
+\subsection{Visualiser les données}\label{visualiser-les-donnuxe9es}}
+
+\begin{itemize}
+\tightlist
+\item
+  Using \texttt{Dam10dat.csv}, you must first change the data type of the
+  numerical variable year , so that R recognizes that we wish to treat this
+  variable as a factor variable and not a continuous variable.
+\end{itemize}
+
+\begin{verbatim}
+## 'data.frame':    118 obs. of  21 variables:
+##  $ year    : Factor w/ 4 levels "1954","1958",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ fklngth : num  45 50 39 46 54.5 49 42.5 49 56 54 ...
+##  $ totlngth: num  49 NA 43 50.5 NA 51.7 45.5 52 60.2 58.5 ...
+##  $ drlngth : logi  NA NA NA NA NA NA ...
+##  $ drwght  : num  16 20.5 10 17.5 19.7 21.3 9.5 23.7 31 27.3 ...
+##  $ rdwght  : num  24.5 33 15.5 28.5 32.5 35.5 15.3 40.5 51.5 43 ...
+##  $ sex     : int  1 1 1 2 1 2 1 1 1 1 ...
+##  $ age     : int  24 33 17 31 37 44 23 34 33 47 ...
+##  $ lfkl    : num  1.65 1.7 1.59 1.66 1.74 ...
+##  $ ltotl   : num  1.69 NA 1.63 1.7 NA ...
+##  $ ldrl    : logi  NA NA NA NA NA NA ...
+##  $ ldrwght : num  1.2 1.31 1 1.24 1.29 ...
+##  $ lrdwght : num  1.39 1.52 1.19 1.45 1.51 ...
+##  $ lage    : num  1.38 1.52 1.23 1.49 1.57 ...
+##  $ rage    : int  4 6 3 6 7 7 4 6 6 7 ...
+##  $ ryear   : int  1954 1954 1954 1954 1954 1954 1954 1954 1954 1954 ...
+##  $ ryear2  : int  1958 1958 1958 1958 1958 1958 1958 1958 1958 1958 ...
+##  $ ryear3  : int  1966 1966 1966 1966 1966 1966 1966 1966 1966 1966 ...
+##  $ location: int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ girth   : logi  NA NA NA NA NA NA ...
+##  $ lgirth  : logi  NA NA NA NA NA NA ...
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Next, have a look at the fklngth data, just as we did in the last lab for t-tests. Create a histogram with density line grouped by year to get a feel for what's happening with your data and a boxplot of length per year. What can you say about these data?
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-2-1.pdf}
+\caption{\label{fig:ano-2}Distribution of sturgeon length per year}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-38-1.pdf}
+\caption{\label{fig:unnamed-chunk-38}Boxplot of sturgeon length per year}
+\end{figure}
+
+It appears as though there may have been a small drop in \texttt{fklngth} after the construction of the dam, but the data are variable and the effects are not clear. There might also be some problems with normality in the 1954 and 1966 samples, and it looks as though there are outliers in the 1958 and 1966 samples. Let's proceed with testing the assumptions of the ANOVA by running the analysis and looking at the residuals.
+
+\hypertarget{testing-the-assumptions-of-a-parametric-anova}{%
+\subsection{Testing the assumptions of a parametric ANOVA}\label{testing-the-assumptions-of-a-parametric-anova}}
+
+Parametric one-way ANOVAs have three major assumptions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the residuals are normally distributed
+\item
+  the error variance is the same for all groups (homoscedasticity)
+\item
+  the residuals are independent.
+\end{enumerate}
+
+These assumptions must be tested before we can accept the results of any parametric ANOVA.
+
+\begin{itemize}
+\tightlist
+\item
+  Carry out a one-way ANOVA on fklngth by year and produce the residual diagnostic plots
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit anova model and plot residual diagnostics}
+\NormalTok{anova.model1 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{year, }\DataTypeTok{data =}\NormalTok{ dam10dat)}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(anova.model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-3-1.pdf}
+\caption{\label{fig:ano-3}Diagnostic plots for a one-way ANOVA}
+\end{figure}
+
+\begin{rmdwarning}
+Double check that the independent variable is a \textbf{factor}. If the dependent variable is a \textbf{character}, then you will obtain only 3 graphs and an error message like:
+
+`hat values (leverages) are all = 0.1
+
+and there are no factor predictors; no plot no. 5`
+\end{rmdwarning}
+
+D'après les graphiques, on peut douter de la normalité et de l'homogénéité des variances. Judging from the plots, it looks as though there may be problems with both normality and variance heterogeneity. Note that there is one point (case 59) with large expected values and a large residual that appear to lie well off the line: this is the outlier we noted earlier. This point might be expected to inflate the variance for the group it belongs to. Formal tests may also provide some insight as to whether we should be concerned about normality and variance heterogeneity.
+
+\begin{itemize}
+\tightlist
+\item
+  Perform a normality test on the residuals from the ANOVA.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(anova.model1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(anova.model1)
+## W = 0.91571, p-value = 1.63e-06
+\end{verbatim}
+
+This test confirms our suspicions from the probability plot: the residuals are not normally distributed. Recall, however, that the power here is high, so only small deviations from normality are required to reject the null.
+
+\begin{itemize}
+\tightlist
+\item
+  Next, test for homoscedasticity:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{leveneTest}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{year, }\DataTypeTok{data =}\NormalTok{ dam10dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value  Pr(>F)  
+## group   3  2.8159 0.04234 *
+##       114                  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The probability value tells you that you can reject the null hypothesis that there is no difference in variances among years. Thus, we conclude there is evidence that the variances in the groups are not equal.
+
+\hypertarget{performing-the-anova}{%
+\subsection{Performing the ANOVA}\label{performing-the-anova}}
+
+Let's look at the results of the ANOVA, assuming for the moment that assumptions are met well enough.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(anova.model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = fklngth ~ year, data = dam10dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -11.2116  -2.6866  -0.7116   2.2103  26.7885 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  48.0243     0.8566  56.061  < 2e-16 ***
+## year1958      0.1872     1.3335   0.140  0.88859    
+## year1965     -5.5077     1.7310  -3.182  0.00189 ** 
+## year1966     -3.3127     1.1684  -2.835  0.00542 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 5.211 on 114 degrees of freedom
+## Multiple R-squared:  0.1355, Adjusted R-squared:  0.1128 
+## F-statistic: 5.957 on 3 and 114 DF,  p-value: 0.0008246
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Coefficients: Estimates} Note the 4 coefficients printed. They can be used to obtain the predicted values for the model (i.e.~the group means). The mean fklngth for the first year (1954) is 48.0243. The coefficients for the 3 other years are the difference between the mean for that year and for 1954. So, the mean for 1965 is (48.0243-5.5077=42.5166). For each estimated coefficient, there is a standard error, a t-value and associated probability (for H0 that the coefficient is 0). Note here that coefficients for 1965 and 1966 are both negative and significantly less than 0. Fish were smaller after the construction of the dam than in 1954. Take these p-values with a grain of salt: these are not corrected for multiple comparisons, and they constitute only a subset of the possible comparisons. In general, I pay little attention to this part of the output and look more at what comes next.
+\item
+  \emph{Residual standard error}: The square root of the variance of the residuals (observed minus fitted values) corresponds to the amount of variability that is unexplained by the models (here an estimate of how much size varied among fish, once corrected for differences among years)
+\item
+  \emph{Mutiple R-squared} The R-squared is the proportion of the variance of the dependent variable that can be explained by the model. Here the model explains only 13.5\% of the variability. Size differences among year are relatively small compared to the ranges of sizes that can occur within years. This corresponds well to the visual impression left by the histograms of \texttt{fklngth} per \texttt{year}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  \emph{F-Statistic} This is the p-value for the ``omnibus'' test, the test that all means are equal. Here it is much smaller than 0.05 and hence we would reject H0 and conclude that fklngth varies among the years
+\end{enumerate}
+
+The \texttt{anova()} command produces the standard ANOVA table that contains most of the same information:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{anova}\NormalTok{(anova.model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: fklngth
+##            Df  Sum Sq Mean Sq F value    Pr(>F)    
+## year        3  485.26 161.755  5.9574 0.0008246 ***
+## Residuals 114 3095.30  27.152                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The total variability in fklngth sums of square is partitioned into what can be accounted for by year (485.26) and what is left unexplained as residual variability (3095.30). Year indeed explains \((485.26/(3095.30+485.26)=.1355\) or 13.55\% of the variability). The mean square of the residuals is their variance.
+
+\hypertarget{performing-multiple-comparisons-of-means-test}{%
+\subsection{Performing multiple comparisons of means test}\label{performing-multiple-comparisons-of-means-test}}
+
+\begin{itemize}
+\tightlist
+\item
+  The \texttt{pairwise.t.test()} function can be used to compare means and adjust (or not) probabilities for multiple comparisons by choosing one of the options for the argument \texttt{p.adj}:
+\end{itemize}
+
+Comparing all means without corrections for multiple comparisons.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairwise.t.test}\NormalTok{(dam10dat}\OperatorTok{$}\NormalTok{fklngth, dam10dat}\OperatorTok{$}\NormalTok{year,}
+  \DataTypeTok{p.adj =} \StringTok{"none"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dam10dat$fklngth and dam10dat$year 
+## 
+##      1954   1958   1965  
+## 1958 0.8886 -      -     
+## 1965 0.0019 0.0022 -     
+## 1966 0.0054 0.0079 0.1996
+## 
+## P value adjustment method: none
+\end{verbatim}
+
+Option \texttt{"bonf"} adjusts the p-values according to the Bonferroni correction. In this case, since there are 6 p-values calculated, it amounts to simply multiplying the uncorrected p-values by 6 (unless the result is above 1, in that case the adjusted p-value is 1).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairwise.t.test}\NormalTok{(dam10dat}\OperatorTok{$}\NormalTok{fklngth, dam10dat}\OperatorTok{$}\NormalTok{year,}
+  \DataTypeTok{p.adj =} \StringTok{"bonf"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dam10dat$fklngth and dam10dat$year 
+## 
+##      1954  1958  1965 
+## 1958 1.000 -     -    
+## 1965 0.011 0.013 -    
+## 1966 0.033 0.047 1.000
+## 
+## P value adjustment method: bonferroni
+\end{verbatim}
+
+Option \texttt{"holm"} is the sequential Bonferroni correction, where the p-values are ranked from (i=1) smallest to (N) largest. The correction factor for p-values is then \$\((N-i+1)\). Here, for example, we have N=6 pairs that are compared. The lowest uncorrected p-value is 0.0019 for 1954 vs 1965. The corrected p-value becomes \(0.0019*(6-1+1)= 0.011\). The second lowest p-value is 0.0022. The corrected p/value is therefore \(0.0022*(6-2+1)=0.011\). For the highest p-value, the correction is \((N-N+1)=1\), hence it is equal to the uncorrected probability.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairwise.t.test}\NormalTok{(dam10dat}\OperatorTok{$}\NormalTok{fklngth, dam10dat}\OperatorTok{$}\NormalTok{year,}
+  \DataTypeTok{p.adj =} \StringTok{"holm"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dam10dat$fklngth and dam10dat$year 
+## 
+##      1954  1958  1965 
+## 1958 0.889 -     -    
+## 1965 0.011 0.011 -    
+## 1966 0.022 0.024 0.399
+## 
+## P value adjustment method: holm
+\end{verbatim}
+
+The ``fdr'' option is for controlling the false discovery rate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pairwise.t.test}\NormalTok{(dam10dat}\OperatorTok{$}\NormalTok{fklngth, dam10dat}\OperatorTok{$}\NormalTok{year,}
+  \DataTypeTok{p.adj =} \StringTok{"fdr"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  dam10dat$fklngth and dam10dat$year 
+## 
+##      1954   1958   1965  
+## 1958 0.8886 -      -     
+## 1965 0.0066 0.0066 -     
+## 1966 0.0108 0.0119 0.2395
+## 
+## P value adjustment method: fdr
+\end{verbatim}
+
+The four post-hoc tests here tell us the same thing: differences are all between two groups of years: 1954/58 and 1965/66, since all comparisons show differences between the 50's and 60's but no differences within the 50's or 60's. So, in this particular case, the conclusion is not affected by the choice of adjustment method. But in other situations, you will observe contradictory results.
+
+Which one to choose? Unadjusted p-values are certainly suspect when there are multiple tests. On the other hand, the traditional \emph{Bonferroni} correction is very conservative, and becomes even more so when there are a large number of comparisons. Recent work suggest that the \emph{fdr} approach may be a good compromise when there are a lot of comparisons. The \emph{Tukey} method of multiple comparisons is one of the most popular and is easily performed with R (note, however, that there is a pesky bug that manifests itself when the independent variable can look like a number rather than a factor, hence the little pirouette with \texttt{paste0()} to add a letter \texttt{m} before the first digit):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dam10dat}\OperatorTok{$}\NormalTok{myyear \textless{}{-}}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(}\StringTok{"m"}\NormalTok{, dam10dat}\OperatorTok{$}\NormalTok{year))}
+\KeywordTok{TukeyHSD}\NormalTok{(}\KeywordTok{aov}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{myyear, }\DataTypeTok{data =}\NormalTok{ dam10dat))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
+## 
+## $myyear
+##                   diff        lwr        upr     p adj
+## m1958-m1954  0.1872141  -3.289570  3.6639986 0.9990071
+## m1965-m1954 -5.5076577 -10.021034 -0.9942809 0.0100528
+## m1966-m1954 -3.3126964  -6.359223 -0.2661701 0.0274077
+## m1965-m1958 -5.6948718 -10.436304 -0.9534397 0.0116943
+## m1966-m1958 -3.4999106  -6.875104 -0.1247171 0.0390011
+## m1966-m1965  2.1949612  -2.240630  6.6305526 0.5710111
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(}\KeywordTok{TukeyHSD}\NormalTok{(}\KeywordTok{aov}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{myyear, }\DataTypeTok{data =}\NormalTok{ dam10dat)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-13-1.pdf}
+\caption{\label{fig:ano-13}Inter-annual differences in sturgeon length}
+\end{figure}
+
+The confidence intervals, corrected for multiple tests by the Tukey method, are plotted for differences among years. Unfortunately, the labels are not all printed because they would overlap, but the order is the same as in the preceding table. The \texttt{multcomp} 📦 can produce a better plot version, but requires a bit more code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Alternative way to compute Tukey multiple comparisons}
+\CommentTok{\# set up a one{-}way ANOVA}
+\NormalTok{anova\_fkl\_year \textless{}{-}}\StringTok{ }\KeywordTok{aov}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{myyear, }\DataTypeTok{data =}\NormalTok{ dam10dat)}
+\CommentTok{\# set up all{-}pairs comparisons for factor \textasciigrave{}year\textquotesingle{}}
+
+\NormalTok{meandiff \textless{}{-}}\StringTok{ }\KeywordTok{glht}\NormalTok{(anova\_fkl\_year, }\DataTypeTok{linfct =} \KeywordTok{mcp}\NormalTok{(}
+  \DataTypeTok{myyear =}
+    \StringTok{"Tukey"}
+\NormalTok{))}
+\KeywordTok{confint}\NormalTok{(meandiff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##   Simultaneous Confidence Intervals
+## 
+## Multiple Comparisons of Means: Tukey Contrasts
+## 
+## 
+## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
+## 
+## Quantile = 2.5918
+## 95% family-wise confidence level
+##  
+## 
+## Linear Hypotheses:
+##                    Estimate lwr      upr     
+## m1958 - m1954 == 0   0.1872  -3.2689   3.6433
+## m1965 - m1954 == 0  -5.5077  -9.9942  -1.0212
+## m1966 - m1954 == 0  -3.3127  -6.3411  -0.2843
+## m1965 - m1958 == 0  -5.6949 -10.4081  -0.9817
+## m1966 - m1958 == 0  -3.4999  -6.8550  -0.1448
+## m1966 - m1965 == 0   2.1950  -2.2142   6.6041
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(meandiff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-14-1.pdf}
+\caption{\label{fig:ano-14}Inter-annual differences in sturgeon length}
+\end{figure}
+
+This is better. Also useful is a plot the means and their confidence intervals with the Tukey groupings shown as letters above:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute and plot means and Tukey CI}
+\NormalTok{means \textless{}{-}}\StringTok{ }\KeywordTok{glht}\NormalTok{(}
+\NormalTok{  anova\_fkl\_year,}
+  \DataTypeTok{linfct =} \KeywordTok{mcp}\NormalTok{(}\DataTypeTok{myyear =} \StringTok{"Tukey"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{cimeans \textless{}{-}}\StringTok{ }\KeywordTok{cld}\NormalTok{(means)}
+\CommentTok{\# use sufficiently large upper margin}
+\CommentTok{\# plot}
+\NormalTok{old\_par \textless{}{-}}\StringTok{ }\KeywordTok{par}\NormalTok{(}\DataTypeTok{mai =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\FloatTok{1.25}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(cimeans)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-15-1.pdf}
+\caption{\label{fig:ano-15}Inter-annual differences in sturgeon length}
+\end{figure}
+
+Note the letters appearing on top. Years labelled with the same letter do not differ significantly.
+
+\hypertarget{data-transformations-and-non-parametric-anova}{%
+\section{Data transformations and non-parametric ANOVA}\label{data-transformations-and-non-parametric-anova}}
+
+In the above example to examine differences in fklngth among years , we detected evidence of non-normality and variance heterogeneity. If the assumptions underlying a parametric ANOVA are not valid, there are several options:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  if sample sizes in each group are reasonably large, parametric ANOVA is reasonably robust with respect to the normality assumption, for the same reason that the t-test is, so the results are probably not too bad;
+\item
+  we can transform the data;
+\item
+  we can go the non-parametric route.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Repeat the one-way ANOVA in the section above, but this time run the analysis on the log 10 fklngth . With this transformation, do some of the problems encountered previously disappear?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit anova model on log10 of fklngth and plot residual diagnostics}
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{anova.model2 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log10}\NormalTok{(fklngth) }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{year, }\DataTypeTok{data =}\NormalTok{ dam10dat)}
+\KeywordTok{plot}\NormalTok{(anova.model2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\centering
+\includegraphics{Labs_BIO4158_files/figure-latex/ano-16-1.pdf}
+\caption{\label{fig:ano-16}Diagnostic plots for the ANOVA of sturgeon length by year}
+\end{figure}
+
+Looking at the residuals, things look barely better than before without the log transformation. Running the Wilks-Shapiro
+test for normality on the residuals, we get:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(anova.model2))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(anova.model2)
+## W = 0.96199, p-value = 0.002048
+\end{verbatim}
+
+So, it would appear that we still have some problems with the assumption of normality and are just on the border line of meeting the assumption of homogeneity of variances. You have several choices here:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  try to find a different transformation to satisfy the assumptions,
+\item
+  assume the data are close enough to meeting the assumptions, or
+\item
+  perform a non-parametric ANOVA.
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  The most commonly used non-parametric analog of the parametric one-way ANOVA is the Kruskall-Wallis one-way ANOVA. Perform a Kruskall-Wallis one-way ANOVA of \texttt{fklngth} , and compare these results to the parametric analysis above. What do you conclude?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{kruskal.test}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{year, }\DataTypeTok{data =}\NormalTok{ dam10dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  fklngth by year
+## Kruskal-Wallis chi-squared = 15.731, df = 3, p-value = 0.001288
+\end{verbatim}
+
+So, the conclusion is the same as with the parametric ANOVA: we reject the null that the mean rank is the same for each year. Thus, despite violation of one or more assumptions, the parametric analysis is telling us the same thing as the non-parametric analysis: the conclusion is, therefore, quite robust.
+
+\hypertarget{dealing-with-outliers-1}{%
+\section{Dealing with outliers}\label{dealing-with-outliers-1}}
+
+Our preliminary analysis of the relationship between \texttt{fklngth} and \texttt{year} suggested there might be some outliers in the data. These were evident in the box plots of \texttt{fklngth} by \texttt{year} and flagged as cases 59, 23 and 87 in the residual probability plot and residual-fit plot. In general, you have to have very good reasons for removing outliers from a data set (e.g., you know there was a mistake made in the data collection/entry). However, it is often useful to know how the analysis changes if you remove the outliers from the data set.
+
+\begin{itemize}
+\tightlist
+\item
+  Repeat the original ANOVA of \texttt{fklngth} by \texttt{year} but work with a subset of the data without the outliers. Have any of the conclusions changed?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{damsubset \textless{}{-}}\StringTok{ }\NormalTok{dam10dat[}\OperatorTok{{-}}\KeywordTok{c}\NormalTok{(}\DecValTok{23}\NormalTok{, }\DecValTok{59}\NormalTok{, }\DecValTok{87}\NormalTok{), ] }\CommentTok{\# removes obs 23, 59 and 87}
+\NormalTok{aov\_damsubset \textless{}{-}}\StringTok{ }\KeywordTok{aov}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(year), damsubset)}
+\KeywordTok{summary}\NormalTok{(aov\_damsubset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  Df Sum Sq Mean Sq F value   Pr(>F)    
+## as.factor(year)   3  367.5  122.50   6.894 0.000267 ***
+## Residuals       111 1972.4   17.77                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{shapiro.test}\NormalTok{(}\KeywordTok{residuals}\NormalTok{(aov\_damsubset))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  residuals(aov_damsubset)
+## W = 0.98533, p-value = 0.2448
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{leveneTest}\NormalTok{(fklngth }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{year, damsubset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value   Pr(>F)   
+## group   3  4.6237 0.004367 **
+##       111                    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+Elimination of three outliers, in this case, makes things better in terms of the normality assumption, but does not improve the
+variances. Moreover, the fact that the conclusion drawn from the original ANOVA with outliers retained does not change upon their removal reinforces the fact that there is no good reason to remove the points. Instead of a Kruskall-Wallis rank-based test, a permutation test could be used.
+
+\hypertarget{permutation-test}{%
+\section{Permutation test}\label{permutation-test}}
+
+This is an example for a more complex way of doing permutation that we used when \texttt{lmPerm} was not available.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Permutation Test for one{-}way ANOVA}
+\CommentTok{\# modified from code written by David C. Howell}
+\CommentTok{\# http://www.uvm.edu/\textasciitilde{}dhowell/StatPages/}
+\CommentTok{\# More\_Stuff/Permutation\%20Anova/PermTestsAnova.html}
+\CommentTok{\# set desired number of permutations}
+\NormalTok{nreps \textless{}{-}}\StringTok{ }\DecValTok{500}
+\CommentTok{\# to simplify reuse of this code, copy desired dataframe to mydata}
+\NormalTok{mydata \textless{}{-}}\StringTok{ }\NormalTok{dam10dat}
+\CommentTok{\# copy model formula to myformula}
+\NormalTok{myformula \textless{}{-}}\StringTok{ }\KeywordTok{as.formula}\NormalTok{(}\StringTok{"fklngth \textasciitilde{} year"}\NormalTok{)}
+\CommentTok{\# copy dependent variable vector to mydep}
+\NormalTok{mydep \textless{}{-}}\StringTok{ }\NormalTok{mydata}\OperatorTok{$}\NormalTok{fklngth}
+\CommentTok{\# copy independent variable vector to myindep}
+\NormalTok{myindep \textless{}{-}}\StringTok{ }\KeywordTok{as.factor}\NormalTok{(mydata}\OperatorTok{$}\NormalTok{year)}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# You should not need to modify code chunk below}
+\CommentTok{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}
+\CommentTok{\# Compute observed F value for original sample}
+\NormalTok{mod1 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(myformula, }\DataTypeTok{data =}\NormalTok{ mydata) }\CommentTok{\# Standard Anova}
+\NormalTok{sum\_anova \textless{}{-}}\StringTok{ }\KeywordTok{summary}\NormalTok{(}\KeywordTok{aov}\NormalTok{(mod1)) }\CommentTok{\# Save summary to variable}
+\NormalTok{obs\_f \textless{}{-}}\StringTok{ }\NormalTok{sum\_anova[[}\DecValTok{1}\NormalTok{]]}\OperatorTok{$}\StringTok{"F value"}\NormalTok{[}\DecValTok{1}\NormalTok{] }\CommentTok{\# Save observed F value}
+\CommentTok{\# Print standard ANOVA results}
+\KeywordTok{cat}\NormalTok{(}
+  \StringTok{" The standard ANOVA for these data follows "}\NormalTok{,}
+  \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{)}
+
+\KeywordTok{print}\NormalTok{(sum\_anova, }\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(}\StringTok{"Resampling as in Manly with unrestricted sampling of observations. "}\NormalTok{)}
+
+\CommentTok{\# Now start resampling}
+\NormalTok{boot\_f \textless{}{-}}\StringTok{ }\KeywordTok{numeric}\NormalTok{(nreps) }\CommentTok{\# initalize vector to receive permuted}
+\NormalTok{values}
+\NormalTok{boot\_f[}\DecValTok{1}\NormalTok{] \textless{}{-}}\StringTok{ }\NormalTok{obs\_f}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\OperatorTok{:}\NormalTok{nreps) \{}
+\NormalTok{  newdependent \textless{}{-}}\StringTok{ }\KeywordTok{sample}\NormalTok{(mydep, }\KeywordTok{length}\NormalTok{(mydep)) }\CommentTok{\# randomize dep}
+\NormalTok{  var}
+\NormalTok{  mod2 \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(newdependent }\OperatorTok{\textasciitilde{}}\StringTok{ }\NormalTok{myindep) }\CommentTok{\# refit model}
+\NormalTok{  b \textless{}{-}}\StringTok{ }\KeywordTok{summary}\NormalTok{(}\KeywordTok{aov}\NormalTok{(mod2))}
+\NormalTok{  boot\_f[i] \textless{}{-}}\StringTok{ }\NormalTok{b[[}\DecValTok{1}\NormalTok{]]}\OperatorTok{$}\StringTok{"F value"}\NormalTok{[}\DecValTok{1}\NormalTok{] }\CommentTok{\# store F stats}
+\NormalTok{\}}
+\NormalTok{permprob \textless{}{-}}\StringTok{ }\KeywordTok{length}\NormalTok{(boot\_f[boot\_f }\OperatorTok{\textgreater{}=}\StringTok{ }\NormalTok{obs\_f]) }\OperatorTok{/}\StringTok{ }\NormalTok{nreps}
+\KeywordTok{cat}\NormalTok{(}
+  \StringTok{" The permutation probability value is: "}\NormalTok{, permprob,}
+  \StringTok{"}\CharTok{\textbackslash{}n}\StringTok{"}
+\NormalTok{)}
+\CommentTok{\# end of code chunk for permutation}
+\end{Highlighting}
+\end{Shaded}
+
+Version \texttt{lmPerm} du test de permutation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# lmPerm version of permutation test}
+\KeywordTok{library}\NormalTok{(lmPerm)}
+\CommentTok{\# for generality, copy desired dataframe to mydata}
+\CommentTok{\# and model formula to myformula}
+\NormalTok{mydata \textless{}{-}}\StringTok{ }\NormalTok{dam10dat}
+\NormalTok{myformula \textless{}{-}}\StringTok{ }\KeywordTok{as.formula}\NormalTok{(}\StringTok{"fklngth \textasciitilde{} year"}\NormalTok{)}
+\CommentTok{\# Fit desired model on the desired dataframe}
+\NormalTok{mymodel \textless{}{-}}\StringTok{ }\KeywordTok{lm}\NormalTok{(myformula, }\DataTypeTok{data =}\NormalTok{ mydata)}
+\CommentTok{\# Calculate permutation p{-}value}
+\KeywordTok{anova}\NormalTok{(}\KeywordTok{lmp}\NormalTok{(myformula, }\DataTypeTok{data =}\NormalTok{ mydata, }\DataTypeTok{perm =} \StringTok{"Prob"}\NormalTok{, }\DataTypeTok{center =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{Ca =} \FloatTok{0.001}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \cleardoublepage
 
