@@ -18,7 +18,7 @@ For this la b you need:
   * lmtest
   * boot
   * pwr
-  * ggplot
+  * ggplot2
   * performance
 * data:
   * sturgeon.csv
