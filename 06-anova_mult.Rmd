@@ -1,25 +1,28 @@
 <!-- # (PART) Modèle multivarié {-} -->
 
-# ANOVA à critères multiples : plans factoriels et hiérarchiques
+# Multiway ANOVA: factorial and nested designs
 
-Après avoir complété cet exercice de laboratoire, vous devriez être
-capable de:
+After completing this laboratory exercise, you should be able to:
 
-* Utiliser R pour faire une ANOVA paramétrique d'un plan factoriel avec deux facteurs de classification et réplication
-* Utiliser R pour faire une ANOVA paramétrique d'un plan factoriel avec deux facteurs de classification sans réplication
-* Utiliser R pour faire une ANOVA paramétrique d'un plan hiérarchique avec réplication
-* Utiliser R pour faire une ANOVA non paramétrique avec deux facteurs de classification
-* Utiliser R pour faire des comparaisons multiples
+* Use R to do parametric ANOVAs for 2-way factorial designs with replication.
+* Use R to do 2-way factorial design ANOVA without replication
+* Use R to do parametric ANOVAs for nested designs with replication.
+* Use R to do non-parametric 2-way ANOVAs
+* Use R to do multiway pairwise comparisons
 
-Il existe une très grande variété de plans (designs) d'ANOVA que R peut analyser. Cet exercice n'est qu'une introduction aux plans les plus communs.
+Be aware that there are a large number of possible ANOVA designs,
+many of which can be handled by R: this laboratory is
 
-## Paquets et données requises pour le labo {#set-anomul}
-Ce laboratoire nécessite:
+## R packages and data needed {#set-anomul}
 
-* les paquets R:
+For this lab you need:
+
+* R packages:
+  * tidyverse
   * multicomp
   * car
-* les fichiers de données
+  * effects
+* data files:
   * Stu2wdat.csv
   * Stu2mdat.csv
   * nr2wdat.csv
@@ -30,31 +33,40 @@ Ce laboratoire nécessite:
 ```{r}
 library(multcomp)
 library(car)
+library(tidyverse)
+library(effects)
 ```
 
-## Plan factoriel à deux facteurs de classification et réplication
-Il est fréquent de vouloir analyser l'effet de plusieurs facteurs simultanément. L'ANOVA factorielle à deux critères de classification permet d'examiner deux facteurs à la fois, mais la même approche peut être utilisée pour 3, 4 ou même 5 facteurs quoique l'interprétation des résultats devienne beaucoup plus complexe.
+## Two-way factorial design with replication
 
+Many experiments are designed to investigate the joint effects of several different factors: in a two-way ANOVA, we examine the effect of two factors, but in principle the analysis can be extended to three, four or even five factors, although interpreting the results from 4- and 5-way ANOVAs can be very difficult.
 
-Supposons que vous êtes intéressés par l'effet de deux facteurs : site (location, Cumberland House ou The Pas) et sexe (sex, mâle ou femelle) sur la taille des esturgeons. Comme l'effectif n'est pas le même pour tous les groupes, c'est un plan qui n'est pas balancé. Notez aussi qu’il y a des valeurs manquantes pour certaines variables, ce qui veut dire que chaque mesure n’a pas été effectuée sur chaque poisson.
+Suppose that we are interested in the effects of two factors: `location` (Cumberland House and The Pas) and `sex` (male or female) on sturgeon size (data can be found in `Stu2wdat.csv`). Note that because the sample sizes are not the same for each group, this is an unbalanced design. Note also that there are missing data for some of the variables, meaning that not every measurement was made on every fish.
 
-### ANOVA à effets fixes
-* Examinez d’abord les données en faisant des box plots de rdwght pour sex et location des données du fichier `Stu2wdat.csv` .
+### Fixed effects ANOVA (Model I)
 
+* Begin by having a look at the data by generating box plots of `rdwght` for `sex` and `location` from the file `Stu2wdat.csv` .
 
-Les graphiques montrent qu’aux deux sites les femelles sont probablement plus grandes que les mâles, mais que les tailles ne varient pas beaucoup d’un site à l’autre. La présence de valeurs extrêmes sur ces graphiques suggère qu’il y aura peut-être des problèmes avec la condition de normalité des résidus.
+```{r, echo = params$echo_sol, class.source = "exer"}
+Stu2wdat <- read.csv("data/Stu2wdat.csv")
 
+ggplot(Stu2wdat, aes(x = sex, y = rdwght)) +
+geom_boxplot(notch = TRUE) +
+facet_grid(~location)
+```
 
-* Générez les statistiques sommaires pour RDWGHT par sex et Location.
+From this, it appears as though females might be larger at both locations. It’s difficult to get an idea of whether fish differ in size between the two locations. The presence of outliers on these plots suggests there might be problems meeting normality assumptions for the residuals.
+
+* Generate summary statistics for rdwght by sex and location .
 
 ```{r}
 Stu2wdat <- read.csv("data/Stu2wdat.csv")
 aggregate(rdwght ~ sex + location, data = Stu2wdat, FUN = "summary")
 ```
-Ces résultats supportent l’interprétation des box plots: Les femelles sont plus grosses que les mâles, et la différence de taille entre les deuxsites sont petites.
 
-* À l'aide du fichier Stu2wdat.csv faites une ANOVA factorielle à
-deux critères de classification:
+The summary statistics confirm our interpretation of the box plots: females appear to be larger than males, and differences in fish size between locations are small.
+
+* Using the file `Stu2wdat.csv` , do a two-way factorial ANOVA:
 
 ```{r}
 # Fit anova model and plot residual diagnostics
@@ -68,42 +80,41 @@ anova(anova.model1)
 ```
 
 ```{block2, type = "rmdwarning"}
-Attention, R imprime les sommes des carrés séquentielles (Type I) les carrés moyens et probabilités associés. Vous ne pouvez pas vous y fier si votre plan d’expérience n’est pas parfaitement balancé. Dans cet exemple, le nombre de poissons capturés change selon le site et le sexe et le plan d’expérience n’est donc pas balancé.
+Be careful here. R gives you the sequential sums of squares (Type I) and associated Mean squares and probabilities. These are not to be trusted unless the design is perfectly balanced. In this case, there are varying numbers of observations across sex and location combinations and therefore the design is not balanced.
 ```
 
-Vous devez extraire les sommes de carrés partielles (Type III). Le moyen le plus simple que j’ai trouvé est d’utiliser la fonction Anova()du package `car` (notez la différence subtile, Anova() n’est pas la même chose que anova(), R est impitoyable et distingue les majuscules des minuscules). Malheureusement, Anova() ne suffit pas; il faut également spécifier le type de contraste dans le modèle avecl'argument `contrasts = list(sex = contr.sum,location = contr.sum)`
+What you want are the partial sums of squares (type III). The easiest way to get them is to use the Anova() function in the `car` `r emo::ji("package")` package (note the subtle difference, `Anova()` is not the same as `anova()`, remember case matters in R.). However, this is not enough by itself. To get the proper values for the type III sums of square, one also needs to specify contrasts, hence the cryptic  `contrasts = list(sex = contr.sum,location = contr.sum)`.
 
 ```{r}
 library(car)
 Anova(anova.model1, type = 3)
 ```
 
-Suite à l’ANOVA, on accepte deux hypothèses nulles: (1) que l’effet du sexe ne varie pas entre les sites (pas d’interaction significative) et (2) qu’il n’y a pas de différence de taille des esturgeons (peu importe le sexe) entre les deux sites. D’un autre coté, on rejette l’hypothèse nulle qu’il n’y a pas de différence de taille entre les esturgeons mâles et les femelles, tel que suggéré par les graphiques.
+On the basis of the ANOVA, there is no reason to reject two null hypotheses: (1) that the effect of sex (if any) does not depend on location (no interaction), and (2) that there is no difference in the size of sturgeon (pooled over sex ) between the two locations . On the other hand, we reject the null hypothesis that there is no difference in size between male and female sturgeon (pooled over location ), precisely as expected from the graphs.
 
-```{r, fig.cap = "Conditions d'application ANOVA model1"}
+```{r, fig.cap = "Checking model assumptions for ANOVA model1"}
 par(mfrow = c(2, 2))
 plot(anova.model1)
 ```
 
-Cependant, on ne peut se fier à ces résultats sans vérifier si les conditions d’application de l’ANOVA étaient remplies. Un examen des graphiques des résidus, en haut, montre que les résidus semblent être distribués plus ou moins normalement, si ce n’est des 3 valeurs extrêmes qui sont notées sur le diagramme de probabilité (cas 101, 24,& 71). D’après le graphique des résidus vs les valeurs prédites, on voit que l’étendue des résidus est plus ou moins égale pour les valeurs estimées, sauf encore pour 2 ou 3 cas. Si on éprouve la normalité, on obtient:
+As usual, we cannot accept the above results without first ensuring that the assumptions of ANOVA are met. Examination of the residuals plots above shows that the residuals are reasonably normally distributed, with the exception of three potential outliers flagged on the QQ plot (cases 101, 24, & 71; the latter two are on top of one another). However, Cook's distances are not large for these (the 0.5 contour is not even visible on the plot), so there is little indication that these are a concern.The residuals vs fit plot shows that the spread of residuals is about equal over the range of the fitted values, again with the exception of a few cases. When we test for normality of residuals we get:
 
 ```{r}
 shapiro.test(residuals(anova.model1))
 ```
 
-Alors, il y a évidence que les résidus ne sont pas distribués normalement.
+So, there is evidence of non-normality in the residuals.
 
-Nous allons utiliser le test de Levene pour examiner l’homoscédasticité des résidus, de la même façon qu’on a fait pour l’ANOVA à un critère de classification.
+We will use the Levene’s test to examine the assumption of homogeneity of variances, just as we did with the 1-way anova.
 
 ```{r}
-library(car)
 leveneTest(rdwght ~ sex * location, data = Stu2wdat)
 ```
 
-Si les résidus étaient homoscédastiques, on accepterait l’hypothèse nulle que le absres moyen ne varie pas entre les niveaux de sexe et location (i.e., sexloc). Le tableau d’ANOVA ci-dessus montre que l’hypothèse est rejetée. Il y a donc évidence d’hétéroscédasticité. En bref, nous avons donc plusieurs conditions d’application qui ne sont pas respectées. La question qui reste est: ces violations sont-elles suffisantes pour invalider nos conclusions ?
+If the assumption of homogeneity of variances was valid, we would be accepting the null that the mean of the absolute values of residuals does not vary among levels of sex and location (i.e., group ). The above table shows that the hypothesis is rejected and we conclude there is evidence of heteroscedascticity. All in all, there is some evidence that several important assumptions have been violated. However, whether these violations are sufficiently large to invalidate our conclusions remains to be seen.
 
 ```{block2, type = "rmdcode"}
-Répétez la même analyse avec les données du fichier `stu2mdat.csv` . Que concluez-vous? Supposons que vous vouliez comparer la taille des mâles et des femelles. Comment cette comparaison diffère entre les deux ensembles de données ?
+Repeat this procedure using the data file Stu2mdat.Rdata . Now what do you conclude? Suppose you wanted to compare the sizes of males and females: in what way would these comparisons differ between Stu2wdat.Rdata and Stu2mdat.Rdata ?
 ```
 
 ```{r, results = 'hide', echo = params$echo_sol, class.source = "exer"}
@@ -121,15 +132,15 @@ Anova(anova.model2, type = 3)
 summary(anova.model2)
 ```
 
-Notez que cette fois les femelles sont plus grandes que les mâles à Cumberland House, mais que c’est le contraire à The Pas. Quel est le résultat de l’ANOVA (n’oubliez pas qu’il faut des Type III sums of squares pour les résultats)?
+Note that in this case, we see that at Cumberland House, females are larger than males, whereas the opposite is true in The Pas (you can confirm this observation by generating summary statistics). What happens with the ANOVA (remember, you want Type III sum of squares)?
 
 ```{r, echo = FALSE}
 Anova(anova.model2, type = 3)
 ```
 
-Dans ce cas, le terme de l’interaction (sex:location) est maintenant significatif mais les effets principaux ne le sont pas.
+In this case, the interaction term `sex:location` is significant but the main effects are not significant.
 
-* Vous trouverez utile ici de créer des graphiques pour les deux fichiers de données pour comparer les interactions entre sex et location. Le graphique d’interaction montre les relations entre les moyennes de chaque combinaison de facteurs (appelées aussi les moyennes des ce$lules).Générez un graphique illustrant les intéractions en utilisant la fonction allEffects du package effects :
+* You might find it useful here to generate plots for the two data files to compare the interactions between `sex` and `location`. The effect plot shows the relationship between means for each combination of factors (also called cell means). Generate an effect plot for the two models using the `allEffects()` command from the `effects` `r emo::ji("package")` package:
 
 ```{r, fig.cap = "Effet du sexe et du lieu sur le poids des esturgeons"}
 library(effects)
@@ -142,29 +153,28 @@ allEffects(anova.model2)
 plot(allEffects(anova.model2), "sex:location")
 ```
 
-Il y a une différence importante entre les résultats obtenus avec `stu2wdat` et `stu2mdat`. Dans le premier cas, puisqu’il n’y a pas d'interaction, on peut regrouper les données des deux niveaux d’un facteur (le site, par exemple) pour éprouver l’hypothèse d’un effet de l’autre facteur (le sexe). En fait, si on fait cela et que l’on calcule une ANOVA à un critère de classification (sex), on obtient:
+There is a very large difference between the results from `Stu2wdat` and `Stu2mdat`. In the former case, because there is no significant interaction, we can essentially pool over the levels of factor 1 (`sex`, say) to test for the effects of location , or over the levels of factor 2 (`location`) to test for the effects of sex . In fact, if we do so and simply run a one-way ANOVA on the `Stu2wdat` data with sex as the grouping variable, we get:
 
 ```{r}
 Anova(aov(rdwght ~ sex, data = Stu2wdat), type = 3)
 ```
 
-Notez que la somme des carrés des résidus (17583) est presque égale à celle du modèle complet (17530) de l’ANOVA factorielle à deux facteurs. C’est parce que dans cette anova factorielle, le terme d’interaction et le terme représentant l’effet du site n’expliquent qu’une partie infime de la variabilité. D’un autre coté, si on essaie le même truc avec `stu2mdat`, on obtient:
+Note that here the residual sum of squares (17583) is only slightly higher than for the 2-way model (17530), simply because, in the 2-way model, only a small fraction of the explained sums of squares is due to the location main effect or the sex:LOCATION interaction. On the other hand, if you try the same trick with `stu2mdat`, you get:
 
+<!-- need to add r code to grad the value of SS in text -->
 ```{r}
 Anova(aov(rdwght ~ sex, data = Stu2mdat), type = 3)
 ```
 
-Ici la somme des carrées des résidus (19309) est beaucoup plus grande que celle de l’ANOVA factorielle (175306) parce qu’une partie importante de la variabilité expliquée par le modèle est associée à l’interaction. Notez que si on n’avait fait que cette analyse, on conclurait que les esturgeons mâles et femelles ont la même taille. Mais en fait leur taille diffère; seulement la différence est à l’avantage des mâles à un site et à l’avantage des femelles à l’autre. Il est donc délicat d’interpréter l’effet principal (sexe) en présence d’une interaction significative...
+Here, the residuals sum of squares (19309) is much larger than in the 2-way model (17530), because most of the explained sums of squares is due to the interaction. Note that if we did this, we would conclude that male and female sturgeons don't differ in size. But in fact they do: it's just that the difference is in different directions, depending on location. This is why it is always dangerous to try and make too much of main effects in the presence of interactions!
 
+### Mixed effects ANOVA (Model III)
 
-### ANOVA à effets mixtes
+We have neglected an important component in the above analyses, and that is related to the type of ANOVA model we wish to run. In this example, Location could be considered a random effect, whereas sex is a fixed effect (because it is "fixed" biologically), and so this model could be treated as a mixed model (Model III) ANOVA. Note that in these analyses, R treats analyses by default as Model I ANOVA, so that the main effects and the interaction are tested over the residuals mean square. Recall, however, that in a Model III ANOVA, main effects are tested over the interaction mean square or the pooled interaction mean square and residual mean square (depending on which statistician you consult!)
 
-Les analyses qui précèdent négligent un point important: `location` pourrait être traité comme un facteur aléatoire et `sex` est fixe. Par conséquent le modèle approprié d’ANOVA est de type mixte.
-
-Notez que dans toutes les analyses qui précèdent, R a traité cette ANOVA comme si elle etait de type effet fixe seulement, et les termes principaux et celui d’interaction ont été testés en utilisant le carré moyen des résidus comme dénominateur des tests de F. Cependant, pour une ANOVA de type mixte, ces effets devraient être testés en utilisant le carré moyen du terme d’interaction, ou en combinant la somme des carrés de l’erreur et de l’interaction (selon le statisticien consulté!).
-
-En utilisant `Stu2wdat`, refaites un tableau d’ANOVA pour RDWGHT en considérant location comme facteur aléatoire et sex comme un facteur fixe. Pour ce faire, vous devrez recalculer les valeurs de F pour sex et location en utilisant le carré moyen de l’interaction sex:location au lieu du carré moyen des résidus comme dénominateur. Le mieux c’est de le faire à la mitaine ent travaillant avec les Type III Sums of squares du tableau d’ANOVA.
-
+* Working with the `Stu2wdat` data, rebuild the ANOVA table for `rdwght`
+for the situation in which `location` is a random factor and `sex` is a
+fixed factor. To do this, you need to recalculate the F-ratio for sex using the `sex:location` interaction mean square instead of the residual mean square. This is most easily accomplished by hand, making sure you are working with the Type III Sums of squares ANOVA table.
 
 ```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
 Anova(anova.model2, type = 3)
@@ -174,33 +184,33 @@ Anova(anova.model2, type = 3)
 Anova(anova.model2, type = 3)
 ```
 
-Pour `sex`, la nouvelle valeur de F (le rapport des carrés moyens) est de
+For `sex`, the new ratio of mean squares is
 
 $$F = \frac{(1745/1)}{(49/1)} = 35.6$$
 
-Pour obtenir la valeur de p correspondant à cette statistique `F`, il faut utilisez la fonction de probabilité de la distribtuion de F `pf(F, df1, df2, lower.tail = FALSE)`, où F est la valeur de F calculée, et `df1` et `df2` sont les degrés de liberté du numérateur (sex) et dénominateur(SEX:location).
+To assign a probability to the new `F-value`, enter the following in the commands window: `pf(F, df1, df2, lower.tail = FALSE)` , where `F` is the newly calculated `F-value`, and `df1` and `df2` are the degrees of freedom of the numerator (`sex`) and denominator (`SEX:location`), respectively.
 
 ```{r}
 pf(35.6, 1, 1, lower.tail = FALSE)
 ```
 
-Notez que maintenant la valeur de p pour sex n’est plus significative. C’est parce que le carré moyen de l’erreur dans l’ANOVA initiale est plus petit que celui associé à l’interaction, mais surtout parce que le nombre de degrés de liberté pour le dénominateur du test de F est passé de 178 à 1 seulement. En général, c’est beaucoup plus difficile d’obtenir des résultats significatifs quand les degrés de liberté pour le dénominateur sont petits.
+Note that the *p value* for `sex` is now non-significant. This is because the error MS of the initial ANOVA is smaller than the interaction MS, but mostly because the number of degrees of freedom of the denominator of the F test has dropped from 178 to 1. In general, a drop in the denominator degrees of freedom makes it much more difficult to reach significance.
 
 ```{block2, type = "rmdnote"}
-Les modèles mixtes qui sont une généralisation de l'ANOVA à effets mixtes sont maintenant extrêmement bien développé et sont à favoriser lors d'analyse incluant des effets dit aléatoires.
+Mixed model which are a generalisation of mixed-effect ANOVA are now really developped and are to be favoured intead of doing it by hand.
 ```
 
-## Plan factoriel à deux facteurs de classification sans réplication
+## 2-way factorial ANOVA without replication
 
-Dans certains plans d'expérience il n'y a pas de réplicats pour chaque combinaison de facteurs, par exemple parce qu'il serait trop coûteux de faire plus d'une observation. L'ANOVA à deux critères de classification est quand même possible dans ces circonstances, mais il y a une limitation importante.
+In some experimental designs, there are no replicates within data cells: perhaps it is simply too expensive to obtain more than one datum per cell. A 2-way ANOVA is still possible under these circumstances, but there is an important limitation.
 
 ```{block2, type = "rmdwarning"}
-Comme il n'y a pas de réplicats, on ne peut estimer la variance du terme d'erreur. En effet on ne peut qu'estimer la somme des carrés associés à chacun des facteurs principaux, et la quantité de variabilité qui reste (Remainder Mean Square) représente la somme de la variabilité attribuable à l'interaction et au terme d'erreur. Cela a une implication importante. Dans le cas d'un modèle avec uniquement des effets fixes ou pour l'effet aléatoire d'un modèle d'ANOVA mixtes on ne peut tester les effets principaux que si on est sur qu'il n'y a pas d'interaction.
+Because there is no replication within cells, there is no error variance: we have simply a row sum of squares, a column sum of squares, and a remainder sum of squares. This has important implications: if there is an interaction in a Model III ANOVA, only the fixed effect can be tested (over the remainder MS); for Model I ANOVAs, or for random effects in Model III ANOVAs, it is not appropriate to test main effects over the remainder unless we are sure there is no interaction.
 ```
 
-Un limnologiste qui étudie Round Lake dans le Parc Algonquin prend une seule mesure de température (temp,en degrés C) à 10 profondeurs différentes (depth, en m) à quatre dates (date) au cours de l'été. Ses données sont au fichier `nr2wdat.csv`.
+A limnologist studying Round Lake in Algonquin Park takes a single temperature ( `temp` ) reading at 10 different depths ( `depth` , in m) at four times ( date) over the course of the summer. Her data are shown in `Nr2wdat.csv`.
 
-- Effectuez une ANOVA à deux critères de classification en utilisant temp comme variable dépendante et date et depth comme variables indépendantes (vous devez changer le type de données pour DEPTH pour que R traite cette variable comme un facteur et non pas une var$able continue).
+* Do a two-way unreplicated ANOVA using temp as the dependent vari able, date and depth as the factor variables (you will need to recode depth to tell R to treat this variable as a factor). Note that there is no interaction term included in this model.
 
 ```{r}
 nr2wdat <- read.csv("data/nr2wdat.csv")
@@ -209,15 +219,15 @@ anova.model4 <- lm(temp ~ date + depth, data = nr2wdat)
 Anova(anova.model4, type = 3)
 ```
 
-Si on suppose que c’est un modèle d’ANOVA mixte (date aléatoire, Depth fixe), que concluez vous? (Indice: faites un graphique d’interaction température en fonction de la profondeur et la date, pour voir ce qui se passe).
+Assuming that this is a Model III ANOVA ( `date` random, `depth` fixed), what do you conclude? (Hint: you may want to generate an interaction plot of temp versus depth and month, just to see what's going on.)
 
 ```{r, fig.cap = "Effet du mois et de la profondeur sur la température"}
 interaction.plot(nr2wdat$depth, nr2wdat$date, nr2wdat$temp)
 ```
 
-La température diminue significativement en profondeur. Pour tester l’effet du mois (le facteur aléatoire), on doit présumer qu’il n’y a pas d’interaction entre la profondeur et le mois (donc que l’effet de la profondeur sur la température est le même à chaque mois). C’est peu probable: si vous faites un graphique de la température en fonction de la profondeur pour chaque mois, vous observerez que le profil de   température change au fur et à mesure du développement de la thermocline. Bref, comme le profil change au cours de l’été, ce modèle ne fait pas de très bonnes prédictions.
+There is a highly significant decrease in temperature as depth increases. To test the effect of month (the (assumed) random factor), we must assume that there is no interaction between depth and month, i.e. that the change in temperature with depth is the same for each month. This is a dubious assumption: if you plot temperature against depth for each month, you should see that the temperature profile becomes increasingly non-linear as the summer progresses (i.e. the thermocline develops), from almost a linear decline in early spring to what amounts to a step decline in August. In other words, the relationship between temperature and depth does change with month, so that if you were to use the above fitted model to estimate, say, the temperature at a depth of 5 m in July, you would not get a particularly good estimate.
 
-Jetez un coup d’oeil sur les graphiques des résidus:
+In terms of residual diagnostics, have a look at the residuals probability plot and residuals vs fitted values plot.
 
 
 ```{r, fig.cap = "Conditions d'applications du modèle anova.model4", error =  TRUE}
@@ -225,24 +235,24 @@ par(mfrow = c(2, 2))
 plot(anova.model4)
 ```
 
-
 ```{r}
 shapiro.test(residuals(anova.model4))
 ```
 
-Le test de normalité sur les résidus donne p = 0.16, donc l’hypothèse de normalité ne semble pas être sérieusement en doute. Pour l’égalité des variances, on peut seulement comparer entre les mois en utilisant les profondeurs comme réplicats (ou l’inverse). En utilisant les profondeurs comme réplicats, on obtient:
+Testing the residuals for normality, we get `p = 0.16`, so that the normality assumption seems to be O.K. In terms of heteroscedasticity, we can only test among months, using depths as replicates (or among depths using months as replicates). Using depths as replicates within months, we find
 
 ```{r}
 leveneTest(temp ~ date, data = nr2wdat)
 ```
 
-Il y a donc un problème d’hétéroscédasticité, comme on peut très bien voir dans le graphique des résidus vs les valeurs estimées. Cette analyse n’est donc pas très satisfaisante: il y a des violations des conditions d’application et il semble y avoir une interaction entre depth et date qui pourrait invalider l’analyse.
+So there seems to be some problem here, as can be plainly seen in the above plot of residuals vs fit. All in all, this analysis is not very satisfactory: there appears to be some problems with the assumptions, and the assumption of no interaction between depth and date would appear to be invalid.
 
 
-## Plans hiérarchiques
-Un design expérimental fréquent implique la division de chaque groupe du facteur majeur en sous-groupes aléatoires. Par exemple, une généticienne intéressée par l'effet du génotype sur la résistance à la dessiccation chez la drosophile effectue une expérience. Pour chaque génotype (facteur principal) elle prépare trois chambres de croissance (sous-groupes) avec une température et humidité contrôlées. Dans chaque chambre de croissance, elle place cinq larves, puis mesure le nombre d'heures pendant lesquelles chaque larve survit. Les données ont donc un structure hiérarchique. Il ya des observations répétées dans chaque chambre au sein de chaque génotype.
+## Nested designs
 
-- Le fichier `nestdat.csv` contient les résultats d'une expérience semblable. Il contient trois variables : genotype, chamber et survival. Effectuez une ANOVA hiérarchique avec survival comme variable dépendante et genotype et chamber/genotype comme variables indépendantes.
+A common experimental design occurs when each major group (or treatment) is divided into randomly chosen subgroups. For example, a geneticist interested in the effects of genotype on desiccation resistance in fruit flies might conduct an experiment with larvae of three different genotypes. For each genotype (major group), she sets up three environmental chambers (sub-groups, replicates within groups) with a fixed temperature humidity regime, and in each chamber, she has five larvae for which she records the number of hours each larvae survived.
+
+- The file `Nestdat.csv` contains the results of just such an experi ment. The file lists three variables: genotype , chamber and survival . Run a nested ANOVA with survival as the dependent variable, genotype/chamber as the independent variables (this is the shorthand notation for a chamber effect nested under genotype).
 
 ```{r}
 nestdat <- read.csv("data/nestdat.csv")
@@ -250,7 +260,8 @@ nestdat$chamber <- as.factor(nestdat$chamber)
 nestdat$genotype <- as.factor(nestdat$genotype)
 anova.nested <- lm(survival ~ genotype / chamber, data = nestdat)
 ```
-Que concluez-vous de cette analyse ? Que devrait être la prochaine étape ? (Indice: si l'effet de Chamber / genotype n'est pas significatif, vous pouvez augmenter la puissance des comparaisons entre génotypes en regroupant les chambres de chaque génotype.). Faites-le ! N'oubliez pas de vérifier les conditions d'applications de l'ANOVA!
+
+What do you conclude from this analysis? What analysis would (should) you do next? (Hint: if there is a non-significant effect of chambers within genotypes, then you can increase the power of between-genotype comparisons by pooling over chambers within genotypes, although not everyone (Dr. Rundle included) agrees with such pooling.) Do it! Make sure you check your assumptions!
 
 
 ```{r, fig.cap = "Conditions d'applications du modèle anova.nested", echo = params$echo_sol, class.source = "exer"}
@@ -259,18 +270,18 @@ par(mfrow = c(2, 2))
 plot(anova.nested)
 ```
 
-On conclue de cette analyse que la variation entre les chambres de croissance n’est pas significative, mais qu’on doit rejeter l’hypothèse nulle que tous les génotypes ont la même résistance à la dessiccation.
+We conclude from this analysis that there is no (significant) variation among chambers within genotypes, but that the null hypothesis that all genotypes have the same dessiccation resistance (as measured by survival) is rejected (Test of genotype using MS genotype:chamber as denominator: F = 1476.11/6.78 = 217.7153, P<0.0001). In other words, genotypes differ in their survival.
 
-Comme l’effet hiérarchique chamber / genotype n’est pas significatif, on peut regrouper les observations pour augmenter le nombre de degrés de liberté:
+Since the chambers within genotypes effect is non-significant, we may want to pool over chambers to increase our degrees of freedom:
 
 ```{r}
 anova.simple <- lm(survival ~ genotype, data = nestdat)
 anova(anova.simple)
 ```
 
-Donc on conclue qu’il y a une variation significative de résistance à la dessiccation entre les trois génotypes.
+Thus, we conclude that there is significant variation among the three genotypes in dessiccation resistance.
 
-Le graphique de `survival` en fonction du `génotype` suggère que la résistance à la dessiccation varie entre chaque génotype. On peut combiner cela avec un test de Tukey.
+A box plot of survival across genotypes shows clearly that there is significant variation among the three genotypes in dessiccation resistance. This can be combined with a formal Tukey multiple comparison test:
 
 ```{r, fig.cap = "Effet du genotype sur la résistance à la dessication avec un test de Tukey "}
 par(mfrow = c(1, 1))
@@ -286,9 +297,9 @@ old.par <- par(mai = c(1, 1, 1.25, 1))
 plot(cimeans, las = 1) # las option to put y-axis labels as God intended them
 ```
 
-On conclue donc que la résistance à la dessiccation (R), telle que mesurée par la survie dans des conditions chaudes et sèches, varie significativement entre les trois génotypes avec R(AA) > R(Aa) > R(aa).
+So, we conclude from the Tukey analysis and plot that dessiccation resistance (R) , as measured by larval survival under hot, dry conditions, varies significantly among all three genotypes with R(AA) > R(Aa) > R(aa).
 
-Cependant, avant d’accepter cette conclusion, il faut éprouver les conditions d’application du test. Voici les diagnostics des résidus pour l’ANOVA à un critère de classification (non hiérarchique):
+Before concluding this, however, we must test the assumptions. Here are the residual plots and diagnostics for the one-way (unnested) design:
 
 
 ```{r, fig.cap = "Conditions d'applications du modèle anova.simple", echo = params$echo_sol, class.source = "exer"}
@@ -296,14 +307,14 @@ par(mfrow = c(2, 2))
 plot(anova.simple)
 ```
 
-Donc, toutes les conditions d’application semblent être remplies, et on peut donc accepter les conclusions. Notez que si l’on compare le carré moyen des résidus de l’ANOVA hiérarchique et de l’ANOVA à un critère de classification (5.045 vs 5.292), ils sont presque identiques. Cela n’est pas surprenant compte tenu de la faible variabilité associée aux chambres de croissance pour chaque génotype.
+So, all the assumptions appear to be valid, and the conclusion reached above still holds. Note that if you compare the residual mean squares of the nested and one-way ANOVAs (5.04 vs 5.29), they are almost identical. This is not surprising, given the small contribution of the chamber %in% genotype effect to the explained sum of squares.
 
 
-## ANOVA non paramétrique avec deux facteurs de classification
+## Two-way non-parametric ANOVA
 
-L'ANOVA non paramétrique à deux critères de classification est une extension de celle à un critère de classification vue précédemment. Elle débute par une ANOVA faite sur les données transformées en rangs. Elle peut se faire sur des données avec ou sans réplicats.
+Two-way non-parametric ANOVA is an extension of the non-parametric one-way methods discussed previously. The basic procedure is to rank all the data in the sample from smallest to largest, then carry out a 2-way ANOVA on the ranks. This can be done either for replicated or unreplicated data.
 
-À partir du fichier `stu2wdat.csv`, effectuez une ANOVA non paramétrique à deux facteurs de classification pour examiner l'effet de `sex` et `location` sur `rank(rdwght)`.
+Using the data file `Stu2wdat.csv` , do a two-factor ANOVA to examine the effects of `sex` and `location` on `rank(rdwght)`.
 
 ```{r}
 aov.rank <- aov(
@@ -315,17 +326,15 @@ aov.rank <- aov(
 )
 ```
 
-L'extension de Schreirer-Ray-Hare au test de Kruskall-Wallis se fait ensuite à la main. Il faut d'abord calculer la statistique H égale au rapport de la somme des carrées de l'effet testé, divisée par le carré moyen total. On calcule la statistique H pour chacun des termes. Les statistiques H sont ensuite comparées à une distribution théorique de $\chi^2$ (chi-carré) en utilisant la commande `pchisq(H, df, lower.tail = FALSE)`, où `H` et `df` sont les statistiques H calculées et les degrés de libertés, respectivement.
+The Scheirer-Ray-Hare extension of the Kruskall-Wallis test is done by computing a statistic H given by the effect sums of squares (SS) divided by the total MS. The latter can be calculated as the variance of the ranks. We compute an H statistic for each term. The H-statistics are then compared to a theoretical $\chi^2$ (chi-square) distribution using the command line: `pchisq(H, df, lower.tail = FALSE)` , where `H` and `df` are the calculated H-statistics and associated degrees of freedom, respectively. 
 
-Testez l'effet de sex et location sur rdwght. Que concluez-vous ? Comment ce résultat se compare-t-il à celui obtenu en faisant l'ANOVA paramétrique faite précédemment ?
+- Use the ANOVA table based on ranks to test the effects of `sex` and on `rdwght`. What do you conclude? How does this result compare with the result obtained with the parametric 2-way ANOVA done before?
 
 ```{r}
 Anova(aov.rank, type = 3)
 ```
 
-Pour calculer l’extension Schreirer-Ray-Hare au test de Kruskall-Wallis, on doit d’abord calculer le carré moyen total (MS), i.e. la variance des données transformées en rang. Ici, on a 186 observations, donc des rangs; 1, 2, 3, ... 186. La variance de cette série de 186 valeurs peut être calculée simplement par `var(1:186)`.
-
-Donc on peut calculer la statistique H pour chaque terme:
+To calculate the Scheirer-Ray-Hare extension to the Kruskall-Wallis test, you must first calculate the total mean square (MS), i.e. the variance of the ranked data. In this case, there are 186 observations, their ranks are therefore the series 1, 2, 3, ..., 186. The variance can be calculated simply as var(1:186) (Isn’t R neat? Cryptic maybe, but neat). So we can compute the `H` statistic for each term:
 
 ```{r}
 Hsex <- 58394 / var(1:186)
@@ -333,7 +342,7 @@ Hlocation <- 1128 / var(1:186)
 Hsexloc <- 1230 / var(1:186)
 ```
 
-Et convertir ces statistiques en valeur de ps:
+And convert these statistics into p-values:
 
 ```{r}
 # sex
@@ -349,18 +358,17 @@ Hsexloc
 pchisq(Hsexloc, 1, lower.tail = FALSE)
 ```
 
-Ces résultats sont semblables aux résultats de l’ANOVA non-paramétrique à deux critères de classification. Malgré la puissance réduite, il y a encore un effet significatif du sexe, mais ni interaction ni effet du site.
+Note that these results are the same as those obtained in our original two-way parametric ANOVA. Despite the reduced power, we still find significant differences between the sexes, but still no interaction and no effect due to location.
 
-Il y a toutefois une différence importante. Rappelez-vous que dans l’ANOVA paramétrique il y avait un effet significatif de sex en considérant le problème comme un modèle ANOVA à effet fixe. Cependant, si on traite le problème comme un modèle d'ANOVA à effet mixte l’effet significatif de `sex` peut en principe disparaître parce que le nombre de degré de liberté (dl) associés au carré moyen (CM) de l’interaction est plus faible que le nombre de dl du CM de l’erreur du modèle à effet fixes. Dans ce cas ci, cependant, le CM de l’interaction est environ la moitié du CM de l’erreur. Par conséquent, l’effet significatif de `sex` pourrait devenir encore plus significatif si le problème est analysé (comme il se doit) comme une ANOVA mixte. Encore une fois on peut voir l’importance de spécifier le modèle adéquat en ANOVA.
+There is, however, an important difference. Recall that in the original parametric ANOVA, there was a significant effect of sex when we considered the problem as a Model I ANOVA. However, if we consider it as Model III, the significant sex effect could in principle disappear, because the df associated with the interaction MS are much smaller than the df associated with the Model I error MS. In this case, however, the interaction MS is about half that of the error MS. So, the significant sex effect becomes even more significant if we analyze the problem as a Model III ANOVA. Once again, we see the importance of specifying the appropriate ANOVA design.
 
+## Multiple comparisons
 
-## Comparaisons multiples
+Further hypothesis testing in multiway ANOVAs depends critically on the outcome of the initial ANOVA. If you are interested in comparing groups of marginal means (that is, means of treatments for one factor pooled over levels of the other factor, e.g., between male and female sturgeon pooled over location), this can be done exactly as outlined for multiple comparisons for one-way ANOVAs. For comparison of individual cell means, you must specify the interaction as the group variable.
 
-Les épreuves d'hypothèses subséquentes en ANOVA à plus d'un critère de classification dépendent des résultats initiaux de l'ANOVA. Si vous êtes intéressés à comparer des effets moyens d'un facteur pour tous les niveaux d'un autre facteur (par exemple l'effet du sexe sur la taille des esturgeons peu importe d'où ils viennent), alors vous pouvez procéder exactement tel que décrit dans la section sur les comparaisons multiples suivant l'ANOVA à un critère de classification. Pour comparer les moyennes des cellules entre elles, il faut spécifier l'interaction comme variable qui représente le groupe.
+The file `wmcdat2.csv` shows measured oxygen consumption ( `o2cons` ) of two species ( `species` = A, B)) of limpets at three different concentrations of seawater ( `conc` = 100, 75, 50%) taken from Sokal and Rohlf, 1995, p. 332.
 
-Le fichier `wmcdat2.csv` contient des mesures de consommation d'oxygène, `o2cons`, de deux espèces, `species`, d'un mollusque (une patelle) à trois concentrations différentes d'eau de mer, `conc`. Ces données sont présentées à la p. 332 de Sokal et Rohlf 1995.
-
-- Effectuez une ANOVA factorielle à deux critères de classification sur ces données en utilisant `o2cons` comme variable dépendante et `species` et `conc` comme les facteurs (il va probablement falloir changer le type de données de variable conc à facteur). Que concluez-vous ?
+- Run a 2-way factorial ANOVA on `wmcdat2` data, using `o2cons` as the dependent variable and species and conc as the factors. What do you conclude?
 
 ```{r, results = "hide", echo = params$echo_sol, class.source = "exer"}
 wmcdat2 <- read.csv("data/wmcdat2.csv")
@@ -370,16 +378,14 @@ anova.model5 <- lm(o2cons ~ species * conc, data = wmcdat2)
 Anova(anova.model5, type = 3)
 ```
 
+The ANOVA table is shown below. Technically, because the sample sizes in individual cells are rather small, this analysis should be repeated using a non-parametric ANOVA. For the moment, let’s stick with the parametric analysis.
 
 ```{r, echo = FALSE}
 Anova(anova.model5, type = 3)
 ```
 
 
-Comme l’effectif dans chaque cellule est relativement petit, il faudrait idéalement refaire cette analyse avec une ANOVA non-paramétrique. Pour le moment, contentons nous de la version paramétrique.
-
-
-Examinons les graphiques diagnostiques:
+Look at the diagnostic plots:
 
 
 ```{r, echo = params$echo_sol, class.source = "exer"}
@@ -388,7 +394,8 @@ plot(anova.model5)
 ```
 
 
-Les variances semblent donc égales. Le test de normalité donne:
+Homoscedasticity looks ok, but normality less so.. Testing for
+normality, we get:
 
 
 ```{r, echo = params$echo_sol, class.source = "exer"}
@@ -396,16 +403,16 @@ shapiro.test(residuals(anova.model5))
 ```
 
 
-Il y a donc évidence de non-normalité, mais à part ça tout semble aller. Comme l’ANOVA est relativement robuste à la non-normalité, on va regarder de l’autre coté. (Si vous voulez être plus confiants, vous pouvez tourner une ANOVA non paramétrique. Vous arriverez aux mêmes conclusions.)
+So there is evidence of non-normality, but otherwise everything looks O.K. Since the ANOVA is relatively robust with respect to non-normality, we proceed, but if we wanted to reassure ourselves, we could run a non-parametric ANOVA, and get the same answer.
 
-- À la suite des résultats que vous venez d'obtenir, quelles moyennes voudriez-vous comparer ? Pourquoi?
+- On the basis of the ANOVA results obtained above, which means would you proceed to compare? Why?
 
 ```{block2, echo = params$echo_sol, type = "exer"}
-ajouter une explication ici
+Need to add an explnation here
 ```
 
 
-On conclue donc qu’il n’y a pas de différence entre les espèces et que l’effet de la concentration ne dépends pas de l’espèce (il n’y a pas d’interaction). Par conséquent, les seules comparaisons justifiables sont entre les concentrations:
+Overall, we conclude that there are no differences among species, and that the effect of concentration does not depend on species (no interaction). Since there is no interaction and no main effect due to species, the only comparison of interest is among salinity concentrations:
 
 ```{r, fig.cap = "Comparaison de Tukey des moyennes de consommation d'oxygèn en fonction del la concentration"}
 # fit simplified model
@@ -425,9 +432,10 @@ plot(tuk.cld)
 par(old.par)
 ```
 
-Il y a donc une différence de consommation d’oxygène significative lorsque la salinité est réduite de 50%, mais pas à 25% de réduction.
+So there is evidence of a significant difference in oxygen consumption at a reduction in salinity to 50% of regular seawater, but not at a reduction of only 25%.
 
-- Répétez les deux analyses précédentes sur les données du fichier `wmc2dat2.csv`. Comment les résultats se comparent-ils à ceux obt$nus précédemment ?
+- Repeat the analysis described above using `wmc2dat2.csv` . How do
+your results compare with those obtained for `wmcdat2.csv` ?
 
 ```{r, echo = params$echo_sol, class.source = "exer"}
 wmc2dat2 <- read.csv("data/wmc2dat2.csv")
@@ -436,33 +444,35 @@ wmc2dat2$conc <- as.factor(wmc2dat2$conc)
 anova.model7 <- lm(o2cons ~ species * conc, data = wmcdat2)
 ```
 
-En utilisant `wmc2dat2.csv`, on obtient:
+Using `wmc2dat2.csv`,we get:
 
 ```{r, echo = FALSE}
 Anova(anova.model7, type = 3)
 ```
 
-Dans ce cas ci, il y a une interaction significative, et il n’est par conséquent pas approprié de comparer les moyennes regroupées par espèce ou concentration. Ceci est clairement visualisé par un graphique d'interaction:
+Here there is a large interaction effect, and consequently, there is no
+point in comparing marginal means. This is made clear by examining
+an interaction plot:
 
 ```{r}
 with(wmc2dat2, interaction.plot(conc, species, o2cons))
 ```
 
-- Toujours en utilisant les données de `wmc2dat2.csv`, comparez les 6 moyennes avec l’ajustement Bonferonni. Pour ce faire, il sera utile de créer une nouvelle variable qui combine species et conc:
+- Working still with the `wmc2dat2` data set, compare individual cell means (6 in all), with the Bonferonni adjustment. To do this, it is helpful to create a new variable to indicate all the combinations of `species` and `conc`:
 
 ```{r}
 wmc2dat2$species.conc <- as.factor(paste0(wmc2dat2$species, wmc2dat2$conc))
 ```
 
-ensuite on peut faire les comparaisons de Bonferroni:
+Then we can conduct pairwise bonferroni comparisons:
 
 ```{r}
 with(wmc2dat2, pairwise.t.test(o2cons, species.conc, p.adj = "bonf"))
 ```
 
-Ces comparaisons sont un peu plus difficiles à interpréter, mais l’analyse examine essentiellement les différences entre les concentrations de l’eau dans l’espèce A (nommé adj1) et pour les différences entre les concentrations dans l’espèce B (nommé adj2). Cette analyse indique que la différence principale est entre la concentration de 50% pour l’espèce B et les concentrations de 75 et 100% de l’espèce B, tandis qu’il n’y a aucunes différences significatives pour l’espèce A.
+These comparisons are a little more difficult to interpret, but the analysis essentially examines for differences among seawater concentrations within species A and for differences among concentrations within species B. We see here that the o2Cons at 50% seawater for species B is significantly different from that of 75% and 100% seawater for species B, whereas there are no significant differences in `o2cons` for species A across all seawater concentrations.
 
-Je trouve ces tableaux de résultats peu satisfaisants parce qu’ils indiquent seulement les valeur de ps sans indices de la taille de l’effet. On peut obtenir à la fois le résultat des tests de comparaison multiple et un indice de la taille de l’effet à l’aide du code suivant:
+I find these outputs rather unsatisfying because they show only p- values, but no indication of effect size. One can get both the conclusion from the multiple comparison procedure and an indication of effect size from the graph produced with the following code:
 
 ```{r}
 # fit one-way anova comparing all combinations of species.conc combinations
@@ -477,12 +487,30 @@ plot(tuk2.cld)
 par(old.par)
 ```
 
-Dans cette analyse on a utilisé le CM = 9.474 du modèle d’ANOVA pour comparer les moyennes. En ce faisant, on présume qu’il s’agit d’une situation d’ANOVA à effet fixes, ce qui n’est peut-être pas le cas (conc est certainement fixe, mais species peut être fixe ou aléatoire).
+Note that in this analysis, we have used the error MS = 9.474 from the original model to contrast cell means. Recall, however, that this assumes that in fact we are dealing with a Model I ANOVA, which may or may not be the case ( conc is certainly a fixed factor, but species might be either fixed or random).
 
 
 ## Test de permutation pour l’ANOVA à deux facteurs de classification
 
-Quand les données ne rencontrent pas les conditions d’application des tests paramétriques d’ANOVA à un ou plusieurs facteurs de classification, il est possible d’utiliser les tests de permutation comme une alternative aux tests non-paramétriques pour calculer des p-valeurs. Le code suivant est pour un modèle I d’une ANOVA à deux facteurs de classification. Je vous laisse le soin d’adapter ce code pour d’autres modèles. (J’offre même des points boni pour une solution élégante pour des modèles à plusieurs facteurs de classification).
+When data do not meet the assumptions of the parametric analysis in two- and multiway ANOVA, as an alternative to the non-parametric ANOVA, , it is possible to run permutation tests to calculate p- values. The lmPerm package does this easily.
+
+
+```{r, ano-perm2, eval = FALSE}
+#######################################################################
+## lmPerm version of permutation test
+library(lmPerm)
+# for generality, copy desired dataframe to mydata
+# and model formula to myformula
+mydata <- Stu2wdat
+myformula <- as.formula("rdwght ~ sex+location+sex:location")
+# Fit desired model on the desired dataframe
+mymodel <- lm(myformula, data = mydata)
+# Calculate permutation p-value
+anova(lmp(myformula, data = mydata, perm = "Prob", center = FALSE, Ca = 0.001))
+```
+
+
+`lmPerm` was orphaned for a while and the code below, while clunkier, provided an alternative way of doing it. You would have to adapt it for other situations.
 
 ```{r, ano-perm,eval = FALSE}
 ###########################################################
@@ -548,24 +576,9 @@ cat(
 )
 ```
 
-Si vous avez la chance d’avoir accès au package lmPerm, vous pouvez effectuer le test de permutation beaucoup plus rapidement et facilement:
+## Bootstrap for two-way ANOVA
 
-```{r, ano-perm2, eval = FALSE}
-#######################################################################
-## lmPerm version of permutation test
-library(lmPerm)
-# for generality, copy desired dataframe to mydata
-# and model formula to myformula
-mydata <- Stu2wdat
-myformula <- as.formula("rdwght ~ sex+location+sex:location")
-# Fit desired model on the desired dataframe
-mymodel <- lm(myformula, data = mydata)
-# Calculate permutation p-value
-anova(lmp(myformula, data = mydata, perm = "Prob", center = FALSE, Ca = 0.001))
-```
-
-## Bootstrap pour l’ANOVA à deux facteurs de classification
-Dans la plupart des cas, les tests de permutation seront plus appropriés que le bootstrap pour les designs d’ANOVA. J’ai quand même un bout de code qui pourra servir si vous en avez besoin:
+In most cases, permutation tests will be more appropriate than bootstrap in ANOVA designs. However, for the sake of completedness, I have a snippet of code to do bootstrap for you::
 
 ```{r, ano-boot, eval = FALSE}
 ############################################################
