@@ -24,6 +24,15 @@ fig:ano-13
 fig:ano-14
 fig:ano-15
 fig:ano-16
+fig:unnamed-chunk-46
+fig:unnamed-chunk-53
+fig:unnamed-chunk-54
+fig:unnamed-chunk-63
+fig:unnamed-chunk-64
+fig:unnamed-chunk-68
+fig:unnamed-chunk-70
+fig:unnamed-chunk-71
+fig:unnamed-chunk-81
 introduction-to-r
 set-intro
 importing-and-exporting-data
@@ -89,6 +98,17 @@ performing-multiple-comparisons-of-means-test
 data-transformations-and-non-parametric-anova
 dealing-with-outliers-1
 permutation-test
+multiway-anova-factorial-and-nested-designs
+set-anomul
+two-way-factorial-design-with-replication
+fixed-effects-anova-model-i
+mixed-effects-anova-model-iii
+way-factorial-anova-without-replication
+nested-designs
+two-way-non-parametric-anova
+multiple-comparisons
+test-de-permutation-pour-lanova-à-deux-facteurs-de-classification
+bootstrap-for-two-way-anova
 software-tools
 r-and-r-packages
 pandoc

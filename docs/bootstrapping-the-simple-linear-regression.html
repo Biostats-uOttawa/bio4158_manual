@@ -248,6 +248,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="dealing-with-outliers-1.html"><a href="dealing-with-outliers-1.html"><i class="fa fa-check"></i><b>5.4</b> Dealing with outliers</a></li>
 <li class="chapter" data-level="5.5" data-path="permutation-test.html"><a href="permutation-test.html"><i class="fa fa-check"></i><b>5.5</b> Permutation test</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multiway-anova-factorial-and-nested-designs.html"><a href="multiway-anova-factorial-and-nested-designs.html"><i class="fa fa-check"></i><b>6</b> Multiway ANOVA: factorial and nested designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="set-anomul.html"><a href="set-anomul.html"><i class="fa fa-check"></i><b>6.1</b> R packages and data needed</a></li>
+<li class="chapter" data-level="6.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html"><i class="fa fa-check"></i><b>6.2</b> Two-way factorial design with replication</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#fixed-effects-anova-model-i"><i class="fa fa-check"></i><b>6.2.1</b> Fixed effects ANOVA (Model I)</a></li>
+<li class="chapter" data-level="6.2.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#mixed-effects-anova-model-iii"><i class="fa fa-check"></i><b>6.2.2</b> Mixed effects ANOVA (Model III)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="way-factorial-anova-without-replication.html"><a href="way-factorial-anova-without-replication.html"><i class="fa fa-check"></i><b>6.3</b> 2-way factorial ANOVA without replication</a></li>
+<li class="chapter" data-level="6.4" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>6.4</b> Nested designs</a></li>
+<li class="chapter" data-level="6.5" data-path="two-way-non-parametric-anova.html"><a href="two-way-non-parametric-anova.html"><i class="fa fa-check"></i><b>6.5</b> Two-way non-parametric ANOVA</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>6.6</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
+<li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -304,9 +319,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 1.1919926  0.001702555  0.03338065
-## t2* 0.3408557 -0.001285350  0.02640274</code></pre>
+##      original        bias    std. error
+## t1* 1.1919926  0.0011194736  0.03462524
+## t2* 0.3408557 -0.0006926075  0.02725629</code></pre>
 <p>For each parameter in the model (here the intercept is labeled <code>t1\*</code> and the slope of the regression line is labeled <code>t2\*</code>) , you obtain:</p>
 <p>Pour chaque paramètre du modèle (ici l’ordonnée à l’origine est
 appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
@@ -333,12 +348,11 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.125,  1.256 )   ( 1.127,  1.257 )  
+## 95%   ( 1.123,  1.259 )   ( 1.120,  1.256 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.127,  1.257 )   ( 1.115,  1.248 )  
-## Calculations and Intervals on Original Scale
-## Some BCa intervals may be unstable</code></pre>
+## 95%   ( 1.128,  1.264 )   ( 1.118,  1.256 )  
+## Calculations and Intervals on Original Scale</code></pre>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="bootstrapping-the-simple-linear-regression.html#cb120-1" aria-hidden="true"></a><span class="co"># intervalle de confiance pour la pente</span></span>
 <span id="cb120-2"><a href="bootstrapping-the-simple-linear-regression.html#cb120-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning in boot.ci(results, type = &quot;all&quot;, index = 2): bootstrap variances needed
@@ -351,12 +365,11 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2904,  0.3939 )   ( 0.2885,  0.3910 )  
+## 95%   ( 0.2881,  0.3950 )   ( 0.2888,  0.3977 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2907,  0.3932 )   ( 0.2964,  0.4024 )  
-## Calculations and Intervals on Original Scale
-## Some BCa intervals may be unstable</code></pre>
+## 95%   ( 0.2840,  0.3929 )   ( 0.2901,  0.3962 )  
+## Calculations and Intervals on Original Scale</code></pre>
 <p>Here the 4 types of CI that R managed to calculate are essentially the same. Had data been violating more strongly the standard assumptions (normality, homoscedasticity), then the different methods (Normal, Basic, Percentile, and BCa) would have diverged more. In that case, which one is best? BCa has the favor of most, currently.</p>
 
 </div>

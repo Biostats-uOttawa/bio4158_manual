@@ -248,6 +248,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="dealing-with-outliers-1.html"><a href="dealing-with-outliers-1.html"><i class="fa fa-check"></i><b>5.4</b> Dealing with outliers</a></li>
 <li class="chapter" data-level="5.5" data-path="permutation-test.html"><a href="permutation-test.html"><i class="fa fa-check"></i><b>5.5</b> Permutation test</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multiway-anova-factorial-and-nested-designs.html"><a href="multiway-anova-factorial-and-nested-designs.html"><i class="fa fa-check"></i><b>6</b> Multiway ANOVA: factorial and nested designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="set-anomul.html"><a href="set-anomul.html"><i class="fa fa-check"></i><b>6.1</b> R packages and data needed</a></li>
+<li class="chapter" data-level="6.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html"><i class="fa fa-check"></i><b>6.2</b> Two-way factorial design with replication</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#fixed-effects-anova-model-i"><i class="fa fa-check"></i><b>6.2.1</b> Fixed effects ANOVA (Model I)</a></li>
+<li class="chapter" data-level="6.2.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#mixed-effects-anova-model-iii"><i class="fa fa-check"></i><b>6.2.2</b> Mixed effects ANOVA (Model III)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="way-factorial-anova-without-replication.html"><a href="way-factorial-anova-without-replication.html"><i class="fa fa-check"></i><b>6.3</b> 2-way factorial ANOVA without replication</a></li>
+<li class="chapter" data-level="6.4" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>6.4</b> Nested designs</a></li>
+<li class="chapter" data-level="6.5" data-path="two-way-non-parametric-anova.html"><a href="two-way-non-parametric-anova.html"><i class="fa fa-check"></i><b>6.5</b> Two-way non-parametric ANOVA</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>6.6</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
+<li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -275,18 +290,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-and-r-packages" class="section level2" number="6.1">
+<div id="r-and-r-packages" class="section level2" number="7.1">
 <h2><span class="header-section-number">A.1</span> R and R packages</h2>
 <p>R can be downloaded and installed from any CRAN (the Comprehensive R Archive Network) mirrors, e.g., <a href="https://cran.rstudio.com" class="uri">https://cran.rstudio.com</a>. Please note that there will be a few new releases of R every year, and you may want to upgrade R occasionally.</p>
 <p>To install the <strong>bookdown</strong> package, you can type this in R:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="r-and-r-packages.html#cb210-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="r-and-r-packages.html#cb301-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span></code></pre></div>
 <p>This installs all required R packages. You can also choose to install all optional packages as well, if you do not care too much about whether these packages will actually be used to compile your book (such as <strong>htmlwidgets</strong>):</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="r-and-r-packages.html#cb211-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="r-and-r-packages.html#cb302-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>If you want to test the development version of <strong>bookdown</strong> on GitHub, you need to install <strong>devtools</strong> first:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="r-and-r-packages.html#cb212-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb212-2"><a href="r-and-r-packages.html#cb212-2" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="r-and-r-packages.html#cb303-1" aria-hidden="true"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;devtools&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb303-2"><a href="r-and-r-packages.html#cb303-2" aria-hidden="true"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;rstudio/bookdown&quot;</span>)</span></code></pre></div>
 <p>R packages are also often constantly updated on CRAN or GitHub, so you may want to update them once in a while:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="r-and-r-packages.html#cb213-1" aria-hidden="true"></a><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="r-and-r-packages.html#cb304-1" aria-hidden="true"></a><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>Although it is not required, the RStudio IDE can make a lot of things much easier when you work on R-related projects. The RStudio IDE can be downloaded from <a href="https://www.rstudio.com" class="uri">https://www.rstudio.com</a>.</p>
 </div>
 <script src="js/solution.js"></script>

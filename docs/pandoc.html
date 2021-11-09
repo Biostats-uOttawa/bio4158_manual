@@ -248,6 +248,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="dealing-with-outliers-1.html"><a href="dealing-with-outliers-1.html"><i class="fa fa-check"></i><b>5.4</b> Dealing with outliers</a></li>
 <li class="chapter" data-level="5.5" data-path="permutation-test.html"><a href="permutation-test.html"><i class="fa fa-check"></i><b>5.5</b> Permutation test</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multiway-anova-factorial-and-nested-designs.html"><a href="multiway-anova-factorial-and-nested-designs.html"><i class="fa fa-check"></i><b>6</b> Multiway ANOVA: factorial and nested designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="set-anomul.html"><a href="set-anomul.html"><i class="fa fa-check"></i><b>6.1</b> R packages and data needed</a></li>
+<li class="chapter" data-level="6.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html"><i class="fa fa-check"></i><b>6.2</b> Two-way factorial design with replication</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#fixed-effects-anova-model-i"><i class="fa fa-check"></i><b>6.2.1</b> Fixed effects ANOVA (Model I)</a></li>
+<li class="chapter" data-level="6.2.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#mixed-effects-anova-model-iii"><i class="fa fa-check"></i><b>6.2.2</b> Mixed effects ANOVA (Model III)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="way-factorial-anova-without-replication.html"><a href="way-factorial-anova-without-replication.html"><i class="fa fa-check"></i><b>6.3</b> 2-way factorial ANOVA without replication</a></li>
+<li class="chapter" data-level="6.4" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>6.4</b> Nested designs</a></li>
+<li class="chapter" data-level="6.5" data-path="two-way-non-parametric-anova.html"><a href="two-way-non-parametric-anova.html"><i class="fa fa-check"></i><b>6.5</b> Two-way non-parametric ANOVA</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>6.6</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
+<li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -275,11 +290,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="pandoc" class="section level2" number="6.2">
+<div id="pandoc" class="section level2" number="7.2">
 <h2><span class="header-section-number">A.2</span> Pandoc</h2>
 <p>An R Markdown document (<code>*.Rmd</code>) is first compiled to Markdown (<code>*.md</code>) through the <strong>knitr</strong> package, and then Markdown is compiled to other output formats (such as LaTeX or HTML) through Pandoc. This process is automated by the <strong>rmarkdown</strong> package. You do not need to install <strong>knitr</strong> or <strong>rmarkdown</strong> separately, because they are the required packages of <strong>bookdown</strong> and will be automatically installed when you install <strong>bookdown</strong>. However, Pandoc is not an R package, so it will not be automatically installed when you install <strong>bookdown</strong>. You can follow the installation instructions on the Pandoc homepage (<a href="http://pandoc.org" class="uri">http://pandoc.org</a>) to install Pandoc, but if you use the RStudio IDE, you do not really need to install Pandoc separately, because RStudio includes a copy of Pandoc. The Pandoc version number can be obtained via:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="pandoc.html#cb214-1" aria-hidden="true"></a>rmarkdown<span class="op">::</span><span class="kw">pandoc_version</span>()</span>
-<span id="cb214-2"><a href="pandoc.html#cb214-2" aria-hidden="true"></a><span class="co">## [1] &#39;2.9.2.1&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="pandoc.html#cb305-1" aria-hidden="true"></a>rmarkdown<span class="op">::</span><span class="kw">pandoc_version</span>()</span>
+<span id="cb305-2"><a href="pandoc.html#cb305-2" aria-hidden="true"></a><span class="co">## [1] &#39;2.9.2.1&#39;</span></span></code></pre></div>
 <p>If you find this version too low and there are Pandoc features only in a later version, you can install the later version of Pandoc, and <strong>rmarkdown</strong> will call the newer version instead of its built-in version.</p>
 </div>
 <script src="js/solution.js"></script>

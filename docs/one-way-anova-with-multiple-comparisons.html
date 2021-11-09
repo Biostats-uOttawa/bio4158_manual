@@ -248,6 +248,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="dealing-with-outliers-1.html"><a href="dealing-with-outliers-1.html"><i class="fa fa-check"></i><b>5.4</b> Dealing with outliers</a></li>
 <li class="chapter" data-level="5.5" data-path="permutation-test.html"><a href="permutation-test.html"><i class="fa fa-check"></i><b>5.5</b> Permutation test</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="multiway-anova-factorial-and-nested-designs.html"><a href="multiway-anova-factorial-and-nested-designs.html"><i class="fa fa-check"></i><b>6</b> Multiway ANOVA: factorial and nested designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="set-anomul.html"><a href="set-anomul.html"><i class="fa fa-check"></i><b>6.1</b> R packages and data needed</a></li>
+<li class="chapter" data-level="6.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html"><i class="fa fa-check"></i><b>6.2</b> Two-way factorial design with replication</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#fixed-effects-anova-model-i"><i class="fa fa-check"></i><b>6.2.1</b> Fixed effects ANOVA (Model I)</a></li>
+<li class="chapter" data-level="6.2.2" data-path="two-way-factorial-design-with-replication.html"><a href="two-way-factorial-design-with-replication.html#mixed-effects-anova-model-iii"><i class="fa fa-check"></i><b>6.2.2</b> Mixed effects ANOVA (Model III)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="way-factorial-anova-without-replication.html"><a href="way-factorial-anova-without-replication.html"><i class="fa fa-check"></i><b>6.3</b> 2-way factorial ANOVA without replication</a></li>
+<li class="chapter" data-level="6.4" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>6.4</b> Nested designs</a></li>
+<li class="chapter" data-level="6.5" data-path="two-way-non-parametric-anova.html"><a href="two-way-non-parametric-anova.html"><i class="fa fa-check"></i><b>6.5</b> Two-way non-parametric ANOVA</a></li>
+<li class="chapter" data-level="6.6" data-path="multiple-comparisons.html"><a href="multiple-comparisons.html"><i class="fa fa-check"></i><b>6.6</b> Multiple comparisons</a></li>
+<li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
+<li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -551,18 +566,18 @@ Figure 5.4: Inter-annual differences in sturgeon length
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5937
+## Quantile = 2.5926
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2714   3.6458
-## m1965 - m1954 == 0  -5.5077  -9.9975  -1.0179
-## m1966 - m1954 == 0  -3.3127  -6.3433  -0.2821
-## m1965 - m1958 == 0  -5.6949 -10.4115  -0.9782
-## m1966 - m1958 == 0  -3.4999  -6.8575  -0.1423
-## m1966 - m1965 == 0   2.1950  -2.2175   6.6074</code></pre>
+## m1958 - m1954 == 0   0.1872  -3.2700   3.6444
+## m1965 - m1954 == 0  -5.5077  -9.9956  -1.0198
+## m1966 - m1954 == 0  -3.3127  -6.3420  -0.2834
+## m1965 - m1958 == 0  -5.6949 -10.4095  -0.9802
+## m1966 - m1958 == 0  -3.4999  -6.8561  -0.1438
+## m1966 - m1965 == 0   2.1950  -2.2156   6.6055</code></pre>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="one-way-anova-with-multiple-comparisons.html#cb195-1" aria-hidden="true"></a><span class="kw">plot</span>(meandiff)</span></code></pre></div>
 <div class="figure"><span id="fig:ano-14"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-14-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
