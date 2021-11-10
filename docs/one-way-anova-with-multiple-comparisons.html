@@ -540,7 +540,8 @@ and there are no factor predictors; no plot no. 5`
 ## m1965-m1958 -5.6948718 -10.436304 -0.9534397 0.0116943
 ## m1966-m1958 -3.4999106  -6.875104 -0.1247171 0.0390011
 ## m1966-m1965  2.1949612  -2.240630  6.6305526 0.5710111</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="one-way-anova-with-multiple-comparisons.html#cb192-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)))</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="one-way-anova-with-multiple-comparisons.html#cb192-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb192-2"><a href="one-way-anova-with-multiple-comparisons.html#cb192-2" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)),<span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:ano-13"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-13-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
 <p class="caption">
@@ -566,19 +567,20 @@ Figure 5.4: Inter-annual differences in sturgeon length
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5926
+## Quantile = 2.5968
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2700   3.6444
-## m1965 - m1954 == 0  -5.5077  -9.9956  -1.0198
-## m1966 - m1954 == 0  -3.3127  -6.3420  -0.2834
-## m1965 - m1958 == 0  -5.6949 -10.4095  -0.9802
-## m1966 - m1958 == 0  -3.4999  -6.8561  -0.1438
-## m1966 - m1965 == 0   2.1950  -2.2156   6.6055</code></pre>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="one-way-anova-with-multiple-comparisons.html#cb195-1" aria-hidden="true"></a><span class="kw">plot</span>(meandiff)</span></code></pre></div>
+## m1958 - m1954 == 0   0.1872  -3.2755   3.6500
+## m1965 - m1954 == 0  -5.5077 -10.0028  -1.0125
+## m1966 - m1954 == 0  -3.3127  -6.3469  -0.2785
+## m1965 - m1958 == 0  -5.6949 -10.4172  -0.9726
+## m1966 - m1958 == 0  -3.4999  -6.8615  -0.1384
+## m1966 - m1965 == 0   2.1950  -2.2227   6.6126</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="one-way-anova-with-multiple-comparisons.html#cb195-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb195-2"><a href="one-way-anova-with-multiple-comparisons.html#cb195-2" aria-hidden="true"></a><span class="kw">plot</span>(meandiff)</span></code></pre></div>
 <div class="figure"><span id="fig:ano-14"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-14-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
 <p class="caption">
