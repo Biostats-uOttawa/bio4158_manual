@@ -321,9 +321,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 45.084391 -0.008093432   0.4238755
-## t2* -1.714546  0.004571621   0.7572409</code></pre>
+##      original      bias    std. error
+## t1* 45.084391 0.002373299   0.4469541
+## t2* -1.714546 0.006037618   0.7988904</code></pre>
 <p>So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#cb143-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:tb-3"></span>
@@ -342,7 +342,7 @@ Figure 4.4: Distribution of bootstrapped mean difference
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   (-3.059, -0.193 )  
+## 95%   (-3.350, -0.231 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p>The 95% CI for the difference between the two means does not include 0. Hence, the bootstrap test indicates that the two means are not equals.</p>
 </div>
@@ -367,7 +367,7 @@ Figure 4.4: Distribution of bootstrapped mean difference
 ## 
 ## Coefficients:
 ##           Estimate Iter Pr(Prob)  
-## location1   0.8573 1424    0.066 .
+## location1   0.8573 5000   0.0124 *
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -375,8 +375,8 @@ Figure 4.4: Distribution of bootstrapped mean difference
 ## Multiple R-Squared: 0.02419, Adjusted R-squared: 0.01889 
 ## F-statistic: 4.562 on 1 and 184 DF,  p-value: 0.03401</code></pre>
 <ol style="list-style-type: decimal">
-<li><code>Iter</code> coefficient: the Prob stopping rule stopped after 1424 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.</li>
-<li><code>Pr(Prob)</code> coefficient: The estimated probability associated to H0 is 0.066 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.066= about 93.4%) of the 1424 cases. Mind you, 1424 permutations is not a large number, so small p values can’t be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p. Default 0.1.</li>
+<li><code>Iter</code> coefficient: the Prob stopping rule stopped after 5000 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.</li>
+<li><code>Pr(Prob)</code> coefficient: The estimated probability associated to H0 is 0.0124 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0124= about 98.8%) of the 5000 cases. Mind you, 5000 permutations is not a large number, so small p values can’t be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p. Default 0.1.</li>
 <li><code>F-statistic</code>: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.</li>
 </ol>
 </div>

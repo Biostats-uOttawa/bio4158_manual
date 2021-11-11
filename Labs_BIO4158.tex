@@ -239,7 +239,7 @@
 \makeatother
 \subtitle{Laboratory manual}
 \author{Julien Martin}
-\date{10-11-2021}
+\date{11-11-2021}
 
 \begin{document}
 \maketitle
@@ -2717,8 +2717,8 @@ A non-parametric test for the intercept and slope of a linear regression can be 
 ## 
 ## Bootstrap Statistics :
 ##      original       bias    std. error
-## t1* 1.1919926  0.001344019  0.03352537
-## t2* 0.3408557 -0.001023578  0.02650728
+## t1* 1.1919926  0.001725133  0.03326180
+## t2* 0.3408557 -0.001223008  0.02626566
 \end{verbatim}
 
 For each parameter in the model (here the intercept is labeled \texttt{t1\textbackslash{}*} and the slope of the regression line is labeled \texttt{t2\textbackslash{}*}) , you obtain:
@@ -2777,11 +2777,12 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.125,  1.256 )   ( 1.122,  1.255 )  
+## 95%   ( 1.125,  1.255 )   ( 1.120,  1.255 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.129,  1.262 )   ( 1.117,  1.251 )  
+## 95%   ( 1.129,  1.264 )   ( 1.118,  1.252 )  
 ## Calculations and Intervals on Original Scale
+## Some BCa intervals may be unstable
 \end{verbatim}
 
 \begin{Shaded}
@@ -2805,10 +2806,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2899,  0.3938 )   ( 0.2917,  0.3946 )  
+## 95%   ( 0.2906,  0.3936 )   ( 0.2925,  0.3982 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2871,  0.3900 )   ( 0.2940,  0.4014 )  
+## 95%   ( 0.2835,  0.3893 )   ( 0.2941,  0.3987 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3186,9 +3187,9 @@ The second section with the \texttt{boot()} command is where the real work is do
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 45.084391  0.007169477    0.425276
-## t2* -1.714546 -0.039535861    0.766435
+##      original      bias    std. error
+## t1* 45.084391 -0.02177118   0.4207067
+## t2* -1.714546  0.01160296   0.7571275
 \end{verbatim}
 
 So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.
@@ -3221,7 +3222,7 @@ So we get the original estimates for the two coefficients in this model: the mea
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   (-3.198, -0.207 )  
+## 95%   (-3.258, -0.288 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3265,7 +3266,7 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 ## 
 ## Coefficients:
 ##           Estimate Iter Pr(Prob)  
-## location1   0.8573 3684   0.0266 *
+## location1   0.8573 2749   0.0353 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3278,9 +3279,9 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \texttt{Iter} coefficient: the Prob stopping rule stopped after 3684 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
+  \texttt{Iter} coefficient: the Prob stopping rule stopped after 2749 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
 \item
-  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0266 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0266= about 97.3\%) of the 3684 cases. Mind you, 3684 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
+  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0353 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0353= about 96.5\%) of the 2749 cases. Mind you, 2749 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
 \item
   \texttt{F-statistic}: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.
 \end{enumerate}
@@ -3978,18 +3979,18 @@ The confidence intervals, corrected for multiple tests by the Tukey method, are 
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5946
+## Quantile = 2.5931
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2726   3.6470
-## m1965 - m1954 == 0  -5.5077  -9.9990  -1.0163
-## m1966 - m1954 == 0  -3.3127  -6.3443  -0.2811
-## m1965 - m1958 == 0  -5.6949 -10.4131  -0.9766
-## m1966 - m1958 == 0  -3.4999  -6.8586  -0.1412
-## m1966 - m1965 == 0   2.1950  -2.2190   6.6089
+## m1958 - m1954 == 0   0.1872  -3.2707   3.6451
+## m1965 - m1954 == 0  -5.5077  -9.9965  -1.0188
+## m1966 - m1954 == 0  -3.3127  -6.3426  -0.2827
+## m1965 - m1958 == 0  -5.6949 -10.4105  -0.9792
+## m1966 - m1958 == 0  -3.4999  -6.8567  -0.1431
+## m1966 - m1965 == 0   2.1950  -2.2165   6.6064
 \end{verbatim}
 
 \begin{Shaded}
@@ -5185,12 +5186,12 @@ Using \texttt{wmc2dat2.csv},we get:
 ## Anova Table (Type III tests)
 ## 
 ## Response: o2cons
-##               Sum Sq Df  F value    Pr(>F)    
-## (Intercept)  1185.60  1 124.0165 4.101e-14 ***
-## species         0.09  1   0.0097   0.92189    
-## conc           74.90  2   3.9172   0.02755 *  
-## species:conc   23.93  2   1.2514   0.29656    
-## Residuals     401.52 42                       
+##              Sum Sq Df F value    Pr(>F)    
+## (Intercept)  343.09  1 36.2132 3.745e-07 ***
+## species      133.52  1 14.0929 0.0005286 ***
+## conc          66.76  2  3.5232 0.0385011 *  
+## species:conc 168.15  2  8.8742 0.0006101 ***
+## Residuals    397.91 42                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
