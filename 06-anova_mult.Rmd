@@ -177,11 +177,11 @@ for the situation in which `location` is a random factor and `sex` is a
 fixed factor. To do this, you need to recalculate the F-ratio for sex using the `sex:location` interaction mean square instead of the residual mean square. This is most easily accomplished by hand, making sure you are working with the Type III Sums of squares ANOVA table.
 
 ```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
-Anova(anova.model2, type = 3)
+Anova(anova.model1, type = 3)
 ```
 
 ```{r, echo = FALSE}
-Anova(anova.model2, type = 3)
+Anova(anova.model1, type = 3)
 ```
 
 For `sex`, the new ratio of mean squares is
