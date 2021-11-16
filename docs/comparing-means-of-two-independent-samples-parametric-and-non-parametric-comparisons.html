@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.3 Comparing means of two independent samples: parametric and non-parametric comparisons | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.3 Comparing means of two independent samples: parametric and non-parametric comparisons | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="visual-examination-of-sample-data.html"/>
 <link rel="next" href="bootstrap-and-permutation-tests-to-compare-2-means.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<li class="chapter" data-level="4" data-path="two---sample-comparisons.html"><a href="two---sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
@@ -263,6 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
 <li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>7</b> Multiple regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="set-reg-mul.html"><a href="set-reg-mul.html"><i class="fa fa-check"></i><b>7.1</b> R packages and data</a></li>
+<li class="chapter" data-level="7.2" data-path="points-to-keep-in-mind.html"><a href="points-to-keep-in-mind.html"><i class="fa fa-check"></i><b>7.2</b> Points to keep in mind</a></li>
+<li class="chapter" data-level="7.3" data-path="first-look-at-the-data.html"><a href="first-look-at-the-data.html"><i class="fa fa-check"></i><b>7.3</b> First look at the data</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-regression-models-from-scratch.html"><a href="multiple-regression-models-from-scratch.html"><i class="fa fa-check"></i><b>7.4</b> Multiple regression models from scratch</a></li>
+<li class="chapter" data-level="7.5" data-path="stepwise-multiple-regression-procedures.html"><a href="stepwise-multiple-regression-procedures.html"><i class="fa fa-check"></i><b>7.5</b> Stepwise multiple regression procedures</a></li>
+<li class="chapter" data-level="7.6" data-path="detecting-multicollinearity.html"><a href="detecting-multicollinearity.html"><i class="fa fa-check"></i><b>7.6</b> Detecting multicollinearity</a></li>
+<li class="chapter" data-level="7.7" data-path="polynomial-regression.html"><a href="polynomial-regression.html"><i class="fa fa-check"></i><b>7.7</b> Polynomial regression</a></li>
+<li class="chapter" data-level="7.8" data-path="checking-assumptions-of-a-multiple-regression-model.html"><a href="checking-assumptions-of-a-multiple-regression-model.html"><i class="fa fa-check"></i><b>7.8</b> Checking assumptions of a multiple regression model</a></li>
+<li class="chapter" data-level="7.9" data-path="visualizing-effect-size.html"><a href="visualizing-effect-size.html"><i class="fa fa-check"></i><b>7.9</b> Visualizing effect size</a></li>
+<li class="chapter" data-level="7.10" data-path="testing-for-interactions.html"><a href="testing-for-interactions.html"><i class="fa fa-check"></i><b>7.10</b> Testing for interactions</a></li>
+<li class="chapter" data-level="7.11" data-path="dredging-and-the-information-theoretical-approach.html"><a href="dredging-and-the-information-theoretical-approach.html"><i class="fa fa-check"></i><b>7.11</b> Dredging and the information theoretical approach</a></li>
+<li class="chapter" data-level="7.12" data-path="bootstrapping-multiple-regression.html"><a href="bootstrapping-multiple-regression.html"><i class="fa fa-check"></i><b>7.12</b> Bootstrapping multiple regression</a></li>
+<li class="chapter" data-level="7.13" data-path="permutation-test-1.html"><a href="permutation-test-1.html"><i class="fa fa-check"></i><b>7.13</b> Permutation test</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -299,13 +315,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>non-parametric test</li>
 </ol>
 <p>What do you conclude?</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-1" aria-hidden="true"></a><span class="co"># t-test assuming equal variances</span></span>
-<span id="cb125-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-2" aria-hidden="true"></a><span class="kw">t.test</span>(</span>
-<span id="cb125-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
-<span id="cb125-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
-<span id="cb125-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
-<span id="cb125-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-6" aria-hidden="true"></a>  <span class="dt">var.equal =</span> <span class="ot">TRUE</span></span>
-<span id="cb125-7"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb125-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-1" aria-hidden="true"></a><span class="co"># t-test assuming equal variances</span></span>
+<span id="cb124-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-2" aria-hidden="true"></a><span class="kw">t.test</span>(</span>
+<span id="cb124-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
+<span id="cb124-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb124-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb124-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-6" aria-hidden="true"></a>  <span class="dt">var.equal =</span> <span class="ot">TRUE</span></span>
+<span id="cb124-7"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb124-7" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -317,13 +333,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## mean in group CUMBERLAND    mean in group THE_PAS 
 ##                 45.08439                 43.36984</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-1" aria-hidden="true"></a><span class="co"># t-test assuming unequal variances</span></span>
-<span id="cb127-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-2" aria-hidden="true"></a><span class="kw">t.test</span>(</span>
-<span id="cb127-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
-<span id="cb127-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
-<span id="cb127-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
-<span id="cb127-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-6" aria-hidden="true"></a>  <span class="dt">var.equal =</span> <span class="ot">FALSE</span></span>
-<span id="cb127-7"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb127-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-1" aria-hidden="true"></a><span class="co"># t-test assuming unequal variances</span></span>
+<span id="cb126-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-2" aria-hidden="true"></a><span class="kw">t.test</span>(</span>
+<span id="cb126-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
+<span id="cb126-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb126-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb126-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-6" aria-hidden="true"></a>  <span class="dt">var.equal =</span> <span class="ot">FALSE</span></span>
+<span id="cb126-7"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb126-7" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -335,12 +351,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## mean in group CUMBERLAND    mean in group THE_PAS 
 ##                 45.08439                 43.36984</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-1" aria-hidden="true"></a><span class="co"># test non paramétrique</span></span>
-<span id="cb129-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-2" aria-hidden="true"></a><span class="kw">wilcox.test</span>(</span>
-<span id="cb129-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
-<span id="cb129-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
-<span id="cb129-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
-<span id="cb129-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb129-6" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-1" aria-hidden="true"></a><span class="co"># test non paramétrique</span></span>
+<span id="cb128-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-2" aria-hidden="true"></a><span class="kw">wilcox.test</span>(</span>
+<span id="cb128-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-3" aria-hidden="true"></a>  fklngth <span class="op">~</span><span class="st"> </span>location,</span>
+<span id="cb128-4"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb128-5"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-5" aria-hidden="true"></a>  <span class="dt">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb128-6"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb128-6" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -350,10 +366,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Based on the <em>t-test</em>, we would reject the null hypothesis, <em>i.e.</em> there is a significant (but not highly significant) difference in mean fork length between the two populations.</p>
 <p>Note that using the Wilcoxon rank sum test, we do not reject the null hypothesis. The two different tests therefore give us two different results. The significant difference obtained using the t-test may, at least in part, be due to deviations from normality or homoscedasticity; on the other hand, the non-significant difference obtained using the U -statistic may be due to the fact that for fixed sample size, the power of a non- parametric test is lower than the corresponding parametric test. Given the p values obtained from both tests, and the fact that for samples of this size (84 and 101), the t-test is comparatively robust with respect to non-normality, I would be inclined to reject the null hypothesis. In practice to avoid P-hacking, you should decide which test is appropriate first and then apply and interpret it, or if you decide to do all you should present results of all and interpret accordingly.</p>
 <p>Before accepting the results of the parametric t-test and rejecting the null hypothesis that there is no difference in size between the two locations, one should do some sort of assessment to determine if the model fits the assumption of normally distributed residuals and equal variances. Preliminary examination of the raw data suggested the data appeared roughly normal but there might be problems with variances (since the spread of data for The_Pas was much greater than for Cumberland). We can examine this more closely by looking at the residuals. An easy way to do so, is to fit a linear model and use the residual diagnostic plots:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb131-1" aria-hidden="true"></a>m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fklngth <span class="op">~</span><span class="st"> </span>location, <span class="dt">data =</span> sturgeon)</span>
-<span id="cb131-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb131-2" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb131-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb131-3" aria-hidden="true"></a><span class="kw">plot</span>(m1)</span></code></pre></div>
-<div class="figure"><span id="fig:t-6"></span>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb130-1" aria-hidden="true"></a>m1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fklngth <span class="op">~</span><span class="st"> </span>location, <span class="dt">data =</span> sturgeon)</span>
+<span id="cb130-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb130-2" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb130-3"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb130-3" aria-hidden="true"></a><span class="kw">plot</span>(m1)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:t-6"></span>
 <img src="Labs_BIO4158_files/figure-html/t-6-1.svg" alt="Model assumption checks" width="672" />
 <p class="caption">
 Figure 4.3: Model assumption checks
@@ -361,7 +377,7 @@ Figure 4.3: Model assumption checks
 </div>
 <p>The first plot above shows the spread of the residuals around the estimated values for the two groups and allows us to get a feel for whether there are problems with the assumption of homogeneity of variances. If the variances were equal, the vertical spread of the two clusters of points should be about the same. The above plot shows that the vertical spread of the group with the smaller mean is greater than it is for the larger mean, suggesting again that there are problems with the variances. We can test this formally by examining the mean differences in the absolute value of the residuals.</p>
 <p>The second graph above is a normal QQ plot (or probability plot) of the residuals of the model. Note that these generally fall on a straight line, suggesting there is no real problem with normality. We can do a formal test for normality on the residuals using the Shapiro-Wilk test.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb132-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(m1))</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb131-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(m1))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -369,8 +385,8 @@ Figure 4.3: Model assumption checks
 ## W = 0.97469, p-value = 0.001857</code></pre>
 <p>Hummm. The test indicates that the residuals are not normal. But, given that (a) the distribution is not very far (at least visually) from normal, and that (b) the number of observations in each location is reasonably large (i.e. &gt;30), we do not need to be overly concerned with this violation of the normality assumption.</p>
 <p>How about equality of variance?</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb134-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
-<span id="cb134-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb134-2" aria-hidden="true"></a><span class="kw">leveneTest</span>(m1)</span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb133-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
+<span id="cb133-2"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb133-2" aria-hidden="true"></a><span class="kw">leveneTest</span>(m1)</span></code></pre></div>
 <pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 ## factor.</code></pre>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
@@ -379,7 +395,7 @@ Figure 4.3: Model assumption checks
 ##       184                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb137-1" aria-hidden="true"></a><span class="kw">bptest</span>(m1)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="comparing-means-of-two-independent-samples-parametric-and-non-parametric-comparisons.html#cb136-1" aria-hidden="true"></a><span class="kw">bptest</span>(m1)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
@@ -400,7 +416,6 @@ better known. It tests whether the mean of absolute values of the residuals diff
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -430,6 +445,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

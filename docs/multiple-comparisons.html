@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.6 Multiple comparisons | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.6 Multiple comparisons | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="two-way-non-parametric-anova.html"/>
 <link rel="next" href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<li class="chapter" data-level="4" data-path="two---sample-comparisons.html"><a href="two---sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
@@ -263,6 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
 <li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>7</b> Multiple regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="set-reg-mul.html"><a href="set-reg-mul.html"><i class="fa fa-check"></i><b>7.1</b> R packages and data</a></li>
+<li class="chapter" data-level="7.2" data-path="points-to-keep-in-mind.html"><a href="points-to-keep-in-mind.html"><i class="fa fa-check"></i><b>7.2</b> Points to keep in mind</a></li>
+<li class="chapter" data-level="7.3" data-path="first-look-at-the-data.html"><a href="first-look-at-the-data.html"><i class="fa fa-check"></i><b>7.3</b> First look at the data</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-regression-models-from-scratch.html"><a href="multiple-regression-models-from-scratch.html"><i class="fa fa-check"></i><b>7.4</b> Multiple regression models from scratch</a></li>
+<li class="chapter" data-level="7.5" data-path="stepwise-multiple-regression-procedures.html"><a href="stepwise-multiple-regression-procedures.html"><i class="fa fa-check"></i><b>7.5</b> Stepwise multiple regression procedures</a></li>
+<li class="chapter" data-level="7.6" data-path="detecting-multicollinearity.html"><a href="detecting-multicollinearity.html"><i class="fa fa-check"></i><b>7.6</b> Detecting multicollinearity</a></li>
+<li class="chapter" data-level="7.7" data-path="polynomial-regression.html"><a href="polynomial-regression.html"><i class="fa fa-check"></i><b>7.7</b> Polynomial regression</a></li>
+<li class="chapter" data-level="7.8" data-path="checking-assumptions-of-a-multiple-regression-model.html"><a href="checking-assumptions-of-a-multiple-regression-model.html"><i class="fa fa-check"></i><b>7.8</b> Checking assumptions of a multiple regression model</a></li>
+<li class="chapter" data-level="7.9" data-path="visualizing-effect-size.html"><a href="visualizing-effect-size.html"><i class="fa fa-check"></i><b>7.9</b> Visualizing effect size</a></li>
+<li class="chapter" data-level="7.10" data-path="testing-for-interactions.html"><a href="testing-for-interactions.html"><i class="fa fa-check"></i><b>7.10</b> Testing for interactions</a></li>
+<li class="chapter" data-level="7.11" data-path="dredging-and-the-information-theoretical-approach.html"><a href="dredging-and-the-information-theoretical-approach.html"><i class="fa fa-check"></i><b>7.11</b> Dredging and the information theoretical approach</a></li>
+<li class="chapter" data-level="7.12" data-path="bootstrapping-multiple-regression.html"><a href="bootstrapping-multiple-regression.html"><i class="fa fa-check"></i><b>7.12</b> Bootstrapping multiple regression</a></li>
+<li class="chapter" data-level="7.13" data-path="permutation-test-1.html"><a href="permutation-test-1.html"><i class="fa fa-check"></i><b>7.13</b> Permutation test</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -297,11 +313,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Run a 2-way factorial ANOVA on <code>wmcdat2</code> data, using <code>o2cons</code> as the dependent variable and species and conc as the factors. What do you conclude?</li>
 </ul>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb281-1"><a href="multiple-comparisons.html#cb281-1" aria-hidden="true"></a>wmcdat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/wmcdat2.csv&quot;</span>)</span>
-<span id="cb281-2"><a href="multiple-comparisons.html#cb281-2" aria-hidden="true"></a>wmcdat2<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmcdat2<span class="op">$</span>species)</span>
-<span id="cb281-3"><a href="multiple-comparisons.html#cb281-3" aria-hidden="true"></a>wmcdat2<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmcdat2<span class="op">$</span>conc)</span>
-<span id="cb281-4"><a href="multiple-comparisons.html#cb281-4" aria-hidden="true"></a>anova.model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(o2cons <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>conc, <span class="dt">data =</span> wmcdat2)</span>
-<span id="cb281-5"><a href="multiple-comparisons.html#cb281-5" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model5, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb279-1"><a href="multiple-comparisons.html#cb279-1" aria-hidden="true"></a>wmcdat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/wmcdat2.csv&quot;</span>)</span>
+<span id="cb279-2"><a href="multiple-comparisons.html#cb279-2" aria-hidden="true"></a>wmcdat2<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmcdat2<span class="op">$</span>species)</span>
+<span id="cb279-3"><a href="multiple-comparisons.html#cb279-3" aria-hidden="true"></a>wmcdat2<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmcdat2<span class="op">$</span>conc)</span>
+<span id="cb279-4"><a href="multiple-comparisons.html#cb279-4" aria-hidden="true"></a>anova.model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(o2cons <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>conc, <span class="dt">data =</span> wmcdat2)</span>
+<span id="cb279-5"><a href="multiple-comparisons.html#cb279-5" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model5, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p>The ANOVA table is shown below. Technically, because the sample sizes in individual cells are rather small, this analysis should be repeated using a non-parametric ANOVA. For the moment, let’s stick with the parametric analysis.</p>
 <pre><code>## Anova Table (Type III tests)
 ## 
@@ -315,12 +331,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Look at the diagnostic plots:</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb283-1"><a href="multiple-comparisons.html#cb283-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb283-2"><a href="multiple-comparisons.html#cb283-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model5)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb281-1"><a href="multiple-comparisons.html#cb281-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb281-2"><a href="multiple-comparisons.html#cb281-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model5)</span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-78-1.svg" width="672" /></p>
 <p>Homoscedasticity looks ok, but normality less so.. Testing for
 normality, we get:</p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb284-1"><a href="multiple-comparisons.html#cb284-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model5))</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb282-1"><a href="multiple-comparisons.html#cb282-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model5))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -335,10 +351,10 @@ normality, we get:</p>
 Need to add an explnation here
 </div>
 <p>Overall, we conclude that there are no differences among species, and that the effect of concentration does not depend on species (no interaction). Since there is no interaction and no main effect due to species, the only comparison of interest is among salinity concentrations:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="multiple-comparisons.html#cb286-1" aria-hidden="true"></a><span class="co"># fit simplified model</span></span>
-<span id="cb286-2"><a href="multiple-comparisons.html#cb286-2" aria-hidden="true"></a>anova.model6 &lt;-<span class="st"> </span><span class="kw">aov</span>(o2cons <span class="op">~</span><span class="st"> </span>conc, <span class="dt">data =</span> wmcdat2)</span>
-<span id="cb286-3"><a href="multiple-comparisons.html#cb286-3" aria-hidden="true"></a><span class="co"># Make Tukey multiple comparisons</span></span>
-<span id="cb286-4"><a href="multiple-comparisons.html#cb286-4" aria-hidden="true"></a><span class="kw">TukeyHSD</span>(anova.model6)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="multiple-comparisons.html#cb284-1" aria-hidden="true"></a><span class="co"># fit simplified model</span></span>
+<span id="cb284-2"><a href="multiple-comparisons.html#cb284-2" aria-hidden="true"></a>anova.model6 &lt;-<span class="st"> </span><span class="kw">aov</span>(o2cons <span class="op">~</span><span class="st"> </span>conc, <span class="dt">data =</span> wmcdat2)</span>
+<span id="cb284-3"><a href="multiple-comparisons.html#cb284-3" aria-hidden="true"></a><span class="co"># Make Tukey multiple comparisons</span></span>
+<span id="cb284-4"><a href="multiple-comparisons.html#cb284-4" aria-hidden="true"></a><span class="kw">TukeyHSD</span>(anova.model6)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -349,31 +365,31 @@ Need to add an explnation here
 ## 75-50  -4.63625 -7.321998 -1.9505018 0.0003793
 ## 100-50 -3.25500 -5.940748 -0.5692518 0.0141313
 ## 100-75  1.38125 -1.304498  4.0669982 0.4325855</code></pre>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="multiple-comparisons.html#cb288-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb288-2"><a href="multiple-comparisons.html#cb288-2" aria-hidden="true"></a><span class="co"># Graph of all comparisons for conc</span></span>
-<span id="cb288-3"><a href="multiple-comparisons.html#cb288-3" aria-hidden="true"></a>tuk &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.model6, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">conc =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
-<span id="cb288-4"><a href="multiple-comparisons.html#cb288-4" aria-hidden="true"></a><span class="co"># extract information</span></span>
-<span id="cb288-5"><a href="multiple-comparisons.html#cb288-5" aria-hidden="true"></a>tuk.cld &lt;-<span class="st"> </span><span class="kw">cld</span>(tuk)</span>
-<span id="cb288-6"><a href="multiple-comparisons.html#cb288-6" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
-<span id="cb288-7"><a href="multiple-comparisons.html#cb288-7" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
-<span id="cb288-8"><a href="multiple-comparisons.html#cb288-8" aria-hidden="true"></a><span class="co"># plot</span></span>
-<span id="cb288-9"><a href="multiple-comparisons.html#cb288-9" aria-hidden="true"></a><span class="kw">plot</span>(tuk.cld)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-81"></span>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="multiple-comparisons.html#cb286-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb286-2"><a href="multiple-comparisons.html#cb286-2" aria-hidden="true"></a><span class="co"># Graph of all comparisons for conc</span></span>
+<span id="cb286-3"><a href="multiple-comparisons.html#cb286-3" aria-hidden="true"></a>tuk &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.model6, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">conc =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
+<span id="cb286-4"><a href="multiple-comparisons.html#cb286-4" aria-hidden="true"></a><span class="co"># extract information</span></span>
+<span id="cb286-5"><a href="multiple-comparisons.html#cb286-5" aria-hidden="true"></a>tuk.cld &lt;-<span class="st"> </span><span class="kw">cld</span>(tuk)</span>
+<span id="cb286-6"><a href="multiple-comparisons.html#cb286-6" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
+<span id="cb286-7"><a href="multiple-comparisons.html#cb286-7" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
+<span id="cb286-8"><a href="multiple-comparisons.html#cb286-8" aria-hidden="true"></a><span class="co"># plot</span></span>
+<span id="cb286-9"><a href="multiple-comparisons.html#cb286-9" aria-hidden="true"></a><span class="kw">plot</span>(tuk.cld)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-81"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-81-1.svg" alt="Comparaison de Tukey des moyennes de consommation d'oxygèn en fonction del la concentration" width="672" />
 <p class="caption">
 Figure 6.9: Comparaison de Tukey des moyennes de consommation d’oxygèn en fonction del la concentration
 </p>
 </div>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="multiple-comparisons.html#cb289-1" aria-hidden="true"></a><span class="kw">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="multiple-comparisons.html#cb287-1" aria-hidden="true"></a><span class="kw">par</span>(old.par)</span></code></pre></div>
 <p>So there is evidence of a significant difference in oxygen consumption at a reduction in salinity to 50% of regular seawater, but not at a reduction of only 25%.</p>
 <ul>
 <li>Repeat the analysis described above using <code>wmc2dat2.csv</code> . How do
 your results compare with those obtained for <code>wmcdat2.csv</code> ?</li>
 </ul>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb290-1"><a href="multiple-comparisons.html#cb290-1" aria-hidden="true"></a>wmc2dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/wmc2dat2.csv&quot;</span>)</span>
-<span id="cb290-2"><a href="multiple-comparisons.html#cb290-2" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmc2dat2<span class="op">$</span>species)</span>
-<span id="cb290-3"><a href="multiple-comparisons.html#cb290-3" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmc2dat2<span class="op">$</span>conc)</span>
-<span id="cb290-4"><a href="multiple-comparisons.html#cb290-4" aria-hidden="true"></a>anova.model7 &lt;-<span class="st"> </span><span class="kw">lm</span>(o2cons <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>conc, <span class="dt">data =</span> wmc2dat2)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb288-1"><a href="multiple-comparisons.html#cb288-1" aria-hidden="true"></a>wmc2dat2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/wmc2dat2.csv&quot;</span>)</span>
+<span id="cb288-2"><a href="multiple-comparisons.html#cb288-2" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>species &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmc2dat2<span class="op">$</span>species)</span>
+<span id="cb288-3"><a href="multiple-comparisons.html#cb288-3" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(wmc2dat2<span class="op">$</span>conc)</span>
+<span id="cb288-4"><a href="multiple-comparisons.html#cb288-4" aria-hidden="true"></a>anova.model7 &lt;-<span class="st"> </span><span class="kw">lm</span>(o2cons <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>conc, <span class="dt">data =</span> wmc2dat2)</span></code></pre></div>
 <p>Using <code>wmc2dat2.csv</code>,we get:</p>
 <pre><code>## Anova Table (Type III tests)
 ## 
@@ -389,14 +405,14 @@ your results compare with those obtained for <code>wmcdat2.csv</code> ?</li>
 <p>Here there is a large interaction effect, and consequently, there is no
 point in comparing marginal means. This is made clear by examining
 an interaction plot:</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="multiple-comparisons.html#cb292-1" aria-hidden="true"></a><span class="kw">with</span>(wmc2dat2, <span class="kw">interaction.plot</span>(conc, species, o2cons))</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="multiple-comparisons.html#cb290-1" aria-hidden="true"></a><span class="kw">with</span>(wmc2dat2, <span class="kw">interaction.plot</span>(conc, species, o2cons))</span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-84-1.svg" width="672" /></p>
 <ul>
 <li>Working still with the <code>wmc2dat2</code> data set, compare individual cell means (6 in all), with the Bonferonni adjustment. To do this, it is helpful to create a new variable to indicate all the combinations of <code>species</code> and <code>conc</code>:</li>
 </ul>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="multiple-comparisons.html#cb293-1" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>species.conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">paste0</span>(wmc2dat2<span class="op">$</span>species, wmc2dat2<span class="op">$</span>conc))</span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="multiple-comparisons.html#cb291-1" aria-hidden="true"></a>wmc2dat2<span class="op">$</span>species.conc &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">paste0</span>(wmc2dat2<span class="op">$</span>species, wmc2dat2<span class="op">$</span>conc))</span></code></pre></div>
 <p>Then we can conduct pairwise bonferroni comparisons:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="multiple-comparisons.html#cb294-1" aria-hidden="true"></a><span class="kw">with</span>(wmc2dat2, <span class="kw">pairwise.t.test</span>(o2cons, species.conc, <span class="dt">p.adj =</span> <span class="st">&quot;bonf&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="multiple-comparisons.html#cb292-1" aria-hidden="true"></a><span class="kw">with</span>(wmc2dat2, <span class="kw">pairwise.t.test</span>(o2cons, species.conc, <span class="dt">p.adj =</span> <span class="st">&quot;bonf&quot;</span>))</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -412,17 +428,17 @@ an interaction plot:</p>
 ## P value adjustment method: bonferroni</code></pre>
 <p>These comparisons are a little more difficult to interpret, but the analysis essentially examines for differences among seawater concentrations within species A and for differences among concentrations within species B. We see here that the o2Cons at 50% seawater for species B is significantly different from that of 75% and 100% seawater for species B, whereas there are no significant differences in <code>o2cons</code> for species A across all seawater concentrations.</p>
 <p>I find these outputs rather unsatisfying because they show only p- values, but no indication of effect size. One can get both the conclusion from the multiple comparison procedure and an indication of effect size from the graph produced with the following code:</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="multiple-comparisons.html#cb296-1" aria-hidden="true"></a><span class="co"># fit one-way anova comparing all combinations of species.conc combinations</span></span>
-<span id="cb296-2"><a href="multiple-comparisons.html#cb296-2" aria-hidden="true"></a>anova.modelx &lt;-<span class="st"> </span><span class="kw">aov</span>(o2cons <span class="op">~</span><span class="st"> </span>species.conc, <span class="dt">data =</span> wmc2dat2)</span>
-<span id="cb296-3"><a href="multiple-comparisons.html#cb296-3" aria-hidden="true"></a>tuk2 &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.modelx, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">species.conc =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
-<span id="cb296-4"><a href="multiple-comparisons.html#cb296-4" aria-hidden="true"></a><span class="co"># extract information</span></span>
-<span id="cb296-5"><a href="multiple-comparisons.html#cb296-5" aria-hidden="true"></a>tuk2.cld &lt;-<span class="st"> </span><span class="kw">cld</span>(tuk2)</span>
-<span id="cb296-6"><a href="multiple-comparisons.html#cb296-6" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
-<span id="cb296-7"><a href="multiple-comparisons.html#cb296-7" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
-<span id="cb296-8"><a href="multiple-comparisons.html#cb296-8" aria-hidden="true"></a><span class="co"># plot</span></span>
-<span id="cb296-9"><a href="multiple-comparisons.html#cb296-9" aria-hidden="true"></a><span class="kw">plot</span>(tuk2.cld)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="multiple-comparisons.html#cb294-1" aria-hidden="true"></a><span class="co"># fit one-way anova comparing all combinations of species.conc combinations</span></span>
+<span id="cb294-2"><a href="multiple-comparisons.html#cb294-2" aria-hidden="true"></a>anova.modelx &lt;-<span class="st"> </span><span class="kw">aov</span>(o2cons <span class="op">~</span><span class="st"> </span>species.conc, <span class="dt">data =</span> wmc2dat2)</span>
+<span id="cb294-3"><a href="multiple-comparisons.html#cb294-3" aria-hidden="true"></a>tuk2 &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.modelx, <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">species.conc =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
+<span id="cb294-4"><a href="multiple-comparisons.html#cb294-4" aria-hidden="true"></a><span class="co"># extract information</span></span>
+<span id="cb294-5"><a href="multiple-comparisons.html#cb294-5" aria-hidden="true"></a>tuk2.cld &lt;-<span class="st"> </span><span class="kw">cld</span>(tuk2)</span>
+<span id="cb294-6"><a href="multiple-comparisons.html#cb294-6" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
+<span id="cb294-7"><a href="multiple-comparisons.html#cb294-7" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
+<span id="cb294-8"><a href="multiple-comparisons.html#cb294-8" aria-hidden="true"></a><span class="co"># plot</span></span>
+<span id="cb294-9"><a href="multiple-comparisons.html#cb294-9" aria-hidden="true"></a><span class="kw">plot</span>(tuk2.cld)</span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-87-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="multiple-comparisons.html#cb297-1" aria-hidden="true"></a><span class="kw">par</span>(old.par)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="multiple-comparisons.html#cb295-1" aria-hidden="true"></a><span class="kw">par</span>(old.par)</span></code></pre></div>
 <p>Note that in this analysis, we have used the error MS = 9.474 from the original model to contrast cell means. Recall, however, that this assumes that in fact we are dealing with a Model I ANOVA, which may or may not be the case ( conc is certainly a fixed factor, but species might be either fixed or random).</p>
 </div>
 <script src="js/solution.js"></script>
@@ -436,7 +452,6 @@ an interaction plot:</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -466,6 +481,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

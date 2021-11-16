@@ -33,6 +33,14 @@ fig:unnamed-chunk-68
 fig:unnamed-chunk-70
 fig:unnamed-chunk-71
 fig:unnamed-chunk-81
+fig:unnamed-chunk-88
+fig:unnamed-chunk-90
+fig:unnamed-chunk-107
+fig:unnamed-chunk-115
+fig:unnamed-chunk-116
+fig:unnamed-chunk-121
+fig:unnamed-chunk-122
+fig:unnamed-chunk-137
 introduction-to-r
 set-intro
 importing-and-exporting-data
@@ -109,6 +117,20 @@ two-way-non-parametric-anova
 multiple-comparisons
 test-de-permutation-pour-lanova-à-deux-facteurs-de-classification
 bootstrap-for-two-way-anova
+multiple-regression
+set-reg-mul
+points-to-keep-in-mind
+first-look-at-the-data
+multiple-regression-models-from-scratch
+stepwise-multiple-regression-procedures
+detecting-multicollinearity
+polynomial-regression
+checking-assumptions-of-a-multiple-regression-model
+visualizing-effect-size
+testing-for-interactions
+dredging-and-the-information-theoretical-approach
+bootstrapping-multiple-regression
+permutation-test-1
 software-tools
 r-and-r-packages
 pandoc

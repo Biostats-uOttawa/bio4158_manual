@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.5 Two-way non-parametric ANOVA | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.5 Two-way non-parametric ANOVA | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="nested-designs.html"/>
 <link rel="next" href="multiple-comparisons.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<li class="chapter" data-level="4" data-path="two---sample-comparisons.html"><a href="two---sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
@@ -263,6 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
 <li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>7</b> Multiple regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="set-reg-mul.html"><a href="set-reg-mul.html"><i class="fa fa-check"></i><b>7.1</b> R packages and data</a></li>
+<li class="chapter" data-level="7.2" data-path="points-to-keep-in-mind.html"><a href="points-to-keep-in-mind.html"><i class="fa fa-check"></i><b>7.2</b> Points to keep in mind</a></li>
+<li class="chapter" data-level="7.3" data-path="first-look-at-the-data.html"><a href="first-look-at-the-data.html"><i class="fa fa-check"></i><b>7.3</b> First look at the data</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-regression-models-from-scratch.html"><a href="multiple-regression-models-from-scratch.html"><i class="fa fa-check"></i><b>7.4</b> Multiple regression models from scratch</a></li>
+<li class="chapter" data-level="7.5" data-path="stepwise-multiple-regression-procedures.html"><a href="stepwise-multiple-regression-procedures.html"><i class="fa fa-check"></i><b>7.5</b> Stepwise multiple regression procedures</a></li>
+<li class="chapter" data-level="7.6" data-path="detecting-multicollinearity.html"><a href="detecting-multicollinearity.html"><i class="fa fa-check"></i><b>7.6</b> Detecting multicollinearity</a></li>
+<li class="chapter" data-level="7.7" data-path="polynomial-regression.html"><a href="polynomial-regression.html"><i class="fa fa-check"></i><b>7.7</b> Polynomial regression</a></li>
+<li class="chapter" data-level="7.8" data-path="checking-assumptions-of-a-multiple-regression-model.html"><a href="checking-assumptions-of-a-multiple-regression-model.html"><i class="fa fa-check"></i><b>7.8</b> Checking assumptions of a multiple regression model</a></li>
+<li class="chapter" data-level="7.9" data-path="visualizing-effect-size.html"><a href="visualizing-effect-size.html"><i class="fa fa-check"></i><b>7.9</b> Visualizing effect size</a></li>
+<li class="chapter" data-level="7.10" data-path="testing-for-interactions.html"><a href="testing-for-interactions.html"><i class="fa fa-check"></i><b>7.10</b> Testing for interactions</a></li>
+<li class="chapter" data-level="7.11" data-path="dredging-and-the-information-theoretical-approach.html"><a href="dredging-and-the-information-theoretical-approach.html"><i class="fa fa-check"></i><b>7.11</b> Dredging and the information theoretical approach</a></li>
+<li class="chapter" data-level="7.12" data-path="bootstrapping-multiple-regression.html"><a href="bootstrapping-multiple-regression.html"><i class="fa fa-check"></i><b>7.12</b> Bootstrapping multiple regression</a></li>
+<li class="chapter" data-level="7.13" data-path="permutation-test-1.html"><a href="permutation-test-1.html"><i class="fa fa-check"></i><b>7.13</b> Permutation test</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -294,18 +310,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.5</span> Two-way non-parametric ANOVA</h2>
 <p>Two-way non-parametric ANOVA is an extension of the non-parametric one-way methods discussed previously. The basic procedure is to rank all the data in the sample from smallest to largest, then carry out a 2-way ANOVA on the ranks. This can be done either for replicated or unreplicated data.</p>
 <p>Using the data file <code>Stu2wdat.csv</code> , do a two-factor ANOVA to examine the effects of <code>sex</code> and <code>location</code> on <code>rank(rdwght)</code>.</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="two-way-non-parametric-anova.html#cb265-1" aria-hidden="true"></a>aov.rank &lt;-<span class="st"> </span><span class="kw">aov</span>(</span>
-<span id="cb265-2"><a href="two-way-non-parametric-anova.html#cb265-2" aria-hidden="true"></a>  <span class="kw">rank</span>(rdwght) <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>location,</span>
-<span id="cb265-3"><a href="two-way-non-parametric-anova.html#cb265-3" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(</span>
-<span id="cb265-4"><a href="two-way-non-parametric-anova.html#cb265-4" aria-hidden="true"></a>    <span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum</span>
-<span id="cb265-5"><a href="two-way-non-parametric-anova.html#cb265-5" aria-hidden="true"></a>  ),</span>
-<span id="cb265-6"><a href="two-way-non-parametric-anova.html#cb265-6" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2wdat</span>
-<span id="cb265-7"><a href="two-way-non-parametric-anova.html#cb265-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="two-way-non-parametric-anova.html#cb263-1" aria-hidden="true"></a>aov.rank &lt;-<span class="st"> </span><span class="kw">aov</span>(</span>
+<span id="cb263-2"><a href="two-way-non-parametric-anova.html#cb263-2" aria-hidden="true"></a>  <span class="kw">rank</span>(rdwght) <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>location,</span>
+<span id="cb263-3"><a href="two-way-non-parametric-anova.html#cb263-3" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(</span>
+<span id="cb263-4"><a href="two-way-non-parametric-anova.html#cb263-4" aria-hidden="true"></a>    <span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum</span>
+<span id="cb263-5"><a href="two-way-non-parametric-anova.html#cb263-5" aria-hidden="true"></a>  ),</span>
+<span id="cb263-6"><a href="two-way-non-parametric-anova.html#cb263-6" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2wdat</span>
+<span id="cb263-7"><a href="two-way-non-parametric-anova.html#cb263-7" aria-hidden="true"></a>)</span></code></pre></div>
 <p>The Scheirer-Ray-Hare extension of the Kruskall-Wallis test is done by computing a statistic H given by the effect sums of squares (SS) divided by the total MS. The latter can be calculated as the variance of the ranks. We compute an H statistic for each term. The H-statistics are then compared to a theoretical <span class="math inline">\(\chi^2\)</span> (chi-square) distribution using the command line: <code>pchisq(H, df, lower.tail = FALSE)</code> , where <code>H</code> and <code>df</code> are the calculated H-statistics and associated degrees of freedom, respectively.</p>
 <ul>
 <li>Use the ANOVA table based on ranks to test the effects of <code>sex</code> and on <code>rdwght</code>. What do you conclude? How does this result compare with the result obtained with the parametric 2-way ANOVA done before?</li>
 </ul>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="two-way-non-parametric-anova.html#cb266-1" aria-hidden="true"></a><span class="kw">Anova</span>(aov.rank, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="two-way-non-parametric-anova.html#cb264-1" aria-hidden="true"></a><span class="kw">Anova</span>(aov.rank, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: rank(rdwght)
@@ -318,24 +334,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>To calculate the Scheirer-Ray-Hare extension to the Kruskall-Wallis test, you must first calculate the total mean square (MS), i.e. the variance of the ranked data. In this case, there are 186 observations, their ranks are therefore the series 1, 2, 3, …, 186. The variance can be calculated simply as var(1:186) (Isn’t R neat? Cryptic maybe, but neat). So we can compute the <code>H</code> statistic for each term:</p>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="two-way-non-parametric-anova.html#cb268-1" aria-hidden="true"></a>Hsex &lt;-<span class="st"> </span><span class="dv">58394</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span>
-<span id="cb268-2"><a href="two-way-non-parametric-anova.html#cb268-2" aria-hidden="true"></a>Hlocation &lt;-<span class="st"> </span><span class="dv">1128</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span>
-<span id="cb268-3"><a href="two-way-non-parametric-anova.html#cb268-3" aria-hidden="true"></a>Hsexloc &lt;-<span class="st"> </span><span class="dv">1230</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="two-way-non-parametric-anova.html#cb266-1" aria-hidden="true"></a>Hsex &lt;-<span class="st"> </span><span class="dv">58394</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span>
+<span id="cb266-2"><a href="two-way-non-parametric-anova.html#cb266-2" aria-hidden="true"></a>Hlocation &lt;-<span class="st"> </span><span class="dv">1128</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span>
+<span id="cb266-3"><a href="two-way-non-parametric-anova.html#cb266-3" aria-hidden="true"></a>Hsexloc &lt;-<span class="st"> </span><span class="dv">1230</span> <span class="op">/</span><span class="st"> </span><span class="kw">var</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">186</span>)</span></code></pre></div>
 <p>And convert these statistics into p-values:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="two-way-non-parametric-anova.html#cb269-1" aria-hidden="true"></a><span class="co"># sex</span></span>
-<span id="cb269-2"><a href="two-way-non-parametric-anova.html#cb269-2" aria-hidden="true"></a>Hsex</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="two-way-non-parametric-anova.html#cb267-1" aria-hidden="true"></a><span class="co"># sex</span></span>
+<span id="cb267-2"><a href="two-way-non-parametric-anova.html#cb267-2" aria-hidden="true"></a>Hsex</span></code></pre></div>
 <pre><code>## [1] 20.14628</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="two-way-non-parametric-anova.html#cb271-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hsex, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="two-way-non-parametric-anova.html#cb269-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hsex, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 7.173954e-06</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="two-way-non-parametric-anova.html#cb273-1" aria-hidden="true"></a><span class="co"># location</span></span>
-<span id="cb273-2"><a href="two-way-non-parametric-anova.html#cb273-2" aria-hidden="true"></a>Hlocation</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="two-way-non-parametric-anova.html#cb271-1" aria-hidden="true"></a><span class="co"># location</span></span>
+<span id="cb271-2"><a href="two-way-non-parametric-anova.html#cb271-2" aria-hidden="true"></a>Hlocation</span></code></pre></div>
 <pre><code>## [1] 0.3891668</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="two-way-non-parametric-anova.html#cb275-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hlocation, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="two-way-non-parametric-anova.html#cb273-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hlocation, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5327377</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="two-way-non-parametric-anova.html#cb277-1" aria-hidden="true"></a><span class="co"># sex:location</span></span>
-<span id="cb277-2"><a href="two-way-non-parametric-anova.html#cb277-2" aria-hidden="true"></a>Hsexloc</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="two-way-non-parametric-anova.html#cb275-1" aria-hidden="true"></a><span class="co"># sex:location</span></span>
+<span id="cb275-2"><a href="two-way-non-parametric-anova.html#cb275-2" aria-hidden="true"></a>Hsexloc</span></code></pre></div>
 <pre><code>## [1] 0.4243574</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="two-way-non-parametric-anova.html#cb279-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hsexloc, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="two-way-non-parametric-anova.html#cb277-1" aria-hidden="true"></a><span class="kw">pchisq</span>(Hsexloc, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5147707</code></pre>
 <p>Note that these results are the same as those obtained in our original two-way parametric ANOVA. Despite the reduced power, we still find significant differences between the sexes, but still no interaction and no effect due to location.</p>
 <p>There is, however, an important difference. Recall that in the original parametric ANOVA, there was a significant effect of sex when we considered the problem as a Model I ANOVA. However, if we consider it as Model III, the significant sex effect could in principle disappear, because the df associated with the interaction MS are much smaller than the df associated with the Model I error MS. In this case, however, the interaction MS is about half that of the error MS. So, the significant sex effect becomes even more significant if we analyze the problem as a Model III ANOVA. Once again, we see the importance of specifying the appropriate ANOVA design.</p>
@@ -351,7 +367,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -381,6 +396,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

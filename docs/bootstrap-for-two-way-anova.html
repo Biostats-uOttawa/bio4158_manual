@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.8 Bootstrap for two-way ANOVA | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.8 Bootstrap for two-way ANOVA | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -31,9 +31,10 @@
   
   
 <link rel="prev" href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"/>
-<link rel="next" href="software-tools.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link rel="next" href="multiple-regression.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.10" data-path="bootstrapping-the-simple-linear-regression.html"><a href="bootstrapping-the-simple-linear-regression.html"><i class="fa fa-check"></i><b>3.10</b> Bootstrapping the simple linear regression</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="two-sample-comparisons.html"><a href="two-sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
+<li class="chapter" data-level="4" data-path="two---sample-comparisons.html"><a href="two---sample-comparisons.html"><i class="fa fa-check"></i><b>4</b> Two - sample comparisons</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="set-ttest.html"><a href="set-ttest.html"><i class="fa fa-check"></i><b>4.1</b> R packages and data</a></li>
 <li class="chapter" data-level="4.2" data-path="visual-examination-of-sample-data.html"><a href="visual-examination-of-sample-data.html"><i class="fa fa-check"></i><b>4.2</b> Visual examination of sample data</a></li>
@@ -263,6 +263,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7" data-path="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html"><i class="fa fa-check"></i><b>6.7</b> Test de permutation pour l’ANOVA à deux facteurs de classification</a></li>
 <li class="chapter" data-level="6.8" data-path="bootstrap-for-two-way-anova.html"><a href="bootstrap-for-two-way-anova.html"><i class="fa fa-check"></i><b>6.8</b> Bootstrap for two-way ANOVA</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="multiple-regression.html"><a href="multiple-regression.html"><i class="fa fa-check"></i><b>7</b> Multiple regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="set-reg-mul.html"><a href="set-reg-mul.html"><i class="fa fa-check"></i><b>7.1</b> R packages and data</a></li>
+<li class="chapter" data-level="7.2" data-path="points-to-keep-in-mind.html"><a href="points-to-keep-in-mind.html"><i class="fa fa-check"></i><b>7.2</b> Points to keep in mind</a></li>
+<li class="chapter" data-level="7.3" data-path="first-look-at-the-data.html"><a href="first-look-at-the-data.html"><i class="fa fa-check"></i><b>7.3</b> First look at the data</a></li>
+<li class="chapter" data-level="7.4" data-path="multiple-regression-models-from-scratch.html"><a href="multiple-regression-models-from-scratch.html"><i class="fa fa-check"></i><b>7.4</b> Multiple regression models from scratch</a></li>
+<li class="chapter" data-level="7.5" data-path="stepwise-multiple-regression-procedures.html"><a href="stepwise-multiple-regression-procedures.html"><i class="fa fa-check"></i><b>7.5</b> Stepwise multiple regression procedures</a></li>
+<li class="chapter" data-level="7.6" data-path="detecting-multicollinearity.html"><a href="detecting-multicollinearity.html"><i class="fa fa-check"></i><b>7.6</b> Detecting multicollinearity</a></li>
+<li class="chapter" data-level="7.7" data-path="polynomial-regression.html"><a href="polynomial-regression.html"><i class="fa fa-check"></i><b>7.7</b> Polynomial regression</a></li>
+<li class="chapter" data-level="7.8" data-path="checking-assumptions-of-a-multiple-regression-model.html"><a href="checking-assumptions-of-a-multiple-regression-model.html"><i class="fa fa-check"></i><b>7.8</b> Checking assumptions of a multiple regression model</a></li>
+<li class="chapter" data-level="7.9" data-path="visualizing-effect-size.html"><a href="visualizing-effect-size.html"><i class="fa fa-check"></i><b>7.9</b> Visualizing effect size</a></li>
+<li class="chapter" data-level="7.10" data-path="testing-for-interactions.html"><a href="testing-for-interactions.html"><i class="fa fa-check"></i><b>7.10</b> Testing for interactions</a></li>
+<li class="chapter" data-level="7.11" data-path="dredging-and-the-information-theoretical-approach.html"><a href="dredging-and-the-information-theoretical-approach.html"><i class="fa fa-check"></i><b>7.11</b> Dredging and the information theoretical approach</a></li>
+<li class="chapter" data-level="7.12" data-path="bootstrapping-multiple-regression.html"><a href="bootstrapping-multiple-regression.html"><i class="fa fa-check"></i><b>7.12</b> Bootstrapping multiple regression</a></li>
+<li class="chapter" data-level="7.13" data-path="permutation-test-1.html"><a href="permutation-test-1.html"><i class="fa fa-check"></i><b>7.13</b> Permutation test</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="software-tools.html"><a href="software-tools.html"><i class="fa fa-check"></i><b>A</b> Software Tools</a>
 <ul>
@@ -293,55 +309,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="bootstrap-for-two-way-anova" class="section level2" number="6.8">
 <h2><span class="header-section-number">6.8</span> Bootstrap for two-way ANOVA</h2>
 <p>In most cases, permutation tests will be more appropriate than bootstrap in ANOVA designs. However, for the sake of completedness, I have a snippet of code to do bootstrap for you::</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="bootstrap-for-two-way-anova.html#cb300-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
-<span id="cb300-2"><a href="bootstrap-for-two-way-anova.html#cb300-2" aria-hidden="true"></a><span class="co">###########</span></span>
-<span id="cb300-3"><a href="bootstrap-for-two-way-anova.html#cb300-3" aria-hidden="true"></a><span class="co"># Bootstrap for two-way ANOVA</span></span>
-<span id="cb300-4"><a href="bootstrap-for-two-way-anova.html#cb300-4" aria-hidden="true"></a><span class="co"># You possibly want to edit bootfunction.mod1 to return other values</span></span>
-<span id="cb300-5"><a href="bootstrap-for-two-way-anova.html#cb300-5" aria-hidden="true"></a><span class="co"># Here it returns the standard coefficients of the fitted model</span></span>
-<span id="cb300-6"><a href="bootstrap-for-two-way-anova.html#cb300-6" aria-hidden="true"></a><span class="co"># Requires boot library</span></span>
-<span id="cb300-7"><a href="bootstrap-for-two-way-anova.html#cb300-7" aria-hidden="true"></a><span class="co">#</span></span>
-<span id="cb300-8"><a href="bootstrap-for-two-way-anova.html#cb300-8" aria-hidden="true"></a>nreps &lt;-<span class="st"> </span><span class="dv">5000</span></span>
-<span id="cb300-9"><a href="bootstrap-for-two-way-anova.html#cb300-9" aria-hidden="true"></a>dependent &lt;-<span class="st"> </span>Stu2wdat<span class="op">$</span>rdwght</span>
-<span id="cb300-10"><a href="bootstrap-for-two-way-anova.html#cb300-10" aria-hidden="true"></a>factor1 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Stu2wdat<span class="op">$</span>sex)</span>
-<span id="cb300-11"><a href="bootstrap-for-two-way-anova.html#cb300-11" aria-hidden="true"></a>factor2 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Stu2wdat<span class="op">$</span>location)</span>
-<span id="cb300-12"><a href="bootstrap-for-two-way-anova.html#cb300-12" aria-hidden="true"></a>my.dataframe &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dependent, factor1, factor2)</span>
-<span id="cb300-13"><a href="bootstrap-for-two-way-anova.html#cb300-13" aria-hidden="true"></a>my.dataframe.noNA &lt;-<span class="st"> </span>my.dataframe[<span class="kw">complete.cases</span>(my.dataframe), ]</span>
-<span id="cb300-14"><a href="bootstrap-for-two-way-anova.html#cb300-14" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
-<span id="cb300-15"><a href="bootstrap-for-two-way-anova.html#cb300-15" aria-hidden="true"></a><span class="co"># Fit model on observed data</span></span>
-<span id="cb300-16"><a href="bootstrap-for-two-way-anova.html#cb300-16" aria-hidden="true"></a>mod1 &lt;-<span class="st"> </span><span class="kw">aov</span>(dependent <span class="op">~</span><span class="st"> </span>factor1 <span class="op">+</span><span class="st"> </span>factor2 <span class="op">+</span><span class="st"> </span>factor1<span class="op">:</span>factor2,</span>
-<span id="cb300-17"><a href="bootstrap-for-two-way-anova.html#cb300-17" aria-hidden="true"></a>  <span class="dt">data =</span> my.dataframe.noNA</span>
-<span id="cb300-18"><a href="bootstrap-for-two-way-anova.html#cb300-18" aria-hidden="true"></a>)</span>
-<span id="cb300-19"><a href="bootstrap-for-two-way-anova.html#cb300-19" aria-hidden="true"></a></span>
-<span id="cb300-20"><a href="bootstrap-for-two-way-anova.html#cb300-20" aria-hidden="true"></a></span>
-<span id="cb300-21"><a href="bootstrap-for-two-way-anova.html#cb300-21" aria-hidden="true"></a><span class="co"># Bootstrap 1000 time using the residuals bootstraping methods to</span></span>
-<span id="cb300-22"><a href="bootstrap-for-two-way-anova.html#cb300-22" aria-hidden="true"></a><span class="co"># keep the same unequal number of observations for each level of the indep. var.</span></span>
-<span id="cb300-23"><a href="bootstrap-for-two-way-anova.html#cb300-23" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">fitted</span>(mod1)</span>
-<span id="cb300-24"><a href="bootstrap-for-two-way-anova.html#cb300-24" aria-hidden="true"></a>e &lt;-<span class="st"> </span><span class="kw">residuals</span>(mod1)</span>
-<span id="cb300-25"><a href="bootstrap-for-two-way-anova.html#cb300-25" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod1)</span>
-<span id="cb300-26"><a href="bootstrap-for-two-way-anova.html#cb300-26" aria-hidden="true"></a>bootfunction.mod1 &lt;-<span class="st"> </span><span class="cf">function</span>(data, indices) {</span>
-<span id="cb300-27"><a href="bootstrap-for-two-way-anova.html#cb300-27" aria-hidden="true"></a>  y &lt;-<span class="st"> </span>fit <span class="op">+</span><span class="st"> </span>e[indices]</span>
-<span id="cb300-28"><a href="bootstrap-for-two-way-anova.html#cb300-28" aria-hidden="true"></a>  bootmod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>X)</span>
-<span id="cb300-29"><a href="bootstrap-for-two-way-anova.html#cb300-29" aria-hidden="true"></a>  <span class="kw">coefficients</span>(bootmod)</span>
-<span id="cb300-30"><a href="bootstrap-for-two-way-anova.html#cb300-30" aria-hidden="true"></a>}</span>
-<span id="cb300-31"><a href="bootstrap-for-two-way-anova.html#cb300-31" aria-hidden="true"></a>bootresults &lt;-<span class="st"> </span><span class="kw">boot</span>(my.dataframe.noNA, bootfunction.mod1,</span>
-<span id="cb300-32"><a href="bootstrap-for-two-way-anova.html#cb300-32" aria-hidden="true"></a>  <span class="dt">R =</span> <span class="dv">1000</span></span>
-<span id="cb300-33"><a href="bootstrap-for-two-way-anova.html#cb300-33" aria-hidden="true"></a>)</span>
-<span id="cb300-34"><a href="bootstrap-for-two-way-anova.html#cb300-34" aria-hidden="true"></a>bootresults</span>
-<span id="cb300-35"><a href="bootstrap-for-two-way-anova.html#cb300-35" aria-hidden="true"></a><span class="co">## Calculate 90% CI and plot bootstrap estimates separately for each model parameter</span></span>
-<span id="cb300-36"><a href="bootstrap-for-two-way-anova.html#cb300-36" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span>
-<span id="cb300-37"><a href="bootstrap-for-two-way-anova.html#cb300-37" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">1</span>)</span>
-<span id="cb300-38"><a href="bootstrap-for-two-way-anova.html#cb300-38" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">3</span>)</span>
-<span id="cb300-39"><a href="bootstrap-for-two-way-anova.html#cb300-39" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">3</span>)</span>
-<span id="cb300-40"><a href="bootstrap-for-two-way-anova.html#cb300-40" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">4</span>)</span>
-<span id="cb300-41"><a href="bootstrap-for-two-way-anova.html#cb300-41" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">4</span>)</span>
-<span id="cb300-42"><a href="bootstrap-for-two-way-anova.html#cb300-42" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">5</span>)</span>
-<span id="cb300-43"><a href="bootstrap-for-two-way-anova.html#cb300-43" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="bootstrap-for-two-way-anova.html#cb298-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
+<span id="cb298-2"><a href="bootstrap-for-two-way-anova.html#cb298-2" aria-hidden="true"></a><span class="co">###########</span></span>
+<span id="cb298-3"><a href="bootstrap-for-two-way-anova.html#cb298-3" aria-hidden="true"></a><span class="co"># Bootstrap for two-way ANOVA</span></span>
+<span id="cb298-4"><a href="bootstrap-for-two-way-anova.html#cb298-4" aria-hidden="true"></a><span class="co"># You possibly want to edit bootfunction.mod1 to return other values</span></span>
+<span id="cb298-5"><a href="bootstrap-for-two-way-anova.html#cb298-5" aria-hidden="true"></a><span class="co"># Here it returns the standard coefficients of the fitted model</span></span>
+<span id="cb298-6"><a href="bootstrap-for-two-way-anova.html#cb298-6" aria-hidden="true"></a><span class="co"># Requires boot library</span></span>
+<span id="cb298-7"><a href="bootstrap-for-two-way-anova.html#cb298-7" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb298-8"><a href="bootstrap-for-two-way-anova.html#cb298-8" aria-hidden="true"></a>nreps &lt;-<span class="st"> </span><span class="dv">5000</span></span>
+<span id="cb298-9"><a href="bootstrap-for-two-way-anova.html#cb298-9" aria-hidden="true"></a>dependent &lt;-<span class="st"> </span>Stu2wdat<span class="op">$</span>rdwght</span>
+<span id="cb298-10"><a href="bootstrap-for-two-way-anova.html#cb298-10" aria-hidden="true"></a>factor1 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Stu2wdat<span class="op">$</span>sex)</span>
+<span id="cb298-11"><a href="bootstrap-for-two-way-anova.html#cb298-11" aria-hidden="true"></a>factor2 &lt;-<span class="st"> </span><span class="kw">as.factor</span>(Stu2wdat<span class="op">$</span>location)</span>
+<span id="cb298-12"><a href="bootstrap-for-two-way-anova.html#cb298-12" aria-hidden="true"></a>my.dataframe &lt;-<span class="st"> </span><span class="kw">data.frame</span>(dependent, factor1, factor2)</span>
+<span id="cb298-13"><a href="bootstrap-for-two-way-anova.html#cb298-13" aria-hidden="true"></a>my.dataframe.noNA &lt;-<span class="st"> </span>my.dataframe[<span class="kw">complete.cases</span>(my.dataframe), ]</span>
+<span id="cb298-14"><a href="bootstrap-for-two-way-anova.html#cb298-14" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
+<span id="cb298-15"><a href="bootstrap-for-two-way-anova.html#cb298-15" aria-hidden="true"></a><span class="co"># Fit model on observed data</span></span>
+<span id="cb298-16"><a href="bootstrap-for-two-way-anova.html#cb298-16" aria-hidden="true"></a>mod1 &lt;-<span class="st"> </span><span class="kw">aov</span>(dependent <span class="op">~</span><span class="st"> </span>factor1 <span class="op">+</span><span class="st"> </span>factor2 <span class="op">+</span><span class="st"> </span>factor1<span class="op">:</span>factor2,</span>
+<span id="cb298-17"><a href="bootstrap-for-two-way-anova.html#cb298-17" aria-hidden="true"></a>  <span class="dt">data =</span> my.dataframe.noNA</span>
+<span id="cb298-18"><a href="bootstrap-for-two-way-anova.html#cb298-18" aria-hidden="true"></a>)</span>
+<span id="cb298-19"><a href="bootstrap-for-two-way-anova.html#cb298-19" aria-hidden="true"></a></span>
+<span id="cb298-20"><a href="bootstrap-for-two-way-anova.html#cb298-20" aria-hidden="true"></a></span>
+<span id="cb298-21"><a href="bootstrap-for-two-way-anova.html#cb298-21" aria-hidden="true"></a><span class="co"># Bootstrap 1000 time using the residuals bootstraping methods to</span></span>
+<span id="cb298-22"><a href="bootstrap-for-two-way-anova.html#cb298-22" aria-hidden="true"></a><span class="co"># keep the same unequal number of observations for each level of the indep. var.</span></span>
+<span id="cb298-23"><a href="bootstrap-for-two-way-anova.html#cb298-23" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">fitted</span>(mod1)</span>
+<span id="cb298-24"><a href="bootstrap-for-two-way-anova.html#cb298-24" aria-hidden="true"></a>e &lt;-<span class="st"> </span><span class="kw">residuals</span>(mod1)</span>
+<span id="cb298-25"><a href="bootstrap-for-two-way-anova.html#cb298-25" aria-hidden="true"></a>X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod1)</span>
+<span id="cb298-26"><a href="bootstrap-for-two-way-anova.html#cb298-26" aria-hidden="true"></a>bootfunction.mod1 &lt;-<span class="st"> </span><span class="cf">function</span>(data, indices) {</span>
+<span id="cb298-27"><a href="bootstrap-for-two-way-anova.html#cb298-27" aria-hidden="true"></a>  y &lt;-<span class="st"> </span>fit <span class="op">+</span><span class="st"> </span>e[indices]</span>
+<span id="cb298-28"><a href="bootstrap-for-two-way-anova.html#cb298-28" aria-hidden="true"></a>  bootmod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>X)</span>
+<span id="cb298-29"><a href="bootstrap-for-two-way-anova.html#cb298-29" aria-hidden="true"></a>  <span class="kw">coefficients</span>(bootmod)</span>
+<span id="cb298-30"><a href="bootstrap-for-two-way-anova.html#cb298-30" aria-hidden="true"></a>}</span>
+<span id="cb298-31"><a href="bootstrap-for-two-way-anova.html#cb298-31" aria-hidden="true"></a>bootresults &lt;-<span class="st"> </span><span class="kw">boot</span>(my.dataframe.noNA, bootfunction.mod1,</span>
+<span id="cb298-32"><a href="bootstrap-for-two-way-anova.html#cb298-32" aria-hidden="true"></a>  <span class="dt">R =</span> <span class="dv">1000</span></span>
+<span id="cb298-33"><a href="bootstrap-for-two-way-anova.html#cb298-33" aria-hidden="true"></a>)</span>
+<span id="cb298-34"><a href="bootstrap-for-two-way-anova.html#cb298-34" aria-hidden="true"></a>bootresults</span>
+<span id="cb298-35"><a href="bootstrap-for-two-way-anova.html#cb298-35" aria-hidden="true"></a><span class="co">## Calculate 90% CI and plot bootstrap estimates separately for each model parameter</span></span>
+<span id="cb298-36"><a href="bootstrap-for-two-way-anova.html#cb298-36" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span>
+<span id="cb298-37"><a href="bootstrap-for-two-way-anova.html#cb298-37" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">1</span>)</span>
+<span id="cb298-38"><a href="bootstrap-for-two-way-anova.html#cb298-38" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">3</span>)</span>
+<span id="cb298-39"><a href="bootstrap-for-two-way-anova.html#cb298-39" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">3</span>)</span>
+<span id="cb298-40"><a href="bootstrap-for-two-way-anova.html#cb298-40" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">4</span>)</span>
+<span id="cb298-41"><a href="bootstrap-for-two-way-anova.html#cb298-41" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">4</span>)</span>
+<span id="cb298-42"><a href="bootstrap-for-two-way-anova.html#cb298-42" aria-hidden="true"></a><span class="kw">boot.ci</span>(bootresults, <span class="dt">conf =</span> <span class="fl">0.9</span>, <span class="dt">index =</span> <span class="dv">5</span>)</span>
+<span id="cb298-43"><a href="bootstrap-for-two-way-anova.html#cb298-43" aria-hidden="true"></a><span class="kw">plot</span>(bootresults, <span class="dt">index =</span> <span class="dv">5</span>)</span></code></pre></div>
 
 </div>
 <!-- </div> -->
-
-
-
 <script src="js/solution.js"></script>
             </section>
 
@@ -349,11 +362,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="test-de-permutation-pour-lanova-à-deux-facteurs-de-classification.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="software-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="multiple-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -383,6 +395,10 @@ gitbook.start({
 "text": null
 },
 "download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
