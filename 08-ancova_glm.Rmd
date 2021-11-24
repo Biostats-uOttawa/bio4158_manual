@@ -70,7 +70,7 @@ model.full1<-lm(lfkl ~ sex + lage + sex:lage, data = anc1dat)
 Anova(model.full1, type = 3)
 ```
 
-In the previous output, on line 4, `r Anova(model.full1, type = 3),[4,4]` is the probability of observing an `lage:sex` interaction this strong or stronger under the null hypothesis that slope of the relationship between fork length and age does not vary between the sexes, or equivalently that the difference in fork length between males and females (if it exists) does not vary with age (and providing the assumptions of the analysis have been met).
+In the previous output, on line 4, `r Anova(model.full1, type = 3)[4,4]` is the probability of observing an `lage:sex` interaction this strong or stronger under the null hypothesis that slope of the relationship between fork length and age does not vary between the sexes, or equivalently that the difference in fork length between males and females (if it exists) does not vary with age (and providing the assumptions of the analysis have been met).
 
 ```{block2, type ="rmdnote"}
 Note that I used the Anova() function with an uppercase "a" (from the car library) instead of the "built in" anova() (with a lowercase "a") command to get the results using Type III sums of squares. The type III (partial) sums of squares are calculated as if each variable was the last entered in the model and correspond to the difference in explained SS between the full model and a reduced model where only that variable is excluded. The standard anova() function returns Type I (sequential) SS, calculated as each variable is added sequentially to a null model with only an intercept. In rare cases, the type I and type III SS are equal (when the design is perfectly balanced and there is no multicolinearity). In the vast majority of cases, they will differ, and I recommend that you always use the Type III SS in your analyses.
@@ -267,6 +267,7 @@ Working with the `Anc1dat` data set, compare the fit of the ANCOVA and common si
 ```
 
 ```{r}
+model.linear<-lm(lfkl ~ lage, data = anc1dat)
 anova(model.ancova, model.linear)
 ```
 
