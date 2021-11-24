@@ -21,8 +21,8 @@ rmd_files: ["index.Rmd",
   "05-anova.Rmd",
   "06-anova_mult.Rmd",
   "07-reg_mult.Rmd",
-#  "08-ancova_glm.Rmd",
-#  "09-model_freq.Rmd",
+  "08-ancova_glm.Rmd",
+  "09-model_freq.Rmd",
   "10-software.Rmd",
 #  "11-other-extra.Rmd"
   ]
