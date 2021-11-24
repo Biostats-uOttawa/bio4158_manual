@@ -472,7 +472,7 @@ with(wmc2dat2, pairwise.t.test(o2cons, species.conc, p.adj = "bonf"))
 
 These comparisons are a little more difficult to interpret, but the analysis essentially examines for differences among seawater concentrations within species A and for differences among concentrations within species B. We see here that the o2Cons at 50% seawater for species B is significantly different from that of 75% and 100% seawater for species B, whereas there are no significant differences in `o2cons` for species A across all seawater concentrations.
 
-I find these outputs rather unsatisfying because they show only p- values, but no indication of effect size. One can get both the conclusion from the multiple comparison procedure and an indication of effect size from the graph produced with the following code:
+I find these outputs rather unsatisfying because they show only p-values, but no indication of effect size. One can get both the conclusion from the multiple comparison procedure and an indication of effect size from the graph produced with the following code:
 
 ```{r}
 # fit one-way anova comparing all combinations of species.conc combinations
@@ -492,7 +492,7 @@ Note that in this analysis, we have used the error MS = 9.474 from the original 
 
 ## Test de permutation pour l’ANOVA à deux facteurs de classification
 
-When data do not meet the assumptions of the parametric analysis in two- and multiway ANOVA, as an alternative to the non-parametric ANOVA, , it is possible to run permutation tests to calculate p- values. The lmPerm package does this easily.
+When data do not meet the assumptions of the parametric analysis in two- and multiway ANOVA, as an alternative to the non-parametric ANOVA, it is possible to run permutation tests to calculate p-values. The lmPerm package does this easily.
 
 
 ```{r, ano-perm2, eval = FALSE}

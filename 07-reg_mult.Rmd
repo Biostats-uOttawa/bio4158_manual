@@ -2,8 +2,7 @@
 
 After completing this laboratory exercise, you should be able to:
 
-- Use R to fit a multiple regression model, and compare the adequacy of several models using inferential and information theo-
-retic criteria
+- Use R to fit a multiple regression model, and compare the adequacy of several models using inferential and information theoretic criteria
 - Use R to test hypotheses about the effects of different independent variables on the dependent variable of interest.
 - Use R to evaluate multicollinearity among (supposedly) independent variables and its effects.
 - Use R to do curvilinear (polynomial) regression.
@@ -33,7 +32,7 @@ Multiple regression models are used in cases where there is one dependent variab
 
 ## First look at the data
 
-The file Mregdat.Rdata contains data collected in 30 wetlands in the Ottawa-Cornwall- Kingston area. The data included are
+The file Mregdat.Rdata contains data collected in 30 wetlands in the Ottawa-Cornwall-Kingston area. The data included are
 
 * the richness (number of species) of: 
     * birds (`bird` , and its log transform `logbird`), 
@@ -92,7 +91,7 @@ summary(model_logcp)
 According to this result, we would accept the null hypothesis, and conclude that there is no relationship between herptile density and the proportion of forest on adjacent lands. But what happens when we enter both variables into the regression simultaneously?
 
 ```{block2, type="rmdcode"}
-Rerun the above regression one more time, this time adding both inde- pendent variables into the model at once, such that `logherp ~ logarea + cpfor2` . What do you conclude?
+Rerun the above regression one more time, this time adding both independent variables into the model at once, such that `logherp ~ logarea + cpfor2` . What do you conclude?
 ```
 
 ```{r, echo = params$echo_sol, class.source = "exer"}
@@ -263,10 +262,7 @@ model_resloga <- lm(resloga ~ swamp, mysub)
 summary(model_resloga)
 ```
 
-In other words, the fit is terrible, even though you can see from the
-graph that there is in fact quite a strong relationship between the two -
-it's just that it is a non-linear relationship. (If you look at model assumptions for this model, you will see strong evidence of nonlinearity, as
-expected.) The pattern might be well described by a quadratic relation.
+In other words, the fit is terrible, even though you can see from the graph that there is in fact quite a strong relationship between the two - it's just that it is a non-linear relationship. (If you look at model assumptions for this model, you will see strong evidence of nonlinearity, as expected) The pattern might be well described by a quadratic relation.
 
 ```{block2, type = "rmdcode"}
 Rerun the above regression but add a second term in the Formula field to represent swamp^2^ . If you simply add swamp^2^ in the model R won't fit a quadratic effect, you need to use the function`I()` which indicates that the formula within should be evaluated before fitting the model.
