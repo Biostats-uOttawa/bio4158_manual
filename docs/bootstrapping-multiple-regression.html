@@ -377,14 +377,14 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 <span id="cb374-2"><a href="bootstrapping-multiple-regression.html#cb374-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.025</span>, <span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>, <span class="fl">0.99</span>, <span class="fl">0.995</span>)</span>
 <span id="cb374-3"><a href="bootstrapping-multiple-regression.html#cb374-3" aria-hidden="true"></a><span class="kw">apply</span>(tmyresults, <span class="dv">2</span>, quantile, p)</span></code></pre></div>
 <pre><code>##       (Intercept)   logarea       thtden      swamp    I(swamp^2)
-## 0.5%  -0.73658132 0.1374089 -0.047055133 0.01798466 -0.0003414745
-## 1%    -0.69598381 0.1426885 -0.044739229 0.01868120 -0.0003323062
-## 2.5%  -0.63607041 0.1547656 -0.042461153 0.01985088 -0.0003256988
-## 5%    -0.59560108 0.1619853 -0.040285762 0.02118483 -0.0003150969
-## 95%   -0.07589387 0.2830633 -0.012930636 0.03788439 -0.0001826644
-## 97.5% -0.03135297 0.2938050 -0.010593642 0.03898650 -0.0001697473
-## 99%    0.01433318 0.3072004 -0.007049741 0.03971323 -0.0001595911
-## 99.5%  0.07384560 0.3200441 -0.005941938 0.04015462 -0.0001532163</code></pre>
+## 0.5%  -0.72767799 0.1326231 -0.047521477 0.01677216 -0.0003500084
+## 1%    -0.70000863 0.1373090 -0.045476077 0.01755597 -0.0003421383
+## 2.5%  -0.64916418 0.1570763 -0.042675231 0.01974625 -0.0003224389
+## 5%    -0.59321612 0.1670611 -0.040152591 0.02157379 -0.0003092993
+## 95%   -0.08661627 0.2796137 -0.012244528 0.03723496 -0.0001860609
+## 97.5% -0.03198154 0.2861305 -0.009228567 0.03877199 -0.0001691541
+## 99%    0.00502538 0.2988415 -0.006184243 0.04137249 -0.0001506122
+## 99.5%  0.07851205 0.3068615 -0.004119463 0.04172556 -0.0001422793</code></pre>
 <p>These confidence limits are not reliable when the distribution of the bootstrap estimates deviate from Gaussian. If they do,, then it is preferable to compute so-called bias-corrected accelerated (BCa) confidence limits. The following code does just that:</p>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bootstrapping-multiple-regression.html#cb376-1" aria-hidden="true"></a><span class="co">################################################</span></span>
 <span id="cb376-2"><a href="bootstrapping-multiple-regression.html#cb376-2" aria-hidden="true"></a><span class="co"># Bootstrap analysis in multiple regression with BCa confidence intervals</span></span>
@@ -426,7 +426,7 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   ( 0.1103,  0.3226 )  
+## 95%   ( 0.1168,  0.3154 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-141-1.svg" width="672" /></p>
 <p>Note that the BCa interval is from 0.12 to 0.32, whereas the simpler percentile interval is 0.16 to 0.29. BCa interval here is longer on the low side, and shorter on the high side, which it should be given the distribution of bootstrap estimates.</p>
@@ -459,7 +459,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/master/07-reg_mult.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/main/07-reg_mult.Rmd",
 "text": "Edit"
 },
 "history": {
