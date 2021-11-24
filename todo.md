@@ -3,4 +3,5 @@
 * [ ] restructure the text and clarify multiple options
 * [ ] add pca and intro to multivariate analysis
 - [ ] intro to glm
-- update everything with chek_model from performance package
+- [ ] update everything with chek_model from performance package
+- [ ] translate all figure legends
