@@ -1,4 +1,4 @@
-# ANCOVA et modèle linéaire général
+# ANCOVA and general linear model
 
 After competing this laboratory exercise, you should be able to:
 
