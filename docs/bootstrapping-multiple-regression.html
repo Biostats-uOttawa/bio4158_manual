@@ -279,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.12" data-path="bootstrapping-multiple-regression.html"><a href="bootstrapping-multiple-regression.html"><i class="fa fa-check"></i><b>7.12</b> Bootstrapping multiple regression</a></li>
 <li class="chapter" data-level="7.13" data-path="permutation-test-1.html"><a href="permutation-test-1.html"><i class="fa fa-check"></i><b>7.13</b> Permutation test</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="ancova-et-modèle-linéaire-général.html"><a href="ancova-et-modèle-linéaire-général.html"><i class="fa fa-check"></i><b>8</b> ANCOVA et modèle linéaire général</a>
+<li class="chapter" data-level="8" data-path="ancova-and-general-linear-model.html"><a href="ancova-and-general-linear-model.html"><i class="fa fa-check"></i><b>8</b> ANCOVA and general linear model</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="set-anco.html"><a href="set-anco.html"><i class="fa fa-check"></i><b>8.1</b> R packages and data</a></li>
 <li class="chapter" data-level="8.2" data-path="linear-models.html"><a href="linear-models.html"><i class="fa fa-check"></i><b>8.2</b> Linear models</a></li>
@@ -377,14 +377,14 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 <span id="cb374-2"><a href="bootstrapping-multiple-regression.html#cb374-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.025</span>, <span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>, <span class="fl">0.99</span>, <span class="fl">0.995</span>)</span>
 <span id="cb374-3"><a href="bootstrapping-multiple-regression.html#cb374-3" aria-hidden="true"></a><span class="kw">apply</span>(tmyresults, <span class="dv">2</span>, quantile, p)</span></code></pre></div>
 <pre><code>##       (Intercept)   logarea       thtden      swamp    I(swamp^2)
-## 0.5%  -0.72767799 0.1326231 -0.047521477 0.01677216 -0.0003500084
-## 1%    -0.70000863 0.1373090 -0.045476077 0.01755597 -0.0003421383
-## 2.5%  -0.64916418 0.1570763 -0.042675231 0.01974625 -0.0003224389
-## 5%    -0.59321612 0.1670611 -0.040152591 0.02157379 -0.0003092993
-## 95%   -0.08661627 0.2796137 -0.012244528 0.03723496 -0.0001860609
-## 97.5% -0.03198154 0.2861305 -0.009228567 0.03877199 -0.0001691541
-## 99%    0.00502538 0.2988415 -0.006184243 0.04137249 -0.0001506122
-## 99.5%  0.07851205 0.3068615 -0.004119463 0.04172556 -0.0001422793</code></pre>
+## 0.5%  -0.75390929 0.1294810 -0.047103700 0.01725948 -0.0003546466
+## 1%    -0.71670123 0.1456930 -0.045684852 0.01853864 -0.0003444012
+## 2.5%  -0.65985811 0.1595224 -0.042786694 0.01986897 -0.0003256009
+## 5%    -0.61018895 0.1684052 -0.040003219 0.02117844 -0.0003141903
+## 95%   -0.06680114 0.2805738 -0.013229454 0.03750531 -0.0001821810
+## 97.5% -0.01993566 0.2880973 -0.011178228 0.03880143 -0.0001736785
+## 99%    0.03028161 0.2971491 -0.008420285 0.04171672 -0.0001540693
+## 99.5%  0.05198923 0.3125772 -0.006519649 0.04291782 -0.0001465282</code></pre>
 <p>These confidence limits are not reliable when the distribution of the bootstrap estimates deviate from Gaussian. If they do,, then it is preferable to compute so-called bias-corrected accelerated (BCa) confidence limits. The following code does just that:</p>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bootstrapping-multiple-regression.html#cb376-1" aria-hidden="true"></a><span class="co">################################################</span></span>
 <span id="cb376-2"><a href="bootstrapping-multiple-regression.html#cb376-2" aria-hidden="true"></a><span class="co"># Bootstrap analysis in multiple regression with BCa confidence intervals</span></span>
@@ -426,7 +426,7 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   ( 0.1168,  0.3154 )  
+## 95%   ( 0.1201,  0.3188 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-141-1.svg" width="672" /></p>
 <p>Note that the BCa interval is from 0.12 to 0.32, whereas the simpler percentile interval is 0.16 to 0.29. BCa interval here is longer on the low side, and shorter on the high side, which it should be given the distribution of bootstrap estimates.</p>

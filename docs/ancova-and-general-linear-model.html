@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 How to use G*Power | BIO4158 Applied biostats with R</title>
+  <title>8 ANCOVA and general linear model | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 How to use G*Power | BIO4158 Applied biostats with R" />
+  <meta property="og:title" content="8 ANCOVA and general linear model | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/missing.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 How to use G*Power | BIO4158 Applied biostats with R" />
+  <meta name="twitter:title" content="8 ANCOVA and general linear model | BIO4158 Applied biostats with R" />
   
   <meta name="twitter:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="twitter:image" content="/images/missing.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="what-is-gpower.html"/>
-<link rel="next" href="power-analysis-for-a-t-test-on-two-independent-means.html"/>
+<link rel="prev" href="permutation-test-1.html"/>
+<link rel="next" href="set-anco.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -331,110 +331,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-gpower" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> How to use G*Power</h2>
-<div id="general-principle" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> General Principle</h3>
-<p>Using G*Power generally involves 3 steps:</p>
-<ol style="list-style-type: decimal">
-<li>Choosing the appropriate test</li>
-<li>Choosing one of the 5 types of available power analyses</li>
-<li>Enter parameter values and press the <strong>Calculate</strong> button</li>
-</ol>
-</div>
-<div id="types-of-power-analyses" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Types of power analyses</h3>
-<p>First, <span class="math inline">\(\alpha\)</span> is define as the probability level at which
-one rejects the null hypothesis, and <span class="math inline">\(\beta\)</span> is <span class="math inline">\(1 - power\)</span>.</p>
-<div id="a-priori" class="section level4 unnumbered" number="">
-<h4>A priori</h4>
-<p>Computes the sample size required given <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\alpha\)</span>, and the effect size. This type of analysis is useful when planning experiments.</p>
-</div>
-<div id="compromise" class="section level4 unnumbered" number="">
-<h4>Compromise</h4>
-<p>Computes <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> for a given <span class="math inline">\(\alpha\)</span>/<span class="math inline">\(\beta\)</span> ratio, sample size, and effect size. Less commonly used (I have never used it myself) although it can be useful when the <span class="math inline">\(\alpha\)</span>/<span class="math inline">\(\beta\)</span> ratio has meaning, for example when the cost of type I and type II errors can be quantified.</p>
-</div>
-<div id="criterion" class="section level4 unnumbered" number="">
-<h4>Criterion</h4>
-<p>Computes <span class="math inline">\(\alpha\)</span> for a given <span class="math inline">\(\beta\)</span>, sample size, and effect size. In practice, I see little interest in this. Let me know if you see something I don’t!</p>
-</div>
-<div id="post-hoc" class="section level4 unnumbered" number="">
-<h4>Post-hoc</h4>
-<p>Computes the power for a given <span class="math inline">\(\alpha\)</span>, effect size, and
-sample size. Used frequently to help in the interpretation of a test
-that is not statistically significant, but only if an effect size that is
-biologically significant is used (and not the observed effect size). Not
-relevant when the test is significant.
-Sensitivity. Computes the detectable effect size for a given <span class="math inline">\(\beta\)</span> ,<span class="math inline">\(\alpha\)</span>, and
-sample size. Very useful at the planning stage of an experiment.</p>
-</div>
-</div>
-<div id="how-to-calculate-effect-size" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> How to calculate effect size</h3>
-<p>G*Power can perform power analyses for several statistical tests.
-The metric for effect size depends on the test. Note that other
-software packages often use different effect size metrics and that it is
-important to use the correct one for each package. G<em>Power has an
-effect size calculator for many tests that only requires you to enter
-the relevant values. The following table lists the effect size metrics
-used by G</em>Power for the various tests.</p>
-<table>
-<colgroup>
-<col width="11%" />
-<col width="38%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Test</th>
-<th align="center">Taille d’effet</th>
-<th align="left">Formule</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">t-test on means</td>
-<td align="center">d</td>
-<td align="left"><span class="math inline">\(d = \frac{|\mu_1 - \mu_2|}{\sqrt{({s_1}^2 + {s_2}^2)/2}}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left">t-test on correlations</td>
-<td align="center">r</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">other t-tests</td>
-<td align="center">f</td>
-<td align="left"><span class="math inline">\(f = \frac{\mu_1}{\sigma}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left">F-test (ANOVA)</td>
-<td align="center">f</td>
-<td align="left"><span class="math inline">\(f = \frac{\frac{\sqrt{\sum_{i=1}^k (\mu_i - \mu)^2}}{k}}{\sigma}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left">other F-tests</td>
-<td align="center"><span class="math inline">\(f^2\)</span></td>
-<td align="left"><span class="math inline">\(f^2 = \frac{{R_p}^2}{1-{R_p}^2}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"><span class="math inline">\({R_p}\)</span> is the squared partial correlation coefficient</td>
-</tr>
-<tr class="odd">
-<td align="left">Chi-square test</td>
-<td align="center">w</td>
-<td align="left"><span class="math inline">\(w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2 }{ p_{0i}} }\)</span></td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"><span class="math inline">\(p_{0i}\)</span> and <span class="math inline">\(p_{1i}\)</span> are theporportion in category <span class="math inline">\(i\)</span> predicted by the null, <span class="math inline">\(_0\)</span>, and alternative, <span class="math inline">\(_1\)</span>, hypothesis</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div id="ancova-and-general-linear-model" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> ANCOVA and general linear model</h1>
+<p>After competing this laboratory exercise, you should be able to:</p>
+<ul>
+<li>Use R to do an analysis of covariance (ANCOVA) and interpret statistical models that have both continuous and categorical
+independent variables LMs</li>
+<li>Use R to test the assumptions underlying LMs</li>
+<li>Use R to compare model fits</li>
+<li>Use R to do bootstrap and permutation tests on LM type models including both continuous and categorical independent variables.</li>
+</ul>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -442,8 +348,8 @@ used by G</em>Power for the various tests.</p>
           </div>
         </div>
       </div>
-<a href="what-is-gpower.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="power-analysis-for-a-t-test-on-two-independent-means.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="permutation-test-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="set-anco.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -464,7 +370,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/main/02-Gpower.Rmd",
+"link": "https://github.com/Bio4158-4558-uottawa/lab_manual/edit/main/08-ancova_glm.Rmd",
 "text": "Edit"
 },
 "history": {

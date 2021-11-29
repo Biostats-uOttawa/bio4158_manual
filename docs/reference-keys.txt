@@ -140,7 +140,7 @@ testing-for-interactions
 dredging-and-the-information-theoretical-approach
 bootstrapping-multiple-regression
 permutation-test-1
-ancova-et-modèle-linéaire-général
+ancova-and-general-linear-model
 set-anco
 linear-models
 ancova
