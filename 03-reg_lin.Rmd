@@ -442,7 +442,15 @@ No real difference either. Overall, this suggests that the most extreme values d
 ## Quantifying effect size in regression and power analysis
 
 Biological interpretation differs from statistical interpretation. Statistically, we conclude that size increase with age (i.e. the slope is positive and different from 0). But this conclusion alone does not tell if the difference between young and old fish is large. The slope and the scatterplot are more informative than the p-value here. The slope (in log-log space) is 0.34.
-This means that for each unit increase of X (`log10(age)`), there is an increase of 0.34 units of `log10(fklngth)`. In other words, when age is multiplied by 10, fork length is multiplied by about 2 (10^0.34). Humm, length increases more slowly than age. This slope value (0.34) is an estimate of raw effect size. It measure how much length changes with age.
+This means that for each unit increase of X (`log10(age)`), there is an increase of 0.34 units of `log10(fklngth)`. In other words, when age is multiplied by 10, fork length is multiplied by about 2 (`10^0.34^`). Humm, length increases more slowly than age. This slope value (0.34) is an estimate of raw effect size. It measure how much length changes with age.
+
+It would also be important to estimate the confidence interval around the estimate of the slope. This can beobtained using the `confint()` function.
+
+```{r, ci-es-lm}
+confint(RegModel.2)
+```
+
+The 95% confidence interval for the slope is 0.29-0.38. It is quite narrow and include only values far from zero.
 
 ### Power to detect a given slope
 
