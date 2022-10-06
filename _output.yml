@@ -14,7 +14,7 @@ bookdown::gitbook:
         <li><a href="./">BIO4158 Laboratory manual</a></li>
       after: |
         <li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
-    download: [pdf, epub, mobi]
+    download: [pdf, epub]
     edit: https://github.com/Bio4158-4558-uottawa/lab_manual/edit/main/%s
     sharing: false
 #      github: no
