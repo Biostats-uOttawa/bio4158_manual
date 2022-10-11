@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.4 Multiple regression models from scratch | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.4 Multiple regression models from scratch | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="first-look-at-the-data.html"/>
 <link rel="next" href="stepwise-multiple-regression-procedures.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,16 +330,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-regression-models-from-scratch" class="section level2" number="7.4">
-<h2><span class="header-section-number">7.4</span> Multiple regression models from scratch</h2>
+<div id="multiple-regression-models-from-scratch" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Multiple regression models from scratch<a href="multiple-regression-models-from-scratch.html#multiple-regression-models-from-scratch" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We begin the multiple regression exercise by considering a situation with one dependent variable and three (possibly) independent variables. First, we will start from scratch and build a multiple regression model based on what we know from building simple regression models. Next, we will look at automated methods of building multiple regressions models using simultaneous, forward, and backward stepwise procedures.</p>
 
 <div class="rmdcode">
 Using the subset of the <code>Mregdat.csv</code> data file, regress <code>logherp</code> on <code>logarea</code>.
 </div>
 <p>On the basis of the regression, what do you conclude?</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="multiple-regression-models-from-scratch.html#cb300-1" aria-hidden="true"></a>model_loga &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea, <span class="dt">data =</span> mydata)</span>
-<span id="cb300-2"><a href="multiple-regression-models-from-scratch.html#cb300-2" aria-hidden="true"></a><span class="kw">summary</span>(model_loga)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="multiple-regression-models-from-scratch.html#cb301-1" aria-hidden="true"></a>model_loga &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea, <span class="dt">data =</span> mydata)</span>
+<span id="cb301-2"><a href="multiple-regression-models-from-scratch.html#cb301-2" aria-hidden="true"></a><span class="kw">summary</span>(model_loga)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea, data = mydata)
@@ -360,8 +359,8 @@ Using the subset of the <code>Mregdat.csv</code> data file, regress <code>logher
 ##   (2 observations deleted due to missingness)
 ## Multiple R-squared:  0.3552, Adjusted R-squared:  0.3304 
 ## F-statistic: 14.32 on 1 and 26 DF,  p-value: 0.0008185</code></pre>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="multiple-regression-models-from-scratch.html#cb302-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb302-2"><a href="multiple-regression-models-from-scratch.html#cb302-2" aria-hidden="true"></a><span class="kw">plot</span>(model_loga)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="multiple-regression-models-from-scratch.html#cb303-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb303-2"><a href="multiple-regression-models-from-scratch.html#cb303-2" aria-hidden="true"></a><span class="kw">plot</span>(model_loga)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-90"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-90-1.svg" alt="Checking model asusmptions for regression of *logherp* as a function of *logarea*" width="672" />
 <p class="caption">
@@ -373,8 +372,8 @@ Figure 7.2: Checking model asusmptions for regression of <em>logherp</em> as a f
 <div class="rmdcode">
 Rerun the above regression, this time replacing <code>logarea</code> with <code>cpfor2</code> as the independent variable, such that the expression in the formula field reads: <code>logherp ~ cpfor2</code> . What do you conclude?
 </div>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb303-1"><a href="multiple-regression-models-from-scratch.html#cb303-1" aria-hidden="true"></a>model_logcp &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>cpfor2, <span class="dt">data =</span> mydata)</span>
-<span id="cb303-2"><a href="multiple-regression-models-from-scratch.html#cb303-2" aria-hidden="true"></a><span class="kw">summary</span>(model_logcp)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb304-1"><a href="multiple-regression-models-from-scratch.html#cb304-1" aria-hidden="true"></a>model_logcp &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>cpfor2, <span class="dt">data =</span> mydata)</span>
+<span id="cb304-2"><a href="multiple-regression-models-from-scratch.html#cb304-2" aria-hidden="true"></a><span class="kw">summary</span>(model_logcp)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ cpfor2, data = mydata)
@@ -399,8 +398,8 @@ Rerun the above regression, this time replacing <code>logarea</code> with <code>
 <div class="rmdcode">
 Rerun the above regression one more time, this time adding both independent variables into the model at once, such that <code>logherp ~ logarea + cpfor2</code> . What do you conclude?
 </div>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb305-1"><a href="multiple-regression-models-from-scratch.html#cb305-1" aria-hidden="true"></a>model_mcp &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2, <span class="dt">data =</span> mydata)</span>
-<span id="cb305-2"><a href="multiple-regression-models-from-scratch.html#cb305-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mcp)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb306-1"><a href="multiple-regression-models-from-scratch.html#cb306-1" aria-hidden="true"></a>model_mcp &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2, <span class="dt">data =</span> mydata)</span>
+<span id="cb306-2"><a href="multiple-regression-models-from-scratch.html#cb306-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mcp)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + cpfor2, data = mydata)
@@ -427,8 +426,8 @@ Rerun the above regression one more time, this time adding both independent vari
 <div class="rmdcode">
 Run another multiple regression, this time substituting <code>thtden</code> for <code>cpfor2</code> as an independent variable (<code>logherp ~ logarea + thtden</code>).
 </div>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb307-1"><a href="multiple-regression-models-from-scratch.html#cb307-1" aria-hidden="true"></a>model_mden &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">data =</span> mydata)</span>
-<span id="cb307-2"><a href="multiple-regression-models-from-scratch.html#cb307-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mden)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb308-1"><a href="multiple-regression-models-from-scratch.html#cb308-1" aria-hidden="true"></a>model_mden &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">data =</span> mydata)</span>
+<span id="cb308-2"><a href="multiple-regression-models-from-scratch.html#cb308-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mden)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + thtden, data = mydata)
@@ -456,8 +455,8 @@ Run another multiple regression, this time substituting <code>thtden</code> for 
 <div class="rmdcode">
 Fit a regression model with logherp as the dependent variable and logarea , cpfor2 and thtden as the independent variables. What do you conclude?
 </div>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb309-1"><a href="multiple-regression-models-from-scratch.html#cb309-1" aria-hidden="true"></a>model_mtri &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">data =</span> mydata)</span>
-<span id="cb309-2"><a href="multiple-regression-models-from-scratch.html#cb309-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mtri)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb310-1"><a href="multiple-regression-models-from-scratch.html#cb310-1" aria-hidden="true"></a>model_mtri &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">data =</span> mydata)</span>
+<span id="cb310-2"><a href="multiple-regression-models-from-scratch.html#cb310-2" aria-hidden="true"></a><span class="kw">summary</span>(model_mtri)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + cpfor2 + thtden, data = mydata)
@@ -486,7 +485,7 @@ Fit a regression model with logherp as the dependent variable and logarea , cpfo
 </ol>
 <p>Note also that although the regression coefficient for <code>thtden</code> has not changed much from that obtained when just <code>thtden</code> and <code>logarea</code> were included in the fitted model (-.036 vs -.042, the standard error for the regression coefficient for <code>thtden</code> has increased slightly, meaning the estimate is less precise. If the correlation between <code>thtden</code> and <code>cpfor2</code> was greater, the change in precision would also be greater.</p>
 <p>We can compare the fit of the last two models (<em>i.e.</em>, the model with all 3 variables and the model with only <code>logarea</code> and <code>thtden</code> to decide which model is best to include.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="multiple-regression-models-from-scratch.html#cb311-1" aria-hidden="true"></a><span class="kw">anova</span>(model_mtri, model_mden)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="multiple-regression-models-from-scratch.html#cb312-1" aria-hidden="true"></a><span class="kw">anova</span>(model_mtri, model_mden)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: logherp ~ logarea + cpfor2 + thtden
@@ -541,7 +540,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

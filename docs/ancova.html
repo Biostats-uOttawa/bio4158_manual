@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.3 ANCOVA | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.3 ANCOVA | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="linear-models.html"/>
 <link rel="next" href="homogeneity-of-slopes.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ancova" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> ANCOVA</h2>
+<div id="ancova" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> ANCOVA<a href="ancova.html#ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>ANCOVA stands for Analysis of Covariance. It is a type of LM where there is one (or more) continuous independent variable (sometimes called a covariate) and one (or more) categorical independent variable. In the traditional treatment of ANCOVA in biostatistical textbooks, the ANCOVA model does not contain interaction terms between the continuous and categorical independent variables. Hence, the traditional ANCOVA analysis assumes that there is no interaction, and is preceeded by a test of significance of interactions, equivalent to testing that the slopes (coefficients for the continuous independent variables) do not differ among level of the categorical independent variables (a test for homogeneity of slopes). Some people, me included, use the term ANCOVA a bit more loosely for any LM that involves both continuous and categorical variables. Be aware that, depending on the author, ANCOVA may refer to a model with or without interaction terms.</p>
 </div>
 <script src="js/solution.js"></script>
@@ -374,7 +373,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

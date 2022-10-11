@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.6 Simple linear regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.6 Simple linear regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="non-parametric-correlations-spearmans-rank-and-kendalls-tau.html"/>
 <link rel="next" href="data-transformations-in-regression.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simple-linear-regression" class="section level2" number="3.6">
-<h2><span class="header-section-number">3.6</span> Simple linear regression</h2>
+<div id="simple-linear-regression" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Simple linear regression<a href="simple-linear-regression.html#simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In correlation analysis we are interested in how pairs of variables covary: However, in regression analysis, we are attempting to estimate a model that predicts a variable (the dependent variable) from another variable (the independent variable).</p>
 <p>As with any statistical analysis, the best way to begin is by looking at your data.
 If you are interested in the relationship between two variables, say, Y and X, produce a plot of Y versus X just to get a “feel” for the relationship.</p>
@@ -392,8 +391,8 @@ regression.</li>
 <p>The estimated regression equation is therefore:</p>
 <p><span class="math display">\[ Fklngth = 28.50359 + 0.70724 * age\]</span></p>
 <p>Given the highly significant F-value of the model (or equivalently the highly significant t-value for the slope of the line), we reject the null hypothesis that there is no relationship between fork length and age.</p>
-<div id="testing-regression-assumptions" class="section level3" number="3.6.1">
-<h3><span class="header-section-number">3.6.1</span> Testing regression assumptions</h3>
+<div id="testing-regression-assumptions" class="section level3 hasAnchor" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Testing regression assumptions<a href="simple-linear-regression.html#testing-regression-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Simple model I regression makes four assumptions:</p>
 <ol style="list-style-type: decimal">
 <li>the X variable is measured without error;</li>
@@ -424,8 +423,8 @@ Note that R automatically labels the most extreme cases on each of these 4 plots
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-29-1.svg" width="672" /></p>
 <p>So, what is the verdict about the linear regression between <code>fklngth</code> and <code>age</code> ? It fails the linearity, possibly fails the normality, passes homoscedasticity, and this does not seem to be too strongly affected by some bizarre points.</p>
 </div>
-<div id="formal-tests-of-regression-assumptions" class="section level3" number="3.6.2">
-<h3><span class="header-section-number">3.6.2</span> Formal tests of regression assumptions</h3>
+<div id="formal-tests-of-regression-assumptions" class="section level3 hasAnchor" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Formal tests of regression assumptions<a href="simple-linear-regression.html#formal-tests-of-regression-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In my practice, I seldom use formal tests of regression assumptions and mostly rely on graphs of the residuals to guide my decisions. To my knowledge, this is what most biologists and data analysts do. However, in my early analyst life I was not always confident that I was interpreting these graphs correctly and wished that I had a formal test or a statistic quantifying the degree of deviation from the regression assumptions.</p>
 <p>The <code>lmtest</code> R package, not part of the base R installation, but available from CRAN, contains a number of tests for linearity and homoscedasticity. And one can test for normality using the Shapiro-Wilk test seen previously.</p>
 <p>First, you need to load (and maybe install) the <code>lmtest</code> package.</p>
@@ -505,7 +504,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

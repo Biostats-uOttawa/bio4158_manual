@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.2 One-way ANOVA with multiple comparisons | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.2 One-way ANOVA with multiple comparisons | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="set-ano.html"/>
 <link rel="next" href="data-transformations-and-non-parametric-anova.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,20 +330,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="one-way-anova-with-multiple-comparisons" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> One-way ANOVA with multiple comparisons</h2>
+<div id="one-way-anova-with-multiple-comparisons" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> One-way ANOVA with multiple comparisons<a href="one-way-anova-with-multiple-comparisons.html#one-way-anova-with-multiple-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The one-way ANOVA is the multi-group analog of the <em>t</em>-test, which is used to compare two groups/levels. It makes essentially the same assumptions, and in the case of two groups/levels, is in fact mathematically equivalent to the <em>t</em>-test.</p>
 <p>In 1960-1962, the Grand Rapids Dam was built on the Saskatchewan River upstream of Cumberland House. There are anecdotal reports that during dam construction, a number of large sturgeon were stranded and died in shallow pools. Surveys of sturgeon were carried out in 1954, 1958, 1965 and 1966 with fork length (<code>fklngth</code>) and round weight (<code>rdwght</code>) being recorded (not necessarily both measurements for each individual). These data are in the data file <code>Dam10dat.csv</code>.</p>
-<div id="visualiser-les-données" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Visualiser les données</h3>
+<div id="visualiser-les-données" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Visualiser les données<a href="one-way-anova-with-multiple-comparisons.html#visualiser-les-données" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Using <code>Dam10dat.csv</code>, you must first change the data type of the
 numerical variable year , so that R recognizes that we wish to treat this
 variable as a factor variable and not a continuous variable.</li>
 </ul>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb168-1"><a href="one-way-anova-with-multiple-comparisons.html#cb168-1" aria-hidden="true"></a>dam10dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Dam10dat.csv&quot;</span>)</span>
-<span id="cb168-2"><a href="one-way-anova-with-multiple-comparisons.html#cb168-2" aria-hidden="true"></a>dam10dat<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.factor</span>(dam10dat<span class="op">$</span>year)</span>
-<span id="cb168-3"><a href="one-way-anova-with-multiple-comparisons.html#cb168-3" aria-hidden="true"></a><span class="kw">str</span>(dam10dat)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb170-1"><a href="one-way-anova-with-multiple-comparisons.html#cb170-1" aria-hidden="true"></a>dam10dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Dam10dat.csv&quot;</span>)</span>
+<span id="cb170-2"><a href="one-way-anova-with-multiple-comparisons.html#cb170-2" aria-hidden="true"></a>dam10dat<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">as.factor</span>(dam10dat<span class="op">$</span>year)</span>
+<span id="cb170-3"><a href="one-way-anova-with-multiple-comparisons.html#cb170-3" aria-hidden="true"></a><span class="kw">str</span>(dam10dat)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    118 obs. of  21 variables:
 ##  $ year    : Factor w/ 4 levels &quot;1954&quot;,&quot;1958&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ fklngth : num  45 50 39 46 54.5 49 42.5 49 56 54 ...
@@ -370,32 +369,32 @@ variable as a factor variable and not a continuous variable.</li>
 <ul>
 <li>Next, have a look at the fklngth data, just as we did in the last lab for t-tests. Create a histogram with density line grouped by year to get a feel for what’s happening with your data and a boxplot of length per year. What can you say about these data?</li>
 </ul>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb170-1"><a href="one-way-anova-with-multiple-comparisons.html#cb170-1" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dam10dat, <span class="kw">aes</span>(<span class="dt">x =</span> fklngth)) <span class="op">+</span></span>
-<span id="cb170-2"><a href="one-way-anova-with-multiple-comparisons.html#cb170-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fork length (cm)&quot;</span>) <span class="op">+</span></span>
-<span id="cb170-3"><a href="one-way-anova-with-multiple-comparisons.html#cb170-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
-<span id="cb170-4"><a href="one-way-anova-with-multiple-comparisons.html#cb170-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span></span>
-<span id="cb170-5"><a href="one-way-anova-with-multiple-comparisons.html#cb170-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..),</span>
-<span id="cb170-6"><a href="one-way-anova-with-multiple-comparisons.html#cb170-6" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb170-7"><a href="one-way-anova-with-multiple-comparisons.html#cb170-7" aria-hidden="true"></a>    <span class="dt">alpha =</span> <span class="fl">0.3</span></span>
-<span id="cb170-8"><a href="one-way-anova-with-multiple-comparisons.html#cb170-8" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb170-9"><a href="one-way-anova-with-multiple-comparisons.html#cb170-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_function</span>(</span>
-<span id="cb170-10"><a href="one-way-anova-with-multiple-comparisons.html#cb170-10" aria-hidden="true"></a>    <span class="dt">fun =</span> dnorm,</span>
-<span id="cb170-11"><a href="one-way-anova-with-multiple-comparisons.html#cb170-11" aria-hidden="true"></a>    <span class="dt">args =</span> <span class="kw">list</span>(</span>
-<span id="cb170-12"><a href="one-way-anova-with-multiple-comparisons.html#cb170-12" aria-hidden="true"></a>      <span class="dt">mean =</span> <span class="kw">mean</span>(dam10dat<span class="op">$</span>fklngth),</span>
-<span id="cb170-13"><a href="one-way-anova-with-multiple-comparisons.html#cb170-13" aria-hidden="true"></a>      <span class="dt">sd =</span> <span class="kw">sd</span>(dam10dat<span class="op">$</span>fklngth)</span>
-<span id="cb170-14"><a href="one-way-anova-with-multiple-comparisons.html#cb170-14" aria-hidden="true"></a>    ),</span>
-<span id="cb170-15"><a href="one-way-anova-with-multiple-comparisons.html#cb170-15" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb170-16"><a href="one-way-anova-with-multiple-comparisons.html#cb170-16" aria-hidden="true"></a>  )</span>
-<span id="cb170-17"><a href="one-way-anova-with-multiple-comparisons.html#cb170-17" aria-hidden="true"></a></span>
-<span id="cb170-18"><a href="one-way-anova-with-multiple-comparisons.html#cb170-18" aria-hidden="true"></a><span class="co"># display graph, by year</span></span>
-<span id="cb170-19"><a href="one-way-anova-with-multiple-comparisons.html#cb170-19" aria-hidden="true"></a>mygraph <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year, <span class="dt">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb172-1"><a href="one-way-anova-with-multiple-comparisons.html#cb172-1" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(dam10dat, <span class="kw">aes</span>(<span class="dt">x =</span> fklngth)) <span class="op">+</span></span>
+<span id="cb172-2"><a href="one-way-anova-with-multiple-comparisons.html#cb172-2" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Fork length (cm)&quot;</span>) <span class="op">+</span></span>
+<span id="cb172-3"><a href="one-way-anova-with-multiple-comparisons.html#cb172-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span></span>
+<span id="cb172-4"><a href="one-way-anova-with-multiple-comparisons.html#cb172-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span></span>
+<span id="cb172-5"><a href="one-way-anova-with-multiple-comparisons.html#cb172-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..),</span>
+<span id="cb172-6"><a href="one-way-anova-with-multiple-comparisons.html#cb172-6" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb172-7"><a href="one-way-anova-with-multiple-comparisons.html#cb172-7" aria-hidden="true"></a>    <span class="dt">alpha =</span> <span class="fl">0.3</span></span>
+<span id="cb172-8"><a href="one-way-anova-with-multiple-comparisons.html#cb172-8" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb172-9"><a href="one-way-anova-with-multiple-comparisons.html#cb172-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_function</span>(</span>
+<span id="cb172-10"><a href="one-way-anova-with-multiple-comparisons.html#cb172-10" aria-hidden="true"></a>    <span class="dt">fun =</span> dnorm,</span>
+<span id="cb172-11"><a href="one-way-anova-with-multiple-comparisons.html#cb172-11" aria-hidden="true"></a>    <span class="dt">args =</span> <span class="kw">list</span>(</span>
+<span id="cb172-12"><a href="one-way-anova-with-multiple-comparisons.html#cb172-12" aria-hidden="true"></a>      <span class="dt">mean =</span> <span class="kw">mean</span>(dam10dat<span class="op">$</span>fklngth),</span>
+<span id="cb172-13"><a href="one-way-anova-with-multiple-comparisons.html#cb172-13" aria-hidden="true"></a>      <span class="dt">sd =</span> <span class="kw">sd</span>(dam10dat<span class="op">$</span>fklngth)</span>
+<span id="cb172-14"><a href="one-way-anova-with-multiple-comparisons.html#cb172-14" aria-hidden="true"></a>    ),</span>
+<span id="cb172-15"><a href="one-way-anova-with-multiple-comparisons.html#cb172-15" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb172-16"><a href="one-way-anova-with-multiple-comparisons.html#cb172-16" aria-hidden="true"></a>  )</span>
+<span id="cb172-17"><a href="one-way-anova-with-multiple-comparisons.html#cb172-17" aria-hidden="true"></a></span>
+<span id="cb172-18"><a href="one-way-anova-with-multiple-comparisons.html#cb172-18" aria-hidden="true"></a><span class="co"># display graph, by year</span></span>
+<span id="cb172-19"><a href="one-way-anova-with-multiple-comparisons.html#cb172-19" aria-hidden="true"></a>mygraph <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year, <span class="dt">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ano-2"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-2-1.svg" alt="Distribution of sturgeon length per year" width="672" />
 <p class="caption">
 Figure 5.1: Distribution of sturgeon length per year
 </p>
 </div>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb171-1"><a href="one-way-anova-with-multiple-comparisons.html#cb171-1" aria-hidden="true"></a><span class="kw">boxplot</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb173-1"><a href="one-way-anova-with-multiple-comparisons.html#cb173-1" aria-hidden="true"></a><span class="kw">boxplot</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-38"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-38-1.svg" alt="Boxplot of sturgeon length per year" width="672" />
 <p class="caption">
@@ -404,8 +403,8 @@ Figure 5.2: Boxplot of sturgeon length per year
 </div>
 <p>It appears as though there may have been a small drop in <code>fklngth</code> after the construction of the dam, but the data are variable and the effects are not clear. There might also be some problems with normality in the 1954 and 1966 samples, and it looks as though there are outliers in the 1958 and 1966 samples. Let’s proceed with testing the assumptions of the ANOVA by running the analysis and looking at the residuals.</p>
 </div>
-<div id="testing-the-assumptions-of-a-parametric-anova" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Testing the assumptions of a parametric ANOVA</h3>
+<div id="testing-the-assumptions-of-a-parametric-anova" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Testing the assumptions of a parametric ANOVA<a href="one-way-anova-with-multiple-comparisons.html#testing-the-assumptions-of-a-parametric-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Parametric one-way ANOVAs have three major assumptions:</p>
 <ol style="list-style-type: decimal">
 <li>the residuals are normally distributed</li>
@@ -416,10 +415,10 @@ Figure 5.2: Boxplot of sturgeon length per year
 <ul>
 <li>Carry out a one-way ANOVA on fklngth by year and produce the residual diagnostic plots</li>
 </ul>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="one-way-anova-with-multiple-comparisons.html#cb172-1" aria-hidden="true"></a><span class="co"># Fit anova model and plot residual diagnostics</span></span>
-<span id="cb172-2"><a href="one-way-anova-with-multiple-comparisons.html#cb172-2" aria-hidden="true"></a>anova.model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span>
-<span id="cb172-3"><a href="one-way-anova-with-multiple-comparisons.html#cb172-3" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb172-4"><a href="one-way-anova-with-multiple-comparisons.html#cb172-4" aria-hidden="true"></a><span class="kw">plot</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="one-way-anova-with-multiple-comparisons.html#cb174-1" aria-hidden="true"></a><span class="co"># Fit anova model and plot residual diagnostics</span></span>
+<span id="cb174-2"><a href="one-way-anova-with-multiple-comparisons.html#cb174-2" aria-hidden="true"></a>anova.model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span>
+<span id="cb174-3"><a href="one-way-anova-with-multiple-comparisons.html#cb174-3" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb174-4"><a href="one-way-anova-with-multiple-comparisons.html#cb174-4" aria-hidden="true"></a><span class="kw">plot</span>(anova.model1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ano-3"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-3-1.svg" alt="Diagnostic plots for a one-way ANOVA" width="672" />
 <p class="caption">
@@ -436,7 +435,7 @@ and there are no factor predictors; no plot no. 5`
 <ul>
 <li>Perform a normality test on the residuals from the ANOVA.</li>
 </ul>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="one-way-anova-with-multiple-comparisons.html#cb173-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model1))</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="one-way-anova-with-multiple-comparisons.html#cb175-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model1))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -446,7 +445,7 @@ and there are no factor predictors; no plot no. 5`
 <ul>
 <li>Next, test for homoscedasticity:</li>
 </ul>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="one-way-anova-with-multiple-comparisons.html#cb175-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="one-way-anova-with-multiple-comparisons.html#cb177-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(fklngth <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> dam10dat)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##        Df F value  Pr(&gt;F)  
 ## group   3  2.8159 0.04234 *
@@ -455,10 +454,10 @@ and there are no factor predictors; no plot no. 5`
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The probability value tells you that you can reject the null hypothesis that there is no difference in variances among years. Thus, we conclude there is evidence that the variances in the groups are not equal.</p>
 </div>
-<div id="performing-the-anova" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">5.2.3</span> Performing the ANOVA</h3>
+<div id="performing-the-anova" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Performing the ANOVA<a href="one-way-anova-with-multiple-comparisons.html#performing-the-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s look at the results of the ANOVA, assuming for the moment that assumptions are met well enough.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="one-way-anova-with-multiple-comparisons.html#cb177-1" aria-hidden="true"></a><span class="kw">summary</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="one-way-anova-with-multiple-comparisons.html#cb179-1" aria-hidden="true"></a><span class="kw">summary</span>(anova.model1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = fklngth ~ year, data = dam10dat)
@@ -488,7 +487,7 @@ and there are no factor predictors; no plot no. 5`
 <li><em>F-Statistic</em> This is the p-value for the “omnibus” test, the test that all means are equal. Here it is much smaller than 0.05 and hence we would reject H0 and conclude that fklngth varies among the years</li>
 </ol>
 <p>The <code>anova()</code> command produces the standard ANOVA table that contains most of the same information:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="one-way-anova-with-multiple-comparisons.html#cb179-1" aria-hidden="true"></a><span class="kw">anova</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="one-way-anova-with-multiple-comparisons.html#cb181-1" aria-hidden="true"></a><span class="kw">anova</span>(anova.model1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: fklngth
@@ -499,15 +498,15 @@ and there are no factor predictors; no plot no. 5`
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The total variability in fklngth sums of square is partitioned into what can be accounted for by year (485.26) and what is left unexplained as residual variability (3095.30). Year indeed explains <span class="math inline">\((485.26/(3095.30+485.26)=.1355\)</span> or 13.55% of the variability). The mean square of the residuals is their variance.</p>
 </div>
-<div id="performing-multiple-comparisons-of-means-test" class="section level3" number="5.2.4">
-<h3><span class="header-section-number">5.2.4</span> Performing multiple comparisons of means test</h3>
+<div id="performing-multiple-comparisons-of-means-test" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Performing multiple comparisons of means test<a href="one-way-anova-with-multiple-comparisons.html#performing-multiple-comparisons-of-means-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>The <code>pairwise.t.test()</code> function can be used to compare means and adjust (or not) probabilities for multiple comparisons by choosing one of the options for the argument <code>p.adj</code>:</li>
 </ul>
 <p>Comparing all means without corrections for multiple comparisons.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="one-way-anova-with-multiple-comparisons.html#cb181-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
-<span id="cb181-2"><a href="one-way-anova-with-multiple-comparisons.html#cb181-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;none&quot;</span></span>
-<span id="cb181-3"><a href="one-way-anova-with-multiple-comparisons.html#cb181-3" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="one-way-anova-with-multiple-comparisons.html#cb183-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
+<span id="cb183-2"><a href="one-way-anova-with-multiple-comparisons.html#cb183-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;none&quot;</span></span>
+<span id="cb183-3"><a href="one-way-anova-with-multiple-comparisons.html#cb183-3" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -520,9 +519,9 @@ and there are no factor predictors; no plot no. 5`
 ## 
 ## P value adjustment method: none</code></pre>
 <p>Option <code>"bonf"</code> adjusts the p-values according to the Bonferroni correction. In this case, since there are 6 p-values calculated, it amounts to simply multiplying the uncorrected p-values by 6 (unless the result is above 1, in that case the adjusted p-value is 1).</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="one-way-anova-with-multiple-comparisons.html#cb183-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
-<span id="cb183-2"><a href="one-way-anova-with-multiple-comparisons.html#cb183-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;bonf&quot;</span></span>
-<span id="cb183-3"><a href="one-way-anova-with-multiple-comparisons.html#cb183-3" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="one-way-anova-with-multiple-comparisons.html#cb185-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
+<span id="cb185-2"><a href="one-way-anova-with-multiple-comparisons.html#cb185-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;bonf&quot;</span></span>
+<span id="cb185-3"><a href="one-way-anova-with-multiple-comparisons.html#cb185-3" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -535,9 +534,9 @@ and there are no factor predictors; no plot no. 5`
 ## 
 ## P value adjustment method: bonferroni</code></pre>
 <p>Option <code>"holm"</code> is the sequential Bonferroni correction, where the p-values are ranked from (i=1) smallest to (N) largest. The correction factor for p-values is then $<span class="math inline">\((N-i+1)\)</span>. Here, for example, we have N=6 pairs that are compared. The lowest uncorrected p-value is 0.0019 for 1954 vs 1965. The corrected p-value becomes <span class="math inline">\(0.0019*(6-1+1)= 0.011\)</span>. The second lowest p-value is 0.0022. The corrected p/value is therefore <span class="math inline">\(0.0022*(6-2+1)=0.011\)</span>. For the highest p-value, the correction is <span class="math inline">\((N-N+1)=1\)</span>, hence it is equal to the uncorrected probability.</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="one-way-anova-with-multiple-comparisons.html#cb185-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
-<span id="cb185-2"><a href="one-way-anova-with-multiple-comparisons.html#cb185-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;holm&quot;</span></span>
-<span id="cb185-3"><a href="one-way-anova-with-multiple-comparisons.html#cb185-3" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="one-way-anova-with-multiple-comparisons.html#cb187-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
+<span id="cb187-2"><a href="one-way-anova-with-multiple-comparisons.html#cb187-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;holm&quot;</span></span>
+<span id="cb187-3"><a href="one-way-anova-with-multiple-comparisons.html#cb187-3" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -550,9 +549,9 @@ and there are no factor predictors; no plot no. 5`
 ## 
 ## P value adjustment method: holm</code></pre>
 <p>The “fdr” option is for controlling the false discovery rate.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="one-way-anova-with-multiple-comparisons.html#cb187-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
-<span id="cb187-2"><a href="one-way-anova-with-multiple-comparisons.html#cb187-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;fdr&quot;</span></span>
-<span id="cb187-3"><a href="one-way-anova-with-multiple-comparisons.html#cb187-3" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="one-way-anova-with-multiple-comparisons.html#cb189-1" aria-hidden="true"></a><span class="kw">pairwise.t.test</span>(dam10dat<span class="op">$</span>fklngth, dam10dat<span class="op">$</span>year,</span>
+<span id="cb189-2"><a href="one-way-anova-with-multiple-comparisons.html#cb189-2" aria-hidden="true"></a>  <span class="dt">p.adj =</span> <span class="st">&quot;fdr&quot;</span></span>
+<span id="cb189-3"><a href="one-way-anova-with-multiple-comparisons.html#cb189-3" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -566,8 +565,8 @@ and there are no factor predictors; no plot no. 5`
 ## P value adjustment method: fdr</code></pre>
 <p>The four post-hoc tests here tell us the same thing: differences are all between two groups of years: 1954/58 and 1965/66, since all comparisons show differences between the 50’s and 60’s but no differences within the 50’s or 60’s. So, in this particular case, the conclusion is not affected by the choice of adjustment method. But in other situations, you will observe contradictory results.</p>
 <p>Which one to choose? Unadjusted p-values are certainly suspect when there are multiple tests. On the other hand, the traditional <em>Bonferroni</em> correction is very conservative, and becomes even more so when there are a large number of comparisons. Recent work suggest that the <em>fdr</em> approach may be a good compromise when there are a lot of comparisons. The <em>Tukey</em> method of multiple comparisons is one of the most popular and is easily performed with R (note, however, that there is a pesky bug that manifests itself when the independent variable can look like a number rather than a factor, hence the little pirouette with <code>paste0()</code> to add a letter <code>m</code> before the first digit):</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="one-way-anova-with-multiple-comparisons.html#cb189-1" aria-hidden="true"></a>dam10dat<span class="op">$</span>myyear &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">paste0</span>(<span class="st">&quot;m&quot;</span>, dam10dat<span class="op">$</span>year))</span>
-<span id="cb189-2"><a href="one-way-anova-with-multiple-comparisons.html#cb189-2" aria-hidden="true"></a><span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat))</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="one-way-anova-with-multiple-comparisons.html#cb191-1" aria-hidden="true"></a>dam10dat<span class="op">$</span>myyear &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">paste0</span>(<span class="st">&quot;m&quot;</span>, dam10dat<span class="op">$</span>year))</span>
+<span id="cb191-2"><a href="one-way-anova-with-multiple-comparisons.html#cb191-2" aria-hidden="true"></a><span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat))</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -581,8 +580,8 @@ and there are no factor predictors; no plot no. 5`
 ## m1965-m1958 -5.6948718 -10.436304 -0.9534397 0.0116943
 ## m1966-m1958 -3.4999106  -6.875104 -0.1247171 0.0390011
 ## m1966-m1965  2.1949612  -2.240630  6.6305526 0.5710111</code></pre>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="one-way-anova-with-multiple-comparisons.html#cb191-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb191-2"><a href="one-way-anova-with-multiple-comparisons.html#cb191-2" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)), <span class="dt">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="one-way-anova-with-multiple-comparisons.html#cb193-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb193-2"><a href="one-way-anova-with-multiple-comparisons.html#cb193-2" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)), <span class="dt">las =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ano-13"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-13-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
 <p class="caption">
@@ -590,16 +589,16 @@ Figure 5.4: Inter-annual differences in sturgeon length
 </p>
 </div>
 <p>The confidence intervals, corrected for multiple tests by the Tukey method, are plotted for differences among years. Unfortunately, the labels are not all printed because they would overlap, but the order is the same as in the preceding table. The <code>multcomp</code> 📦 can produce a better plot version, but requires a bit more code:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="one-way-anova-with-multiple-comparisons.html#cb192-1" aria-hidden="true"></a><span class="co"># Alternative way to compute Tukey multiple comparisons</span></span>
-<span id="cb192-2"><a href="one-way-anova-with-multiple-comparisons.html#cb192-2" aria-hidden="true"></a><span class="co"># set up a one-way ANOVA</span></span>
-<span id="cb192-3"><a href="one-way-anova-with-multiple-comparisons.html#cb192-3" aria-hidden="true"></a>anova_fkl_year &lt;-<span class="st"> </span><span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)</span>
-<span id="cb192-4"><a href="one-way-anova-with-multiple-comparisons.html#cb192-4" aria-hidden="true"></a><span class="co"># set up all-pairs comparisons for factor `year&#39;</span></span>
-<span id="cb192-5"><a href="one-way-anova-with-multiple-comparisons.html#cb192-5" aria-hidden="true"></a></span>
-<span id="cb192-6"><a href="one-way-anova-with-multiple-comparisons.html#cb192-6" aria-hidden="true"></a>meandiff &lt;-<span class="st"> </span><span class="kw">glht</span>(anova_fkl_year, <span class="dt">linfct =</span> <span class="kw">mcp</span>(</span>
-<span id="cb192-7"><a href="one-way-anova-with-multiple-comparisons.html#cb192-7" aria-hidden="true"></a>  <span class="dt">myyear =</span></span>
-<span id="cb192-8"><a href="one-way-anova-with-multiple-comparisons.html#cb192-8" aria-hidden="true"></a>    <span class="st">&quot;Tukey&quot;</span></span>
-<span id="cb192-9"><a href="one-way-anova-with-multiple-comparisons.html#cb192-9" aria-hidden="true"></a>))</span>
-<span id="cb192-10"><a href="one-way-anova-with-multiple-comparisons.html#cb192-10" aria-hidden="true"></a><span class="kw">confint</span>(meandiff)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="one-way-anova-with-multiple-comparisons.html#cb194-1" aria-hidden="true"></a><span class="co"># Alternative way to compute Tukey multiple comparisons</span></span>
+<span id="cb194-2"><a href="one-way-anova-with-multiple-comparisons.html#cb194-2" aria-hidden="true"></a><span class="co"># set up a one-way ANOVA</span></span>
+<span id="cb194-3"><a href="one-way-anova-with-multiple-comparisons.html#cb194-3" aria-hidden="true"></a>anova_fkl_year &lt;-<span class="st"> </span><span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span>myyear, <span class="dt">data =</span> dam10dat)</span>
+<span id="cb194-4"><a href="one-way-anova-with-multiple-comparisons.html#cb194-4" aria-hidden="true"></a><span class="co"># set up all-pairs comparisons for factor `year&#39;</span></span>
+<span id="cb194-5"><a href="one-way-anova-with-multiple-comparisons.html#cb194-5" aria-hidden="true"></a></span>
+<span id="cb194-6"><a href="one-way-anova-with-multiple-comparisons.html#cb194-6" aria-hidden="true"></a>meandiff &lt;-<span class="st"> </span><span class="kw">glht</span>(anova_fkl_year, <span class="dt">linfct =</span> <span class="kw">mcp</span>(</span>
+<span id="cb194-7"><a href="one-way-anova-with-multiple-comparisons.html#cb194-7" aria-hidden="true"></a>  <span class="dt">myyear =</span></span>
+<span id="cb194-8"><a href="one-way-anova-with-multiple-comparisons.html#cb194-8" aria-hidden="true"></a>    <span class="st">&quot;Tukey&quot;</span></span>
+<span id="cb194-9"><a href="one-way-anova-with-multiple-comparisons.html#cb194-9" aria-hidden="true"></a>))</span>
+<span id="cb194-10"><a href="one-way-anova-with-multiple-comparisons.html#cb194-10" aria-hidden="true"></a><span class="kw">confint</span>(meandiff)</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Confidence Intervals
 ## 
@@ -608,20 +607,20 @@ Figure 5.4: Inter-annual differences in sturgeon length
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5938
+## Quantile = 2.5942
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2715   3.6460
-## m1965 - m1954 == 0  -5.5077  -9.9976  -1.0177
-## m1966 - m1954 == 0  -3.3127  -6.3434  -0.2820
-## m1965 - m1958 == 0  -5.6949 -10.4117  -0.9780
-## m1966 - m1958 == 0  -3.4999  -6.8576  -0.1422
-## m1966 - m1965 == 0   2.1950  -2.2176   6.6075</code></pre>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="one-way-anova-with-multiple-comparisons.html#cb194-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb194-2"><a href="one-way-anova-with-multiple-comparisons.html#cb194-2" aria-hidden="true"></a><span class="kw">plot</span>(meandiff)</span></code></pre></div>
+## m1958 - m1954 == 0   0.1872  -3.2721   3.6465
+## m1965 - m1954 == 0  -5.5077  -9.9984  -1.0169
+## m1966 - m1954 == 0  -3.3127  -6.3439  -0.2815
+## m1965 - m1958 == 0  -5.6949 -10.4125  -0.9772
+## m1966 - m1958 == 0  -3.4999  -6.8582  -0.1417
+## m1966 - m1965 == 0   2.1950  -2.2184   6.6083</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="one-way-anova-with-multiple-comparisons.html#cb196-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb196-2"><a href="one-way-anova-with-multiple-comparisons.html#cb196-2" aria-hidden="true"></a><span class="kw">plot</span>(meandiff)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ano-14"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-14-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
 <p class="caption">
@@ -629,16 +628,16 @@ Figure 5.5: Inter-annual differences in sturgeon length
 </p>
 </div>
 <p>This is better. Also useful is a plot the means and their confidence intervals with the Tukey groupings shown as letters above:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="one-way-anova-with-multiple-comparisons.html#cb195-1" aria-hidden="true"></a><span class="co"># Compute and plot means and Tukey CI</span></span>
-<span id="cb195-2"><a href="one-way-anova-with-multiple-comparisons.html#cb195-2" aria-hidden="true"></a>means &lt;-<span class="st"> </span><span class="kw">glht</span>(</span>
-<span id="cb195-3"><a href="one-way-anova-with-multiple-comparisons.html#cb195-3" aria-hidden="true"></a>  anova_fkl_year,</span>
-<span id="cb195-4"><a href="one-way-anova-with-multiple-comparisons.html#cb195-4" aria-hidden="true"></a>  <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">myyear =</span> <span class="st">&quot;Tukey&quot;</span>)</span>
-<span id="cb195-5"><a href="one-way-anova-with-multiple-comparisons.html#cb195-5" aria-hidden="true"></a>)</span>
-<span id="cb195-6"><a href="one-way-anova-with-multiple-comparisons.html#cb195-6" aria-hidden="true"></a>cimeans &lt;-<span class="st"> </span><span class="kw">cld</span>(means)</span>
-<span id="cb195-7"><a href="one-way-anova-with-multiple-comparisons.html#cb195-7" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
-<span id="cb195-8"><a href="one-way-anova-with-multiple-comparisons.html#cb195-8" aria-hidden="true"></a><span class="co"># plot</span></span>
-<span id="cb195-9"><a href="one-way-anova-with-multiple-comparisons.html#cb195-9" aria-hidden="true"></a>old_par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
-<span id="cb195-10"><a href="one-way-anova-with-multiple-comparisons.html#cb195-10" aria-hidden="true"></a><span class="kw">plot</span>(cimeans)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="one-way-anova-with-multiple-comparisons.html#cb197-1" aria-hidden="true"></a><span class="co"># Compute and plot means and Tukey CI</span></span>
+<span id="cb197-2"><a href="one-way-anova-with-multiple-comparisons.html#cb197-2" aria-hidden="true"></a>means &lt;-<span class="st"> </span><span class="kw">glht</span>(</span>
+<span id="cb197-3"><a href="one-way-anova-with-multiple-comparisons.html#cb197-3" aria-hidden="true"></a>  anova_fkl_year,</span>
+<span id="cb197-4"><a href="one-way-anova-with-multiple-comparisons.html#cb197-4" aria-hidden="true"></a>  <span class="dt">linfct =</span> <span class="kw">mcp</span>(<span class="dt">myyear =</span> <span class="st">&quot;Tukey&quot;</span>)</span>
+<span id="cb197-5"><a href="one-way-anova-with-multiple-comparisons.html#cb197-5" aria-hidden="true"></a>)</span>
+<span id="cb197-6"><a href="one-way-anova-with-multiple-comparisons.html#cb197-6" aria-hidden="true"></a>cimeans &lt;-<span class="st"> </span><span class="kw">cld</span>(means)</span>
+<span id="cb197-7"><a href="one-way-anova-with-multiple-comparisons.html#cb197-7" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
+<span id="cb197-8"><a href="one-way-anova-with-multiple-comparisons.html#cb197-8" aria-hidden="true"></a><span class="co"># plot</span></span>
+<span id="cb197-9"><a href="one-way-anova-with-multiple-comparisons.html#cb197-9" aria-hidden="true"></a>old_par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
+<span id="cb197-10"><a href="one-way-anova-with-multiple-comparisons.html#cb197-10" aria-hidden="true"></a><span class="kw">plot</span>(cimeans)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ano-15"></span>
 <img src="Labs_BIO4158_files/figure-html/ano-15-1.svg" alt="Inter-annual differences in sturgeon length" width="672" />
 <p class="caption">
@@ -687,7 +686,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

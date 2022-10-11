@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.7 Polynomial regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.7 Polynomial regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="detecting-multicollinearity.html"/>
 <link rel="next" href="checking-assumptions-of-a-multiple-regression-model.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="polynomial-regression" class="section level2" number="7.7">
-<h2><span class="header-section-number">7.7</span> Polynomial regression</h2>
+<div id="polynomial-regression" class="section level2 hasAnchor" number="7.7">
+<h2><span class="header-section-number">7.7</span> Polynomial regression<a href="polynomial-regression.html#polynomial-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the regression models considered so far, we have assumed that the relationship between the dependent and independent variables is linear. If not, in some cases it can be made linear by transforming one or both variables. On the other hand, for many biological relationships no transformation in the world will help, and we are forced to go with some sort of non-linear regression method.</p>
 <p>The simplest type of nonlinear regression method is polynomial regression, in which you fit regression models that include independent variables raised to some power greater than one, e.g. X<sup>2</sup>,
 X<sup>3</sup>, etc.</p>
@@ -341,13 +340,13 @@ X<sup>3</sup>, etc.</p>
 Plot the relationship between the residuals of the <code>logherp ~ logarea</code>
 regression and <code>swamp</code>.
 </div>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb323-1"><a href="polynomial-regression.html#cb323-1" aria-hidden="true"></a><span class="co"># problème avec les données de manquantes dans logherp</span></span>
-<span id="cb323-2"><a href="polynomial-regression.html#cb323-2" aria-hidden="true"></a>mysub &lt;-<span class="st"> </span><span class="kw">subset</span>(mydata, <span class="op">!</span><span class="kw">is.na</span>(logherp))</span>
-<span id="cb323-3"><a href="polynomial-regression.html#cb323-3" aria-hidden="true"></a><span class="co"># ajouter les résidus dans les donnée</span></span>
-<span id="cb323-4"><a href="polynomial-regression.html#cb323-4" aria-hidden="true"></a>mysub<span class="op">$</span>resloga &lt;-<span class="st"> </span><span class="kw">residuals</span>(model_loga)</span>
-<span id="cb323-5"><a href="polynomial-regression.html#cb323-5" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mysub, <span class="kw">aes</span>(<span class="dt">y =</span> resloga, <span class="dt">x =</span> swamp)) <span class="op">+</span></span>
-<span id="cb323-6"><a href="polynomial-regression.html#cb323-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb323-7"><a href="polynomial-regression.html#cb323-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb324-1"><a href="polynomial-regression.html#cb324-1" aria-hidden="true"></a><span class="co"># problème avec les données de manquantes dans logherp</span></span>
+<span id="cb324-2"><a href="polynomial-regression.html#cb324-2" aria-hidden="true"></a>mysub &lt;-<span class="st"> </span><span class="kw">subset</span>(mydata, <span class="op">!</span><span class="kw">is.na</span>(logherp))</span>
+<span id="cb324-3"><a href="polynomial-regression.html#cb324-3" aria-hidden="true"></a><span class="co"># ajouter les résidus dans les donnée</span></span>
+<span id="cb324-4"><a href="polynomial-regression.html#cb324-4" aria-hidden="true"></a>mysub<span class="op">$</span>resloga &lt;-<span class="st"> </span><span class="kw">residuals</span>(model_loga)</span>
+<span id="cb324-5"><a href="polynomial-regression.html#cb324-5" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> mysub, <span class="kw">aes</span>(<span class="dt">y =</span> resloga, <span class="dt">x =</span> swamp)) <span class="op">+</span></span>
+<span id="cb324-6"><a href="polynomial-regression.html#cb324-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb324-7"><a href="polynomial-regression.html#cb324-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>()</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-107"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-107-1.svg" alt="Relation entre swamp et les résidus de la régression entre logherp et logarea" width="672" />
@@ -361,8 +360,8 @@ Figure 7.3: Relation entre swamp et les résidus de la régression entre logherp
 Try regressing the residuals of the <code>logherp ~ logarea</code> regression on <code>swamp</code>.
 What do you conclude?
 </div>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb325-1"><a href="polynomial-regression.html#cb325-1" aria-hidden="true"></a>model_resloga &lt;-<span class="st"> </span><span class="kw">lm</span>(resloga <span class="op">~</span><span class="st"> </span>swamp, mysub)</span>
-<span id="cb325-2"><a href="polynomial-regression.html#cb325-2" aria-hidden="true"></a><span class="kw">summary</span>(model_resloga)</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb326-1"><a href="polynomial-regression.html#cb326-1" aria-hidden="true"></a>model_resloga &lt;-<span class="st"> </span><span class="kw">lm</span>(resloga <span class="op">~</span><span class="st"> </span>swamp, mysub)</span>
+<span id="cb326-2"><a href="polynomial-regression.html#cb326-2" aria-hidden="true"></a><span class="kw">summary</span>(model_resloga)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = resloga ~ swamp, data = mysub)
@@ -387,8 +386,8 @@ What do you conclude?
 <p><span class="math display">\[ residuals ~ swamp + I(swamp^2)\]</span>.</p>
 What do you conclude? What does examination of the residuals from this multiple regression tell you?
 </div>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb327-1"><a href="polynomial-regression.html#cb327-1" aria-hidden="true"></a>model_resloga2 &lt;-<span class="st"> </span><span class="kw">lm</span>(resloga <span class="op">~</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>), mysub)</span>
-<span id="cb327-2"><a href="polynomial-regression.html#cb327-2" aria-hidden="true"></a><span class="kw">summary</span>(model_resloga2)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb328-1"><a href="polynomial-regression.html#cb328-1" aria-hidden="true"></a>model_resloga2 &lt;-<span class="st"> </span><span class="kw">lm</span>(resloga <span class="op">~</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>), mysub)</span>
+<span id="cb328-2"><a href="polynomial-regression.html#cb328-2" aria-hidden="true"></a><span class="kw">summary</span>(model_resloga2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = resloga ~ swamp + I(swamp^2), data = mysub)
@@ -408,17 +407,17 @@ What do you conclude? What does examination of the residuals from this multiple 
 ## Residual standard error: 0.1177 on 25 degrees of freedom
 ## Multiple R-squared:  0.6132, Adjusted R-squared:  0.5823 
 ## F-statistic: 19.82 on 2 and 25 DF,  p-value: 6.972e-06</code></pre>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb329-1"><a href="polynomial-regression.html#cb329-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb329-2"><a href="polynomial-regression.html#cb329-2" aria-hidden="true"></a><span class="kw">plot</span>(model_resloga2)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb330-1"><a href="polynomial-regression.html#cb330-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb330-2"><a href="polynomial-regression.html#cb330-2" aria-hidden="true"></a><span class="kw">plot</span>(model_resloga2)</span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-111-1.svg" width="672" /></p>
 <p>It is clear that once the effects of area are controlled for, a considerable amount of the remaining variability in herptile richness is explained by <code>swamp</code> , in a nonlinear fashion. If you examine model assumptions, you will see that compared to the linear model, the fit is much better.</p>
 <p>Based on the results from the above analyses, how would you modify the regression model arrived at above? What, in your view, is the “best” overall model? Why? How would you rank the various factors in terms of their effects on herptile species richness?</p>
 <p>In light of these results, we might want to try and fit a model which includes <code>logarea</code>, <code>thtden</code>, <code>cpfor2</code>, <code>swamp</code> and <code>swamp^2^</code> :</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb330-1"><a href="polynomial-regression.html#cb330-1" aria-hidden="true"></a>model_poly1 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb330-2"><a href="polynomial-regression.html#cb330-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb330-3"><a href="polynomial-regression.html#cb330-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb330-4"><a href="polynomial-regression.html#cb330-4" aria-hidden="true"></a>)</span>
-<span id="cb330-5"><a href="polynomial-regression.html#cb330-5" aria-hidden="true"></a><span class="kw">summary</span>(model_poly1)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb331-1"><a href="polynomial-regression.html#cb331-1" aria-hidden="true"></a>model_poly1 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb331-2"><a href="polynomial-regression.html#cb331-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb331-3"><a href="polynomial-regression.html#cb331-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb331-4"><a href="polynomial-regression.html#cb331-4" aria-hidden="true"></a>)</span>
+<span id="cb331-5"><a href="polynomial-regression.html#cb331-5" aria-hidden="true"></a><span class="kw">summary</span>(model_poly1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + cpfor2 + thtden + swamp + I(swamp^2), 
@@ -444,11 +443,11 @@ What do you conclude? What does examination of the residuals from this multiple 
 ## Multiple R-squared:  0.8181, Adjusted R-squared:  0.7767 
 ## F-statistic: 19.78 on 5 and 22 DF,  p-value: 1.774e-07</code></pre>
 <p>Note that on the basis of this analysis, we could potentially drop <code>cpfor2</code> and refit using the remaining variables:</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb332-1"><a href="polynomial-regression.html#cb332-1" aria-hidden="true"></a>model_poly2 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb332-2"><a href="polynomial-regression.html#cb332-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb332-3"><a href="polynomial-regression.html#cb332-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb332-4"><a href="polynomial-regression.html#cb332-4" aria-hidden="true"></a>)</span>
-<span id="cb332-5"><a href="polynomial-regression.html#cb332-5" aria-hidden="true"></a><span class="kw">summary</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb333-1"><a href="polynomial-regression.html#cb333-1" aria-hidden="true"></a>model_poly2 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb333-2"><a href="polynomial-regression.html#cb333-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb333-3"><a href="polynomial-regression.html#cb333-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb333-4"><a href="polynomial-regression.html#cb333-4" aria-hidden="true"></a>)</span>
+<span id="cb333-5"><a href="polynomial-regression.html#cb333-5" aria-hidden="true"></a><span class="kw">summary</span>(model_poly2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + thtden + swamp + I(swamp^2), 
@@ -473,7 +472,7 @@ What do you conclude? What does examination of the residuals from this multiple 
 ## Multiple R-squared:  0.8129, Adjusted R-squared:  0.7804 
 ## F-statistic: 24.98 on 4 and 23 DF,  p-value: 4.405e-08</code></pre>
 <p>How about multicollinearity in this model?</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="polynomial-regression.html#cb334-1" aria-hidden="true"></a><span class="kw">vif</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="polynomial-regression.html#cb335-1" aria-hidden="true"></a><span class="kw">vif</span>(model_poly2)</span></code></pre></div>
 <pre><code>##    logarea     thtden      swamp I(swamp^2) 
 ##   1.053193   1.123491  45.845845  45.656453</code></pre>
 <p>VIF for the two swamp terms are much higher than the standard threshold of 5. However, this is expected for polynomial terms, and not really a concern given that both terms are highly significant in the model. The high VIF means that these two coefficients are not estimated precisely, but using both in the model still allows to make a good prediction (i.e. account for the response to swamp).</p>
@@ -517,7 +516,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

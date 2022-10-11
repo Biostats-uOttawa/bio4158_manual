@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 How to use G*Power | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 How to use G*Power | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="what-is-gpower.html"/>
 <link rel="next" href="power-analysis-for-a-t-test-on-two-independent-means.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,10 +330,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-gpower" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> How to use G*Power</h2>
-<div id="general-principle" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> General Principle</h3>
+<div id="how-to-use-gpower" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> How to use G*Power<a href="how-to-use-gpower.html#how-to-use-gpower" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="general-principle" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> General Principle<a href="how-to-use-gpower.html#general-principle" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Using G*Power generally involves 3 steps:</p>
 <ol style="list-style-type: decimal">
 <li>Choosing the appropriate test</li>
@@ -342,24 +341,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Enter parameter values and press the <strong>Calculate</strong> button</li>
 </ol>
 </div>
-<div id="types-of-power-analyses" class="section level3" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> Types of power analyses</h3>
+<div id="types-of-power-analyses" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Types of power analyses<a href="how-to-use-gpower.html#types-of-power-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, <span class="math inline">\(\alpha\)</span> is define as the probability level at which
 one rejects the null hypothesis, and <span class="math inline">\(\beta\)</span> is <span class="math inline">\(1 - power\)</span>.</p>
-<div id="a-priori" class="section level4 unnumbered" number="">
-<h4>A priori</h4>
+<div id="a-priori" class="section level4 unnumbered hasAnchor" number="">
+<h4>A priori<a href="how-to-use-gpower.html#a-priori" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Computes the sample size required given <span class="math inline">\(\beta\)</span>, <span class="math inline">\(\alpha\)</span>, and the effect size. This type of analysis is useful when planning experiments.</p>
 </div>
-<div id="compromise" class="section level4 unnumbered" number="">
-<h4>Compromise</h4>
+<div id="compromise" class="section level4 unnumbered hasAnchor" number="">
+<h4>Compromise<a href="how-to-use-gpower.html#compromise" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Computes <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> for a given <span class="math inline">\(\alpha\)</span>/<span class="math inline">\(\beta\)</span> ratio, sample size, and effect size. Less commonly used (I have never used it myself) although it can be useful when the <span class="math inline">\(\alpha\)</span>/<span class="math inline">\(\beta\)</span> ratio has meaning, for example when the cost of type I and type II errors can be quantified.</p>
 </div>
-<div id="criterion" class="section level4 unnumbered" number="">
-<h4>Criterion</h4>
+<div id="criterion" class="section level4 unnumbered hasAnchor" number="">
+<h4>Criterion<a href="how-to-use-gpower.html#criterion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Computes <span class="math inline">\(\alpha\)</span> for a given <span class="math inline">\(\beta\)</span>, sample size, and effect size. In practice, I see little interest in this. Let me know if you see something I don’t!</p>
 </div>
-<div id="post-hoc" class="section level4 unnumbered" number="">
-<h4>Post-hoc</h4>
+<div id="post-hoc" class="section level4 unnumbered hasAnchor" number="">
+<h4>Post-hoc<a href="how-to-use-gpower.html#post-hoc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Computes the power for a given <span class="math inline">\(\alpha\)</span>, effect size, and
 sample size. Used frequently to help in the interpretation of a test
 that is not statistically significant, but only if an effect size that is
@@ -369,8 +368,8 @@ Sensitivity. Computes the detectable effect size for a given <span class="math i
 sample size. Very useful at the planning stage of an experiment.</p>
 </div>
 </div>
-<div id="how-to-calculate-effect-size" class="section level3" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> How to calculate effect size</h3>
+<div id="how-to-calculate-effect-size" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> How to calculate effect size<a href="how-to-use-gpower.html#how-to-calculate-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>G*Power can perform power analyses for several statistical tests.
 The metric for effect size depends on the test. Note that other
 software packages often use different effect size metrics and that it is
@@ -475,7 +474,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

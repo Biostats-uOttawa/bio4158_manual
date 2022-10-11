@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.6 Comparing model fits | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.6 Comparing model fits | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="the-ancova-model.html"/>
 <link rel="next" href="bootstrap-1.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,15 +330,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="comparing-model-fits" class="section level2" number="8.6">
-<h2><span class="header-section-number">8.6</span> Comparing model fits</h2>
+<div id="comparing-model-fits" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Comparing model fits<a href="comparing-model-fits.html#comparing-model-fits" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As we have just seen, the process of fitting models to data is usually an iterative one. That is, there are, more often than not, several competing models that may be used to fit the data and it is left to the analyst to decide which model best balances goodness of fit (which we are usually trying to maximize) and complexity (which we are usually trying to minimize). In general, the strategy to use in regression and anova is to choose a simpler model when doing so does not reduce the goodness-of-fit by a significant amount. R can compute an F-statistic to compare the fit of two models. The null hypothesis in this situation is that there is no difference in goodness of fit between the models.</p>
 
 <div class="rmdcode">
 Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA and common simple regression models::
 </div>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="comparing-model-fits.html#cb412-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
-<span id="cb412-2"><a href="comparing-model-fits.html#cb412-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="comparing-model-fits.html#cb414-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
+<span id="cb414-2"><a href="comparing-model-fits.html#cb414-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ sex + lage
@@ -352,9 +351,9 @@ Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA an
 <div class="rmdcode">
 Repeat the above procedure with the ANC3DAT data, rerunning the full ANCOVA with interaction ( <code>lfkl ~ lage + locate + lage:locate</code> ) and without interaction ( <code>lfkl ~ lage + locate</code> ), saving the model objects as you did above. Compare the fits of the two models. What do you conclude?
 </div>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="comparing-model-fits.html#cb414-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb414-2"><a href="comparing-model-fits.html#cb414-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb414-3"><a href="comparing-model-fits.html#cb414-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="comparing-model-fits.html#cb416-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb416-2"><a href="comparing-model-fits.html#cb416-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb416-3"><a href="comparing-model-fits.html#cb416-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ lage + locate + lage:locate
@@ -405,7 +404,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

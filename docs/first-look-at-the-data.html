@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.3 First look at the data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.3 First look at the data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="points-to-keep-in-mind.html"/>
 <link rel="next" href="multiple-regression-models-from-scratch.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="first-look-at-the-data" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> First look at the data</h2>
+<div id="first-look-at-the-data" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> First look at the data<a href="first-look-at-the-data.html#first-look-at-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The file Mregdat.Rdata contains data collected in 30 wetlands in the Ottawa-Cornwall-Kingston area. The data included are</p>
 <ul>
 <li>the richness (number of species) of:
@@ -350,12 +349,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the density (in m/hectare) of hard-surface roads within 1 km of the wetland (<code>thtden</code>).</li>
 </ul>
 <p>We will focus on herptiles for this exercise, so we better first have a look at how this variable is distributed and correlated to the potential independent variables:</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="first-look-at-the-data.html#cb299-1" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Mregdat.csv&quot;</span>)</span>
-<span id="cb299-2"><a href="first-look-at-the-data.html#cb299-2" aria-hidden="true"></a><span class="kw">scatterplotMatrix</span>(</span>
-<span id="cb299-3"><a href="first-look-at-the-data.html#cb299-3" aria-hidden="true"></a>  <span class="op">~</span><span class="st"> </span>logherp <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
-<span id="cb299-4"><a href="first-look-at-the-data.html#cb299-4" aria-hidden="true"></a>  <span class="dt">regLine =</span> <span class="ot">TRUE</span>, <span class="dt">smooth =</span> <span class="ot">TRUE</span>, <span class="dt">diagonal =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb299-5"><a href="first-look-at-the-data.html#cb299-5" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb299-6"><a href="first-look-at-the-data.html#cb299-6" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="first-look-at-the-data.html#cb300-1" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Mregdat.csv&quot;</span>)</span>
+<span id="cb300-2"><a href="first-look-at-the-data.html#cb300-2" aria-hidden="true"></a><span class="kw">scatterplotMatrix</span>(</span>
+<span id="cb300-3"><a href="first-look-at-the-data.html#cb300-3" aria-hidden="true"></a>  <span class="op">~</span><span class="st"> </span>logherp <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
+<span id="cb300-4"><a href="first-look-at-the-data.html#cb300-4" aria-hidden="true"></a>  <span class="dt">regLine =</span> <span class="ot">TRUE</span>, <span class="dt">smooth =</span> <span class="ot">TRUE</span>, <span class="dt">diagonal =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb300-5"><a href="first-look-at-the-data.html#cb300-5" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb300-6"><a href="first-look-at-the-data.html#cb300-6" aria-hidden="true"></a>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-88"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-88-1.svg" alt="Matrice de rélation et densité pour la richesse spécifique des amphibiens et reptiles" width="672" />
 <p class="caption">
@@ -402,7 +401,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

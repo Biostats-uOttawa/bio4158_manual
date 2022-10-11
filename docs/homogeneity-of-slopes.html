@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.4 Homogeneity of slopes | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.4 Homogeneity of slopes | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="ancova.html"/>
 <link rel="next" href="the-ancova-model.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,28 +330,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homogeneity-of-slopes" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Homogeneity of slopes</h2>
+<div id="homogeneity-of-slopes" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Homogeneity of slopes<a href="homogeneity-of-slopes.html#homogeneity-of-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In many biological problems, a question arises as to whether the slopes of two or more regression lines are significantly different; for example, whether two different insecticides differ in their efficacy, whether males and females differ in their growth curves, etc. These problems call for direct comparisons of slopes. GLMs (ANCOVAs) can test for equality of slopes (homogeneity of slopes).</p>
 <p>Remember that there are two parameters that describe a regression line, the intercept and the slope. The ANCOVA model (<em>sensu stricto</em>) tests for homogeneity of intercepts, but the starting point for the analysis is a test for homogeneity of slopes. This test can be performed by fitting a model with main effects for both the categorical and continuous independent variables, plus the interaction term(s), and testing for significance of the addition of the interaction terms.</p>
-<div id="case-1---size-as-a-function-of-age-equal-slopes-example" class="section level3" number="8.4.1">
-<h3><span class="header-section-number">8.4.1</span> Case 1 - Size as a function of age (equal slopes example)</h3>
+<div id="case-1---size-as-a-function-of-age-equal-slopes-example" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Case 1 - Size as a function of age (equal slopes example)<a href="homogeneity-of-slopes.html#case-1---size-as-a-function-of-age-equal-slopes-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdcode">
 Using the file <code>anc1dat.csv</code> , test the hypothesis that female and male sturgeon at The Pas over the years 1978-1980 have the same observed growth rate, defined as the slope of the regression of log<sub>10</sub> of fork <code>length</code>, <code>lfkl</code> , on the log<sub>10</sub> age, <code>lage</code> .
 </div>
 <p>First, let’s have a look at the data. It would help to draw the regression line and a lowess trace to better assess linearity. Being fancy, one could also use more of R magic to spruce up the axis legends (note the use of <code>expression()</code> to get subscripts):</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="homogeneity-of-slopes.html#cb380-1" aria-hidden="true"></a>anc1dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/anc1dat.csv&quot;</span>)</span>
-<span id="cb380-2"><a href="homogeneity-of-slopes.html#cb380-2" aria-hidden="true"></a>anc1dat<span class="op">$</span>sex &lt;-<span class="st"> </span><span class="kw">as.factor</span>(anc1dat<span class="op">$</span>sex)</span>
-<span id="cb380-3"><a href="homogeneity-of-slopes.html#cb380-3" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> anc1dat, <span class="kw">aes</span>(<span class="dt">x=</span>lage,    <span class="dt">y=</span><span class="kw">log10</span>(fklngth)))<span class="op">+</span><span class="kw">facet_grid</span>(.<span class="op">~</span>sex)<span class="op">+</span><span class="kw">geom_point</span>()</span>
-<span id="cb380-4"><a href="homogeneity-of-slopes.html#cb380-4" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span>myplot<span class="op">+</span></span>
-<span id="cb380-5"><a href="homogeneity-of-slopes.html#cb380-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
-<span id="cb380-6"><a href="homogeneity-of-slopes.html#cb380-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb380-7"><a href="homogeneity-of-slopes.html#cb380-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
-<span id="cb380-8"><a href="homogeneity-of-slopes.html#cb380-8" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Fork<span class="op">~</span>length)),</span>
-<span id="cb380-9"><a href="homogeneity-of-slopes.html#cb380-9" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Age))</span>
-<span id="cb380-10"><a href="homogeneity-of-slopes.html#cb380-10" aria-hidden="true"></a>)</span>
-<span id="cb380-11"><a href="homogeneity-of-slopes.html#cb380-11" aria-hidden="true"></a>myplot</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="homogeneity-of-slopes.html#cb382-1" aria-hidden="true"></a>anc1dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/anc1dat.csv&quot;</span>)</span>
+<span id="cb382-2"><a href="homogeneity-of-slopes.html#cb382-2" aria-hidden="true"></a>anc1dat<span class="op">$</span>sex &lt;-<span class="st"> </span><span class="kw">as.factor</span>(anc1dat<span class="op">$</span>sex)</span>
+<span id="cb382-3"><a href="homogeneity-of-slopes.html#cb382-3" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> anc1dat, <span class="kw">aes</span>(<span class="dt">x=</span>lage,    <span class="dt">y=</span><span class="kw">log10</span>(fklngth)))<span class="op">+</span><span class="kw">facet_grid</span>(.<span class="op">~</span>sex)<span class="op">+</span><span class="kw">geom_point</span>()</span>
+<span id="cb382-4"><a href="homogeneity-of-slopes.html#cb382-4" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span>myplot<span class="op">+</span></span>
+<span id="cb382-5"><a href="homogeneity-of-slopes.html#cb382-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb382-6"><a href="homogeneity-of-slopes.html#cb382-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb382-7"><a href="homogeneity-of-slopes.html#cb382-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb382-8"><a href="homogeneity-of-slopes.html#cb382-8" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Fork<span class="op">~</span>length)),</span>
+<span id="cb382-9"><a href="homogeneity-of-slopes.html#cb382-9" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Age))</span>
+<span id="cb382-10"><a href="homogeneity-of-slopes.html#cb382-10" aria-hidden="true"></a>)</span>
+<span id="cb382-11"><a href="homogeneity-of-slopes.html#cb382-11" aria-hidden="true"></a>myplot</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-145"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-145-1.svg" alt="Sturgeon length as a function of age" width="672" />
 <p class="caption">
@@ -360,8 +359,8 @@ Figure 8.1: Sturgeon length as a function of age
 </p>
 </div>
 <p>The log-log transformation makes the relationship linear and, at first glance, there is no issues with assumptions of LMs (although this should be confirmed by appropriate examination of the residuals). Let’s fit the full model with both main effects and the interaction:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="homogeneity-of-slopes.html#cb381-1" aria-hidden="true"></a>model.full1&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>lage, <span class="dt">data =</span> anc1dat)</span>
-<span id="cb381-2"><a href="homogeneity-of-slopes.html#cb381-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="homogeneity-of-slopes.html#cb383-1" aria-hidden="true"></a>model.full1&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>lage, <span class="dt">data =</span> anc1dat)</span>
+<span id="cb383-2"><a href="homogeneity-of-slopes.html#cb383-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -384,8 +383,8 @@ Note that I used the Anova() function with an uppercase “a” (from the car li
 <li>that the intercepts are also the same for the two sexes (the sex term is also not significant).</li>
 </ol>
 <p>But before accepting these conclusions, we should test the assumptions in the usual way</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb383-1"><a href="homogeneity-of-slopes.html#cb383-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb383-2"><a href="homogeneity-of-slopes.html#cb383-2" aria-hidden="true"></a><span class="kw">plot</span>(model.full1)</span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb385-1"><a href="homogeneity-of-slopes.html#cb385-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb385-2"><a href="homogeneity-of-slopes.html#cb385-2" aria-hidden="true"></a><span class="kw">plot</span>(model.full1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-148"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-148-1.svg" alt="Model assumptions for `model.full1`" width="672" />
 <p class="caption">
@@ -393,7 +392,7 @@ Figure 8.2: Model assumptions for <code>model.full1</code>
 </p>
 </div>
 <p>With respect to normality, things look O.K., although there are several points in the top right corner that appear to lie off the line. We could also run a Wilk-Shapiro normality test and find <em>W = 0.9764</em>, <em>p = 0.09329</em>, also suggesting this assumption is valid. Homoscedasticity seems fine too, but if you want further evidence of this, you can run one of the tests. Here I use the Breusch-Pagan test, which is appropriate when some of the independent variables are continuous (Levene’s test is for categorical independent variables only):</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="homogeneity-of-slopes.html#cb384-1" aria-hidden="true"></a><span class="kw">bptest</span>(model.full1)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="homogeneity-of-slopes.html#cb386-1" aria-hidden="true"></a><span class="kw">bptest</span>(model.full1)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
@@ -401,7 +400,7 @@ Figure 8.2: Model assumptions for <code>model.full1</code>
 ## BP = 0.99979, df = 3, p-value = 0.8013</code></pre>
 <p>Since the null is that the residuals are homoscedastic, and p is rather large, the test confirm the visual assessment.</p>
 <p>Further, there is no obvious pattern in the residuals, which implies there is no problem with the assumption of linearity. This too can be formally tested:</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="homogeneity-of-slopes.html#cb386-1" aria-hidden="true"></a><span class="kw">resettest</span>(model.full1, <span class="dt">power =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>, <span class="dt">data =</span> anc1dat)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="homogeneity-of-slopes.html#cb388-1" aria-hidden="true"></a><span class="kw">resettest</span>(model.full1, <span class="dt">power =</span> <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>, <span class="dt">data =</span> anc1dat)</span></code></pre></div>
 <pre><code>## 
 ##  RESET test
 ## 
@@ -412,8 +411,8 @@ Figure 8.2: Model assumptions for <code>model.full1</code>
 <div class="rmdcode">
 You will notice that there is one datum with a large studentized residual, i.e. an outlier (case 49). Eliminate this datum from your data file and rerun the analysis. Do your conclusions change?
 </div>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb388-1"><a href="homogeneity-of-slopes.html#cb388-1" aria-hidden="true"></a>model.full.no49&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>lage, <span class="dt">data =</span> anc1dat[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>),])</span>
-<span id="cb388-2"><a href="homogeneity-of-slopes.html#cb388-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full.no49, <span class="dt">type=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb390-1"><a href="homogeneity-of-slopes.html#cb390-1" aria-hidden="true"></a>model.full.no49&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>lage, <span class="dt">data =</span> anc1dat[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>),])</span>
+<span id="cb390-2"><a href="homogeneity-of-slopes.html#cb390-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full.no49, <span class="dt">type=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -427,31 +426,31 @@ You will notice that there is one datum with a large studentized residual, i.e.�
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>So the conclusion does not change if the outlier is deleted (not surprising as Cook’s distance is low for this point reflecting its low leverage). Since there is no good reason to delete this data point, and since (at least qualitatively) our conclusions do not change, it is probably best to go with the full data set. A test of the assumptions for the refit model (with the outlier removed) shows that all are met, and no more outliers are detected. (I won’t report these analyses, but you can and should do them just to assure yourself that everything is O.K.)</p>
 </div>
-<div id="case-2---size-as-a-function-of-age-different-slopes-example" class="section level3" number="8.4.2">
-<h3><span class="header-section-number">8.4.2</span> Case 2 - Size as a function of age (different slopes example)</h3>
+<div id="case-2---size-as-a-function-of-age-different-slopes-example" class="section level3 hasAnchor" number="8.4.2">
+<h3><span class="header-section-number">8.4.2</span> Case 2 - Size as a function of age (different slopes example)<a href="homogeneity-of-slopes.html#case-2---size-as-a-function-of-age-different-slopes-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdcode">
 The file <code>anc3dat.csv</code> records data on male sturgeon collected at two locations ( locate) , Lake of the Woods, in northwestern Ontario, and the Churchill River in northern Manitoba. Using the same procedure as outlined above (with locate as the categorical variable instead of sex ), test the null hypothesis that the slope of the regression of <code>lfkl</code> on <code>lage</code> is the same in the two locations. What do you conclude?
 </div>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="homogeneity-of-slopes.html#cb390-1" aria-hidden="true"></a>anc3dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/anc3dat.csv&quot;</span>)</span>
-<span id="cb390-2"><a href="homogeneity-of-slopes.html#cb390-2" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> anc3dat, <span class="kw">aes</span>(<span class="dt">x=</span>lage, <span class="dt">y =</span> <span class="kw">log10</span>(fklngth))) <span class="op">+</span></span>
-<span id="cb390-3"><a href="homogeneity-of-slopes.html#cb390-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_grid</span>(.<span class="op">~</span>locate) <span class="op">+</span></span>
-<span id="cb390-4"><a href="homogeneity-of-slopes.html#cb390-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
-<span id="cb390-5"><a href="homogeneity-of-slopes.html#cb390-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
-<span id="cb390-6"><a href="homogeneity-of-slopes.html#cb390-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb390-7"><a href="homogeneity-of-slopes.html#cb390-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
-<span id="cb390-8"><a href="homogeneity-of-slopes.html#cb390-8" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Fork<span class="op">~</span>length)),</span>
-<span id="cb390-9"><a href="homogeneity-of-slopes.html#cb390-9" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Age))</span>
-<span id="cb390-10"><a href="homogeneity-of-slopes.html#cb390-10" aria-hidden="true"></a>)</span>
-<span id="cb390-11"><a href="homogeneity-of-slopes.html#cb390-11" aria-hidden="true"></a>myplot</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="homogeneity-of-slopes.html#cb392-1" aria-hidden="true"></a>anc3dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/anc3dat.csv&quot;</span>)</span>
+<span id="cb392-2"><a href="homogeneity-of-slopes.html#cb392-2" aria-hidden="true"></a>myplot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> anc3dat, <span class="kw">aes</span>(<span class="dt">x=</span>lage, <span class="dt">y =</span> <span class="kw">log10</span>(fklngth))) <span class="op">+</span></span>
+<span id="cb392-3"><a href="homogeneity-of-slopes.html#cb392-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">facet_grid</span>(.<span class="op">~</span>locate) <span class="op">+</span></span>
+<span id="cb392-4"><a href="homogeneity-of-slopes.html#cb392-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb392-5"><a href="homogeneity-of-slopes.html#cb392-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb392-6"><a href="homogeneity-of-slopes.html#cb392-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb392-7"><a href="homogeneity-of-slopes.html#cb392-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(</span>
+<span id="cb392-8"><a href="homogeneity-of-slopes.html#cb392-8" aria-hidden="true"></a>    <span class="dt">y =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Fork<span class="op">~</span>length)),</span>
+<span id="cb392-9"><a href="homogeneity-of-slopes.html#cb392-9" aria-hidden="true"></a>    <span class="dt">x =</span> <span class="kw">expression</span>(log[<span class="dv">10</span>]<span class="op">~</span>(Age))</span>
+<span id="cb392-10"><a href="homogeneity-of-slopes.html#cb392-10" aria-hidden="true"></a>)</span>
+<span id="cb392-11"><a href="homogeneity-of-slopes.html#cb392-11" aria-hidden="true"></a>myplot</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-154"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-154-1.svg" alt="Longueur des esturgeons en fonction de l'age d'après `anc3dat`" width="672" />
 <p class="caption">
 Figure 8.3: Longueur des esturgeons en fonction de l’age d’après <code>anc3dat</code>
 </p>
 </div>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="homogeneity-of-slopes.html#cb391-1" aria-hidden="true"></a>model.full2&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb391-2"><a href="homogeneity-of-slopes.html#cb391-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="homogeneity-of-slopes.html#cb393-1" aria-hidden="true"></a>model.full2&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb393-2"><a href="homogeneity-of-slopes.html#cb393-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.full2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -464,8 +463,8 @@ Figure 8.3: Longueur des esturgeons en fonction de l’age d’après <code>anc3
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>In this case, we reject the null hypotheses that (1) the slopes of the regressions are the same in the two locations; and (2) that the intercepts are the same in the two locations. In other words, if we want to predict the fork length of a sturgeon of a particular age (accurately) we need to know from which location it came. The fact that we reject the null hypothesis that the slopes of the lfkl - lage regressions are the same in both locations means that we should be doing individual regressions for each location separately (that is in fact what the full model is fitting). But we are jumping the gun here. Before you can trust these p values, you need to confirm that assumptions are met:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb393-1"><a href="homogeneity-of-slopes.html#cb393-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb393-2"><a href="homogeneity-of-slopes.html#cb393-2" aria-hidden="true"></a><span class="kw">plot</span>(model.full2)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb395-1"><a href="homogeneity-of-slopes.html#cb395-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb395-2"><a href="homogeneity-of-slopes.html#cb395-2" aria-hidden="true"></a><span class="kw">plot</span>(model.full2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-155"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-155-1.svg" alt="Conditions d'applications du modèle `model.full2`" width="672" />
 <p class="caption">
@@ -475,7 +474,7 @@ Figure 8.4: Conditions d’applications du modèle <code>model.full2</code>
 <p>If you analyze the residuals (in the way described above), you will find that there is no problem with the linearity assumption, nor the homoscedasticity assumption (BP = 1.2267, p = 0.268). However, Wilk-Shapiro test of normality of residuals is suspicious (W=0.97, p = 0.03). Given the relatively large sample size (<span class="math inline">\(N = 92\)</span>), this normality test has high power and the magnitude of deviation from normality does not appear to be large. Considering the robustness of GLM to non-normality with large samples, we should not be overly concerned with this violation.</p>
 <p>Given that the assumptions appear sufficiently met, we can accept the results as calculated by R. All terms in the model are significant (location, lage, and the interaction). This full model is equivalent to fitting separate regressions for each location. To get the coefficients of these regression, one can either fit the two regressions on data subsets for each location, or extract the fitted coefficients from the
 full model:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="homogeneity-of-slopes.html#cb394-1" aria-hidden="true"></a>model.full2</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="homogeneity-of-slopes.html#cb396-1" aria-hidden="true"></a>model.full2</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lfkl ~ lage + locate + lage:locate, data = anc3dat)
@@ -498,7 +497,7 @@ lfkl &amp;= 1.2284 + 0.3253 \times lage + 0.2207 \times 1 - 0.1656 \times 1 \tim
 \end{aligned}\]</span></p>
 <p>You can convince youself that this is the same as fitting 2 regressions
 separately.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="homogeneity-of-slopes.html#cb396-1" aria-hidden="true"></a><span class="kw">by</span>(anc3dat, anc3dat<span class="op">$</span>locate,<span class="cf">function</span>(x) <span class="kw">lm</span>(lfkl<span class="op">~</span>lage, <span class="dt">data=</span>x))</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="homogeneity-of-slopes.html#cb398-1" aria-hidden="true"></a><span class="kw">by</span>(anc3dat, anc3dat<span class="op">$</span>locate,<span class="cf">function</span>(x) <span class="kw">lm</span>(lfkl<span class="op">~</span>lage, <span class="dt">data=</span>x))</span></code></pre></div>
 <pre><code>## anc3dat$locate: LOFW        
 ## 
 ## Call:
@@ -558,7 +557,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

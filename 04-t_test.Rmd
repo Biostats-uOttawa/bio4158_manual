@@ -325,10 +325,12 @@ Note that instead of rerunning the t-test specifying a one-tailed test, you can:
 
 - if the sign of the estimate goes in the same direction as the alternative hypothesis, simply divide by 2 the probability you obtain with the two-tailed test
 - if not the sign of the estimate is in the opposite direction of the alternative hypothesis, use $1 - p/2$
+
 ```
 
 
-## Références
+## Bibliography
+
 Bumpus, H.C. (1898) The elimination of the unfit as illustrated by the introduced sparrow, Passer domesticus. Biological Lectures, Woods Hole Biology Laboratory, Woods Hole, 11 th Lecture: 209 - 226.
 
 Newman, K.J. and H.V. Meredith. (1956) Individual growth in skeletal bigonial diameter during the childhood period from 5 to 11 years of age. Amer. J. Anat. 99: 157 - 187.

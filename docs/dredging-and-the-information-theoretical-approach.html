@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.11 Dredging and the information theoretical approach | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.11 Dredging and the information theoretical approach | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="testing-for-interactions.html"/>
 <link rel="next" href="bootstrapping-multiple-regression.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dredging-and-the-information-theoretical-approach" class="section level2" number="7.11">
-<h2><span class="header-section-number">7.11</span> Dredging and the information theoretical approach</h2>
+<div id="dredging-and-the-information-theoretical-approach" class="section level2 hasAnchor" number="7.11">
+<h2><span class="header-section-number">7.11</span> Dredging and the information theoretical approach<a href="dredging-and-the-information-theoretical-approach.html#dredging-and-the-information-theoretical-approach" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One of the main critiques of stepwise methods is that the p-values are not strictly correct because of the large number of tests that are actually done. This is the multiple testing problem. In building linear models (multiple regression for example) from a large number of independent variables, and possibly their interactions, there are so many possible combinations that if one were to use Bonferroni type corrections, it would make tests very conservative.</p>
 <p>An alternative, very elegantly advocated by Burnham and Anderson (2002, Model selection and multimodel inference: a practical information-theoretic approach. 2nd ed), is to use AIC (or better the AICc that is more appropriate for samples where the number of observations is less that about 40 times the number of variables) to rank potential models, and identify the set of models that are the best ones. One can then average the parameters across models, weighting using the probability that it is the best model to obtain coefficients that are more robust and less likely to be unduly affected by multicollinearity.</p>
 
@@ -344,25 +343,25 @@ To compare models using <em>AIC</em>, models need to be fitted using the exact s
 <div class="rmdnote">
 I do not support the use of stepwise AIC or data dredging which are going against the philosophy of AIC and parsimony. Develop a model based on biological hypothesis and report all the results significant or not without dredging the data.
 </div>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="dredging-and-the-information-theoretical-approach.html#cb366-1" aria-hidden="true"></a><span class="co"># redo the model double chekcing there are no &quot;NA&quot;</span></span>
-<span id="cb366-2"><a href="dredging-and-the-information-theoretical-approach.html#cb366-2" aria-hidden="true"></a><span class="co"># specifying na.action</span></span>
-<span id="cb366-3"><a href="dredging-and-the-information-theoretical-approach.html#cb366-3" aria-hidden="true"></a></span>
-<span id="cb366-4"><a href="dredging-and-the-information-theoretical-approach.html#cb366-4" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">update</span>(</span>
-<span id="cb366-5"><a href="dredging-and-the-information-theoretical-approach.html#cb366-5" aria-hidden="true"></a>  full_model_2ndinteractions,</span>
-<span id="cb366-6"><a href="dredging-and-the-information-theoretical-approach.html#cb366-6" aria-hidden="true"></a>  . <span class="op">~</span><span class="st"> </span>.,</span>
-<span id="cb366-7"><a href="dredging-and-the-information-theoretical-approach.html#cb366-7" aria-hidden="true"></a>  <span class="dt">data =</span> mysub,</span>
-<span id="cb366-8"><a href="dredging-and-the-information-theoretical-approach.html#cb366-8" aria-hidden="true"></a>  <span class="dt">na.action =</span> <span class="st">&quot;na.fail&quot;</span></span>
-<span id="cb366-9"><a href="dredging-and-the-information-theoretical-approach.html#cb366-9" aria-hidden="true"></a>)</span>
-<span id="cb366-10"><a href="dredging-and-the-information-theoretical-approach.html#cb366-10" aria-hidden="true"></a></span>
-<span id="cb366-11"><a href="dredging-and-the-information-theoretical-approach.html#cb366-11" aria-hidden="true"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb366-12"><a href="dredging-and-the-information-theoretical-approach.html#cb366-12" aria-hidden="true"></a>dd &lt;-<span class="st"> </span><span class="kw">dredge</span>(full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="dredging-and-the-information-theoretical-approach.html#cb368-1" aria-hidden="true"></a><span class="co"># redo the model double chekcing there are no &quot;NA&quot;</span></span>
+<span id="cb368-2"><a href="dredging-and-the-information-theoretical-approach.html#cb368-2" aria-hidden="true"></a><span class="co"># specifying na.action</span></span>
+<span id="cb368-3"><a href="dredging-and-the-information-theoretical-approach.html#cb368-3" aria-hidden="true"></a></span>
+<span id="cb368-4"><a href="dredging-and-the-information-theoretical-approach.html#cb368-4" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">update</span>(</span>
+<span id="cb368-5"><a href="dredging-and-the-information-theoretical-approach.html#cb368-5" aria-hidden="true"></a>  full_model_2ndinteractions,</span>
+<span id="cb368-6"><a href="dredging-and-the-information-theoretical-approach.html#cb368-6" aria-hidden="true"></a>  . <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb368-7"><a href="dredging-and-the-information-theoretical-approach.html#cb368-7" aria-hidden="true"></a>  <span class="dt">data =</span> mysub,</span>
+<span id="cb368-8"><a href="dredging-and-the-information-theoretical-approach.html#cb368-8" aria-hidden="true"></a>  <span class="dt">na.action =</span> <span class="st">&quot;na.fail&quot;</span></span>
+<span id="cb368-9"><a href="dredging-and-the-information-theoretical-approach.html#cb368-9" aria-hidden="true"></a>)</span>
+<span id="cb368-10"><a href="dredging-and-the-information-theoretical-approach.html#cb368-10" aria-hidden="true"></a></span>
+<span id="cb368-11"><a href="dredging-and-the-information-theoretical-approach.html#cb368-11" aria-hidden="true"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb368-12"><a href="dredging-and-the-information-theoretical-approach.html#cb368-12" aria-hidden="true"></a>dd &lt;-<span class="st"> </span><span class="kw">dredge</span>(full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## Fixed term is &quot;(Intercept)&quot;</code></pre>
 <p>Object <code>dd</code> will contain all possible models using the terms of our full model with 2nd order interactions. Then, we can have a look at the subset of models that have an AICc within 4 units from the lowest AICc model. (Burnham and Anderson suggest that models that deviate by more than 2 AICc units have very
 little empirical support):</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="dredging-and-the-information-theoretical-approach.html#cb368-1" aria-hidden="true"></a><span class="co"># get models within 4 units of AICc from the best model</span></span>
-<span id="cb368-2"><a href="dredging-and-the-information-theoretical-approach.html#cb368-2" aria-hidden="true"></a>top_models_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">get.models</span>(dd, <span class="dt">subset =</span> delta <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
-<span id="cb368-3"><a href="dredging-and-the-information-theoretical-approach.html#cb368-3" aria-hidden="true"></a>avgmodel1 &lt;-<span class="st"> </span><span class="kw">model.avg</span>(top_models_<span class="dv">1</span>) <span class="co"># compute average parameters</span></span>
-<span id="cb368-4"><a href="dredging-and-the-information-theoretical-approach.html#cb368-4" aria-hidden="true"></a><span class="kw">summary</span>(avgmodel1) <span class="co"># display averaged model</span></span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="dredging-and-the-information-theoretical-approach.html#cb370-1" aria-hidden="true"></a><span class="co"># get models within 4 units of AICc from the best model</span></span>
+<span id="cb370-2"><a href="dredging-and-the-information-theoretical-approach.html#cb370-2" aria-hidden="true"></a>top_models_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">get.models</span>(dd, <span class="dt">subset =</span> delta <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
+<span id="cb370-3"><a href="dredging-and-the-information-theoretical-approach.html#cb370-3" aria-hidden="true"></a>avgmodel1 &lt;-<span class="st"> </span><span class="kw">model.avg</span>(top_models_<span class="dv">1</span>) <span class="co"># compute average parameters</span></span>
+<span id="cb370-4"><a href="dredging-and-the-information-theoretical-approach.html#cb370-4" aria-hidden="true"></a><span class="kw">summary</span>(avgmodel1) <span class="co"># display averaged model</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## model.avg(object = top_models_1)
@@ -414,7 +413,7 @@ little empirical support):</p>
 ## logarea:swamp   4.462e-04  1.664e-03   1.762e-03   0.253   0.8001    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="dredging-and-the-information-theoretical-approach.html#cb370-1" aria-hidden="true"></a><span class="kw">confint</span>(avgmodel1) <span class="co"># display CI for averaged coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="dredging-and-the-information-theoretical-approach.html#cb372-1" aria-hidden="true"></a><span class="kw">confint</span>(avgmodel1) <span class="co"># display CI for averaged coefficients</span></span></code></pre></div>
 <pre><code>##                        2.5 %        97.5 %
 ## (Intercept)    -0.7157333646  0.3007147516
 ## logarea        -0.1080048582  0.3708612563
@@ -471,7 +470,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

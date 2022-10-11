@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.2 Organizing the data: 3 forms | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.2 Organizing the data: 3 forms | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="set-freq.html"/>
 <link rel="next" href="graphs-for-contingency-tables-and-testing-for-independence.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,12 +330,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="organizing-the-data-3-forms" class="section level2" number="9.2">
-<h2><span class="header-section-number">9.2</span> Organizing the data: 3 forms</h2>
+<div id="organizing-the-data-3-forms" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Organizing the data: 3 forms<a href="organizing-the-data-3-forms.html#organizing-the-data-3-forms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Some biological experiments yield count data, e.g., the number of plants infected by a plant pathogen under different exposure regimes, the number of male and female turtles hatched under different incubation temperature treatments (in turtles, sex is temperature dependent!), etc. Usually the statistical issue here is whether the proportion of individuals in different categories (e.g., infected versus uninfected, male versus female, etc.) differs significantly among treatments. To examine this question, we can to set up a data file that lists the number of individuals in each category. There are 3 ways to do this. You should be able to decide which one is appropriate, and how to convert between them with R.</p>
 <p>The file <code>USPopSurvey.csv</code> contains the results of a 1980 U.S population survey of a mid-eastern town:</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="organizing-the-data-3-forms.html#cb418-1" aria-hidden="true"></a>USPopSurvey &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/USPopSurvey.csv&quot;</span>)</span>
-<span id="cb418-2"><a href="organizing-the-data-3-forms.html#cb418-2" aria-hidden="true"></a>USPopSurvey</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="organizing-the-data-3-forms.html#cb420-1" aria-hidden="true"></a>USPopSurvey &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/USPopSurvey.csv&quot;</span>)</span>
+<span id="cb420-2"><a href="organizing-the-data-3-forms.html#cb420-2" aria-hidden="true"></a>USPopSurvey</span></code></pre></div>
 <pre><code>##    ageclass    sex frequency
 ## 1       0-9 female     17619
 ## 2     10-19 female     17947
@@ -358,13 +357,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 18      80+   male      1926</code></pre>
 <p>Note that there are 18 lines and 3 columns in this file. Each line lists the number of individuals (<code>frequency</code>) of a given sex and age class. There are (sum(USPopSurvey$frequency)) 239539 individuals that were classified into the 18 (2 sexes x 9 age classes) categories. This way of presenting data is the <strong>frequency form</strong>. It is a compact way to present the data when there are only categorical variables.</p>
 <p>When there are continuous variables, the frequency form can’t be utilized (or provides no gain since each observation could possibly have a different values for the continuous variable(s)). Data have therefore to be stored in <strong>case form</strong> where each observation (<code>individual</code>) represents one line in the data file, and each variable is a column. Conveniently, the <code>vcdExtra</code> 📦 includes the <code>expand.dft()</code> function to convert from the frequency to case form. For example, to create a data frame with 239539 lines and 2 columns (sex and ageclass):</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="organizing-the-data-3-forms.html#cb420-1" aria-hidden="true"></a>USPopSurvey.caseform &lt;-<span class="st"> </span><span class="kw">expand.dft</span>(USPopSurvey, <span class="dt">freq =</span> <span class="st">&quot;frequency&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in type.convert.default(as.character(DF[[i]]), ...): &#39;as.is&#39; should be
-## specified by the caller; using TRUE
-
-## Warning in type.convert.default(as.character(DF[[i]]), ...): &#39;as.is&#39; should be
-## specified by the caller; using TRUE</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="organizing-the-data-3-forms.html#cb422-1" aria-hidden="true"></a><span class="kw">head</span>(USPopSurvey.caseform)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="organizing-the-data-3-forms.html#cb422-1" aria-hidden="true"></a>USPopSurvey.caseform &lt;-<span class="st"> </span><span class="kw">expand.dft</span>(USPopSurvey, <span class="dt">freq =</span> <span class="st">&quot;frequency&quot;</span>)</span>
+<span id="cb422-2"><a href="organizing-the-data-3-forms.html#cb422-2" aria-hidden="true"></a><span class="kw">head</span>(USPopSurvey.caseform)</span></code></pre></div>
 <pre><code>##   ageclass    sex
 ## 1      0-9 female
 ## 2      0-9 female
@@ -478,7 +472,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

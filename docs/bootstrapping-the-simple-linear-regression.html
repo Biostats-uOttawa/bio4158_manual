@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.10 Bootstrapping the simple linear regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.10 Bootstrapping the simple linear regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="quantifying-effect-size-in-regression-and-power-analysis.html"/>
 <link rel="next" href="two---sample-comparisons.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,25 +330,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bootstrapping-the-simple-linear-regression" class="section level2" number="3.10">
-<h2><span class="header-section-number">3.10</span> Bootstrapping the simple linear regression</h2>
+<div id="bootstrapping-the-simple-linear-regression" class="section level2 hasAnchor" number="3.10">
+<h2><span class="header-section-number">3.10</span> Bootstrapping the simple linear regression<a href="bootstrapping-the-simple-linear-regression.html#bootstrapping-the-simple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A non-parametric test for the intercept and slope of a linear regression can be obtained by bootstrapping.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="bootstrapping-the-simple-linear-regression.html#cb112-1" aria-hidden="true"></a><span class="co"># load boot</span></span>
-<span id="cb112-2"><a href="bootstrapping-the-simple-linear-regression.html#cb112-2" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
-<span id="cb112-3"><a href="bootstrapping-the-simple-linear-regression.html#cb112-3" aria-hidden="true"></a><span class="co"># function to obtain regression weights</span></span>
-<span id="cb112-4"><a href="bootstrapping-the-simple-linear-regression.html#cb112-4" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
-<span id="cb112-5"><a href="bootstrapping-the-simple-linear-regression.html#cb112-5" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ] <span class="co"># allows boot to select sample</span></span>
-<span id="cb112-6"><a href="bootstrapping-the-simple-linear-regression.html#cb112-6" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
-<span id="cb112-7"><a href="bootstrapping-the-simple-linear-regression.html#cb112-7" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
-<span id="cb112-8"><a href="bootstrapping-the-simple-linear-regression.html#cb112-8" aria-hidden="true"></a>}</span>
-<span id="cb112-9"><a href="bootstrapping-the-simple-linear-regression.html#cb112-9" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
-<span id="cb112-10"><a href="bootstrapping-the-simple-linear-regression.html#cb112-10" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(</span>
-<span id="cb112-11"><a href="bootstrapping-the-simple-linear-regression.html#cb112-11" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon.male,</span>
-<span id="cb112-12"><a href="bootstrapping-the-simple-linear-regression.html#cb112-12" aria-hidden="true"></a>  <span class="dt">statistic =</span> bs,</span>
-<span id="cb112-13"><a href="bootstrapping-the-simple-linear-regression.html#cb112-13" aria-hidden="true"></a>  <span class="dt">R =</span> <span class="dv">1000</span>, <span class="dt">formula =</span> <span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(age)</span>
-<span id="cb112-14"><a href="bootstrapping-the-simple-linear-regression.html#cb112-14" aria-hidden="true"></a>)</span>
-<span id="cb112-15"><a href="bootstrapping-the-simple-linear-regression.html#cb112-15" aria-hidden="true"></a><span class="co"># view results</span></span>
-<span id="cb112-16"><a href="bootstrapping-the-simple-linear-regression.html#cb112-16" aria-hidden="true"></a>results</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="bootstrapping-the-simple-linear-regression.html#cb114-1" aria-hidden="true"></a><span class="co"># load boot</span></span>
+<span id="cb114-2"><a href="bootstrapping-the-simple-linear-regression.html#cb114-2" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
+<span id="cb114-3"><a href="bootstrapping-the-simple-linear-regression.html#cb114-3" aria-hidden="true"></a><span class="co"># function to obtain regression weights</span></span>
+<span id="cb114-4"><a href="bootstrapping-the-simple-linear-regression.html#cb114-4" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
+<span id="cb114-5"><a href="bootstrapping-the-simple-linear-regression.html#cb114-5" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ] <span class="co"># allows boot to select sample</span></span>
+<span id="cb114-6"><a href="bootstrapping-the-simple-linear-regression.html#cb114-6" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
+<span id="cb114-7"><a href="bootstrapping-the-simple-linear-regression.html#cb114-7" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
+<span id="cb114-8"><a href="bootstrapping-the-simple-linear-regression.html#cb114-8" aria-hidden="true"></a>}</span>
+<span id="cb114-9"><a href="bootstrapping-the-simple-linear-regression.html#cb114-9" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
+<span id="cb114-10"><a href="bootstrapping-the-simple-linear-regression.html#cb114-10" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(</span>
+<span id="cb114-11"><a href="bootstrapping-the-simple-linear-regression.html#cb114-11" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon.male,</span>
+<span id="cb114-12"><a href="bootstrapping-the-simple-linear-regression.html#cb114-12" aria-hidden="true"></a>  <span class="dt">statistic =</span> bs,</span>
+<span id="cb114-13"><a href="bootstrapping-the-simple-linear-regression.html#cb114-13" aria-hidden="true"></a>  <span class="dt">R =</span> <span class="dv">1000</span>, <span class="dt">formula =</span> <span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(age)</span>
+<span id="cb114-14"><a href="bootstrapping-the-simple-linear-regression.html#cb114-14" aria-hidden="true"></a>)</span>
+<span id="cb114-15"><a href="bootstrapping-the-simple-linear-regression.html#cb114-15" aria-hidden="true"></a><span class="co"># view results</span></span>
+<span id="cb114-16"><a href="bootstrapping-the-simple-linear-regression.html#cb114-16" aria-hidden="true"></a>results</span></code></pre></div>
 <pre><code>## 
 ## ORDINARY NONPARAMETRIC BOOTSTRAP
 ## 
@@ -360,9 +359,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 1.1919926  0.001764973  0.03565883
-## t2* 0.3408557 -0.001183146  0.02828878</code></pre>
+##      original        bias    std. error
+## t1* 1.1919926  0.0009066061  0.03352172
+## t2* 0.3408557 -0.0005568719  0.02645282</code></pre>
 <p>For each parameter in the model (here the intercept is labeled <code>t1\*</code> and the slope of the regression line is labeled <code>t2\*</code>) , you obtain:</p>
 <p>Pour chaque paramètre du modèle (ici l’ordonnée à l’origine est
 appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
@@ -371,14 +370,14 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 <li><code>bias</code> the difference between the mean value of all bootstrap estimates and the original value</li>
 <li><code>std. error</code> standard error of the bootstrap estimate</li>
 </ol>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="bootstrapping-the-simple-linear-regression.html#cb114-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb114-2"><a href="bootstrapping-the-simple-linear-regression.html#cb114-2" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">1</span>) <span class="co"># intercept</span></span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="bootstrapping-the-simple-linear-regression.html#cb116-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb116-2"><a href="bootstrapping-the-simple-linear-regression.html#cb116-2" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">1</span>) <span class="co"># intercept</span></span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/lm-boot-2-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="bootstrapping-the-simple-linear-regression.html#cb115-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>) <span class="co"># log10(age)</span></span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="bootstrapping-the-simple-linear-regression.html#cb117-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>) <span class="co"># log10(age)</span></span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/lm-boot-2-2.svg" width="672" /></p>
 <p>The distribution of the bootstrapped estimates is rather Gaussian, with only small deviations in the tails (where it counts for confidence intervals…). One could use the standard error of the bootstrap estimates to calculate a symmetrical confidence interval as mean +- t SE. But, given that R can as easily calculate a bias-corrected adjusted (BCa) confidence interval, or one based on the actual distribution, (Percentile) why not have it do it all:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="bootstrapping-the-simple-linear-regression.html#cb116-1" aria-hidden="true"></a><span class="co"># interval de confiance pour l&#39;ordonnée à l&#39;origine</span></span>
-<span id="cb116-2"><a href="bootstrapping-the-simple-linear-regression.html#cb116-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="bootstrapping-the-simple-linear-regression.html#cb118-1" aria-hidden="true"></a><span class="co"># interval de confiance pour l&#39;ordonnée à l&#39;origine</span></span>
+<span id="cb118-2"><a href="bootstrapping-the-simple-linear-regression.html#cb118-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Warning in boot.ci(results, type = &quot;all&quot;, index = 1): bootstrap variances needed
 ## for studentized intervals</code></pre>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
@@ -389,13 +388,14 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.120,  1.260 )   ( 1.120,  1.259 )  
+## 95%   ( 1.125,  1.257 )   ( 1.129,  1.255 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.125,  1.264 )   ( 1.118,  1.259 )  
-## Calculations and Intervals on Original Scale</code></pre>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="bootstrapping-the-simple-linear-regression.html#cb119-1" aria-hidden="true"></a><span class="co"># intervalle de confiance pour la pente</span></span>
-<span id="cb119-2"><a href="bootstrapping-the-simple-linear-regression.html#cb119-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
+## 95%   ( 1.129,  1.255 )   ( 1.112,  1.247 )  
+## Calculations and Intervals on Original Scale
+## Some BCa intervals may be unstable</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="bootstrapping-the-simple-linear-regression.html#cb121-1" aria-hidden="true"></a><span class="co"># intervalle de confiance pour la pente</span></span>
+<span id="cb121-2"><a href="bootstrapping-the-simple-linear-regression.html#cb121-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning in boot.ci(results, type = &quot;all&quot;, index = 2): bootstrap variances needed
 ## for studentized intervals</code></pre>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
@@ -406,10 +406,10 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2866,  0.3975 )   ( 0.2880,  0.3974 )  
+## 95%   ( 0.2896,  0.3933 )   ( 0.2903,  0.3900 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2843,  0.3937 )   ( 0.2886,  0.3997 )  
+## 95%   ( 0.2917,  0.3914 )   ( 0.2968,  0.4032 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p>Here the 4 types of CI that R managed to calculate are essentially the same. Had data been violating more strongly the standard assumptions (normality, homoscedasticity), then the different methods (Normal, Basic, Percentile, and BCa) would have diverged more. In that case, which one is best? BCa has the favor of most, currently.</p>
 
@@ -454,7 +454,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

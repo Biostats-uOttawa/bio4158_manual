@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.6 Poisson regression to analyze multi-way tables | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.6 Poisson regression to analyze multi-way tables | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="testing-an-external-hypothesis.html"/>
 <link rel="next" href="ex-glm.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="poisson-regression-to-analyze-multi-way-tables" class="section level2" number="9.6">
-<h2><span class="header-section-number">9.6</span> Poisson regression to analyze multi-way tables</h2>
+<div id="poisson-regression-to-analyze-multi-way-tables" class="section level2 hasAnchor" number="9.6">
+<h2><span class="header-section-number">9.6</span> Poisson regression to analyze multi-way tables<a href="poisson-regression-to-analyze-multi-way-tables.html#poisson-regression-to-analyze-multi-way-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="poisson-regression-to-analyze-multi-way-tables.html#cb449-1" aria-hidden="true"></a>loglin &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/loglin.csv&quot;</span>)</span>
 <span id="cb449-2"><a href="poisson-regression-to-analyze-multi-way-tables.html#cb449-2" aria-hidden="true"></a><span class="co"># Convert from frequency form to table form for mosaic plot</span></span>
 <span id="cb449-3"><a href="poisson-regression-to-analyze-multi-way-tables.html#cb449-3" aria-hidden="true"></a>loglinTable &lt;-<span class="st"> </span><span class="kw">xtabs</span>(frequency <span class="op">~</span><span class="st"> </span>temperature <span class="op">+</span><span class="st"> </span>light <span class="op">+</span><span class="st"> </span>infected, <span class="dt">data =</span> loglin)</span>
@@ -364,7 +363,7 @@ Figure 9.3: Proportion de plantes infectées en fonction de la température er l
 ##                            LR Chisq Df Pr(&gt;Chisq)    
 ## temperature                  9.1786  1  0.0024487 ** 
 ## light                       13.2829  1  0.0002678 ***
-## infected                     0.0000  1  1.0000000    
+## infected                     0.0000  1  0.9999999    
 ## temperature:light            5.6758  1  0.0172008 *  
 ## temperature:infected        29.0612  1  7.013e-08 ***
 ## light:infected              20.2687  1  6.729e-06 ***
@@ -418,7 +417,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null

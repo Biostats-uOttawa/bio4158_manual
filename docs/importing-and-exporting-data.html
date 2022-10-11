@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.2 Importing and exporting data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.2 Importing and exporting data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Laboratory manual for BIO4158 Applied biostatistics" />
   <meta name="github-repo" content="Bio4158-4558-uottawa/lab_manual/" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="set-intro.html"/>
 <link rel="next" href="preliminary-examination-of-data.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -232,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.4.2" data-path="bootstrap-and-permutation-tests-to-compare-2-means.html"><a href="bootstrap-and-permutation-tests-to-compare-2-means.html#permutation"><i class="fa fa-check"></i><b>4.4.2</b> Permutation</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="comparing-the-means-of-paired-samples.html"><a href="comparing-the-means-of-paired-samples.html"><i class="fa fa-check"></i><b>4.5</b> Comparing the means of paired samples</a></li>
-<li class="chapter" data-level="4.6" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>4.6</b> Références</a></li>
+<li class="chapter" data-level="4.6" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i><b>4.6</b> Bibliography</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="one-way-anova.html"><a href="one-way-anova.html"><i class="fa fa-check"></i><b>5</b> One-way ANOVA</a>
 <ul>
@@ -331,8 +330,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="importing-and-exporting-data" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Importing and exporting data</h2>
+<div id="importing-and-exporting-data" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Importing and exporting data<a href="importing-and-exporting-data.html#importing-and-exporting-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There are multiple format to save data. The 2 most used formats with R are <code>.csv</code> and <code>.Rdata</code>.</p>
 <ul>
 <li><code>.csv</code> files are used to store data in a simple format and are editable using any text editor (e.g. Word, Writer, atom, …) and spreadsheets (e.g. MS Excel, LO Calc).
@@ -340,8 +339,8 @@ They can be read using the function <code>read.csv()</code> and created in R wit
 <li><code>.Rdata</code> files are used to store not only data but any R object, however, those files can only be used in R. They are created using the <code>save()</code> function and read using the <code>load()</code> function.</li>
 </ul>
 <p>Data for exercises and labs are provides in <code>.csv</code>.</p>
-<div id="working-directory" class="section level3" number="1.2.1">
-<h3><span class="header-section-number">1.2.1</span> Working directory</h3>
+<div id="working-directory" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Working directory<a href="importing-and-exporting-data.html#working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 <div class="rmdwarning">
 Potentially the most frequent error when starting with R is link to loading data or reading data from an external file in R.
@@ -367,13 +366,13 @@ When opening Rstudio by double-clicking on a file, it will automatically set the
 For all labs, I strongly recommend you to make a folder where you will save all your R scripts and data and use it as your working directory in R. For better organisation I suggest to save your data in a subfolder named <code>data All R code for data loading in the manual is based on that structure. This is why dat loading or saving code look like</code>data/my_file.xxx`. If you follow it also all code for data loading can be simply copy-pasted and should work.
 </div>
 </div>
-<div id="opening-a-.rdata-file" class="section level3" number="1.2.2">
-<h3><span class="header-section-number">1.2.2</span> Opening a <code>.Rdata</code> file</h3>
+<div id="opening-a-.rdata-file" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Opening a <code>.Rdata</code> file<a href="importing-and-exporting-data.html#opening-a-.rdata-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You can double-click on the file and R/Rstudio should open. Alternatively, you can use <code>load()</code> function and specify the names (and path) of the file. For example to load the data <code>ErablesGatineau.Rdata</code> in R which is located in the folder <code>data</code> in the working directory you can use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="importing-and-exporting-data.html#cb3-1" aria-hidden="true"></a><span class="kw">load</span>(<span class="st">&quot;data/ErablesGatineau.Rdata&quot;</span>)</span></code></pre></div>
 </div>
-<div id="open-a-.csv-file" class="section level3" number="1.2.3">
-<h3><span class="header-section-number">1.2.3</span> Open a <code>.csv</code> file</h3>
+<div id="open-a-.csv-file" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Open a <code>.csv</code> file<a href="importing-and-exporting-data.html#open-a-.csv-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To import data saved in a <code>.csv</code> file, you need to use the <code>read.csv()</code> function.
 For example, to create a R object named <code>erables</code> which contain the data from the file <code>ErablesGatineau.csv</code>, you need to use:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="importing-and-exporting-data.html#cb4-1" aria-hidden="true"></a>erables &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/ErablesGatineau.csv&quot;</span>)</span></code></pre></div>
@@ -399,16 +398,16 @@ I suggest instead to use the combination of <code>ls()</code> to get the list of
 <code>erables</code> is a data.frame that contains 100 observations (lines) of 3 variables (columns) : <code>station</code> , a variable of type Factor with 2
 levels, and <code>diam</code> and <code>biom</code> that are 2 numeric variables.</p>
 </div>
-<div id="entering-data-in-r" class="section level3" number="1.2.4">
-<h3><span class="header-section-number">1.2.4</span> Entering data in R</h3>
+<div id="entering-data-in-r" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Entering data in R<a href="importing-and-exporting-data.html#entering-data-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>R is not the ideal environment to input data. It is possible, but the syntax is heavy and makes most people upset. Use your preferred worksheet program instead. It will be more efficient and less frustrating.</p>
 </div>
-<div id="cleaning-up-correcting-data" class="section level3" number="1.2.5">
-<h3><span class="header-section-number">1.2.5</span> Cleaning up / correcting data</h3>
+<div id="cleaning-up-correcting-data" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Cleaning up / correcting data<a href="importing-and-exporting-data.html#cleaning-up-correcting-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another operation that can be frustrating in R. Our advice: unless you want to keep track of all corrections made (so that you can go back to the original data), do not change data in R. Return to the original data file (in a worksheet or database), correct the data there, and then reimport into R. It is simple to resubmit the few lines of code to reimport data. Doing things this way will leave you with a single version of your data file that has all corrections, and the code that allows you to repeat the analysis exactly.</p>
 </div>
-<div id="exporting-data-from-r" class="section level3" number="1.2.6">
-<h3><span class="header-section-number">1.2.6</span> Exporting data from R</h3>
+<div id="exporting-data-from-r" class="section level3 hasAnchor" number="1.2.6">
+<h3><span class="header-section-number">1.2.6</span> Exporting data from R<a href="importing-and-exporting-data.html#exporting-data-from-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You have 2 options: export data in <code>.csv</code> or in <code>.Rdata</code></p>
 <p>To export in <code>.Rdata</code> use the function <code>save()</code> to export in <code>.csv</code> use <code>write.csv()</code></p>
 <p>For example, to save teh object <code>mydata</code> in a file <code>wonderful_data.csv</code>that will be saved in your working directory you can type:</p>
@@ -454,7 +453,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub", "Labs_BIO4158.mobi"],
+"download": ["Labs_BIO4158.pdf", "Labs_BIO4158.epub"],
 "search": {
 "engine": "fuse",
 "options": null
