@@ -349,12 +349,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>the density (in m/hectare) of hard-surface roads within 1 km of the wetland (<code>thtden</code>).</li>
 </ul>
 <p>We will focus on herptiles for this exercise, so we better first have a look at how this variable is distributed and correlated to the potential independent variables:</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="first-look-at-the-data.html#cb300-1" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Mregdat.csv&quot;</span>)</span>
-<span id="cb300-2"><a href="first-look-at-the-data.html#cb300-2" aria-hidden="true"></a><span class="kw">scatterplotMatrix</span>(</span>
-<span id="cb300-3"><a href="first-look-at-the-data.html#cb300-3" aria-hidden="true"></a>  <span class="op">~</span><span class="st"> </span>logherp <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
-<span id="cb300-4"><a href="first-look-at-the-data.html#cb300-4" aria-hidden="true"></a>  <span class="dt">regLine =</span> <span class="ot">TRUE</span>, <span class="dt">smooth =</span> <span class="ot">TRUE</span>, <span class="dt">diagonal =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb300-5"><a href="first-look-at-the-data.html#cb300-5" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb300-6"><a href="first-look-at-the-data.html#cb300-6" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="first-look-at-the-data.html#cb302-1" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Mregdat.csv&quot;</span>)</span>
+<span id="cb302-2"><a href="first-look-at-the-data.html#cb302-2" aria-hidden="true"></a><span class="kw">scatterplotMatrix</span>(</span>
+<span id="cb302-3"><a href="first-look-at-the-data.html#cb302-3" aria-hidden="true"></a>  <span class="op">~</span><span class="st"> </span>logherp <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
+<span id="cb302-4"><a href="first-look-at-the-data.html#cb302-4" aria-hidden="true"></a>  <span class="dt">regLine =</span> <span class="ot">TRUE</span>, <span class="dt">smooth =</span> <span class="ot">TRUE</span>, <span class="dt">diagonal =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb302-5"><a href="first-look-at-the-data.html#cb302-5" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb302-6"><a href="first-look-at-the-data.html#cb302-6" aria-hidden="true"></a>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-88"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-88-1.svg" alt="Matrice de rélation et densité pour la richesse spécifique des amphibiens et reptiles" width="672" />
 <p class="caption">

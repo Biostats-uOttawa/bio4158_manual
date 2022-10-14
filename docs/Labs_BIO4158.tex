@@ -239,7 +239,7 @@
 \makeatother
 \subtitle{Laboratory manual}
 \author{Julien Martin}
-\date{11-10-2022}
+\date{13-10-2022}
 
 \begin{document}
 \maketitle
@@ -1230,9 +1230,9 @@ r\strut
 \begin{minipage}[t]{0.11\columnwidth}\raggedright
 other t-tests\strut
 \end{minipage} & \begin{minipage}[t]{0.35\columnwidth}\centering
-f\strut
+d\strut
 \end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright
-\(f = \frac{\mu_1}{\sigma}\)\strut
+\(d = \frac{\mu}{\sigma}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.11\columnwidth}\raggedright
 F-test (ANOVA)\strut
@@ -2728,9 +2728,9 @@ A non-parametric test for the intercept and slope of a linear regression can be 
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original        bias    std. error
-## t1* 1.1919926  0.0010531136  0.03244506
-## t2* 0.3408557 -0.0006502573  0.02567282
+##      original       bias    std. error
+## t1* 1.1919926  0.001715330  0.03352203
+## t2* 0.3408557 -0.001128609  0.02651356
 \end{verbatim}
 
 For each parameter in the model (here the intercept is labeled \texttt{t1\textbackslash{}*} and the slope of the regression line is labeled \texttt{t2\textbackslash{}*}) , you obtain:
@@ -2789,10 +2789,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.127,  1.255 )   ( 1.127,  1.250 )  
+## 95%   ( 1.125,  1.256 )   ( 1.122,  1.258 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.134,  1.257 )   ( 1.121,  1.252 )  
+## 95%   ( 1.126,  1.262 )   ( 1.120,  1.258 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -2817,10 +2817,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2912,  0.3918 )   ( 0.2928,  0.3918 )  
+## 95%   ( 0.2900,  0.3939 )   ( 0.2887,  0.3967 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2899,  0.3889 )   ( 0.2939,  0.3973 )  
+## 95%   ( 0.2850,  0.3930 )   ( 0.2882,  0.3974 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3198,9 +3198,9 @@ The second section with the \texttt{boot()} command is where the real work is do
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original       bias    std. error
-## t1* 45.084391  0.003919955   0.4177331
-## t2* -1.714546 -0.009729719   0.7442514
+##      original     bias    std. error
+## t1* 45.084391 0.02813173   0.4228463
+## t2* -1.714546 0.01072471   0.7756338
 \end{verbatim}
 
 So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.
@@ -3233,7 +3233,7 @@ So we get the original estimates for the two coefficients in this model: the mea
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   (-3.143, -0.224 )  
+## 95%   (-3.266, -0.279 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3277,7 +3277,7 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 ## 
 ## Coefficients:
 ##           Estimate Iter Pr(Prob)  
-## location1   0.8573 3350   0.0293 *
+## location1   0.8573 4060   0.0241 *
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3290,9 +3290,9 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \texttt{Iter} coefficient: the Prob stopping rule stopped after 3350 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
+  \texttt{Iter} coefficient: the Prob stopping rule stopped after 4060 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
 \item
-  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0293 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0293= about 97.1\%) of the 3350 cases. Mind you, 3350 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
+  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0241 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0241= about 97.6\%) of the 4060 cases. Mind you, 4060 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
 \item
   \texttt{F-statistic}: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.
 \end{enumerate}
@@ -3527,6 +3527,34 @@ Note that instead of rerunning the t-test specifying a one-tailed test, you can:
   if not the sign of the estimate is in the opposite direction of the alternative hypothesis, use \(1 - p/2\)
 \end{itemize}
 \end{rmdwarning}
+
+To estimate the power of a paired t-test in R, we can use the function \texttt{power.t.test()}as for other t-tests but we need to specify the argument \texttt{type\ =\ "paired"}.
+You need to specify the mean difference within the pairs as the \texttt{delta}and standard deviance of difference within pairs as \texttt{sd}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skull\_w}\OperatorTok{$}\NormalTok{diff \textless{}{-}}\StringTok{ }\NormalTok{skull\_w}\OperatorTok{$}\NormalTok{width6 }\OperatorTok{{-}}\StringTok{ }\NormalTok{skull\_w}\OperatorTok{$}\NormalTok{width5}
+\KeywordTok{power.t.test}\NormalTok{(}
+  \DataTypeTok{n =} \DecValTok{15}\NormalTok{,}
+  \DataTypeTok{delta =} \KeywordTok{mean}\NormalTok{(skull\_w}\OperatorTok{$}\NormalTok{diff),}
+  \DataTypeTok{sd =} \KeywordTok{sd}\NormalTok{(skull\_w}\OperatorTok{$}\NormalTok{diff),}
+  \DataTypeTok{type =} \StringTok{"paired"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Paired t test power calculation 
+## 
+##               n = 15
+##           delta = 0.2
+##              sd = 0.03927922
+##       sig.level = 0.05
+##           power = 1
+##     alternative = two.sided
+## 
+## NOTE: n is number of *pairs*, sd is std.dev. of *differences* within pairs
+\end{verbatim}
 
 \hypertarget{bibliography}{%
 \section{Bibliography}\label{bibliography}}
@@ -3990,18 +4018,18 @@ The confidence intervals, corrected for multiple tests by the Tukey method, are 
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5936
+## Quantile = 2.5931
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2712   3.6456
-## m1965 - m1954 == 0  -5.5077  -9.9972  -1.0181
-## m1966 - m1954 == 0  -3.3127  -6.3431  -0.2823
-## m1965 - m1958 == 0  -5.6949 -10.4113  -0.9785
-## m1966 - m1958 == 0  -3.4999  -6.8573  -0.1425
-## m1966 - m1965 == 0   2.1950  -2.2172   6.6071
+## m1958 - m1954 == 0   0.1872  -3.2706   3.6450
+## m1965 - m1954 == 0  -5.5077  -9.9964  -1.0189
+## m1966 - m1954 == 0  -3.3127  -6.3426  -0.2828
+## m1965 - m1958 == 0  -5.6949 -10.4104  -0.9793
+## m1966 - m1958 == 0  -3.4999  -6.8567  -0.1431
+## m1966 - m1965 == 0   2.1950  -2.2164   6.6063
 \end{verbatim}
 
 \begin{Shaded}
@@ -6649,14 +6677,14 @@ Precise values for the limits can be obtained by:
 
 \begin{verbatim}
 ##       (Intercept)   logarea       thtden      swamp    I(swamp^2)
-## 0.5%  -0.70505084 0.1326574 -0.046694667 0.01697221 -0.0003483311
-## 1%    -0.68500110 0.1390574 -0.044043861 0.01837983 -0.0003405809
-## 2.5%  -0.65617554 0.1563839 -0.041417588 0.01995786 -0.0003257414
-## 5%    -0.60794464 0.1666560 -0.038878194 0.02128391 -0.0003130493
-## 95%   -0.07771132 0.2783135 -0.012850499 0.03729858 -0.0001838325
-## 97.5% -0.03236977 0.2869743 -0.010425948 0.03925222 -0.0001741113
-## 99%    0.01861568 0.2959113 -0.009197192 0.04133787 -0.0001602633
-## 99.5%  0.06791832 0.3015255 -0.007929218 0.04190555 -0.0001501193
+## 0.5%  -0.73588966 0.1245537 -0.046259412 0.01625846 -0.0003481962
+## 1%    -0.70076380 0.1448210 -0.044842055 0.01743348 -0.0003438435
+## 2.5%  -0.64819530 0.1559929 -0.042025186 0.01914700 -0.0003322231
+## 5%    -0.60402664 0.1637566 -0.039792139 0.02112919 -0.0003170451
+## 95%   -0.08396235 0.2773623 -0.011309560 0.03783268 -0.0001830793
+## 97.5% -0.03440503 0.2917303 -0.009043622 0.03974768 -0.0001639824
+## 99%    0.02016002 0.3116052 -0.005992926 0.04099485 -0.0001513758
+## 99.5%  0.07264298 0.3148842 -0.005135428 0.04195361 -0.0001453837
 \end{verbatim}
 
 These confidence limits are not reliable when the distribution of the bootstrap estimates deviate from Gaussian. If they do,, then it is preferable to compute so-called bias-corrected accelerated (BCa) confidence limits. The following code does just that:
@@ -6714,8 +6742,9 @@ For \texttt{logarea}, we get:
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   ( 0.1142,  0.3235 )  
+## 95%   ( 0.1293,  0.3293 )  
 ## Calculations and Intervals on Original Scale
+## Some BCa intervals may be unstable
 \end{verbatim}
 
 \includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-141-1.pdf}

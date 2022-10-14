@@ -339,19 +339,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Begin by having a look at the data by generating box plots of <code>rdwght</code> for <code>sex</code> and <code>location</code> from the file <code>Stu2wdat.csv</code> .</li>
 </ul>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb217-1"><a href="two-way-factorial-design-with-replication.html#cb217-1" aria-hidden="true"></a>Stu2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2wdat.csv&quot;</span>)</span>
-<span id="cb217-2"><a href="two-way-factorial-design-with-replication.html#cb217-2" aria-hidden="true"></a></span>
-<span id="cb217-3"><a href="two-way-factorial-design-with-replication.html#cb217-3" aria-hidden="true"></a><span class="kw">ggplot</span>(Stu2wdat, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> rdwght)) <span class="op">+</span></span>
-<span id="cb217-4"><a href="two-way-factorial-design-with-replication.html#cb217-4" aria-hidden="true"></a><span class="kw">geom_boxplot</span>(<span class="dt">notch =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
-<span id="cb217-5"><a href="two-way-factorial-design-with-replication.html#cb217-5" aria-hidden="true"></a><span class="kw">facet_grid</span>(<span class="op">~</span>location)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb219-1"><a href="two-way-factorial-design-with-replication.html#cb219-1" aria-hidden="true"></a>Stu2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2wdat.csv&quot;</span>)</span>
+<span id="cb219-2"><a href="two-way-factorial-design-with-replication.html#cb219-2" aria-hidden="true"></a></span>
+<span id="cb219-3"><a href="two-way-factorial-design-with-replication.html#cb219-3" aria-hidden="true"></a><span class="kw">ggplot</span>(Stu2wdat, <span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">y =</span> rdwght)) <span class="op">+</span></span>
+<span id="cb219-4"><a href="two-way-factorial-design-with-replication.html#cb219-4" aria-hidden="true"></a><span class="kw">geom_boxplot</span>(<span class="dt">notch =</span> <span class="ot">TRUE</span>) <span class="op">+</span></span>
+<span id="cb219-5"><a href="two-way-factorial-design-with-replication.html#cb219-5" aria-hidden="true"></a><span class="kw">facet_grid</span>(<span class="op">~</span>location)</span></code></pre></div>
 <pre><code>## Warning: Removed 4 rows containing non-finite values (stat_boxplot).</code></pre>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-41-1.svg" width="672" /></p>
 <p>From this, it appears as though females might be larger at both locations. It’s difficult to get an idea of whether fish differ in size between the two locations. The presence of outliers on these plots suggests there might be problems meeting normality assumptions for the residuals.</p>
 <ul>
 <li>Generate summary statistics for rdwght by sex and location .</li>
 </ul>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="two-way-factorial-design-with-replication.html#cb219-1" aria-hidden="true"></a>Stu2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2wdat.csv&quot;</span>)</span>
-<span id="cb219-2"><a href="two-way-factorial-design-with-replication.html#cb219-2" aria-hidden="true"></a><span class="kw">aggregate</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location, <span class="dt">data =</span> Stu2wdat, <span class="dt">FUN =</span> <span class="st">&quot;summary&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="two-way-factorial-design-with-replication.html#cb221-1" aria-hidden="true"></a>Stu2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2wdat.csv&quot;</span>)</span>
+<span id="cb221-2"><a href="two-way-factorial-design-with-replication.html#cb221-2" aria-hidden="true"></a><span class="kw">aggregate</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location, <span class="dt">data =</span> Stu2wdat, <span class="dt">FUN =</span> <span class="st">&quot;summary&quot;</span>)</span></code></pre></div>
 <pre><code>##            sex     location rdwght.Min. rdwght.1st Qu. rdwght.Median
 ## 1 FEMALE       CUMBERLAND      15.10000       20.40000      26.80000
 ## 2 MALE         CUMBERLAND      14.00000       19.22500      20.85000
@@ -366,14 +366,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Using the file <code>Stu2wdat.csv</code> , do a two-way factorial ANOVA:</li>
 </ul>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="two-way-factorial-design-with-replication.html#cb221-1" aria-hidden="true"></a><span class="co"># Fit anova model and plot residual diagnostics</span></span>
-<span id="cb221-2"><a href="two-way-factorial-design-with-replication.html#cb221-2" aria-hidden="true"></a><span class="co"># but first, save current par and set graphic page to hold 4 graphs</span></span>
-<span id="cb221-3"><a href="two-way-factorial-design-with-replication.html#cb221-3" aria-hidden="true"></a>opar &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb221-4"><a href="two-way-factorial-design-with-replication.html#cb221-4" aria-hidden="true"></a>anova.model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location,</span>
-<span id="cb221-5"><a href="two-way-factorial-design-with-replication.html#cb221-5" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum),</span>
-<span id="cb221-6"><a href="two-way-factorial-design-with-replication.html#cb221-6" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2wdat</span>
-<span id="cb221-7"><a href="two-way-factorial-design-with-replication.html#cb221-7" aria-hidden="true"></a>)</span>
-<span id="cb221-8"><a href="two-way-factorial-design-with-replication.html#cb221-8" aria-hidden="true"></a><span class="kw">anova</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="two-way-factorial-design-with-replication.html#cb223-1" aria-hidden="true"></a><span class="co"># Fit anova model and plot residual diagnostics</span></span>
+<span id="cb223-2"><a href="two-way-factorial-design-with-replication.html#cb223-2" aria-hidden="true"></a><span class="co"># but first, save current par and set graphic page to hold 4 graphs</span></span>
+<span id="cb223-3"><a href="two-way-factorial-design-with-replication.html#cb223-3" aria-hidden="true"></a>opar &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb223-4"><a href="two-way-factorial-design-with-replication.html#cb223-4" aria-hidden="true"></a>anova.model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location,</span>
+<span id="cb223-5"><a href="two-way-factorial-design-with-replication.html#cb223-5" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum),</span>
+<span id="cb223-6"><a href="two-way-factorial-design-with-replication.html#cb223-6" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2wdat</span>
+<span id="cb223-7"><a href="two-way-factorial-design-with-replication.html#cb223-7" aria-hidden="true"></a>)</span>
+<span id="cb223-8"><a href="two-way-factorial-design-with-replication.html#cb223-8" aria-hidden="true"></a><span class="kw">anova</span>(anova.model1)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: rdwght
@@ -389,8 +389,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Be careful here. R gives you the sequential sums of squares (Type I) and associated Mean squares and probabilities. These are not to be trusted unless the design is perfectly balanced. In this case, there are varying numbers of observations across sex and location combinations and therefore the design is not balanced.
 </div>
 <p>What you want are the partial sums of squares (type III). The easiest way to get them is to use the Anova() function in the <code>car</code> 📦 package (note the subtle difference, <code>Anova()</code> is not the same as <code>anova()</code>, remember case matters in R.). However, this is not enough by itself. To get the proper values for the type III sums of square, one also needs to specify contrasts, hence the cryptic <code>contrasts = list(sex = contr.sum,location = contr.sum)</code>.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="two-way-factorial-design-with-replication.html#cb223-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
-<span id="cb223-2"><a href="two-way-factorial-design-with-replication.html#cb223-2" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="two-way-factorial-design-with-replication.html#cb225-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
+<span id="cb225-2"><a href="two-way-factorial-design-with-replication.html#cb225-2" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: rdwght
@@ -403,8 +403,8 @@ Be careful here. R gives you the sequential sums of squares (Type I) and associa
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>On the basis of the ANOVA, there is no reason to reject two null hypotheses: (1) that the effect of sex (if any) does not depend on location (no interaction), and (2) that there is no difference in the size of sturgeon (pooled over sex ) between the two locations . On the other hand, we reject the null hypothesis that there is no difference in size between male and female sturgeon (pooled over location ), precisely as expected from the graphs.</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="two-way-factorial-design-with-replication.html#cb225-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb225-2"><a href="two-way-factorial-design-with-replication.html#cb225-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="two-way-factorial-design-with-replication.html#cb227-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb227-2"><a href="two-way-factorial-design-with-replication.html#cb227-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-46-1.svg" alt="Checking model assumptions for ANOVA model1" width="672" />
 <p class="caption">
@@ -412,7 +412,7 @@ Figure 6.1: Checking model assumptions for ANOVA model1
 </p>
 </div>
 <p>As usual, we cannot accept the above results without first ensuring that the assumptions of ANOVA are met. Examination of the residuals plots above shows that the residuals are reasonably normally distributed, with the exception of three potential outliers flagged on the QQ plot (cases 101, 24, &amp; 71; the latter two are on top of one another). However, Cook’s distances are not large for these (the 0.5 contour is not even visible on the plot), so there is little indication that these are a concern.The residuals vs fit plot shows that the spread of residuals is about equal over the range of the fitted values, again with the exception of a few cases. When we test for normality of residuals we get:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="two-way-factorial-design-with-replication.html#cb226-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model1))</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="two-way-factorial-design-with-replication.html#cb228-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model1))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -420,7 +420,7 @@ Figure 6.1: Checking model assumptions for ANOVA model1
 ## W = 0.87213, p-value = 2.619e-11</code></pre>
 <p>So, there is evidence of non-normality in the residuals.</p>
 <p>We will use the Levene’s test to examine the assumption of homogeneity of variances, just as we did with the 1-way anova.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="two-way-factorial-design-with-replication.html#cb228-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>location, <span class="dt">data =</span> Stu2wdat)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="two-way-factorial-design-with-replication.html#cb230-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>location, <span class="dt">data =</span> Stu2wdat)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##        Df F value  Pr(&gt;F)  
 ## group   3  3.8526 0.01055 *
@@ -432,14 +432,14 @@ Figure 6.1: Checking model assumptions for ANOVA model1
 <div class="rmdcode">
 Repeat this procedure using the data file Stu2mdat.Rdata . Now what do you conclude? Suppose you wanted to compare the sizes of males and females: in what way would these comparisons differ between Stu2wdat.Rdata and Stu2mdat.Rdata ?
 </div>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb230-1"><a href="two-way-factorial-design-with-replication.html#cb230-1" aria-hidden="true"></a>Stu2mdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2mdat.csv&quot;</span>)</span>
-<span id="cb230-2"><a href="two-way-factorial-design-with-replication.html#cb230-2" aria-hidden="true"></a>anova.model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb230-3"><a href="two-way-factorial-design-with-replication.html#cb230-3" aria-hidden="true"></a>  <span class="dt">formula =</span> rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location,</span>
-<span id="cb230-4"><a href="two-way-factorial-design-with-replication.html#cb230-4" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum),</span>
-<span id="cb230-5"><a href="two-way-factorial-design-with-replication.html#cb230-5" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2mdat</span>
-<span id="cb230-6"><a href="two-way-factorial-design-with-replication.html#cb230-6" aria-hidden="true"></a>)</span>
-<span id="cb230-7"><a href="two-way-factorial-design-with-replication.html#cb230-7" aria-hidden="true"></a><span class="kw">summary</span>(anova.model2)</span>
-<span id="cb230-8"><a href="two-way-factorial-design-with-replication.html#cb230-8" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb232-1"><a href="two-way-factorial-design-with-replication.html#cb232-1" aria-hidden="true"></a>Stu2mdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Stu2mdat.csv&quot;</span>)</span>
+<span id="cb232-2"><a href="two-way-factorial-design-with-replication.html#cb232-2" aria-hidden="true"></a>anova.model2 &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb232-3"><a href="two-way-factorial-design-with-replication.html#cb232-3" aria-hidden="true"></a>  <span class="dt">formula =</span> rdwght <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location,</span>
+<span id="cb232-4"><a href="two-way-factorial-design-with-replication.html#cb232-4" aria-hidden="true"></a>  <span class="dt">contrasts =</span> <span class="kw">list</span>(<span class="dt">sex =</span> contr.sum, <span class="dt">location =</span> contr.sum),</span>
+<span id="cb232-5"><a href="two-way-factorial-design-with-replication.html#cb232-5" aria-hidden="true"></a>  <span class="dt">data =</span> Stu2mdat</span>
+<span id="cb232-6"><a href="two-way-factorial-design-with-replication.html#cb232-6" aria-hidden="true"></a>)</span>
+<span id="cb232-7"><a href="two-way-factorial-design-with-replication.html#cb232-7" aria-hidden="true"></a><span class="kw">summary</span>(anova.model2)</span>
+<span id="cb232-8"><a href="two-way-factorial-design-with-replication.html#cb232-8" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = rdwght ~ sex + location + sex:location, data = Stu2mdat, 
@@ -478,8 +478,8 @@ Repeat this procedure using the data file Stu2mdat.Rdata . Now what do you concl
 <ul>
 <li>You might find it useful here to generate plots for the two data files to compare the interactions between <code>sex</code> and <code>location</code>. The effect plot shows the relationship between means for each combination of factors (also called cell means). Generate an effect plot for the two models using the <code>allEffects()</code> command from the <code>effects</code> 📦 package:</li>
 </ul>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="two-way-factorial-design-with-replication.html#cb233-1" aria-hidden="true"></a><span class="kw">library</span>(effects)</span>
-<span id="cb233-2"><a href="two-way-factorial-design-with-replication.html#cb233-2" aria-hidden="true"></a><span class="kw">allEffects</span>(anova.model1)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="two-way-factorial-design-with-replication.html#cb235-1" aria-hidden="true"></a><span class="kw">library</span>(effects)</span>
+<span id="cb235-2"><a href="two-way-factorial-design-with-replication.html#cb235-2" aria-hidden="true"></a><span class="kw">allEffects</span>(anova.model1)</span></code></pre></div>
 <pre><code>##  model: rdwght ~ sex + location + sex:location
 ## 
 ##  sex*location effect
@@ -487,14 +487,14 @@ Repeat this procedure using the data file Stu2mdat.Rdata . Now what do you concl
 ## sex            CUMBERLAND   THE_PAS     
 ##   FEMALE           27.37347     27.97717
 ##   MALE             22.14118     20.64652</code></pre>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="two-way-factorial-design-with-replication.html#cb235-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">allEffects</span>(anova.model1), <span class="st">&quot;sex:location&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="two-way-factorial-design-with-replication.html#cb237-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">allEffects</span>(anova.model1), <span class="st">&quot;sex:location&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-53"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-53-1.svg" alt="Effet du sexe et du lieu sur le poids des esturgeons" width="672" />
 <p class="caption">
 Figure 6.2: Effet du sexe et du lieu sur le poids des esturgeons
 </p>
 </div>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="two-way-factorial-design-with-replication.html#cb236-1" aria-hidden="true"></a><span class="kw">allEffects</span>(anova.model2)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="two-way-factorial-design-with-replication.html#cb238-1" aria-hidden="true"></a><span class="kw">allEffects</span>(anova.model2)</span></code></pre></div>
 <pre><code>##  model: rdwght ~ sex + location + sex:location
 ## 
 ##  sex*location effect
@@ -502,7 +502,7 @@ Figure 6.2: Effet du sexe et du lieu sur le poids des esturgeons
 ## sex            CUMBERLAND   THE_PAS     
 ##   FEMALE           27.37347     20.64652
 ##   MALE             22.14118     27.97717</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="two-way-factorial-design-with-replication.html#cb238-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">allEffects</span>(anova.model2), <span class="st">&quot;sex:location&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="two-way-factorial-design-with-replication.html#cb240-1" aria-hidden="true"></a><span class="kw">plot</span>(<span class="kw">allEffects</span>(anova.model2), <span class="st">&quot;sex:location&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-54"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-54-1.svg" alt="Effet du sexe et du lieu sur le poids des esturgeons" width="672" />
 <p class="caption">
@@ -510,7 +510,7 @@ Figure 6.3: Effet du sexe et du lieu sur le poids des esturgeons
 </p>
 </div>
 <p>There is a very large difference between the results from <code>Stu2wdat</code> and <code>Stu2mdat</code>. In the former case, because there is no significant interaction, we can essentially pool over the levels of factor 1 (<code>sex</code>, say) to test for the effects of location , or over the levels of factor 2 (<code>location</code>) to test for the effects of sex . In fact, if we do so and simply run a one-way ANOVA on the <code>Stu2wdat</code> data with sex as the grouping variable, we get:</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="two-way-factorial-design-with-replication.html#cb239-1" aria-hidden="true"></a><span class="kw">Anova</span>(<span class="kw">aov</span>(rdwght <span class="op">~</span><span class="st"> </span>sex, <span class="dt">data =</span> Stu2wdat), <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="two-way-factorial-design-with-replication.html#cb241-1" aria-hidden="true"></a><span class="kw">Anova</span>(<span class="kw">aov</span>(rdwght <span class="op">~</span><span class="st"> </span>sex, <span class="dt">data =</span> Stu2wdat), <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: rdwght
@@ -522,7 +522,7 @@ Figure 6.3: Effet du sexe et du lieu sur le poids des esturgeons
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Note that here the residual sum of squares (17583) is only slightly higher than for the 2-way model (17530), simply because, in the 2-way model, only a small fraction of the explained sums of squares is due to the location main effect or the sex:LOCATION interaction. On the other hand, if you try the same trick with <code>stu2mdat</code>, you get:</p>
 <!-- need to add r code to grad the value of SS in text -->
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="two-way-factorial-design-with-replication.html#cb241-1" aria-hidden="true"></a><span class="kw">Anova</span>(<span class="kw">aov</span>(rdwght <span class="op">~</span><span class="st"> </span>sex, <span class="dt">data =</span> Stu2mdat), <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="two-way-factorial-design-with-replication.html#cb243-1" aria-hidden="true"></a><span class="kw">Anova</span>(<span class="kw">aov</span>(rdwght <span class="op">~</span><span class="st"> </span>sex, <span class="dt">data =</span> Stu2mdat), <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: rdwght
@@ -542,7 +542,7 @@ Figure 6.3: Effet du sexe et du lieu sur le poids des esturgeons
 for the situation in which <code>location</code> is a random factor and <code>sex</code> is a
 fixed factor. To do this, you need to recalculate the F-ratio for sex using the <code>sex:location</code> interaction mean square instead of the residual mean square. This is most easily accomplished by hand, making sure you are working with the Type III Sums of squares ANOVA table.</li>
 </ul>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb243-1"><a href="two-way-factorial-design-with-replication.html#cb243-1" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb245-1"><a href="two-way-factorial-design-with-replication.html#cb245-1" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: rdwght
@@ -557,7 +557,7 @@ fixed factor. To do this, you need to recalculate the F-ratio for sex using the 
 <p>For <code>sex</code>, the new ratio of mean squares is</p>
 <p><span class="math display">\[F = \frac{(1745/1)}{(49/1)} = 35.6\]</span></p>
 <p>To assign a probability to the new <code>F-value</code>, enter the following in the commands window: <code>pf(F, df1, df2, lower.tail = FALSE)</code> , where <code>F</code> is the newly calculated <code>F-value</code>, and <code>df1</code> and <code>df2</code> are the degrees of freedom of the numerator (<code>sex</code>) and denominator (<code>SEX:location</code>), respectively.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="two-way-factorial-design-with-replication.html#cb245-1" aria-hidden="true"></a><span class="kw">pf</span>(<span class="fl">35.6</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="two-way-factorial-design-with-replication.html#cb247-1" aria-hidden="true"></a><span class="kw">pf</span>(<span class="fl">35.6</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dt">lower.tail =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1057152</code></pre>
 <p>Note that the <em>p value</em> for <code>sex</code> is now non-significant. This is because the error MS of the initial ANOVA is smaller than the interaction MS, but mostly because the number of degrees of freedom of the denominator of the F test has dropped from 178 to 1. In general, a drop in the denominator degrees of freedom makes it much more difficult to reach significance.</p>
 

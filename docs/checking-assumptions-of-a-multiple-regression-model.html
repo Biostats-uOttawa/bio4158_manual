@@ -334,8 +334,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.8</span> Checking assumptions of a multiple regression model<a href="checking-assumptions-of-a-multiple-regression-model.html#checking-assumptions-of-a-multiple-regression-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All the model selection techniques or the manual model crafting assumes that the standard assumptions (independence, normality, homoscedasticity, linearity) are met. Given that a large number of models can be fitted, it may seem that testing the assumptions at each step would be an herculean task. However, it is generally sufficient to examine the residuals of the full (saturated) model and of the final model. Terms not contributing significantly to the fit do not affect residuals much, and therefore, the residuals to the full model, or the residuals to the final model, are generally sufficient.</p>
 <p>Let’s have a look at the diagnostic plots for the final model. Here we use the <code>check_model()</code> function from the <code>performance</code> 📦.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb337-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb337-1" aria-hidden="true"></a><span class="kw">library</span>(performance)</span>
-<span id="cb337-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb337-2" aria-hidden="true"></a><span class="kw">check_model</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb339-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb339-1" aria-hidden="true"></a><span class="kw">library</span>(performance)</span>
+<span id="cb339-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb339-2" aria-hidden="true"></a><span class="kw">check_model</span>(model_poly2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-115"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-115-1.svg" alt="Conditions d'application du modèle `model_poly2`" width="672" />
 <p class="caption">
@@ -343,8 +343,8 @@ Figure 7.4: Conditions d’application du modèle <code>model_poly2</code>
 </p>
 </div>
 <p>Alternatively it can be done with the classic method</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb338-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb338-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb338-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb338-2" aria-hidden="true"></a><span class="kw">plot</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb340-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb340-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb340-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb340-2" aria-hidden="true"></a><span class="kw">plot</span>(model_poly2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-116"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-116-1.svg" alt="Conditions d'application du modèle `model_poly2`" width="672" />
 <p class="caption">
@@ -352,22 +352,22 @@ Figure 7.5: Conditions d’application du modèle <code>model_poly2</code>
 </p>
 </div>
 <p>Everything looks about right here. For the skeptic, let’s run the formal tests.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb339-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(model_poly2))</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb341-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(model_poly2))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  residuals(model_poly2)
 ## W = 0.9837, p-value = 0.9278</code></pre>
 <p>The residuals do not deviate from normality. Good.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb341-1" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span>
-<span id="cb341-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb341-2" aria-hidden="true"></a><span class="kw">bptest</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb343-1" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span>
+<span id="cb343-2"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb343-2" aria-hidden="true"></a><span class="kw">bptest</span>(model_poly2)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  model_poly2
 ## BP = 3.8415, df = 4, p-value = 0.4279</code></pre>
 <p>No deviation from homoscedasticity either. Good.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb343-1" aria-hidden="true"></a><span class="kw">dwtest</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb345-1" aria-hidden="true"></a><span class="kw">dwtest</span>(model_poly2)</span></code></pre></div>
 <pre><code>## 
 ##  Durbin-Watson test
 ## 
@@ -375,7 +375,7 @@ Figure 7.5: Conditions d’application du modèle <code>model_poly2</code>
 ## DW = 1.725, p-value = 0.2095
 ## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p>No serial correlation in the residuals, so no evidence of non-independence.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb345-1" aria-hidden="true"></a><span class="kw">resettest</span>(model_poly2, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>, <span class="dt">data =</span> mydata)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="checking-assumptions-of-a-multiple-regression-model.html#cb347-1" aria-hidden="true"></a><span class="kw">resettest</span>(model_poly2, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>, <span class="dt">data =</span> mydata)</span></code></pre></div>
 <pre><code>## 
 ##  RESET test
 ## 

@@ -350,8 +350,8 @@ There are several <code>vif()</code> functions (I know of at least three in the 
 </div>
 <p>To quantify multicollinarity, one can simply call the <code>vif()</code> function
 from the package <code>car</code>:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="detecting-multicollinearity.html#cb322-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
-<span id="cb322-2"><a href="detecting-multicollinearity.html#cb322-2" aria-hidden="true"></a><span class="kw">vif</span>(model_mtri)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="detecting-multicollinearity.html#cb324-1" aria-hidden="true"></a><span class="kw">library</span>(car)</span>
+<span id="cb324-2"><a href="detecting-multicollinearity.html#cb324-2" aria-hidden="true"></a><span class="kw">vif</span>(model_mtri)</span></code></pre></div>
 <pre><code>##  logarea   cpfor2   thtden 
 ## 1.022127 1.344455 1.365970</code></pre>
 <p>Here there is no evidence that multicollinearity is a problem since all vif are close to 1.</p>

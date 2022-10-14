@@ -341,10 +341,10 @@ Because there is no replication within cells, there is no error variance: we hav
 <ul>
 <li>Do a two-way unreplicated ANOVA using temp as the dependent vari able, date and depth as the factor variables (you will need to recode depth to tell R to treat this variable as a factor). Note that there is no interaction term included in this model.</li>
 </ul>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="way-factorial-anova-without-replication.html#cb247-1" aria-hidden="true"></a>nr2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nr2wdat.csv&quot;</span>)</span>
-<span id="cb247-2"><a href="way-factorial-anova-without-replication.html#cb247-2" aria-hidden="true"></a>nr2wdat<span class="op">$</span>depth &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nr2wdat<span class="op">$</span>depth)</span>
-<span id="cb247-3"><a href="way-factorial-anova-without-replication.html#cb247-3" aria-hidden="true"></a>anova.model4 &lt;-<span class="st"> </span><span class="kw">lm</span>(temp <span class="op">~</span><span class="st"> </span>date <span class="op">+</span><span class="st"> </span>depth, <span class="dt">data =</span> nr2wdat)</span>
-<span id="cb247-4"><a href="way-factorial-anova-without-replication.html#cb247-4" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model4, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="way-factorial-anova-without-replication.html#cb249-1" aria-hidden="true"></a>nr2wdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nr2wdat.csv&quot;</span>)</span>
+<span id="cb249-2"><a href="way-factorial-anova-without-replication.html#cb249-2" aria-hidden="true"></a>nr2wdat<span class="op">$</span>depth &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nr2wdat<span class="op">$</span>depth)</span>
+<span id="cb249-3"><a href="way-factorial-anova-without-replication.html#cb249-3" aria-hidden="true"></a>anova.model4 &lt;-<span class="st"> </span><span class="kw">lm</span>(temp <span class="op">~</span><span class="st"> </span>date <span class="op">+</span><span class="st"> </span>depth, <span class="dt">data =</span> nr2wdat)</span>
+<span id="cb249-4"><a href="way-factorial-anova-without-replication.html#cb249-4" aria-hidden="true"></a><span class="kw">Anova</span>(anova.model4, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: temp
@@ -356,7 +356,7 @@ Because there is no replication within cells, there is no error variance: we hav
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Assuming that this is a Model III ANOVA ( <code>date</code> random, <code>depth</code> fixed), what do you conclude? (Hint: you may want to generate an interaction plot of temp versus depth and month, just to see what’s going on.)</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="way-factorial-anova-without-replication.html#cb249-1" aria-hidden="true"></a><span class="kw">interaction.plot</span>(nr2wdat<span class="op">$</span>depth, nr2wdat<span class="op">$</span>date, nr2wdat<span class="op">$</span>temp)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="way-factorial-anova-without-replication.html#cb251-1" aria-hidden="true"></a><span class="kw">interaction.plot</span>(nr2wdat<span class="op">$</span>depth, nr2wdat<span class="op">$</span>date, nr2wdat<span class="op">$</span>temp)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-63"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-63-1.svg" alt="Effet du mois et de la profondeur sur la température" width="672" />
 <p class="caption">
@@ -365,22 +365,22 @@ Figure 6.4: Effet du mois et de la profondeur sur la température
 </div>
 <p>There is a highly significant decrease in temperature as depth increases. To test the effect of month (the (assumed) random factor), we must assume that there is no interaction between depth and month, i.e. that the change in temperature with depth is the same for each month. This is a dubious assumption: if you plot temperature against depth for each month, you should see that the temperature profile becomes increasingly non-linear as the summer progresses (i.e. the thermocline develops), from almost a linear decline in early spring to what amounts to a step decline in August. In other words, the relationship between temperature and depth does change with month, so that if you were to use the above fitted model to estimate, say, the temperature at a depth of 5 m in July, you would not get a particularly good estimate.</p>
 <p>In terms of residual diagnostics, have a look at the residuals probability plot and residuals vs fitted values plot.</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="way-factorial-anova-without-replication.html#cb250-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb250-2"><a href="way-factorial-anova-without-replication.html#cb250-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model4)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="way-factorial-anova-without-replication.html#cb252-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb252-2"><a href="way-factorial-anova-without-replication.html#cb252-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.model4)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-64"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-64-1.svg" alt="Conditions d'applications du modèle anova.model4" width="672" />
 <p class="caption">
 Figure 6.5: Conditions d’applications du modèle anova.model4
 </p>
 </div>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="way-factorial-anova-without-replication.html#cb251-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model4))</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="way-factorial-anova-without-replication.html#cb253-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(anova.model4))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  residuals(anova.model4)
 ## W = 0.95968, p-value = 0.1634</code></pre>
 <p>Testing the residuals for normality, we get <code>p = 0.16</code>, so that the normality assumption seems to be O.K. In terms of heteroscedasticity, we can only test among months, using depths as replicates (or among depths using months as replicates). Using depths as replicates within months, we find</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="way-factorial-anova-without-replication.html#cb253-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(temp <span class="op">~</span><span class="st"> </span>date, <span class="dt">data =</span> nr2wdat)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="way-factorial-anova-without-replication.html#cb255-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(temp <span class="op">~</span><span class="st"> </span>date, <span class="dt">data =</span> nr2wdat)</span></code></pre></div>
 <pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 ## factor.</code></pre>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)

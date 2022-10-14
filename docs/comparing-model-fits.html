@@ -337,8 +337,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcode">
 Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA and common simple regression models::
 </div>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="comparing-model-fits.html#cb414-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
-<span id="cb414-2"><a href="comparing-model-fits.html#cb414-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="comparing-model-fits.html#cb416-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
+<span id="cb416-2"><a href="comparing-model-fits.html#cb416-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ sex + lage
@@ -351,9 +351,9 @@ Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA an
 <div class="rmdcode">
 Repeat the above procedure with the ANC3DAT data, rerunning the full ANCOVA with interaction ( <code>lfkl ~ lage + locate + lage:locate</code> ) and without interaction ( <code>lfkl ~ lage + locate</code> ), saving the model objects as you did above. Compare the fits of the two models. What do you conclude?
 </div>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="comparing-model-fits.html#cb416-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb416-2"><a href="comparing-model-fits.html#cb416-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb416-3"><a href="comparing-model-fits.html#cb416-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="comparing-model-fits.html#cb418-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb418-2"><a href="comparing-model-fits.html#cb418-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb418-3"><a href="comparing-model-fits.html#cb418-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ lage + locate + lage:locate

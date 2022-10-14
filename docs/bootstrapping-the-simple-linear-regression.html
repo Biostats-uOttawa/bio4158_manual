@@ -360,8 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Bootstrap Statistics :
 ##      original        bias    std. error
-## t1* 1.1919926  0.0009066061  0.03352172
-## t2* 0.3408557 -0.0005568719  0.02645282</code></pre>
+## t1* 1.1919926  0.0006847971  0.03381602
+## t2* 0.3408557 -0.0003835235  0.02700535</code></pre>
 <p>For each parameter in the model (here the intercept is labeled <code>t1\*</code> and the slope of the regression line is labeled <code>t2\*</code>) , you obtain:</p>
 <p>Pour chaque paramètre du modèle (ici l’ordonnée à l’origine est
 appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
@@ -388,12 +388,11 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.125,  1.257 )   ( 1.129,  1.255 )  
+## 95%   ( 1.125,  1.258 )   ( 1.122,  1.261 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.129,  1.255 )   ( 1.112,  1.247 )  
-## Calculations and Intervals on Original Scale
-## Some BCa intervals may be unstable</code></pre>
+## 95%   ( 1.123,  1.262 )   ( 1.115,  1.252 )  
+## Calculations and Intervals on Original Scale</code></pre>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="bootstrapping-the-simple-linear-regression.html#cb121-1" aria-hidden="true"></a><span class="co"># intervalle de confiance pour la pente</span></span>
 <span id="cb121-2"><a href="bootstrapping-the-simple-linear-regression.html#cb121-2" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## Warning in boot.ci(results, type = &quot;all&quot;, index = 2): bootstrap variances needed
@@ -406,10 +405,10 @@ appelée t1* et la pente de la régression <code>t2\*</code>), R imprime :</p>
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2896,  0.3933 )   ( 0.2903,  0.3900 )  
+## 95%   ( 0.2883,  0.3942 )   ( 0.2863,  0.3951 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2917,  0.3914 )   ( 0.2968,  0.4032 )  
+## 95%   ( 0.2866,  0.3954 )   ( 0.2926,  0.4017 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p>Here the 4 types of CI that R managed to calculate are essentially the same. Had data been violating more strongly the standard assumptions (normality, homoscedasticity), then the different methods (Normal, Basic, Percentile, and BCa) would have diverged more. In that case, which one is best? BCa has the favor of most, currently.</p>
 

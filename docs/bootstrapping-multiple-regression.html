@@ -334,36 +334,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.12</span> Bootstrapping multiple regression<a href="bootstrapping-multiple-regression.html#bootstrapping-multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When data do not meet the assumptions of normality and homoscedasticity and it is not possible to transform the data to meet the assumptions, bootstraping can be used to compute confidence intervals for coefficients. If the distribution of the bootstrapped coefficients is symmetrical and approximately Gaussian, then empirical percentiles can be used to estimate the confidence limits.</p>
 <p>The following code, using the <code>simpleboot</code> 📦 has been designed to be easily modifiable and will compute CI using empirical percentiles. Following this is an easier approach using the library boot that will calculate several different bootstrap confidence limits.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="bootstrapping-multiple-regression.html#cb374-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
-<span id="cb374-2"><a href="bootstrapping-multiple-regression.html#cb374-2" aria-hidden="true"></a><span class="co">#######</span></span>
-<span id="cb374-3"><a href="bootstrapping-multiple-regression.html#cb374-3" aria-hidden="true"></a><span class="co"># Bootstrap analysis the simple way with library simpleboot</span></span>
-<span id="cb374-4"><a href="bootstrapping-multiple-regression.html#cb374-4" aria-hidden="true"></a><span class="co"># Define model to be bootstrapped and the data source used</span></span>
-<span id="cb374-5"><a href="bootstrapping-multiple-regression.html#cb374-5" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> mydata)</span>
-<span id="cb374-6"><a href="bootstrapping-multiple-regression.html#cb374-6" aria-hidden="true"></a><span class="co"># Set the number of bootstrap iterations</span></span>
-<span id="cb374-7"><a href="bootstrapping-multiple-regression.html#cb374-7" aria-hidden="true"></a>nboot &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb374-8"><a href="bootstrapping-multiple-regression.html#cb374-8" aria-hidden="true"></a><span class="kw">library</span>(simpleboot)</span>
-<span id="cb374-9"><a href="bootstrapping-multiple-regression.html#cb374-9" aria-hidden="true"></a><span class="co"># R is the number of bootstrap iterations</span></span>
-<span id="cb374-10"><a href="bootstrapping-multiple-regression.html#cb374-10" aria-hidden="true"></a><span class="co"># Setting rows to FALSE indicates resampling of residuals</span></span>
-<span id="cb374-11"><a href="bootstrapping-multiple-regression.html#cb374-11" aria-hidden="true"></a>mysimpleboot &lt;-<span class="st"> </span><span class="kw">lm.boot</span>(mymodel, <span class="dt">R =</span> nboot, <span class="dt">rows =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb374-12"><a href="bootstrapping-multiple-regression.html#cb374-12" aria-hidden="true"></a><span class="co"># Extract bootstrap coefficients</span></span>
-<span id="cb374-13"><a href="bootstrapping-multiple-regression.html#cb374-13" aria-hidden="true"></a>myresults &lt;-<span class="st"> </span><span class="kw">sapply</span>(mysimpleboot<span class="op">$</span>boot.list, <span class="cf">function</span>(x) x<span class="op">$</span>coef)</span>
-<span id="cb374-14"><a href="bootstrapping-multiple-regression.html#cb374-14" aria-hidden="true"></a><span class="co"># Transpose matrix so that lines are bootstrap iterations</span></span>
-<span id="cb374-15"><a href="bootstrapping-multiple-regression.html#cb374-15" aria-hidden="true"></a><span class="co"># and columns are coefficients</span></span>
-<span id="cb374-16"><a href="bootstrapping-multiple-regression.html#cb374-16" aria-hidden="true"></a>tmyresults &lt;-<span class="st"> </span><span class="kw">t</span>(myresults)</span></code></pre></div>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bootstrapping-multiple-regression.html#cb376-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
+<span id="cb376-2"><a href="bootstrapping-multiple-regression.html#cb376-2" aria-hidden="true"></a><span class="co">#######</span></span>
+<span id="cb376-3"><a href="bootstrapping-multiple-regression.html#cb376-3" aria-hidden="true"></a><span class="co"># Bootstrap analysis the simple way with library simpleboot</span></span>
+<span id="cb376-4"><a href="bootstrapping-multiple-regression.html#cb376-4" aria-hidden="true"></a><span class="co"># Define model to be bootstrapped and the data source used</span></span>
+<span id="cb376-5"><a href="bootstrapping-multiple-regression.html#cb376-5" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>), <span class="dt">data =</span> mydata)</span>
+<span id="cb376-6"><a href="bootstrapping-multiple-regression.html#cb376-6" aria-hidden="true"></a><span class="co"># Set the number of bootstrap iterations</span></span>
+<span id="cb376-7"><a href="bootstrapping-multiple-regression.html#cb376-7" aria-hidden="true"></a>nboot &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb376-8"><a href="bootstrapping-multiple-regression.html#cb376-8" aria-hidden="true"></a><span class="kw">library</span>(simpleboot)</span>
+<span id="cb376-9"><a href="bootstrapping-multiple-regression.html#cb376-9" aria-hidden="true"></a><span class="co"># R is the number of bootstrap iterations</span></span>
+<span id="cb376-10"><a href="bootstrapping-multiple-regression.html#cb376-10" aria-hidden="true"></a><span class="co"># Setting rows to FALSE indicates resampling of residuals</span></span>
+<span id="cb376-11"><a href="bootstrapping-multiple-regression.html#cb376-11" aria-hidden="true"></a>mysimpleboot &lt;-<span class="st"> </span><span class="kw">lm.boot</span>(mymodel, <span class="dt">R =</span> nboot, <span class="dt">rows =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb376-12"><a href="bootstrapping-multiple-regression.html#cb376-12" aria-hidden="true"></a><span class="co"># Extract bootstrap coefficients</span></span>
+<span id="cb376-13"><a href="bootstrapping-multiple-regression.html#cb376-13" aria-hidden="true"></a>myresults &lt;-<span class="st"> </span><span class="kw">sapply</span>(mysimpleboot<span class="op">$</span>boot.list, <span class="cf">function</span>(x) x<span class="op">$</span>coef)</span>
+<span id="cb376-14"><a href="bootstrapping-multiple-regression.html#cb376-14" aria-hidden="true"></a><span class="co"># Transpose matrix so that lines are bootstrap iterations</span></span>
+<span id="cb376-15"><a href="bootstrapping-multiple-regression.html#cb376-15" aria-hidden="true"></a><span class="co"># and columns are coefficients</span></span>
+<span id="cb376-16"><a href="bootstrapping-multiple-regression.html#cb376-16" aria-hidden="true"></a>tmyresults &lt;-<span class="st"> </span><span class="kw">t</span>(myresults)</span></code></pre></div>
 <p>You can then plot the results using the follwoing code. When run, it will pause to let you have a look at the distribution for each coefficient in the model by producing plots like:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="bootstrapping-multiple-regression.html#cb375-1" aria-hidden="true"></a><span class="co"># Plot histograms of bootstrapped coefficients</span></span>
-<span id="cb375-2"><a href="bootstrapping-multiple-regression.html#cb375-2" aria-hidden="true"></a>ncoefs &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">data.frame</span>(tmyresults))</span>
-<span id="cb375-3"><a href="bootstrapping-multiple-regression.html#cb375-3" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mai =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">ask =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb375-4"><a href="bootstrapping-multiple-regression.html#cb375-4" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>ncoefs) {</span>
-<span id="cb375-5"><a href="bootstrapping-multiple-regression.html#cb375-5" aria-hidden="true"></a>  lab &lt;-<span class="st"> </span><span class="kw">colnames</span>(tmyresults)[i]</span>
-<span id="cb375-6"><a href="bootstrapping-multiple-regression.html#cb375-6" aria-hidden="true"></a>  x &lt;-<span class="st"> </span>tmyresults[, i]</span>
-<span id="cb375-7"><a href="bootstrapping-multiple-regression.html#cb375-7" aria-hidden="true"></a>  <span class="kw">plot</span>(<span class="kw">density</span>(x), <span class="dt">main =</span> lab, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb375-8"><a href="bootstrapping-multiple-regression.html#cb375-8" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> mymodel<span class="op">$</span>coef[i], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb375-9"><a href="bootstrapping-multiple-regression.html#cb375-9" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
-<span id="cb375-10"><a href="bootstrapping-multiple-regression.html#cb375-10" aria-hidden="true"></a>  <span class="kw">hist</span>(x, <span class="dt">main =</span> lab, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb375-11"><a href="bootstrapping-multiple-regression.html#cb375-11" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
-<span id="cb375-12"><a href="bootstrapping-multiple-regression.html#cb375-12" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> mymodel<span class="op">$</span>coef[i], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb375-13"><a href="bootstrapping-multiple-regression.html#cb375-13" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="bootstrapping-multiple-regression.html#cb377-1" aria-hidden="true"></a><span class="co"># Plot histograms of bootstrapped coefficients</span></span>
+<span id="cb377-2"><a href="bootstrapping-multiple-regression.html#cb377-2" aria-hidden="true"></a>ncoefs &lt;-<span class="st"> </span><span class="kw">length</span>(<span class="kw">data.frame</span>(tmyresults))</span>
+<span id="cb377-3"><a href="bootstrapping-multiple-regression.html#cb377-3" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">mai =</span> <span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dt">ask =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb377-4"><a href="bootstrapping-multiple-regression.html#cb377-4" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>ncoefs) {</span>
+<span id="cb377-5"><a href="bootstrapping-multiple-regression.html#cb377-5" aria-hidden="true"></a>  lab &lt;-<span class="st"> </span><span class="kw">colnames</span>(tmyresults)[i]</span>
+<span id="cb377-6"><a href="bootstrapping-multiple-regression.html#cb377-6" aria-hidden="true"></a>  x &lt;-<span class="st"> </span>tmyresults[, i]</span>
+<span id="cb377-7"><a href="bootstrapping-multiple-regression.html#cb377-7" aria-hidden="true"></a>  <span class="kw">plot</span>(<span class="kw">density</span>(x), <span class="dt">main =</span> lab, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb377-8"><a href="bootstrapping-multiple-regression.html#cb377-8" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> mymodel<span class="op">$</span>coef[i], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb377-9"><a href="bootstrapping-multiple-regression.html#cb377-9" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
+<span id="cb377-10"><a href="bootstrapping-multiple-regression.html#cb377-10" aria-hidden="true"></a>  <span class="kw">hist</span>(x, <span class="dt">main =</span> lab, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb377-11"><a href="bootstrapping-multiple-regression.html#cb377-11" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> <span class="kw">quantile</span>(x, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)))</span>
+<span id="cb377-12"><a href="bootstrapping-multiple-regression.html#cb377-12" aria-hidden="true"></a>  <span class="kw">abline</span>(<span class="dt">v =</span> mymodel<span class="op">$</span>coef[i], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb377-13"><a href="bootstrapping-multiple-regression.html#cb377-13" aria-hidden="true"></a>}</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-137"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-137-1.svg" alt="Distribution of bootstrapped estimates for `logarea`" width="672" />
 <p class="caption">
@@ -372,50 +372,50 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 </div>
 <p>The top plot is the probability density function and the bottom one is the histogram of the bootstrap estimates for the coefficient. On these plots, the red line indicate the value of the parameter in the ordinary analysis, and the two vertical black lines mark the limits of the 95% confidence interval. Here the CI does not include 0 and one can conclude that the effect of logarea on logherp is significantly positive.</p>
 <p>Precise values for the limits can be obtained by:</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="bootstrapping-multiple-regression.html#cb376-1" aria-hidden="true"></a><span class="co"># Display empirical bootstrap quantiles (not corrected for bias)</span></span>
-<span id="cb376-2"><a href="bootstrapping-multiple-regression.html#cb376-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.025</span>, <span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>, <span class="fl">0.99</span>, <span class="fl">0.995</span>)</span>
-<span id="cb376-3"><a href="bootstrapping-multiple-regression.html#cb376-3" aria-hidden="true"></a><span class="kw">apply</span>(tmyresults, <span class="dv">2</span>, quantile, p)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="bootstrapping-multiple-regression.html#cb378-1" aria-hidden="true"></a><span class="co"># Display empirical bootstrap quantiles (not corrected for bias)</span></span>
+<span id="cb378-2"><a href="bootstrapping-multiple-regression.html#cb378-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.01</span>, <span class="fl">0.025</span>, <span class="fl">0.05</span>, <span class="fl">0.95</span>, <span class="fl">0.975</span>, <span class="fl">0.99</span>, <span class="fl">0.995</span>)</span>
+<span id="cb378-3"><a href="bootstrapping-multiple-regression.html#cb378-3" aria-hidden="true"></a><span class="kw">apply</span>(tmyresults, <span class="dv">2</span>, quantile, p)</span></code></pre></div>
 <pre><code>##       (Intercept)   logarea       thtden      swamp    I(swamp^2)
-## 0.5%  -0.74449869 0.1342440 -0.046343727 0.01793824 -0.0003406181
-## 1%    -0.70240202 0.1462022 -0.045659018 0.01862505 -0.0003350482
-## 2.5%  -0.64979635 0.1576732 -0.041615930 0.02009516 -0.0003263874
-## 5%    -0.60441520 0.1683058 -0.039311565 0.02133890 -0.0003123575
-## 95%   -0.09166956 0.2822246 -0.011680599 0.03742021 -0.0001846157
-## 97.5% -0.04272769 0.2902702 -0.009574891 0.03911392 -0.0001744668
-## 99%    0.01600299 0.3067214 -0.004973741 0.04004360 -0.0001583789
-## 99.5%  0.02907820 0.3117176 -0.004121134 0.04106009 -0.0001545463</code></pre>
+## 0.5%  -0.71710543 0.1388826 -0.045973533 0.01600585 -0.0003428492
+## 1%    -0.68278203 0.1446905 -0.044263370 0.01674271 -0.0003350477
+## 2.5%  -0.63851666 0.1551463 -0.042059022 0.01876748 -0.0003252398
+## 5%    -0.59501579 0.1641038 -0.040321610 0.02099965 -0.0003126246
+## 95%   -0.06450847 0.2788634 -0.012775466 0.03770637 -0.0001782650
+## 97.5% -0.01285999 0.2905614 -0.010807318 0.03883664 -0.0001603325
+## 99%    0.06874337 0.2997460 -0.008167105 0.03989265 -0.0001485079
+## 99.5%  0.11058017 0.3061082 -0.007219017 0.04151634 -0.0001365703</code></pre>
 <p>These confidence limits are not reliable when the distribution of the bootstrap estimates deviate from Gaussian. If they do,, then it is preferable to compute so-called bias-corrected accelerated (BCa) confidence limits. The following code does just that:</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="bootstrapping-multiple-regression.html#cb378-1" aria-hidden="true"></a><span class="co">################################################</span></span>
-<span id="cb378-2"><a href="bootstrapping-multiple-regression.html#cb378-2" aria-hidden="true"></a><span class="co"># Bootstrap analysis in multiple regression with BCa confidence intervals</span></span>
-<span id="cb378-3"><a href="bootstrapping-multiple-regression.html#cb378-3" aria-hidden="true"></a><span class="co"># Preferable when parameter distribution is far from normal</span></span>
-<span id="cb378-4"><a href="bootstrapping-multiple-regression.html#cb378-4" aria-hidden="true"></a><span class="co"># Bootstrap 95% BCa CI for regression coefficients</span></span>
-<span id="cb378-5"><a href="bootstrapping-multiple-regression.html#cb378-5" aria-hidden="true"></a></span>
-<span id="cb378-6"><a href="bootstrapping-multiple-regression.html#cb378-6" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
-<span id="cb378-7"><a href="bootstrapping-multiple-regression.html#cb378-7" aria-hidden="true"></a><span class="co"># function to obtain regression coefficients for each iteration</span></span>
-<span id="cb378-8"><a href="bootstrapping-multiple-regression.html#cb378-8" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
-<span id="cb378-9"><a href="bootstrapping-multiple-regression.html#cb378-9" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ] <span class="co"># allows boot to select sample</span></span>
-<span id="cb378-10"><a href="bootstrapping-multiple-regression.html#cb378-10" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
-<span id="cb378-11"><a href="bootstrapping-multiple-regression.html#cb378-11" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
-<span id="cb378-12"><a href="bootstrapping-multiple-regression.html#cb378-12" aria-hidden="true"></a>}</span>
-<span id="cb378-13"><a href="bootstrapping-multiple-regression.html#cb378-13" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
-<span id="cb378-14"><a href="bootstrapping-multiple-regression.html#cb378-14" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(</span>
-<span id="cb378-15"><a href="bootstrapping-multiple-regression.html#cb378-15" aria-hidden="true"></a>  <span class="dt">data =</span> mydata, <span class="dt">statistic =</span> bs, <span class="dt">R =</span> <span class="dv">1000</span>,</span>
-<span id="cb378-16"><a href="bootstrapping-multiple-regression.html#cb378-16" aria-hidden="true"></a>  <span class="dt">formula =</span> logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb378-17"><a href="bootstrapping-multiple-regression.html#cb378-17" aria-hidden="true"></a>)</span>
-<span id="cb378-18"><a href="bootstrapping-multiple-regression.html#cb378-18" aria-hidden="true"></a><span class="co"># view results</span></span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="bootstrapping-multiple-regression.html#cb380-1" aria-hidden="true"></a><span class="co">################################################</span></span>
+<span id="cb380-2"><a href="bootstrapping-multiple-regression.html#cb380-2" aria-hidden="true"></a><span class="co"># Bootstrap analysis in multiple regression with BCa confidence intervals</span></span>
+<span id="cb380-3"><a href="bootstrapping-multiple-regression.html#cb380-3" aria-hidden="true"></a><span class="co"># Preferable when parameter distribution is far from normal</span></span>
+<span id="cb380-4"><a href="bootstrapping-multiple-regression.html#cb380-4" aria-hidden="true"></a><span class="co"># Bootstrap 95% BCa CI for regression coefficients</span></span>
+<span id="cb380-5"><a href="bootstrapping-multiple-regression.html#cb380-5" aria-hidden="true"></a></span>
+<span id="cb380-6"><a href="bootstrapping-multiple-regression.html#cb380-6" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
+<span id="cb380-7"><a href="bootstrapping-multiple-regression.html#cb380-7" aria-hidden="true"></a><span class="co"># function to obtain regression coefficients for each iteration</span></span>
+<span id="cb380-8"><a href="bootstrapping-multiple-regression.html#cb380-8" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
+<span id="cb380-9"><a href="bootstrapping-multiple-regression.html#cb380-9" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ] <span class="co"># allows boot to select sample</span></span>
+<span id="cb380-10"><a href="bootstrapping-multiple-regression.html#cb380-10" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
+<span id="cb380-11"><a href="bootstrapping-multiple-regression.html#cb380-11" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
+<span id="cb380-12"><a href="bootstrapping-multiple-regression.html#cb380-12" aria-hidden="true"></a>}</span>
+<span id="cb380-13"><a href="bootstrapping-multiple-regression.html#cb380-13" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
+<span id="cb380-14"><a href="bootstrapping-multiple-regression.html#cb380-14" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(</span>
+<span id="cb380-15"><a href="bootstrapping-multiple-regression.html#cb380-15" aria-hidden="true"></a>  <span class="dt">data =</span> mydata, <span class="dt">statistic =</span> bs, <span class="dt">R =</span> <span class="dv">1000</span>,</span>
+<span id="cb380-16"><a href="bootstrapping-multiple-regression.html#cb380-16" aria-hidden="true"></a>  <span class="dt">formula =</span> logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb380-17"><a href="bootstrapping-multiple-regression.html#cb380-17" aria-hidden="true"></a>)</span>
+<span id="cb380-18"><a href="bootstrapping-multiple-regression.html#cb380-18" aria-hidden="true"></a><span class="co"># view results</span></span></code></pre></div>
 <p>To get teh results, the following code will produce the standard graph for each coefficient and the resulting BCa interval.</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="bootstrapping-multiple-regression.html#cb379-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">1</span>) <span class="co"># intercept</span></span>
-<span id="cb379-2"><a href="bootstrapping-multiple-regression.html#cb379-2" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>) <span class="co"># logarea</span></span>
-<span id="cb379-3"><a href="bootstrapping-multiple-regression.html#cb379-3" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">3</span>) <span class="co"># thtden</span></span>
-<span id="cb379-4"><a href="bootstrapping-multiple-regression.html#cb379-4" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">4</span>) <span class="co"># swamp</span></span>
-<span id="cb379-5"><a href="bootstrapping-multiple-regression.html#cb379-5" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">5</span>) <span class="co"># swamp2</span></span>
-<span id="cb379-6"><a href="bootstrapping-multiple-regression.html#cb379-6" aria-hidden="true"></a></span>
-<span id="cb379-7"><a href="bootstrapping-multiple-regression.html#cb379-7" aria-hidden="true"></a><span class="co"># get 95% confidence intervals</span></span>
-<span id="cb379-8"><a href="bootstrapping-multiple-regression.html#cb379-8" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span>
-<span id="cb379-9"><a href="bootstrapping-multiple-regression.html#cb379-9" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span>
-<span id="cb379-10"><a href="bootstrapping-multiple-regression.html#cb379-10" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">3</span>)</span>
-<span id="cb379-11"><a href="bootstrapping-multiple-regression.html#cb379-11" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">4</span>)</span>
-<span id="cb379-12"><a href="bootstrapping-multiple-regression.html#cb379-12" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="bootstrapping-multiple-regression.html#cb381-1" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">1</span>) <span class="co"># intercept</span></span>
+<span id="cb381-2"><a href="bootstrapping-multiple-regression.html#cb381-2" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">2</span>) <span class="co"># logarea</span></span>
+<span id="cb381-3"><a href="bootstrapping-multiple-regression.html#cb381-3" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">3</span>) <span class="co"># thtden</span></span>
+<span id="cb381-4"><a href="bootstrapping-multiple-regression.html#cb381-4" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">4</span>) <span class="co"># swamp</span></span>
+<span id="cb381-5"><a href="bootstrapping-multiple-regression.html#cb381-5" aria-hidden="true"></a><span class="kw">plot</span>(results, <span class="dt">index =</span> <span class="dv">5</span>) <span class="co"># swamp2</span></span>
+<span id="cb381-6"><a href="bootstrapping-multiple-regression.html#cb381-6" aria-hidden="true"></a></span>
+<span id="cb381-7"><a href="bootstrapping-multiple-regression.html#cb381-7" aria-hidden="true"></a><span class="co"># get 95% confidence intervals</span></span>
+<span id="cb381-8"><a href="bootstrapping-multiple-regression.html#cb381-8" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">1</span>)</span>
+<span id="cb381-9"><a href="bootstrapping-multiple-regression.html#cb381-9" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">2</span>)</span>
+<span id="cb381-10"><a href="bootstrapping-multiple-regression.html#cb381-10" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">3</span>)</span>
+<span id="cb381-11"><a href="bootstrapping-multiple-regression.html#cb381-11" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">4</span>)</span>
+<span id="cb381-12"><a href="bootstrapping-multiple-regression.html#cb381-12" aria-hidden="true"></a><span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> <span class="dv">5</span>)</span></code></pre></div>
 <p>For <code>logarea</code>, we get:</p>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
 ## Based on 1000 bootstrap replicates
@@ -425,7 +425,7 @@ Figure 7.8: Distribution of bootstrapped estimates for <code>logarea</code>
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   ( 0.116,  0.316 )  
+## 95%   ( 0.1205,  0.3330 )  
 ## Calculations and Intervals on Original Scale</code></pre>
 <p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-141-1.svg" width="672" /></p>
 <p>Note that the BCa interval is from 0.12 to 0.32, whereas the simpler percentile interval is 0.16 to 0.29. BCa interval here is longer on the low side, and shorter on the high side, which it should be given the distribution of bootstrap estimates.</p>

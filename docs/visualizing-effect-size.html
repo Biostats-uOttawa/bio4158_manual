@@ -333,9 +333,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="visualizing-effect-size" class="section level2 hasAnchor" number="7.9">
 <h2><span class="header-section-number">7.9</span> Visualizing effect size<a href="visualizing-effect-size.html#visualizing-effect-size" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>How about effect size? How is that measured or viewed? The regression coefficients can be used to measure effect size, although it may be better to standardize them so that they become independent of measurement units. But a graph is often useful as well. In this context, some of the most useful graphs are called partial residual plots (or component + residual plots). These plots show how the dependent variable, corrected for other variables in the model, varies with each individual variable. Let’s have a look:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="visualizing-effect-size.html#cb347-1" aria-hidden="true"></a><span class="co"># Evaluate visually linearity and effect size</span></span>
-<span id="cb347-2"><a href="visualizing-effect-size.html#cb347-2" aria-hidden="true"></a><span class="co"># component + residual plot</span></span>
-<span id="cb347-3"><a href="visualizing-effect-size.html#cb347-3" aria-hidden="true"></a><span class="kw">crPlots</span>(model_poly2)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="visualizing-effect-size.html#cb349-1" aria-hidden="true"></a><span class="co"># Evaluate visually linearity and effect size</span></span>
+<span id="cb349-2"><a href="visualizing-effect-size.html#cb349-2" aria-hidden="true"></a><span class="co"># component + residual plot</span></span>
+<span id="cb349-3"><a href="visualizing-effect-size.html#cb349-3" aria-hidden="true"></a><span class="kw">crPlots</span>(model_poly2)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-121"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-121-1.svg" alt="Graphiques de résidus partiels du modèle `model_poly2`" width="672" />
 <p class="caption">
@@ -344,11 +344,11 @@ Figure 7.6: Graphiques de résidus partiels du modèle <code>model_poly2</code>
 </div>
 <p>Note that the vertical scale varies among plots. For <code>thtden</code>, the dependent variable (log10(herptile richness)) varies by about 0.4 units over the range of <code>thtden</code> in the sample. For <code>logarea</code>, the variation is about 0.6 log units. For <code>swamp</code>, it is a bit tricky since there are two terms and they have opposite effect (leading to a peaked relationship), so the plots are less informative. However, there is no deviation from linearity to be seen.</p>
 <p>To illustrate what these graphs would look like if there was deviation from linearity, let’s drop swamp<sup>2</sup> term and produce the graphs and run the RESET test</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb348-1"><a href="visualizing-effect-size.html#cb348-1" aria-hidden="true"></a>model_nopoly &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb348-2"><a href="visualizing-effect-size.html#cb348-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
-<span id="cb348-3"><a href="visualizing-effect-size.html#cb348-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb348-4"><a href="visualizing-effect-size.html#cb348-4" aria-hidden="true"></a>)</span>
-<span id="cb348-5"><a href="visualizing-effect-size.html#cb348-5" aria-hidden="true"></a><span class="kw">crPlots</span>(model_nopoly)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb350-1"><a href="visualizing-effect-size.html#cb350-1" aria-hidden="true"></a>model_nopoly &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb350-2"><a href="visualizing-effect-size.html#cb350-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp,</span>
+<span id="cb350-3"><a href="visualizing-effect-size.html#cb350-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb350-4"><a href="visualizing-effect-size.html#cb350-4" aria-hidden="true"></a>)</span>
+<span id="cb350-5"><a href="visualizing-effect-size.html#cb350-5" aria-hidden="true"></a><span class="kw">crPlots</span>(model_nopoly)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-122"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-122-1.svg" alt="Graphiques de résidus partiels du modèle `model_nopoly`" width="672" />
 <p class="caption">
@@ -357,7 +357,7 @@ Figure 7.7: Graphiques de résidus partiels du modèle <code>model_nopoly</code>
 </div>
 <p>The lack of linearity along the gradient of swamp becomes obvious.
 The RESET test also detects a violation from linearity:</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="visualizing-effect-size.html#cb349-1" aria-hidden="true"></a><span class="kw">resettest</span>(model_nopoly, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="visualizing-effect-size.html#cb351-1" aria-hidden="true"></a><span class="kw">resettest</span>(model_nopoly, <span class="dt">type =</span> <span class="st">&quot;regressor&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  RESET test
 ## 

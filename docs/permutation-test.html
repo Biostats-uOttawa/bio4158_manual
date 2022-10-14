@@ -333,67 +333,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="permutation-test" class="section level2 hasAnchor" number="5.5">
 <h2><span class="header-section-number">5.5</span> Permutation test<a href="permutation-test.html#permutation-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This is an example for a more complex way of doing permutation that we used when <code>lmPerm</code> was not available.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="permutation-test.html#cb209-1" aria-hidden="true"></a><span class="co">#############################################################</span></span>
-<span id="cb209-2"><a href="permutation-test.html#cb209-2" aria-hidden="true"></a><span class="co"># Permutation Test for one-way ANOVA</span></span>
-<span id="cb209-3"><a href="permutation-test.html#cb209-3" aria-hidden="true"></a><span class="co"># modified from code written by David C. Howell</span></span>
-<span id="cb209-4"><a href="permutation-test.html#cb209-4" aria-hidden="true"></a><span class="co"># http://www.uvm.edu/~dhowell/StatPages/</span></span>
-<span id="cb209-5"><a href="permutation-test.html#cb209-5" aria-hidden="true"></a><span class="co"># More_Stuff/Permutation%20Anova/PermTestsAnova.html</span></span>
-<span id="cb209-6"><a href="permutation-test.html#cb209-6" aria-hidden="true"></a><span class="co"># set desired number of permutations</span></span>
-<span id="cb209-7"><a href="permutation-test.html#cb209-7" aria-hidden="true"></a>nreps &lt;-<span class="st"> </span><span class="dv">500</span></span>
-<span id="cb209-8"><a href="permutation-test.html#cb209-8" aria-hidden="true"></a><span class="co"># to simplify reuse of this code, copy desired dataframe to mydata</span></span>
-<span id="cb209-9"><a href="permutation-test.html#cb209-9" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
-<span id="cb209-10"><a href="permutation-test.html#cb209-10" aria-hidden="true"></a><span class="co"># copy model formula to myformula</span></span>
-<span id="cb209-11"><a href="permutation-test.html#cb209-11" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
-<span id="cb209-12"><a href="permutation-test.html#cb209-12" aria-hidden="true"></a><span class="co"># copy dependent variable vector to mydep</span></span>
-<span id="cb209-13"><a href="permutation-test.html#cb209-13" aria-hidden="true"></a>mydep &lt;-<span class="st"> </span>mydata<span class="op">$</span>fklngth</span>
-<span id="cb209-14"><a href="permutation-test.html#cb209-14" aria-hidden="true"></a><span class="co"># copy independent variable vector to myindep</span></span>
-<span id="cb209-15"><a href="permutation-test.html#cb209-15" aria-hidden="true"></a>myindep &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mydata<span class="op">$</span>year)</span>
-<span id="cb209-16"><a href="permutation-test.html#cb209-16" aria-hidden="true"></a><span class="co">################################################</span></span>
-<span id="cb209-17"><a href="permutation-test.html#cb209-17" aria-hidden="true"></a><span class="co"># You should not need to modify code chunk below</span></span>
-<span id="cb209-18"><a href="permutation-test.html#cb209-18" aria-hidden="true"></a><span class="co">################################################</span></span>
-<span id="cb209-19"><a href="permutation-test.html#cb209-19" aria-hidden="true"></a><span class="co"># Compute observed F value for original sample</span></span>
-<span id="cb209-20"><a href="permutation-test.html#cb209-20" aria-hidden="true"></a>mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata) <span class="co"># Standard Anova</span></span>
-<span id="cb209-21"><a href="permutation-test.html#cb209-21" aria-hidden="true"></a>sum_anova &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod1)) <span class="co"># Save summary to variable</span></span>
-<span id="cb209-22"><a href="permutation-test.html#cb209-22" aria-hidden="true"></a>obs_f &lt;-<span class="st"> </span>sum_anova[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># Save observed F value</span></span>
-<span id="cb209-23"><a href="permutation-test.html#cb209-23" aria-hidden="true"></a><span class="co"># Print standard ANOVA results</span></span>
-<span id="cb209-24"><a href="permutation-test.html#cb209-24" aria-hidden="true"></a><span class="kw">cat</span>(</span>
-<span id="cb209-25"><a href="permutation-test.html#cb209-25" aria-hidden="true"></a>  <span class="st">&quot; The standard ANOVA for these data follows &quot;</span>,</span>
-<span id="cb209-26"><a href="permutation-test.html#cb209-26" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
-<span id="cb209-27"><a href="permutation-test.html#cb209-27" aria-hidden="true"></a>)</span>
-<span id="cb209-28"><a href="permutation-test.html#cb209-28" aria-hidden="true"></a></span>
-<span id="cb209-29"><a href="permutation-test.html#cb209-29" aria-hidden="true"></a><span class="kw">print</span>(sum_anova, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb209-30"><a href="permutation-test.html#cb209-30" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb209-31"><a href="permutation-test.html#cb209-31" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb209-32"><a href="permutation-test.html#cb209-32" aria-hidden="true"></a><span class="kw">print</span>(<span class="st">&quot;Resampling as in Manly with unrestricted sampling of observations. &quot;</span>)</span>
-<span id="cb209-33"><a href="permutation-test.html#cb209-33" aria-hidden="true"></a></span>
-<span id="cb209-34"><a href="permutation-test.html#cb209-34" aria-hidden="true"></a><span class="co"># Now start resampling</span></span>
-<span id="cb209-35"><a href="permutation-test.html#cb209-35" aria-hidden="true"></a>boot_f &lt;-<span class="st"> </span><span class="kw">numeric</span>(nreps) <span class="co"># initalize vector to receive permuted</span></span>
-<span id="cb209-36"><a href="permutation-test.html#cb209-36" aria-hidden="true"></a>values</span>
-<span id="cb209-37"><a href="permutation-test.html#cb209-37" aria-hidden="true"></a>boot_f[<span class="dv">1</span>] &lt;-<span class="st"> </span>obs_f</span>
-<span id="cb209-38"><a href="permutation-test.html#cb209-38" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>nreps) {</span>
-<span id="cb209-39"><a href="permutation-test.html#cb209-39" aria-hidden="true"></a>  newdependent &lt;-<span class="st"> </span><span class="kw">sample</span>(mydep, <span class="kw">length</span>(mydep)) <span class="co"># randomize dep</span></span>
-<span id="cb209-40"><a href="permutation-test.html#cb209-40" aria-hidden="true"></a>  var</span>
-<span id="cb209-41"><a href="permutation-test.html#cb209-41" aria-hidden="true"></a>  mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(newdependent <span class="op">~</span><span class="st"> </span>myindep) <span class="co"># refit model</span></span>
-<span id="cb209-42"><a href="permutation-test.html#cb209-42" aria-hidden="true"></a>  b &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod2))</span>
-<span id="cb209-43"><a href="permutation-test.html#cb209-43" aria-hidden="true"></a>  boot_f[i] &lt;-<span class="st"> </span>b[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># store F stats</span></span>
-<span id="cb209-44"><a href="permutation-test.html#cb209-44" aria-hidden="true"></a>}</span>
-<span id="cb209-45"><a href="permutation-test.html#cb209-45" aria-hidden="true"></a>permprob &lt;-<span class="st"> </span><span class="kw">length</span>(boot_f[boot_f <span class="op">&gt;=</span><span class="st"> </span>obs_f]) <span class="op">/</span><span class="st"> </span>nreps</span>
-<span id="cb209-46"><a href="permutation-test.html#cb209-46" aria-hidden="true"></a><span class="kw">cat</span>(</span>
-<span id="cb209-47"><a href="permutation-test.html#cb209-47" aria-hidden="true"></a>  <span class="st">&quot; The permutation probability value is: &quot;</span>, permprob,</span>
-<span id="cb209-48"><a href="permutation-test.html#cb209-48" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
-<span id="cb209-49"><a href="permutation-test.html#cb209-49" aria-hidden="true"></a>)</span>
-<span id="cb209-50"><a href="permutation-test.html#cb209-50" aria-hidden="true"></a><span class="co"># end of code chunk for permutation</span></span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="permutation-test.html#cb211-1" aria-hidden="true"></a><span class="co">#############################################################</span></span>
+<span id="cb211-2"><a href="permutation-test.html#cb211-2" aria-hidden="true"></a><span class="co"># Permutation Test for one-way ANOVA</span></span>
+<span id="cb211-3"><a href="permutation-test.html#cb211-3" aria-hidden="true"></a><span class="co"># modified from code written by David C. Howell</span></span>
+<span id="cb211-4"><a href="permutation-test.html#cb211-4" aria-hidden="true"></a><span class="co"># http://www.uvm.edu/~dhowell/StatPages/</span></span>
+<span id="cb211-5"><a href="permutation-test.html#cb211-5" aria-hidden="true"></a><span class="co"># More_Stuff/Permutation%20Anova/PermTestsAnova.html</span></span>
+<span id="cb211-6"><a href="permutation-test.html#cb211-6" aria-hidden="true"></a><span class="co"># set desired number of permutations</span></span>
+<span id="cb211-7"><a href="permutation-test.html#cb211-7" aria-hidden="true"></a>nreps &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb211-8"><a href="permutation-test.html#cb211-8" aria-hidden="true"></a><span class="co"># to simplify reuse of this code, copy desired dataframe to mydata</span></span>
+<span id="cb211-9"><a href="permutation-test.html#cb211-9" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
+<span id="cb211-10"><a href="permutation-test.html#cb211-10" aria-hidden="true"></a><span class="co"># copy model formula to myformula</span></span>
+<span id="cb211-11"><a href="permutation-test.html#cb211-11" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
+<span id="cb211-12"><a href="permutation-test.html#cb211-12" aria-hidden="true"></a><span class="co"># copy dependent variable vector to mydep</span></span>
+<span id="cb211-13"><a href="permutation-test.html#cb211-13" aria-hidden="true"></a>mydep &lt;-<span class="st"> </span>mydata<span class="op">$</span>fklngth</span>
+<span id="cb211-14"><a href="permutation-test.html#cb211-14" aria-hidden="true"></a><span class="co"># copy independent variable vector to myindep</span></span>
+<span id="cb211-15"><a href="permutation-test.html#cb211-15" aria-hidden="true"></a>myindep &lt;-<span class="st"> </span><span class="kw">as.factor</span>(mydata<span class="op">$</span>year)</span>
+<span id="cb211-16"><a href="permutation-test.html#cb211-16" aria-hidden="true"></a><span class="co">################################################</span></span>
+<span id="cb211-17"><a href="permutation-test.html#cb211-17" aria-hidden="true"></a><span class="co"># You should not need to modify code chunk below</span></span>
+<span id="cb211-18"><a href="permutation-test.html#cb211-18" aria-hidden="true"></a><span class="co">################################################</span></span>
+<span id="cb211-19"><a href="permutation-test.html#cb211-19" aria-hidden="true"></a><span class="co"># Compute observed F value for original sample</span></span>
+<span id="cb211-20"><a href="permutation-test.html#cb211-20" aria-hidden="true"></a>mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata) <span class="co"># Standard Anova</span></span>
+<span id="cb211-21"><a href="permutation-test.html#cb211-21" aria-hidden="true"></a>sum_anova &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod1)) <span class="co"># Save summary to variable</span></span>
+<span id="cb211-22"><a href="permutation-test.html#cb211-22" aria-hidden="true"></a>obs_f &lt;-<span class="st"> </span>sum_anova[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># Save observed F value</span></span>
+<span id="cb211-23"><a href="permutation-test.html#cb211-23" aria-hidden="true"></a><span class="co"># Print standard ANOVA results</span></span>
+<span id="cb211-24"><a href="permutation-test.html#cb211-24" aria-hidden="true"></a><span class="kw">cat</span>(</span>
+<span id="cb211-25"><a href="permutation-test.html#cb211-25" aria-hidden="true"></a>  <span class="st">&quot; The standard ANOVA for these data follows &quot;</span>,</span>
+<span id="cb211-26"><a href="permutation-test.html#cb211-26" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb211-27"><a href="permutation-test.html#cb211-27" aria-hidden="true"></a>)</span>
+<span id="cb211-28"><a href="permutation-test.html#cb211-28" aria-hidden="true"></a></span>
+<span id="cb211-29"><a href="permutation-test.html#cb211-29" aria-hidden="true"></a><span class="kw">print</span>(sum_anova, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb211-30"><a href="permutation-test.html#cb211-30" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb211-31"><a href="permutation-test.html#cb211-31" aria-hidden="true"></a><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb211-32"><a href="permutation-test.html#cb211-32" aria-hidden="true"></a><span class="kw">print</span>(<span class="st">&quot;Resampling as in Manly with unrestricted sampling of observations. &quot;</span>)</span>
+<span id="cb211-33"><a href="permutation-test.html#cb211-33" aria-hidden="true"></a></span>
+<span id="cb211-34"><a href="permutation-test.html#cb211-34" aria-hidden="true"></a><span class="co"># Now start resampling</span></span>
+<span id="cb211-35"><a href="permutation-test.html#cb211-35" aria-hidden="true"></a>boot_f &lt;-<span class="st"> </span><span class="kw">numeric</span>(nreps) <span class="co"># initalize vector to receive permuted</span></span>
+<span id="cb211-36"><a href="permutation-test.html#cb211-36" aria-hidden="true"></a>values</span>
+<span id="cb211-37"><a href="permutation-test.html#cb211-37" aria-hidden="true"></a>boot_f[<span class="dv">1</span>] &lt;-<span class="st"> </span>obs_f</span>
+<span id="cb211-38"><a href="permutation-test.html#cb211-38" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>nreps) {</span>
+<span id="cb211-39"><a href="permutation-test.html#cb211-39" aria-hidden="true"></a>  newdependent &lt;-<span class="st"> </span><span class="kw">sample</span>(mydep, <span class="kw">length</span>(mydep)) <span class="co"># randomize dep</span></span>
+<span id="cb211-40"><a href="permutation-test.html#cb211-40" aria-hidden="true"></a>  var</span>
+<span id="cb211-41"><a href="permutation-test.html#cb211-41" aria-hidden="true"></a>  mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(newdependent <span class="op">~</span><span class="st"> </span>myindep) <span class="co"># refit model</span></span>
+<span id="cb211-42"><a href="permutation-test.html#cb211-42" aria-hidden="true"></a>  b &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">aov</span>(mod2))</span>
+<span id="cb211-43"><a href="permutation-test.html#cb211-43" aria-hidden="true"></a>  boot_f[i] &lt;-<span class="st"> </span>b[[<span class="dv">1</span>]]<span class="op">$</span><span class="st">&quot;F value&quot;</span>[<span class="dv">1</span>] <span class="co"># store F stats</span></span>
+<span id="cb211-44"><a href="permutation-test.html#cb211-44" aria-hidden="true"></a>}</span>
+<span id="cb211-45"><a href="permutation-test.html#cb211-45" aria-hidden="true"></a>permprob &lt;-<span class="st"> </span><span class="kw">length</span>(boot_f[boot_f <span class="op">&gt;=</span><span class="st"> </span>obs_f]) <span class="op">/</span><span class="st"> </span>nreps</span>
+<span id="cb211-46"><a href="permutation-test.html#cb211-46" aria-hidden="true"></a><span class="kw">cat</span>(</span>
+<span id="cb211-47"><a href="permutation-test.html#cb211-47" aria-hidden="true"></a>  <span class="st">&quot; The permutation probability value is: &quot;</span>, permprob,</span>
+<span id="cb211-48"><a href="permutation-test.html#cb211-48" aria-hidden="true"></a>  <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb211-49"><a href="permutation-test.html#cb211-49" aria-hidden="true"></a>)</span>
+<span id="cb211-50"><a href="permutation-test.html#cb211-50" aria-hidden="true"></a><span class="co"># end of code chunk for permutation</span></span></code></pre></div>
 <p>Version <code>lmPerm</code> du test de permutation.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="permutation-test.html#cb210-1" aria-hidden="true"></a><span class="co">## lmPerm version of permutation test</span></span>
-<span id="cb210-2"><a href="permutation-test.html#cb210-2" aria-hidden="true"></a><span class="kw">library</span>(lmPerm)</span>
-<span id="cb210-3"><a href="permutation-test.html#cb210-3" aria-hidden="true"></a><span class="co"># for generality, copy desired dataframe to mydata</span></span>
-<span id="cb210-4"><a href="permutation-test.html#cb210-4" aria-hidden="true"></a><span class="co"># and model formula to myformula</span></span>
-<span id="cb210-5"><a href="permutation-test.html#cb210-5" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
-<span id="cb210-6"><a href="permutation-test.html#cb210-6" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
-<span id="cb210-7"><a href="permutation-test.html#cb210-7" aria-hidden="true"></a><span class="co"># Fit desired model on the desired dataframe</span></span>
-<span id="cb210-8"><a href="permutation-test.html#cb210-8" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata)</span>
-<span id="cb210-9"><a href="permutation-test.html#cb210-9" aria-hidden="true"></a><span class="co"># Calculate permutation p-value</span></span>
-<span id="cb210-10"><a href="permutation-test.html#cb210-10" aria-hidden="true"></a><span class="kw">anova</span>(<span class="kw">lmp</span>(myformula, <span class="dt">data =</span> mydata, <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span>, <span class="dt">center =</span> <span class="ot">FALSE</span>, <span class="dt">Ca =</span> <span class="fl">0.001</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="permutation-test.html#cb212-1" aria-hidden="true"></a><span class="co">## lmPerm version of permutation test</span></span>
+<span id="cb212-2"><a href="permutation-test.html#cb212-2" aria-hidden="true"></a><span class="kw">library</span>(lmPerm)</span>
+<span id="cb212-3"><a href="permutation-test.html#cb212-3" aria-hidden="true"></a><span class="co"># for generality, copy desired dataframe to mydata</span></span>
+<span id="cb212-4"><a href="permutation-test.html#cb212-4" aria-hidden="true"></a><span class="co"># and model formula to myformula</span></span>
+<span id="cb212-5"><a href="permutation-test.html#cb212-5" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>dam10dat</span>
+<span id="cb212-6"><a href="permutation-test.html#cb212-6" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="st">&quot;fklngth ~ year&quot;</span>)</span>
+<span id="cb212-7"><a href="permutation-test.html#cb212-7" aria-hidden="true"></a><span class="co"># Fit desired model on the desired dataframe</span></span>
+<span id="cb212-8"><a href="permutation-test.html#cb212-8" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">lm</span>(myformula, <span class="dt">data =</span> mydata)</span>
+<span id="cb212-9"><a href="permutation-test.html#cb212-9" aria-hidden="true"></a><span class="co"># Calculate permutation p-value</span></span>
+<span id="cb212-10"><a href="permutation-test.html#cb212-10" aria-hidden="true"></a><span class="kw">anova</span>(<span class="kw">lmp</span>(myformula, <span class="dt">data =</span> mydata, <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span>, <span class="dt">center =</span> <span class="ot">FALSE</span>, <span class="dt">Ca =</span> <span class="fl">0.001</span>))</span></code></pre></div>
 
 <!-- # (PART) Modèle multivarié {-} -->
 </div>

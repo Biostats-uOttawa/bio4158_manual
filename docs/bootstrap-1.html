@@ -332,49 +332,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="bootstrap-1" class="section level2 hasAnchor" number="8.7">
 <h2><span class="header-section-number">8.7</span> Bootstrap<a href="bootstrap-1.html#bootstrap-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="bootstrap-1.html#cb418-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
-<span id="cb418-2"><a href="bootstrap-1.html#cb418-2" aria-hidden="true"></a><span class="co">######</span></span>
-<span id="cb418-3"><a href="bootstrap-1.html#cb418-3" aria-hidden="true"></a><span class="co"># Bootstrap analysis</span></span>
-<span id="cb418-4"><a href="bootstrap-1.html#cb418-4" aria-hidden="true"></a><span class="co">#</span></span>
-<span id="cb418-5"><a href="bootstrap-1.html#cb418-5" aria-hidden="true"></a><span class="co"># Bootstrap analysis BCa confidence intervals</span></span>
-<span id="cb418-6"><a href="bootstrap-1.html#cb418-6" aria-hidden="true"></a><span class="co"># Preferable when parameter distribution is far from normal</span></span>
-<span id="cb418-7"><a href="bootstrap-1.html#cb418-7" aria-hidden="true"></a><span class="co"># Bootstrap 95% BCa CI for regression coefficients</span></span>
-<span id="cb418-8"><a href="bootstrap-1.html#cb418-8" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
-<span id="cb418-9"><a href="bootstrap-1.html#cb418-9" aria-hidden="true"></a></span>
-<span id="cb418-10"><a href="bootstrap-1.html#cb418-10" aria-hidden="true"></a><span class="co"># To simplify future modifications of the code in this file,</span></span>
-<span id="cb418-11"><a href="bootstrap-1.html#cb418-11" aria-hidden="true"></a><span class="co"># copy the data to a generic mydata dataframe</span></span>
-<span id="cb418-12"><a href="bootstrap-1.html#cb418-12" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>anc3dat</span>
-<span id="cb418-13"><a href="bootstrap-1.html#cb418-13" aria-hidden="true"></a></span>
-<span id="cb418-14"><a href="bootstrap-1.html#cb418-14" aria-hidden="true"></a><span class="co"># create a myformula variable containing the formula for the model to be fitted</span></span>
-<span id="cb418-15"><a href="bootstrap-1.html#cb418-15" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate)</span>
-<span id="cb418-16"><a href="bootstrap-1.html#cb418-16" aria-hidden="true"></a></span>
-<span id="cb418-17"><a href="bootstrap-1.html#cb418-17" aria-hidden="true"></a><span class="co"># function to obtain regression coefficients for each iteration</span></span>
-<span id="cb418-18"><a href="bootstrap-1.html#cb418-18" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
-<span id="cb418-19"><a href="bootstrap-1.html#cb418-19" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ]</span>
-<span id="cb418-20"><a href="bootstrap-1.html#cb418-20" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
-<span id="cb418-21"><a href="bootstrap-1.html#cb418-21" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
-<span id="cb418-22"><a href="bootstrap-1.html#cb418-22" aria-hidden="true"></a>}</span>
-<span id="cb418-23"><a href="bootstrap-1.html#cb418-23" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
-<span id="cb418-24"><a href="bootstrap-1.html#cb418-24" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(<span class="dt">data =</span> mydata, <span class="dt">statistic =</span> bs, <span class="dt">R =</span> <span class="dv">1000</span>, <span class="dt">formula =</span> myformula)</span>
-<span id="cb418-25"><a href="bootstrap-1.html#cb418-25" aria-hidden="true"></a></span>
-<span id="cb418-26"><a href="bootstrap-1.html#cb418-26" aria-hidden="true"></a><span class="co"># view results</span></span>
-<span id="cb418-27"><a href="bootstrap-1.html#cb418-27" aria-hidden="true"></a>results</span>
-<span id="cb418-28"><a href="bootstrap-1.html#cb418-28" aria-hidden="true"></a>boot_res &lt;-<span class="st"> </span><span class="kw">summary</span>(results)</span>
-<span id="cb418-29"><a href="bootstrap-1.html#cb418-29" aria-hidden="true"></a><span class="kw">rownames</span>(boot_res) &lt;-<span class="st"> </span><span class="kw">names</span>(results<span class="op">$</span>t0)</span>
-<span id="cb418-30"><a href="bootstrap-1.html#cb418-30" aria-hidden="true"></a>boot_res</span>
-<span id="cb418-31"><a href="bootstrap-1.html#cb418-31" aria-hidden="true"></a></span>
-<span id="cb418-32"><a href="bootstrap-1.html#cb418-32" aria-hidden="true"></a>op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">ask =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb418-33"><a href="bootstrap-1.html#cb418-33" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(results<span class="op">$</span>t0)) {</span>
-<span id="cb418-34"><a href="bootstrap-1.html#cb418-34" aria-hidden="true"></a>  <span class="kw">plot</span>(results, <span class="dt">index =</span> i)</span>
-<span id="cb418-35"><a href="bootstrap-1.html#cb418-35" aria-hidden="true"></a>  <span class="kw">title</span>(<span class="kw">names</span>(results<span class="op">$</span>t0)[i])</span>
-<span id="cb418-36"><a href="bootstrap-1.html#cb418-36" aria-hidden="true"></a>}</span>
-<span id="cb418-37"><a href="bootstrap-1.html#cb418-37" aria-hidden="true"></a><span class="kw">par</span>(op)</span>
-<span id="cb418-38"><a href="bootstrap-1.html#cb418-38" aria-hidden="true"></a></span>
-<span id="cb418-39"><a href="bootstrap-1.html#cb418-39" aria-hidden="true"></a><span class="co"># get 95% confidence intervals</span></span>
-<span id="cb418-40"><a href="bootstrap-1.html#cb418-40" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(results<span class="op">$</span>t0)) {</span>
-<span id="cb418-41"><a href="bootstrap-1.html#cb418-41" aria-hidden="true"></a>  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="kw">names</span>(results<span class="op">$</span>t0)[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb418-42"><a href="bootstrap-1.html#cb418-42" aria-hidden="true"></a>  <span class="kw">print</span>(<span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> i))</span>
-<span id="cb418-43"><a href="bootstrap-1.html#cb418-43" aria-hidden="true"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="bootstrap-1.html#cb420-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
+<span id="cb420-2"><a href="bootstrap-1.html#cb420-2" aria-hidden="true"></a><span class="co">######</span></span>
+<span id="cb420-3"><a href="bootstrap-1.html#cb420-3" aria-hidden="true"></a><span class="co"># Bootstrap analysis</span></span>
+<span id="cb420-4"><a href="bootstrap-1.html#cb420-4" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb420-5"><a href="bootstrap-1.html#cb420-5" aria-hidden="true"></a><span class="co"># Bootstrap analysis BCa confidence intervals</span></span>
+<span id="cb420-6"><a href="bootstrap-1.html#cb420-6" aria-hidden="true"></a><span class="co"># Preferable when parameter distribution is far from normal</span></span>
+<span id="cb420-7"><a href="bootstrap-1.html#cb420-7" aria-hidden="true"></a><span class="co"># Bootstrap 95% BCa CI for regression coefficients</span></span>
+<span id="cb420-8"><a href="bootstrap-1.html#cb420-8" aria-hidden="true"></a><span class="kw">library</span>(boot)</span>
+<span id="cb420-9"><a href="bootstrap-1.html#cb420-9" aria-hidden="true"></a></span>
+<span id="cb420-10"><a href="bootstrap-1.html#cb420-10" aria-hidden="true"></a><span class="co"># To simplify future modifications of the code in this file,</span></span>
+<span id="cb420-11"><a href="bootstrap-1.html#cb420-11" aria-hidden="true"></a><span class="co"># copy the data to a generic mydata dataframe</span></span>
+<span id="cb420-12"><a href="bootstrap-1.html#cb420-12" aria-hidden="true"></a>mydata &lt;-<span class="st"> </span>anc3dat</span>
+<span id="cb420-13"><a href="bootstrap-1.html#cb420-13" aria-hidden="true"></a></span>
+<span id="cb420-14"><a href="bootstrap-1.html#cb420-14" aria-hidden="true"></a><span class="co"># create a myformula variable containing the formula for the model to be fitted</span></span>
+<span id="cb420-15"><a href="bootstrap-1.html#cb420-15" aria-hidden="true"></a>myformula &lt;-<span class="st"> </span><span class="kw">as.formula</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate)</span>
+<span id="cb420-16"><a href="bootstrap-1.html#cb420-16" aria-hidden="true"></a></span>
+<span id="cb420-17"><a href="bootstrap-1.html#cb420-17" aria-hidden="true"></a><span class="co"># function to obtain regression coefficients for each iteration</span></span>
+<span id="cb420-18"><a href="bootstrap-1.html#cb420-18" aria-hidden="true"></a>bs &lt;-<span class="st"> </span><span class="cf">function</span>(formula, data, indices) {</span>
+<span id="cb420-19"><a href="bootstrap-1.html#cb420-19" aria-hidden="true"></a>  d &lt;-<span class="st"> </span>data[indices, ]</span>
+<span id="cb420-20"><a href="bootstrap-1.html#cb420-20" aria-hidden="true"></a>  fit &lt;-<span class="st"> </span><span class="kw">lm</span>(formula, <span class="dt">data =</span> d)</span>
+<span id="cb420-21"><a href="bootstrap-1.html#cb420-21" aria-hidden="true"></a>  <span class="kw">return</span>(<span class="kw">coef</span>(fit))</span>
+<span id="cb420-22"><a href="bootstrap-1.html#cb420-22" aria-hidden="true"></a>}</span>
+<span id="cb420-23"><a href="bootstrap-1.html#cb420-23" aria-hidden="true"></a><span class="co"># bootstrapping with 1000 replications</span></span>
+<span id="cb420-24"><a href="bootstrap-1.html#cb420-24" aria-hidden="true"></a>results &lt;-<span class="st"> </span><span class="kw">boot</span>(<span class="dt">data =</span> mydata, <span class="dt">statistic =</span> bs, <span class="dt">R =</span> <span class="dv">1000</span>, <span class="dt">formula =</span> myformula)</span>
+<span id="cb420-25"><a href="bootstrap-1.html#cb420-25" aria-hidden="true"></a></span>
+<span id="cb420-26"><a href="bootstrap-1.html#cb420-26" aria-hidden="true"></a><span class="co"># view results</span></span>
+<span id="cb420-27"><a href="bootstrap-1.html#cb420-27" aria-hidden="true"></a>results</span>
+<span id="cb420-28"><a href="bootstrap-1.html#cb420-28" aria-hidden="true"></a>boot_res &lt;-<span class="st"> </span><span class="kw">summary</span>(results)</span>
+<span id="cb420-29"><a href="bootstrap-1.html#cb420-29" aria-hidden="true"></a><span class="kw">rownames</span>(boot_res) &lt;-<span class="st"> </span><span class="kw">names</span>(results<span class="op">$</span>t0)</span>
+<span id="cb420-30"><a href="bootstrap-1.html#cb420-30" aria-hidden="true"></a>boot_res</span>
+<span id="cb420-31"><a href="bootstrap-1.html#cb420-31" aria-hidden="true"></a></span>
+<span id="cb420-32"><a href="bootstrap-1.html#cb420-32" aria-hidden="true"></a>op &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">ask =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb420-33"><a href="bootstrap-1.html#cb420-33" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(results<span class="op">$</span>t0)) {</span>
+<span id="cb420-34"><a href="bootstrap-1.html#cb420-34" aria-hidden="true"></a>  <span class="kw">plot</span>(results, <span class="dt">index =</span> i)</span>
+<span id="cb420-35"><a href="bootstrap-1.html#cb420-35" aria-hidden="true"></a>  <span class="kw">title</span>(<span class="kw">names</span>(results<span class="op">$</span>t0)[i])</span>
+<span id="cb420-36"><a href="bootstrap-1.html#cb420-36" aria-hidden="true"></a>}</span>
+<span id="cb420-37"><a href="bootstrap-1.html#cb420-37" aria-hidden="true"></a><span class="kw">par</span>(op)</span>
+<span id="cb420-38"><a href="bootstrap-1.html#cb420-38" aria-hidden="true"></a></span>
+<span id="cb420-39"><a href="bootstrap-1.html#cb420-39" aria-hidden="true"></a><span class="co"># get 95% confidence intervals</span></span>
+<span id="cb420-40"><a href="bootstrap-1.html#cb420-40" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(results<span class="op">$</span>t0)) {</span>
+<span id="cb420-41"><a href="bootstrap-1.html#cb420-41" aria-hidden="true"></a>  <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="kw">names</span>(results<span class="op">$</span>t0)[i],<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb420-42"><a href="bootstrap-1.html#cb420-42" aria-hidden="true"></a>  <span class="kw">print</span>(<span class="kw">boot.ci</span>(results, <span class="dt">type =</span> <span class="st">&quot;bca&quot;</span>, <span class="dt">index =</span> i))</span>
+<span id="cb420-43"><a href="bootstrap-1.html#cb420-43" aria-hidden="true"></a>}</span></code></pre></div>
 </div>
 <script src="js/solution.js"></script>
             </section>

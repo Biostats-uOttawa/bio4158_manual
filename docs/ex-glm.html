@@ -337,11 +337,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcode">
 Open <code>sturgdat.csv</code> , then use the table() function to summarize the data according to number of individuals by <code>sex</code> , <code>location</code> , and <code>year</code> . Save this object as sturgdat.table . Make a mosaic plot of the data.
 </div>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="ex-glm.html#cb453-1" aria-hidden="true"></a>sturgdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/sturgdat.csv&quot;</span>)</span>
-<span id="cb453-2"><a href="ex-glm.html#cb453-2" aria-hidden="true"></a><span class="co"># Reorganize data from case form to table form</span></span>
-<span id="cb453-3"><a href="ex-glm.html#cb453-3" aria-hidden="true"></a>sturgdat.table &lt;-<span class="st"> </span><span class="kw">with</span>(sturgdat, <span class="kw">table</span>(sex, year, location))</span>
-<span id="cb453-4"><a href="ex-glm.html#cb453-4" aria-hidden="true"></a><span class="co"># display the table</span></span>
-<span id="cb453-5"><a href="ex-glm.html#cb453-5" aria-hidden="true"></a>sturgdat.table</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="ex-glm.html#cb455-1" aria-hidden="true"></a>sturgdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/sturgdat.csv&quot;</span>)</span>
+<span id="cb455-2"><a href="ex-glm.html#cb455-2" aria-hidden="true"></a><span class="co"># Reorganize data from case form to table form</span></span>
+<span id="cb455-3"><a href="ex-glm.html#cb455-3" aria-hidden="true"></a>sturgdat.table &lt;-<span class="st"> </span><span class="kw">with</span>(sturgdat, <span class="kw">table</span>(sex, year, location))</span>
+<span id="cb455-4"><a href="ex-glm.html#cb455-4" aria-hidden="true"></a><span class="co"># display the table</span></span>
+<span id="cb455-5"><a href="ex-glm.html#cb455-5" aria-hidden="true"></a>sturgdat.table</span></code></pre></div>
 <pre><code>## , , location = CUMBERLAND  
 ## 
 ##               year
@@ -355,10 +355,10 @@ Open <code>sturgdat.csv</code> , then use the table() function to summarize the 
 ## sex            1978 1979 1980
 ##   FEMALE          5   12   38
 ##   MALE           16   12   18</code></pre>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="ex-glm.html#cb455-1" aria-hidden="true"></a><span class="co"># Create data frame while converting from table form to frequency form</span></span>
-<span id="cb455-2"><a href="ex-glm.html#cb455-2" aria-hidden="true"></a>sturgdat.freq &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(sturgdat.table)</span>
-<span id="cb455-3"><a href="ex-glm.html#cb455-3" aria-hidden="true"></a><span class="co"># display data frame</span></span>
-<span id="cb455-4"><a href="ex-glm.html#cb455-4" aria-hidden="true"></a>sturgdat.freq</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="ex-glm.html#cb457-1" aria-hidden="true"></a><span class="co"># Create data frame while converting from table form to frequency form</span></span>
+<span id="cb457-2"><a href="ex-glm.html#cb457-2" aria-hidden="true"></a>sturgdat.freq &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(sturgdat.table)</span>
+<span id="cb457-3"><a href="ex-glm.html#cb457-3" aria-hidden="true"></a><span class="co"># display data frame</span></span>
+<span id="cb457-4"><a href="ex-glm.html#cb457-4" aria-hidden="true"></a>sturgdat.freq</span></code></pre></div>
 <pre><code>##             sex year     location Freq
 ## 1  FEMALE       1978 CUMBERLAND     10
 ## 2  MALE         1978 CUMBERLAND     14
@@ -372,9 +372,9 @@ Open <code>sturgdat.csv</code> , then use the table() function to summarize the 
 ## 10 MALE         1979 THE_PAS        12
 ## 11 FEMALE       1980 THE_PAS        38
 ## 12 MALE         1980 THE_PAS        18</code></pre>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="ex-glm.html#cb457-1" aria-hidden="true"></a><span class="co"># Look at the data as mosaic plot</span></span>
-<span id="cb457-2"><a href="ex-glm.html#cb457-2" aria-hidden="true"></a><span class="co"># mosaic using the table created above</span></span>
-<span id="cb457-3"><a href="ex-glm.html#cb457-3" aria-hidden="true"></a><span class="kw">mosaic</span>(sturgdat.table, <span class="dt">shade =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="ex-glm.html#cb459-1" aria-hidden="true"></a><span class="co"># Look at the data as mosaic plot</span></span>
+<span id="cb459-2"><a href="ex-glm.html#cb459-2" aria-hidden="true"></a><span class="co"># mosaic using the table created above</span></span>
+<span id="cb459-3"><a href="ex-glm.html#cb459-3" aria-hidden="true"></a><span class="kw">mosaic</span>(sturgdat.table, <span class="dt">shade =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-190"></span>
 <img src="Labs_BIO4158_files/figure-html/unnamed-chunk-190-1.svg" alt="Frequency of female and male sturgeon as a function of year and location" width="672" />
 <p class="caption">
@@ -385,9 +385,9 @@ Figure 9.4: Frequency of female and male sturgeon as a function of year and loca
 <div class="rmdcode">
 Using the frequency form of the table, fit the full log-linear model just as we did with the loglin data set and produce the anova table with chi square statistics for the terms in the model. Is the 3-way interaction significant ( location:year:sex )? Does sex ratio change between locations or among years?
 </div>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="ex-glm.html#cb458-1" aria-hidden="true"></a><span class="co"># Fit full model</span></span>
-<span id="cb458-2"><a href="ex-glm.html#cb458-2" aria-hidden="true"></a>full.model &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>year <span class="op">*</span><span class="st"> </span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb458-3"><a href="ex-glm.html#cb458-3" aria-hidden="true"></a><span class="kw">summary</span>(full.model)</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ex-glm.html#cb460-1" aria-hidden="true"></a><span class="co"># Fit full model</span></span>
+<span id="cb460-2"><a href="ex-glm.html#cb460-2" aria-hidden="true"></a>full.model &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>year <span class="op">*</span><span class="st"> </span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb460-3"><a href="ex-glm.html#cb460-3" aria-hidden="true"></a><span class="kw">summary</span>(full.model)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Freq ~ sex * year * location, family = &quot;poisson&quot;, 
@@ -433,7 +433,7 @@ Using the frequency form of the table, fit the full log-linear model just as we 
 ## AIC: 77.28
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="ex-glm.html#cb460-1" aria-hidden="true"></a><span class="kw">Anova</span>(full.model, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="ex-glm.html#cb462-1" aria-hidden="true"></a><span class="kw">Anova</span>(full.model, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type III tests)
 ## 
 ## Response: Freq
@@ -452,8 +452,8 @@ Using the frequency form of the table, fit the full log-linear model just as we 
 <ul>
 <li>If we adjust the model without the 3-way interaction, we get:</li>
 </ul>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb462-1"><a href="ex-glm.html#cb462-1" aria-hidden="true"></a>o2int.model &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>year <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location <span class="op">+</span><span class="st"> </span>year<span class="op">:</span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb462-2"><a href="ex-glm.html#cb462-2" aria-hidden="true"></a><span class="kw">Anova</span>(o2int.model, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb464-1"><a href="ex-glm.html#cb464-1" aria-hidden="true"></a>o2int.model &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>year <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>location <span class="op">+</span><span class="st"> </span>year<span class="op">:</span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb464-2"><a href="ex-glm.html#cb464-2" aria-hidden="true"></a><span class="kw">Anova</span>(o2int.model, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type III tests)
 ## 
 ## Response: Freq
@@ -471,8 +471,8 @@ Using the frequency form of the table, fit the full log-linear model just as we 
 <ul>
 <li>Refit the model, this time excluding the sex:location interaction.</li>
 </ul>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb464-1"><a href="ex-glm.html#cb464-1" aria-hidden="true"></a>o2int.model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>year <span class="op">+</span><span class="st"> </span>year<span class="op">:</span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb464-2"><a href="ex-glm.html#cb464-2" aria-hidden="true"></a><span class="kw">Anova</span>(o2int.model2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb466-1"><a href="ex-glm.html#cb466-1" aria-hidden="true"></a>o2int.model2 &lt;-<span class="st"> </span><span class="kw">glm</span>(Freq <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>sex<span class="op">:</span>year <span class="op">+</span><span class="st"> </span>year<span class="op">:</span>location, <span class="dt">data =</span> sturgdat.freq, <span class="dt">family =</span> <span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb466-2"><a href="ex-glm.html#cb466-2" aria-hidden="true"></a><span class="kw">Anova</span>(o2int.model2, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type III tests)
 ## 
 ## Response: Freq
