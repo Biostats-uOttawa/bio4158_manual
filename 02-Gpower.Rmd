@@ -111,7 +111,7 @@ Test | Taille d'effet | Formule
 :----|:--------------:|:--------------------
 t-test on means | d | $d = \frac{|\mu_1 - \mu_2|}{\sqrt{({s_1}^2 + {s_2}^2)/2}}$
 t-test on correlations |  r |
-other t-tests | f | $f = \frac{\mu_1}{\sigma}$
+other t-tests | d | $d = \frac{\mu}{\sigma}$
 F-test (ANOVA) | f | $f = \frac{\frac{\sqrt{\sum_{i=1}^k (\mu_i - \mu)^2}}{k}}{\sigma}$
 other F-tests | $f^2$ | $f^2 = \frac{{R_p}^2}{1-{R_p}^2}$
  | | | ${R_p}$ is the squared partial correlation coefficient
