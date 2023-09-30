@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.4 Power analysis for a t-test on two independent means | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.4 Power analysis for a t-test on two independent means | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -332,6 +336,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="power-analysis-for-a-t-test-on-two-independent-means" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Power analysis for a t-test on two independent means<a href="power-analysis-for-a-t-test-on-two-independent-means.html#power-analysis-for-a-t-test-on-two-independent-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+<div class="rmdimportant">
+<p>All the power analysis presented in this chapter can be done using 2 functions
+in R.</p>
+<ul>
+<li><code>pwr.t.test()</code> when the two samples have a similar size</li>
+<li><code>pwr.t2n.test()</code> when samples have different numbers of observations</li>
+</ul>
+</div>
 <p>The objective of this lab is to learn to use G*Power and understand how the 4 parameters of power analyses (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, sample size and effect size) are related to each other. For this, you will only use the standard t-test to compare two independent means. This is the test most used by biologists, you have all used it, and it will serve admirably for this lab. What you will learn today will be applicable to all other power analyses.</p>
 <p>Jaynie Stephenson studied the productivity of streams in the Ottawa region. She has measured fish biomass in 36 streams, 18 on the Shield and 18 in the Ottawa Valley. She found that fish biomass was lower in streams from the valley (2.64 <span class="math inline">\(g/m^2\)</span> , standard deviation = 3.28) than from the Shield (3.31 <span class="math inline">\(g/m^2\)</span> , standard deviation = 2.79.).</p>
 <p>When she tested the null hypothesis that fish biomass is the same in the two regions by a t-test, she obtained:</p>
@@ -609,7 +622,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

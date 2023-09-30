@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.8 Dealing with outliers | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.8 Dealing with outliers | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -335,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this case, there are no real clear outliers. Yes, observations 8, 24, and 112 are labeled as the most extreme in the last set of residual diagnostic plots. But they are still within what I consider the “reasonable” range. But how does one define a limit to the reasonable? When is an extreme value a real outlier we have to deal with? Opinions vary about the issue, but I favor conservatism.</p>
 <p>My rule is that, unless the value is clearly impossible or an error in data entry, I do not delete “outliers”; rather, I analyze all my data. Why? Because, I want my data to reflect natural or real variability. Indeed, variability is often what interests biologists the most.</p>
 <p>Keeping extreme values is the fairest way to proceed, but it often creates other issues. These values will often be the main reason why the data fail to meet the assumptions of the statistical analysis. One solution is to run the analysis with and without the outliers, and compare the results. In many cases, the two analyses will be qualitatively similar: the same conclusions will be reached, and the effect size will not be very different. Sometimes, however, this comparison will reveal that the presence of the outliers changes the story. The logical conclusion then is that the results depend on the outliers and that the data at hand are not very conclusive. As an example, let’s rerun the analysis after eliminating observations labeled 8, 24, and 112.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="dealing-with-outliers.html#cb93-1" aria-hidden="true"></a>RegModel<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(age), <span class="dt">data =</span> sturgeon.male, <span class="dt">subset =</span> <span class="op">!</span>(<span class="kw">rownames</span>(sturgeon.male) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;8&quot;</span>, <span class="st">&quot;24&quot;</span>, <span class="st">&quot;112&quot;</span>)))</span>
-<span id="cb93-2"><a href="dealing-with-outliers.html#cb93-2" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dealing-with-outliers.html#cb95-1" aria-hidden="true"></a>RegModel<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log10</span>(fklngth) <span class="op">~</span><span class="st"> </span><span class="kw">log10</span>(age), <span class="dt">data =</span> sturgeon.male, <span class="dt">subset =</span> <span class="op">!</span>(<span class="kw">rownames</span>(sturgeon.male) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;8&quot;</span>, <span class="st">&quot;24&quot;</span>, <span class="st">&quot;112&quot;</span>)))</span>
+<span id="cb95-2"><a href="dealing-with-outliers.html#cb95-2" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log10(fklngth) ~ log10(age), data = sturgeon.male, 
@@ -359,29 +363,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic:   261 on 1 and 70 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The intercept, slope, and R squared are about the same, and the significance of the slope is still astronomical. Removing the “outliers” has little effect in this case.</p>
 <p>As for the diagnostic residual plots and the formal tests of assumptions:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dealing-with-outliers.html#cb95-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb95-2"><a href="dealing-with-outliers.html#cb95-2" aria-hidden="true"></a><span class="kw">plot</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="dealing-with-outliers.html#cb97-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb97-2"><a href="dealing-with-outliers.html#cb97-2" aria-hidden="true"></a><span class="kw">plot</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
 <p><img src="Labs_BIO4158_files/figure-html/sturtr-6-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="dealing-with-outliers.html#cb96-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="dealing-with-outliers.html#cb98-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  RegModel.3
 ## BP = 0.3001, df = 1, p-value = 0.5838</code></pre>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="dealing-with-outliers.html#cb98-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="dealing-with-outliers.html#cb100-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Durbin-Watson test
 ## 
 ## data:  RegModel.3
 ## DW = 2.0171, p-value = 0.5074
 ## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="dealing-with-outliers.html#cb100-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="dealing-with-outliers.html#cb102-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## 
 ##  RESET test
 ## 
 ## data:  RegModel.3
 ## RESET = 3.407, df1 = 2, df2 = 68, p-value = 0.0389</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="dealing-with-outliers.html#cb102-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="dealing-with-outliers.html#cb104-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.3</span>))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -446,7 +450,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

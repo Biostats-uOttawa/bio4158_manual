@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.2 Visual examination of sample data | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.2 Visual examination of sample data | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -342,32 +346,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Using the data file <code>sturgeon.csv</code> , generate histograms for <code>fklngth</code> data at The Pas and Cumberland House.</li>
 </ul>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="visual-examination-of-sample-data.html#cb124-1" aria-hidden="true"></a><span class="co"># use &quot;sturgeon&quot; dataframe to make plot called mygraph</span></span>
-<span id="cb124-2"><a href="visual-examination-of-sample-data.html#cb124-2" aria-hidden="true"></a><span class="co"># and define x axis as representing fklngth</span></span>
-<span id="cb124-3"><a href="visual-examination-of-sample-data.html#cb124-3" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
-<span id="cb124-4"><a href="visual-examination-of-sample-data.html#cb124-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
-<span id="cb124-5"><a href="visual-examination-of-sample-data.html#cb124-5" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> fklngth)</span>
-<span id="cb124-6"><a href="visual-examination-of-sample-data.html#cb124-6" aria-hidden="true"></a>) <span class="op">+</span></span>
-<span id="cb124-7"><a href="visual-examination-of-sample-data.html#cb124-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fork length (cm)&quot;</span>)</span>
-<span id="cb124-8"><a href="visual-examination-of-sample-data.html#cb124-8" aria-hidden="true"></a><span class="co"># add data to the mygraph ggplot</span></span>
-<span id="cb124-9"><a href="visual-examination-of-sample-data.html#cb124-9" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span>mygraph <span class="op">+</span></span>
-<span id="cb124-10"><a href="visual-examination-of-sample-data.html#cb124-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add data density smooth</span></span>
-<span id="cb124-11"><a href="visual-examination-of-sample-data.html#cb124-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add rug (bars at the bottom of the plot)</span></span>
-<span id="cb124-12"><a href="visual-examination-of-sample-data.html#cb124-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>( <span class="co"># add black semitransparent histogram</span></span>
-<span id="cb124-13"><a href="visual-examination-of-sample-data.html#cb124-13" aria-hidden="true"></a>    <span class="kw">aes</span>(<span class="dt">y =</span> ..density..),</span>
-<span id="cb124-14"><a href="visual-examination-of-sample-data.html#cb124-14" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span></span>
-<span id="cb124-15"><a href="visual-examination-of-sample-data.html#cb124-15" aria-hidden="true"></a>  ) <span class="op">+</span></span>
-<span id="cb124-16"><a href="visual-examination-of-sample-data.html#cb124-16" aria-hidden="true"></a><span class="st">  </span><span class="co"># add normal curve in red, with mean and sd from fklength</span></span>
-<span id="cb124-17"><a href="visual-examination-of-sample-data.html#cb124-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_function</span>(</span>
-<span id="cb124-18"><a href="visual-examination-of-sample-data.html#cb124-18" aria-hidden="true"></a>    <span class="dt">fun =</span> dnorm,</span>
-<span id="cb124-19"><a href="visual-examination-of-sample-data.html#cb124-19" aria-hidden="true"></a>    <span class="dt">args =</span> <span class="kw">list</span>(</span>
-<span id="cb124-20"><a href="visual-examination-of-sample-data.html#cb124-20" aria-hidden="true"></a>      <span class="dt">mean =</span> <span class="kw">mean</span>(sturgeon<span class="op">$</span>fklngth),</span>
-<span id="cb124-21"><a href="visual-examination-of-sample-data.html#cb124-21" aria-hidden="true"></a>      <span class="dt">sd =</span> <span class="kw">sd</span>(sturgeon<span class="op">$</span>fklngth)</span>
-<span id="cb124-22"><a href="visual-examination-of-sample-data.html#cb124-22" aria-hidden="true"></a>    ),</span>
-<span id="cb124-23"><a href="visual-examination-of-sample-data.html#cb124-23" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span></span>
-<span id="cb124-24"><a href="visual-examination-of-sample-data.html#cb124-24" aria-hidden="true"></a>  )</span>
-<span id="cb124-25"><a href="visual-examination-of-sample-data.html#cb124-25" aria-hidden="true"></a><span class="co"># display graph, by location</span></span>
-<span id="cb124-26"><a href="visual-examination-of-sample-data.html#cb124-26" aria-hidden="true"></a>mygraph <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>location)</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="visual-examination-of-sample-data.html#cb126-1" aria-hidden="true"></a><span class="co"># use &quot;sturgeon&quot; dataframe to make plot called mygraph</span></span>
+<span id="cb126-2"><a href="visual-examination-of-sample-data.html#cb126-2" aria-hidden="true"></a><span class="co"># and define x axis as representing fklngth</span></span>
+<span id="cb126-3"><a href="visual-examination-of-sample-data.html#cb126-3" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(</span>
+<span id="cb126-4"><a href="visual-examination-of-sample-data.html#cb126-4" aria-hidden="true"></a>  <span class="dt">data =</span> sturgeon,</span>
+<span id="cb126-5"><a href="visual-examination-of-sample-data.html#cb126-5" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> fklngth)</span>
+<span id="cb126-6"><a href="visual-examination-of-sample-data.html#cb126-6" aria-hidden="true"></a>) <span class="op">+</span></span>
+<span id="cb126-7"><a href="visual-examination-of-sample-data.html#cb126-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fork length (cm)&quot;</span>)</span>
+<span id="cb126-8"><a href="visual-examination-of-sample-data.html#cb126-8" aria-hidden="true"></a><span class="co"># add data to the mygraph ggplot</span></span>
+<span id="cb126-9"><a href="visual-examination-of-sample-data.html#cb126-9" aria-hidden="true"></a>mygraph &lt;-<span class="st"> </span>mygraph <span class="op">+</span></span>
+<span id="cb126-10"><a href="visual-examination-of-sample-data.html#cb126-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_density</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add data density smooth</span></span>
+<span id="cb126-11"><a href="visual-examination-of-sample-data.html#cb126-11" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_rug</span>() <span class="op">+</span><span class="st"> </span><span class="co"># add rug (bars at the bottom of the plot)</span></span>
+<span id="cb126-12"><a href="visual-examination-of-sample-data.html#cb126-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>( <span class="co"># add black semitransparent histogram</span></span>
+<span id="cb126-13"><a href="visual-examination-of-sample-data.html#cb126-13" aria-hidden="true"></a>    <span class="kw">aes</span>(<span class="dt">y =</span> ..density..),</span>
+<span id="cb126-14"><a href="visual-examination-of-sample-data.html#cb126-14" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span></span>
+<span id="cb126-15"><a href="visual-examination-of-sample-data.html#cb126-15" aria-hidden="true"></a>  ) <span class="op">+</span></span>
+<span id="cb126-16"><a href="visual-examination-of-sample-data.html#cb126-16" aria-hidden="true"></a><span class="st">  </span><span class="co"># add normal curve in red, with mean and sd from fklength</span></span>
+<span id="cb126-17"><a href="visual-examination-of-sample-data.html#cb126-17" aria-hidden="true"></a><span class="st">  </span><span class="kw">stat_function</span>(</span>
+<span id="cb126-18"><a href="visual-examination-of-sample-data.html#cb126-18" aria-hidden="true"></a>    <span class="dt">fun =</span> dnorm,</span>
+<span id="cb126-19"><a href="visual-examination-of-sample-data.html#cb126-19" aria-hidden="true"></a>    <span class="dt">args =</span> <span class="kw">list</span>(</span>
+<span id="cb126-20"><a href="visual-examination-of-sample-data.html#cb126-20" aria-hidden="true"></a>      <span class="dt">mean =</span> <span class="kw">mean</span>(sturgeon<span class="op">$</span>fklngth),</span>
+<span id="cb126-21"><a href="visual-examination-of-sample-data.html#cb126-21" aria-hidden="true"></a>      <span class="dt">sd =</span> <span class="kw">sd</span>(sturgeon<span class="op">$</span>fklngth)</span>
+<span id="cb126-22"><a href="visual-examination-of-sample-data.html#cb126-22" aria-hidden="true"></a>    ),</span>
+<span id="cb126-23"><a href="visual-examination-of-sample-data.html#cb126-23" aria-hidden="true"></a>    <span class="dt">color =</span> <span class="st">&quot;red&quot;</span></span>
+<span id="cb126-24"><a href="visual-examination-of-sample-data.html#cb126-24" aria-hidden="true"></a>  )</span>
+<span id="cb126-25"><a href="visual-examination-of-sample-data.html#cb126-25" aria-hidden="true"></a><span class="co"># display graph, by location</span></span>
+<span id="cb126-26"><a href="visual-examination-of-sample-data.html#cb126-26" aria-hidden="true"></a>mygraph <span class="op">+</span><span class="st"> </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>location)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:t-1"></span>
 <img src="Labs_BIO4158_files/figure-html/t-1-1.svg" alt="Distribution of sturgeon length at 2 locations" width="672" />
 <p class="caption">
@@ -380,11 +384,11 @@ Visual inspection of these plots suggests that this variable is approximately no
 <ul>
 <li>Generate a box plot of <code>fklngth</code> grouped by <code>location</code> . What do you conclude about differences in size among the two locations?</li>
 </ul>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="visual-examination-of-sample-data.html#cb125-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> sturgeon, <span class="kw">aes</span>(</span>
-<span id="cb125-2"><a href="visual-examination-of-sample-data.html#cb125-2" aria-hidden="true"></a>  <span class="dt">x =</span> location,</span>
-<span id="cb125-3"><a href="visual-examination-of-sample-data.html#cb125-3" aria-hidden="true"></a>  <span class="dt">y =</span> fklngth</span>
-<span id="cb125-4"><a href="visual-examination-of-sample-data.html#cb125-4" aria-hidden="true"></a>)) <span class="op">+</span></span>
-<span id="cb125-5"><a href="visual-examination-of-sample-data.html#cb125-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">notch =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="visual-examination-of-sample-data.html#cb127-1" aria-hidden="true"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> sturgeon, <span class="kw">aes</span>(</span>
+<span id="cb127-2"><a href="visual-examination-of-sample-data.html#cb127-2" aria-hidden="true"></a>  <span class="dt">x =</span> location,</span>
+<span id="cb127-3"><a href="visual-examination-of-sample-data.html#cb127-3" aria-hidden="true"></a>  <span class="dt">y =</span> fklngth</span>
+<span id="cb127-4"><a href="visual-examination-of-sample-data.html#cb127-4" aria-hidden="true"></a>)) <span class="op">+</span></span>
+<span id="cb127-5"><a href="visual-examination-of-sample-data.html#cb127-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">notch =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:t-2"></span>
 <img src="Labs_BIO4158_files/figure-html/t-2-1.svg" alt="Boxplot of sturgeon legnth at 2 locations" width="672" />
 <p class="caption">
@@ -450,7 +454,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.4 Log-linear models as an alternative to Chi-square test for contingency tables | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.4 Log-linear models as an alternative to Chi-square test for contingency tables | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -335,15 +339,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>By now, hopefully, you have learned to appreciate the flexibility and generality of general linear models and you realize that the t-test is a special, simple, case of a linear model with one categorical independent variable. The analysis of contingency tables by chi square test can similarly be generalized. Indeed, generalized linear models for poisson distributed data can be used when the dependent variable are frequencies (count data) and the independent variables can be categorical only (like for contingency tables, these are also called log- linear models), continuous only (Poisson regression), or a combination of categorical and continuous independent variables (this, too is a Poisson regression, but with added categorical variables, analogous to an ANCOVA sensu largo).</p>
 <p>Such models predict the natural log frequency of observations given the independent variables. Like for linear models assuming normality of residuals, one can assess the overall quality of the fit (by AIC for example), and the significance of terms (say by comparing the fit of models including or excluding particular terms). One can even, if desired, obtain estimates of the parameters for each model term, with confidence intervals and p-values for the null hypothesis that the value of the parameter is 0.</p>
 <p>The <code>glm()</code> function with the option <code>family=poisson()</code> allows the estimation, by maximum likelihood, of linear models for count data. One “peculiarity” of fitting such models to contingency table data is that generally the only terms of interest are the interactions. Going back to the population survey data in frequency form, with sex and ageclass as independent variables, one can fit a glm model by:</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb442-1" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">glm</span>(frequency <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>ageclass, <span class="dt">family =</span> <span class="kw">poisson</span>(), <span class="dt">data =</span> USPopSurvey)</span>
-<span id="cb442-2"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb442-2" aria-hidden="true"></a><span class="kw">summary</span>(mymodel)</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb439-1" aria-hidden="true"></a>mymodel &lt;-<span class="st"> </span><span class="kw">glm</span>(frequency <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>ageclass, <span class="dt">family =</span> <span class="kw">poisson</span>(), <span class="dt">data =</span> USPopSurvey)</span>
+<span id="cb439-2"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb439-2" aria-hidden="true"></a><span class="kw">summary</span>(mymodel)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = frequency ~ sex * ageclass, family = poisson(), 
 ##     data = USPopSurvey)
-## 
-## Deviance Residuals: 
-##  [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 ## 
 ## Coefficients:
 ##                        Estimate Std. Error  z value Pr(&gt;|z|)    
@@ -378,7 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Fitting the full model, with the sex:ageclass interaction, allows the proportion of males and females to vary among ageclass levels, and hence to estimate exactly the frequencies for each combination of sex and ageclass (note that the deviance residuals are all 0’s and that the Residual deviance is also approximately zero).</p>
 <p>A masochist can use the coefficient table to obtain the predicted values for sex and ageclass categories by summing the appropriate coefficients. The predicted values, like for multiway ANOVA model, are obtained by combining the coefficients. Remembering that the first level of a factor (alphabetically) is used as a reference, here the coefficient for the intercept (9.776733) is the predicted value for the natural log of the number of observations for females in the first alphabetical ageclass (0 to 9). Indeed e<sup>9.776733</sup> is approximately equal to 17619, the observed number of females in that age class. For example, for males in the 80+ ageclass, calculate the antilog of the coefficient for the intercept (for female in the youngest age class) plus the coefficient for sexmale (equal to the difference between ln frequency of females and males overall), plus the coefficient for the ageclass 80+ corresponding in the difference in frequency on average between the oldest and reference ageclass, plus the coefficient for the interaction terms sexmale:ageclass80+ (corresponding to the difference in the proportion of male for this ageclass compared to the youngest ageclass), so <span class="math inline">\(ln(frequency)=9.776733-0.004608-1.454582- 0.754343 = 7.5632\)</span>, and the frequency is equal to e<sup>7.5632</sup> = 1926</p>
 <p>Although there are numerous p values in this output, they are not really helpful. To test whether the effect of sex on observed frequency is the same across ageclass levels, i.e is sex and age are independent, one needs to fit a model where the interaction sex:ageclass is removed, and see how badly this affects the fit. The <code>Anova()</code> function of the <code>car</code> package provides a handy shortcut:</p>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb444-1" aria-hidden="true"></a><span class="kw">Anova</span>(mymodel, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">test =</span> <span class="st">&quot;LR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="log-linear-models-as-an-alternative-to-chi-square-test-for-contingency-tables.html#cb441-1" aria-hidden="true"></a><span class="kw">Anova</span>(mymodel, <span class="dt">type =</span> <span class="dv">3</span>, <span class="dt">test =</span> <span class="st">&quot;LR&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type III tests)
 ## 
 ## Response: frequency
@@ -448,7 +449,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

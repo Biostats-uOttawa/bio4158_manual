@@ -94,7 +94,10 @@ sample size. Used frequently to help in the interpretation of a test
 that is not statistically significant, but only if an effect size that is
 biologically significant is used (and not the observed effect size). Not
 relevant when the test is significant.
-Sensitivity. Computes the detectable effect size for a given $\beta$ ,$\alpha$, and
+
+#### Sensitivity {-}
+
+Computes the detectable effect size for a given $\beta$ ,$\alpha$, and
 sample size. Very useful at the planning stage of an experiment.
 
 ### How to calculate effect size
@@ -119,6 +122,15 @@ Chi-square test | w | $w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2 }{ p_{0
  | | | $p_{0i}$ and $p_{1i}$ are theporportion in category $i$ predicted by the null, $_0$, and alternative, $_1$, hypothesis
 
 ## Power analysis for a t-test on two independent means
+
+```{block2, type = "rmdimportant"}
+All the power analysis presented in this chapter can be done using 2 functions
+in R.
+
+* `pwr.t.test()` when the two samples have a similar size
+* `pwr.t2n.test()` when samples have different numbers of observations
+
+```
 
 The objective of this lab is to learn to use G*Power and understand how the 4 parameters of power analyses ($\alpha$, $\beta$, sample size and effect size) are related to each other. For this, you will only use the standard t-test to compare two independent means. This is the test most used by biologists, you have all used it, and it will serve admirably for this lab. What you will learn today will be applicable to all other power analyses.
 

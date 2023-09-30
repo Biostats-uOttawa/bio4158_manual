@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.2 Organizing the data: 3 forms | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.2 Organizing the data: 3 forms | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -334,8 +338,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.2</span> Organizing the data: 3 forms<a href="organizing-the-data-3-forms.html#organizing-the-data-3-forms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Some biological experiments yield count data, e.g., the number of plants infected by a plant pathogen under different exposure regimes, the number of male and female turtles hatched under different incubation temperature treatments (in turtles, sex is temperature dependent!), etc. Usually the statistical issue here is whether the proportion of individuals in different categories (e.g., infected versus uninfected, male versus female, etc.) differs significantly among treatments. To examine this question, we can to set up a data file that lists the number of individuals in each category. There are 3 ways to do this. You should be able to decide which one is appropriate, and how to convert between them with R.</p>
 <p>The file <code>USPopSurvey.csv</code> contains the results of a 1980 U.S population survey of a mid-eastern town:</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="organizing-the-data-3-forms.html#cb422-1" aria-hidden="true"></a>USPopSurvey &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/USPopSurvey.csv&quot;</span>)</span>
-<span id="cb422-2"><a href="organizing-the-data-3-forms.html#cb422-2" aria-hidden="true"></a>USPopSurvey</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="organizing-the-data-3-forms.html#cb419-1" aria-hidden="true"></a>USPopSurvey &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/USPopSurvey.csv&quot;</span>)</span>
+<span id="cb419-2"><a href="organizing-the-data-3-forms.html#cb419-2" aria-hidden="true"></a>USPopSurvey</span></code></pre></div>
 <pre><code>##    ageclass    sex frequency
 ## 1       0-9 female     17619
 ## 2     10-19 female     17947
@@ -357,8 +361,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 18      80+   male      1926</code></pre>
 <p>Note that there are 18 lines and 3 columns in this file. Each line lists the number of individuals (<code>frequency</code>) of a given sex and age class. There are (sum(USPopSurvey$frequency)) 239539 individuals that were classified into the 18 (2 sexes x 9 age classes) categories. This way of presenting data is the <strong>frequency form</strong>. It is a compact way to present the data when there are only categorical variables.</p>
 <p>When there are continuous variables, the frequency form can’t be utilized (or provides no gain since each observation could possibly have a different values for the continuous variable(s)). Data have therefore to be stored in <strong>case form</strong> where each observation (<code>individual</code>) represents one line in the data file, and each variable is a column. Conveniently, the <code>vcdExtra</code> 📦 includes the <code>expand.dft()</code> function to convert from the frequency to case form. For example, to create a data frame with 239539 lines and 2 columns (sex and ageclass):</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="organizing-the-data-3-forms.html#cb424-1" aria-hidden="true"></a>USPopSurvey.caseform &lt;-<span class="st"> </span><span class="kw">expand.dft</span>(USPopSurvey, <span class="dt">freq =</span> <span class="st">&quot;frequency&quot;</span>)</span>
-<span id="cb424-2"><a href="organizing-the-data-3-forms.html#cb424-2" aria-hidden="true"></a><span class="kw">head</span>(USPopSurvey.caseform)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="organizing-the-data-3-forms.html#cb421-1" aria-hidden="true"></a>USPopSurvey.caseform &lt;-<span class="st"> </span><span class="kw">expand.dft</span>(USPopSurvey, <span class="dt">freq =</span> <span class="st">&quot;frequency&quot;</span>)</span>
+<span id="cb421-2"><a href="organizing-the-data-3-forms.html#cb421-2" aria-hidden="true"></a><span class="kw">head</span>(USPopSurvey.caseform)</span></code></pre></div>
 <pre><code>##   ageclass    sex
 ## 1      0-9 female
 ## 2      0-9 female
@@ -366,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      0-9 female
 ## 5      0-9 female
 ## 6      0-9 female</code></pre>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="organizing-the-data-3-forms.html#cb426-1" aria-hidden="true"></a><span class="kw">tail</span>(USPopSurvey.caseform)</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="organizing-the-data-3-forms.html#cb423-1" aria-hidden="true"></a><span class="kw">tail</span>(USPopSurvey.caseform)</span></code></pre></div>
 <pre><code>##        ageclass  sex
 ## 239534      80+ male
 ## 239535      80+ male
@@ -375,8 +379,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 239538      80+ male
 ## 239539      80+ male</code></pre>
 <p>Finally, these data can also be represented in <strong>table form</strong> (contingency table) where each variable is represented by a dimension of the n-dimensional table (here, for example, rows could represent each age class, and columns each sex), and the cells of the resulting table contain the frequencies. The table form can be created from the case or frequency form by the <code>xtabs()</code> command with slightly different syntax:</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="organizing-the-data-3-forms.html#cb428-1" aria-hidden="true"></a><span class="co"># convert case form to table form</span></span>
-<span id="cb428-2"><a href="organizing-the-data-3-forms.html#cb428-2" aria-hidden="true"></a><span class="kw">xtabs</span>(<span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, USPopSurvey.caseform)</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="organizing-the-data-3-forms.html#cb425-1" aria-hidden="true"></a><span class="co"># convert case form to table form</span></span>
+<span id="cb425-2"><a href="organizing-the-data-3-forms.html#cb425-2" aria-hidden="true"></a><span class="kw">xtabs</span>(<span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, USPopSurvey.caseform)</span></code></pre></div>
 <pre><code>##         sex
 ## ageclass female  male
 ##    0-9    17619 17538
@@ -388,8 +392,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    60-69  11053  9374
 ##    70-79   7712  5348
 ##    80+     4114  1926</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="organizing-the-data-3-forms.html#cb430-1" aria-hidden="true"></a><span class="co"># convert frequency form to table form</span></span>
-<span id="cb430-2"><a href="organizing-the-data-3-forms.html#cb430-2" aria-hidden="true"></a><span class="kw">xtabs</span>(frequency <span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> USPopSurvey)</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="organizing-the-data-3-forms.html#cb427-1" aria-hidden="true"></a><span class="co"># convert frequency form to table form</span></span>
+<span id="cb427-2"><a href="organizing-the-data-3-forms.html#cb427-2" aria-hidden="true"></a><span class="kw">xtabs</span>(frequency <span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> USPopSurvey)</span></code></pre></div>
 <pre><code>##         sex
 ## ageclass female  male
 ##    0-9    17619 17538
@@ -490,7 +494,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

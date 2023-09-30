@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.10 Testing for interactions | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.10 Testing for interactions | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -333,11 +337,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-for-interactions" class="section level2 hasAnchor" number="7.10">
 <h2><span class="header-section-number">7.10</span> Testing for interactions<a href="testing-for-interactions.html#testing-for-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When there are multiple independent variables one should always be ready to assess interactions. In most multiple regression contexts this is somewhat difficult because adding interaction terms increases overall multicollinearity and because in many cases there are not enough observations to test all interactions, or the observations are not well balanced to make powerful tests for interactions. Going back to our final model, see what happens if one tries to fit the fully saturated model with all interactions:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="testing-for-interactions.html#cb353-1" aria-hidden="true"></a>fullmodel_withinteractions &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb353-2"><a href="testing-for-interactions.html#cb353-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">*</span><span class="st"> </span>cpfor2 <span class="op">*</span><span class="st"> </span>thtden <span class="op">*</span><span class="st"> </span>swamp <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb353-3"><a href="testing-for-interactions.html#cb353-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb353-4"><a href="testing-for-interactions.html#cb353-4" aria-hidden="true"></a>)</span>
-<span id="cb353-5"><a href="testing-for-interactions.html#cb353-5" aria-hidden="true"></a><span class="kw">summary</span>(fullmodel_withinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="testing-for-interactions.html#cb350-1" aria-hidden="true"></a>fullmodel_withinteractions &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb350-2"><a href="testing-for-interactions.html#cb350-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">*</span><span class="st"> </span>cpfor2 <span class="op">*</span><span class="st"> </span>thtden <span class="op">*</span><span class="st"> </span>swamp <span class="op">*</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb350-3"><a href="testing-for-interactions.html#cb350-3" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb350-4"><a href="testing-for-interactions.html#cb350-4" aria-hidden="true"></a>)</span>
+<span id="cb350-5"><a href="testing-for-interactions.html#cb350-5" aria-hidden="true"></a><span class="kw">summary</span>(fullmodel_withinteractions)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea * cpfor2 * thtden * swamp * I(swamp^2), 
@@ -387,20 +391,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic:   NaN on 27 and 0 DF,  p-value: NA</code></pre>
 <p>Indeed, it is not possible to include all 32 terms with only 28 observations. There are not enough data points, R square is one, and the model perfectly overfits the data.</p>
 <p>If you try to use an automated routine to “pick” the best model out of this soup, R complains:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="testing-for-interactions.html#cb355-1" aria-hidden="true"></a><span class="kw">step</span>(fullmodel_withinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="testing-for-interactions.html#cb352-1" aria-hidden="true"></a><span class="kw">step</span>(fullmodel_withinteractions)</span></code></pre></div>
 <pre><code>## Error in step(fullmodel_withinteractions): AIC is -infinity for this model, so &#39;step&#39; cannot proceed</code></pre>
 <p>Does this mean you can forget about potential interactions and simply accept the final model without a thought? No. You simply do not have enough data to test for all interactions. But there is a compromise worth attempting, comparing the final model to a model with a subset of the interactions, say all second order interactions, to check whether the inclusion of these interactions improves substantially the fit:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="testing-for-interactions.html#cb357-1" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
-<span id="cb357-2"><a href="testing-for-interactions.html#cb357-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb357-3"><a href="testing-for-interactions.html#cb357-3" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>cpfor2</span>
-<span id="cb357-4"><a href="testing-for-interactions.html#cb357-4" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>thtden</span>
-<span id="cb357-5"><a href="testing-for-interactions.html#cb357-5" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>swamp</span>
-<span id="cb357-6"><a href="testing-for-interactions.html#cb357-6" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>cpfor2<span class="op">:</span>thtden</span>
-<span id="cb357-7"><a href="testing-for-interactions.html#cb357-7" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>cpfor2<span class="op">:</span>swamp</span>
-<span id="cb357-8"><a href="testing-for-interactions.html#cb357-8" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>thtden<span class="op">:</span>swamp,</span>
-<span id="cb357-9"><a href="testing-for-interactions.html#cb357-9" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb357-10"><a href="testing-for-interactions.html#cb357-10" aria-hidden="true"></a>)</span>
-<span id="cb357-11"><a href="testing-for-interactions.html#cb357-11" aria-hidden="true"></a><span class="kw">summary</span>(full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="testing-for-interactions.html#cb354-1" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">lm</span>(</span>
+<span id="cb354-2"><a href="testing-for-interactions.html#cb354-2" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>)</span>
+<span id="cb354-3"><a href="testing-for-interactions.html#cb354-3" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>cpfor2</span>
+<span id="cb354-4"><a href="testing-for-interactions.html#cb354-4" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>thtden</span>
+<span id="cb354-5"><a href="testing-for-interactions.html#cb354-5" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>logarea<span class="op">:</span>swamp</span>
+<span id="cb354-6"><a href="testing-for-interactions.html#cb354-6" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>cpfor2<span class="op">:</span>thtden</span>
+<span id="cb354-7"><a href="testing-for-interactions.html#cb354-7" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>cpfor2<span class="op">:</span>swamp</span>
+<span id="cb354-8"><a href="testing-for-interactions.html#cb354-8" aria-hidden="true"></a>    <span class="op">+</span><span class="st"> </span>thtden<span class="op">:</span>swamp,</span>
+<span id="cb354-9"><a href="testing-for-interactions.html#cb354-9" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb354-10"><a href="testing-for-interactions.html#cb354-10" aria-hidden="true"></a>)</span>
+<span id="cb354-11"><a href="testing-for-interactions.html#cb354-11" aria-hidden="true"></a><span class="kw">summary</span>(full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = logherp ~ logarea + cpfor2 + thtden + swamp + I(swamp^2) + 
@@ -434,23 +438,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic: 9.382 on 11 and 16 DF,  p-value: 4.829e-05</code></pre>
 <p>This model fits the data slightly better than the “final” model (it explains 86.6% of the variance in <code>logherp</code>, compared to 81.2% for the “final” model without interactions), but has twice as many parameters.</p>
 <p>If you look at the individual coefficients, some weird things happen: for example, the sign for logarea has changed. This is one of the symptoms of multicollinearity. Let’s look at the variance inflation factors:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="testing-for-interactions.html#cb359-1" aria-hidden="true"></a><span class="kw">vif</span>(full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="testing-for-interactions.html#cb356-1" aria-hidden="true"></a><span class="kw">vif</span>(full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## there are higher-order terms (interactions) in this model
-## consider setting terms = &#39;marginal&#39; or &#39;high-order&#39;; see ?vif</code></pre>
-<pre><code>##        logarea         cpfor2         thtden          swamp     I(swamp^2) 
-##       49.86060       78.49622      101.42437       90.47389      115.08457 
-## logarea:cpfor2 logarea:thtden  logarea:swamp  cpfor2:thtden   cpfor2:swamp 
-##       66.97792       71.69894       67.27034       14.66814       29.41422 
-##   thtden:swamp 
-##       20.04410</code></pre>
+## consider setting type = &#39;predictor&#39;; see ?vif</code></pre>
+<pre><code>##        logarea         cpfor2         thtden          swamp     I(swamp^2) logarea:cpfor2 logarea:thtden  logarea:swamp  cpfor2:thtden   cpfor2:swamp   thtden:swamp 
+##       49.86060       78.49622      101.42437       90.47389      115.08457       66.97792       71.69894       67.27034       14.66814       29.41422       20.04410</code></pre>
 <p>Ouch. All VIF are above 5, not only the ones involving the swamp terms. This model is not very satisfying it seems. Indeed the AIC for the two models indicate that the model with interactions has less information than the full model (remember, models with the lowest AIC value are to be preferred):</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="testing-for-interactions.html#cb362-1" aria-hidden="true"></a><span class="kw">AIC</span>(model_poly1)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="testing-for-interactions.html#cb359-1" aria-hidden="true"></a><span class="kw">AIC</span>(model_poly1)</span></code></pre></div>
 <pre><code>## [1] -38.3433</code></pre>
-<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="testing-for-interactions.html#cb364-1" aria-hidden="true"></a><span class="kw">AIC</span>(full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="testing-for-interactions.html#cb361-1" aria-hidden="true"></a><span class="kw">AIC</span>(full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## [1] -34.86123</code></pre>
 <p>The <code>anova()</code> command can be used to test whether the addition of all
 interaction terms improves the fit significantly:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="testing-for-interactions.html#cb366-1" aria-hidden="true"></a><span class="kw">anova</span>(model_poly1, full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="testing-for-interactions.html#cb363-1" aria-hidden="true"></a><span class="kw">anova</span>(model_poly1, full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: logherp ~ logarea + cpfor2 + thtden + swamp + I(swamp^2)
@@ -461,7 +461,7 @@ interaction terms improves the fit significantly:</p>
 ## 1     22 0.25282                           
 ## 2     16 0.18651  6  0.066314 0.9481  0.489</code></pre>
 <p>This test indicates that the addition of interaction terms did not reduce significantly the residual variance around the full model. How about a comparison with the final model without <code>cpfor2</code>?</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="testing-for-interactions.html#cb368-1" aria-hidden="true"></a><span class="kw">anova</span>(model_poly2, full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="testing-for-interactions.html#cb365-1" aria-hidden="true"></a><span class="kw">anova</span>(model_poly2, full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: logherp ~ logarea + thtden + swamp + I(swamp^2)
@@ -530,7 +530,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

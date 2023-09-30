@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9.3 Graphs for contingency tables and testing for independence | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9.3 Graphs for contingency tables and testing for independence | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -334,20 +338,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">9.3</span> Graphs for contingency tables and testing for independence<a href="graphs-for-contingency-tables-and-testing-for-independence.html#graphs-for-contingency-tables-and-testing-for-independence" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Contingency tables can be used to test for independence. By this we mean to answer the question: Is the classification of observations according to one variable (say, sex) independent from the classification by another variable (say, ageclass). In other words, is the proportion of males and females independent of age, or does it vary among age classes?</p>
 <p>The <code>vcd</code> 📦 includes a <code>mosaic()</code> function useful to graphically display contingency tables:</p>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-1" aria-hidden="true"></a><span class="kw">library</span>(vcd)</span>
-<span id="cb432-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-2" aria-hidden="true"></a>USTable &lt;-<span class="st"> </span><span class="kw">xtabs</span>(frequency <span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> USPopSurvey) <span class="co"># save the table form as USTable dataframe</span></span>
-<span id="cb432-3"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-3" aria-hidden="true"></a><span class="co"># Mosaic plot of the contingency table</span></span>
-<span id="cb432-4"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-4" aria-hidden="true"></a><span class="kw">mosaic</span>(USTable)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-176"></span>
-<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-176-1.svg" alt="Mosaic plot of sex classes per age" width="672" />
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb429-1" aria-hidden="true"></a><span class="kw">library</span>(vcd)</span>
+<span id="cb429-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb429-2" aria-hidden="true"></a>USTable &lt;-<span class="st"> </span><span class="kw">xtabs</span>(frequency <span class="op">~</span><span class="st"> </span>ageclass <span class="op">+</span><span class="st"> </span>sex, <span class="dt">data =</span> USPopSurvey) <span class="co"># save the table form as USTable dataframe</span></span>
+<span id="cb429-3"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb429-3" aria-hidden="true"></a><span class="co"># Mosaic plot of the contingency table</span></span>
+<span id="cb429-4"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb429-4" aria-hidden="true"></a><span class="kw">mosaic</span>(USTable)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-177"></span>
+<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-177-1.svg" alt="Mosaic plot of sex classes per age" width="672" />
 <p class="caption">
 Figure 9.1: Mosaic plot of sex classes per age
 </p>
 </div>
 <p>Mosaic plots represent the proportion of observations in each combination of categories (here there are 18 categories, 2 sexes x 9 age classes). Categories with a higher proportion of observations are represented by larger rectangles. Visually, one can see that males and females are approximately equal for young age classes, but that the proportion of females increases quite a bit amongst the elders.</p>
 <p>The Chi square test can be used to test the null hypothesis that the proportion of males and females does not differ among age classes:</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb433-1" aria-hidden="true"></a><span class="co"># Test of independence</span></span>
-<span id="cb433-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb433-2" aria-hidden="true"></a><span class="kw">chisq.test</span>(USTable) <span class="co"># runs chi square test of independence of sex and age class</span></span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb430-1" aria-hidden="true"></a><span class="co"># Test of independence</span></span>
+<span id="cb430-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb430-2" aria-hidden="true"></a><span class="kw">chisq.test</span>(USTable) <span class="co"># runs chi square test of independence of sex and age class</span></span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s Chi-squared test
 ## 
@@ -355,34 +359,32 @@ Figure 9.1: Mosaic plot of sex classes per age
 ## X-squared = 1162.6, df = 8, p-value &lt; 2.2e-16</code></pre>
 <p>From this we conclude there is ample evidence to reject the null hypothesis that ageclass and sex are independent, which isn’t particularly surprising.</p>
 <p>The mosaic plot from the <code>vcd</code> 📦 can be shaded to show the categories that contribute most to the lack of independence:</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb435-1" aria-hidden="true"></a><span class="co"># Mosaic plot of the contingency table with shading</span></span>
-<span id="cb435-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb435-2" aria-hidden="true"></a><span class="kw">mosaic</span>(USTable, <span class="dt">shade =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-178"></span>
-<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-178-1.svg" alt="Mosaic plot of sex by age with colours" width="672" />
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-1" aria-hidden="true"></a><span class="co"># Mosaic plot of the contingency table with shading</span></span>
+<span id="cb432-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb432-2" aria-hidden="true"></a><span class="kw">mosaic</span>(USTable, <span class="dt">shade =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-179"></span>
+<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-179-1.svg" alt="Mosaic plot of sex by age with colours" width="672" />
 <p class="caption">
 Figure 9.2: Mosaic plot of sex by age with colours
 </p>
 </div>
 <p>The shading of each rectangle is proportional to the extent that observed frequencies deviate from what would be expected if sex and age class were independent. The age classes 40-49 and 50-59 have a sex ratio about equal to the overall sex:ratio for the entire dataset, and appear in grey. There are more young males and old females than expected if sex ratio did not change with age, and these rectangles are coded in blue. On the other hand, there are fewer young females and old males than if sex ratio did not change with age, and these rectangles are red coded. Note that the p-value printed on the right of the graph is for the chi-square test that assumes that observations are independent.</p>
 <p>The estimation of p-value associated with the chi square statistic is less than ideal when expected frequencies are small in some of the cells, particularly for 2x2 contingency tables. Two options are then preferred, depending on the number of observations. For large samples, like in this example with more than 200,000 cases(!), a Monte Carlo approach is suggested and can be obtained by adding <code>simulate.p.value=TRUE</code> as an argument to the <code>chisq.test()</code> function</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb436-1" aria-hidden="true"></a><span class="co"># Monte-carlo estimation of p value (better for small n)</span></span>
-<span id="cb436-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb436-2" aria-hidden="true"></a><span class="kw">chisq.test</span>(USTable, <span class="dt">simulate.p.value =</span> <span class="ot">TRUE</span>, <span class="dt">B =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb433-1" aria-hidden="true"></a><span class="co"># Monte-carlo estimation of p value (better for small n)</span></span>
+<span id="cb433-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb433-2" aria-hidden="true"></a><span class="kw">chisq.test</span>(USTable, <span class="dt">simulate.p.value =</span> <span class="ot">TRUE</span>, <span class="dt">B =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <pre><code>## 
-##  Pearson&#39;s Chi-squared test with simulated p-value (based on 10000
-##  replicates)
+##  Pearson&#39;s Chi-squared test with simulated p-value (based on 10000 replicates)
 ## 
 ## data:  USTable
 ## X-squared = 1162.6, df = NA, p-value = 9.999e-05</code></pre>
 <p>Here, the simulation was done B=10000 times, and the chi square value observed with the data was never exceeded so p is estimated as 1/10001=9.999e-05, which is much larger than the p-value estimated from the theoretical chi square distribution (p&lt; 2.2e-16). This difference in p-value is at least partly an artifact of the number of simulations. To estimate p values as small as 1e-16, at least 10<sup>16</sup> simulations must be run. And I am not THAT patient. For small tables with relatively low expected frequencies, Fisher’s exact test can be run to test for independence. This result is unbiased if row and column totals are fixed, but is conservative (i.e. it will incorrectly fail to reject the null more often than expected) if row and/ or column totals are not fixed.</p>
 <p>But this test will fail for large samples, like in this example:</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb438-1" aria-hidden="true"></a><span class="co"># Fisher exact test for contingency tables (small samples and small tables)</span></span>
-<span id="cb438-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb438-2" aria-hidden="true"></a><span class="kw">fisher.test</span>(USTable) <span class="co"># fails here because too many observations</span></span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb435-1" aria-hidden="true"></a><span class="co"># Fisher exact test for contingency tables (small samples and small tables)</span></span>
+<span id="cb435-2"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb435-2" aria-hidden="true"></a><span class="kw">fisher.test</span>(USTable) <span class="co"># fails here because too many observations</span></span></code></pre></div>
 <pre><code>## Error in fisher.test(USTable): FEXACT error 40.
 ## Out of workspace.</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb440-1" aria-hidden="true"></a><span class="kw">fisher.test</span>(USTable, <span class="dt">simulate.p.value =</span> <span class="ot">TRUE</span>, <span class="dt">B =</span> <span class="dv">10000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="graphs-for-contingency-tables-and-testing-for-independence.html#cb437-1" aria-hidden="true"></a><span class="kw">fisher.test</span>(USTable, <span class="dt">simulate.p.value =</span> <span class="ot">TRUE</span>, <span class="dt">B =</span> <span class="dv">10000</span>)</span></code></pre></div>
 <pre><code>## 
-##  Fisher&#39;s Exact Test for Count Data with simulated p-value (based on
-##  10000 replicates)
+##  Fisher&#39;s Exact Test for Count Data with simulated p-value (based on 10000 replicates)
 ## 
 ## data:  USTable
 ## p-value = 9.999e-05
@@ -445,7 +447,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

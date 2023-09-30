@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.11 Dredging and the information theoretical approach | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.11 Dredging and the information theoretical approach | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -343,32 +347,31 @@ To compare models using <em>AIC</em>, models need to be fitted using the exact s
 <div class="rmdnote">
 I do not support the use of stepwise AIC or data dredging which are going against the philosophy of AIC and parsimony. Develop a model based on biological hypothesis and report all the results significant or not without dredging the data.
 </div>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="dredging-and-the-information-theoretical-approach.html#cb370-1" aria-hidden="true"></a><span class="co"># redo the model double chekcing there are no &quot;NA&quot;</span></span>
-<span id="cb370-2"><a href="dredging-and-the-information-theoretical-approach.html#cb370-2" aria-hidden="true"></a><span class="co"># specifying na.action</span></span>
-<span id="cb370-3"><a href="dredging-and-the-information-theoretical-approach.html#cb370-3" aria-hidden="true"></a></span>
-<span id="cb370-4"><a href="dredging-and-the-information-theoretical-approach.html#cb370-4" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">update</span>(</span>
-<span id="cb370-5"><a href="dredging-and-the-information-theoretical-approach.html#cb370-5" aria-hidden="true"></a>  full_model_2ndinteractions,</span>
-<span id="cb370-6"><a href="dredging-and-the-information-theoretical-approach.html#cb370-6" aria-hidden="true"></a>  . <span class="op">~</span><span class="st"> </span>.,</span>
-<span id="cb370-7"><a href="dredging-and-the-information-theoretical-approach.html#cb370-7" aria-hidden="true"></a>  <span class="dt">data =</span> mysub,</span>
-<span id="cb370-8"><a href="dredging-and-the-information-theoretical-approach.html#cb370-8" aria-hidden="true"></a>  <span class="dt">na.action =</span> <span class="st">&quot;na.fail&quot;</span></span>
-<span id="cb370-9"><a href="dredging-and-the-information-theoretical-approach.html#cb370-9" aria-hidden="true"></a>)</span>
-<span id="cb370-10"><a href="dredging-and-the-information-theoretical-approach.html#cb370-10" aria-hidden="true"></a></span>
-<span id="cb370-11"><a href="dredging-and-the-information-theoretical-approach.html#cb370-11" aria-hidden="true"></a><span class="kw">library</span>(MuMIn)</span>
-<span id="cb370-12"><a href="dredging-and-the-information-theoretical-approach.html#cb370-12" aria-hidden="true"></a>dd &lt;-<span class="st"> </span><span class="kw">dredge</span>(full_model_2ndinteractions)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="dredging-and-the-information-theoretical-approach.html#cb367-1" aria-hidden="true"></a><span class="co"># redo the model double chekcing there are no &quot;NA&quot;</span></span>
+<span id="cb367-2"><a href="dredging-and-the-information-theoretical-approach.html#cb367-2" aria-hidden="true"></a><span class="co"># specifying na.action</span></span>
+<span id="cb367-3"><a href="dredging-and-the-information-theoretical-approach.html#cb367-3" aria-hidden="true"></a></span>
+<span id="cb367-4"><a href="dredging-and-the-information-theoretical-approach.html#cb367-4" aria-hidden="true"></a>full_model_2ndinteractions &lt;-<span class="st"> </span><span class="kw">update</span>(</span>
+<span id="cb367-5"><a href="dredging-and-the-information-theoretical-approach.html#cb367-5" aria-hidden="true"></a>  full_model_2ndinteractions,</span>
+<span id="cb367-6"><a href="dredging-and-the-information-theoretical-approach.html#cb367-6" aria-hidden="true"></a>  . <span class="op">~</span><span class="st"> </span>.,</span>
+<span id="cb367-7"><a href="dredging-and-the-information-theoretical-approach.html#cb367-7" aria-hidden="true"></a>  <span class="dt">data =</span> mysub,</span>
+<span id="cb367-8"><a href="dredging-and-the-information-theoretical-approach.html#cb367-8" aria-hidden="true"></a>  <span class="dt">na.action =</span> <span class="st">&quot;na.fail&quot;</span></span>
+<span id="cb367-9"><a href="dredging-and-the-information-theoretical-approach.html#cb367-9" aria-hidden="true"></a>)</span>
+<span id="cb367-10"><a href="dredging-and-the-information-theoretical-approach.html#cb367-10" aria-hidden="true"></a></span>
+<span id="cb367-11"><a href="dredging-and-the-information-theoretical-approach.html#cb367-11" aria-hidden="true"></a><span class="kw">library</span>(MuMIn)</span>
+<span id="cb367-12"><a href="dredging-and-the-information-theoretical-approach.html#cb367-12" aria-hidden="true"></a>dd &lt;-<span class="st"> </span><span class="kw">dredge</span>(full_model_2ndinteractions)</span></code></pre></div>
 <pre><code>## Fixed term is &quot;(Intercept)&quot;</code></pre>
 <p>Object <code>dd</code> will contain all possible models using the terms of our full model with 2nd order interactions. Then, we can have a look at the subset of models that have an AICc within 4 units from the lowest AICc model. (Burnham and Anderson suggest that models that deviate by more than 2 AICc units have very
 little empirical support):</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="dredging-and-the-information-theoretical-approach.html#cb372-1" aria-hidden="true"></a><span class="co"># get models within 4 units of AICc from the best model</span></span>
-<span id="cb372-2"><a href="dredging-and-the-information-theoretical-approach.html#cb372-2" aria-hidden="true"></a>top_models_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">get.models</span>(dd, <span class="dt">subset =</span> delta <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
-<span id="cb372-3"><a href="dredging-and-the-information-theoretical-approach.html#cb372-3" aria-hidden="true"></a>avgmodel1 &lt;-<span class="st"> </span><span class="kw">model.avg</span>(top_models_<span class="dv">1</span>) <span class="co"># compute average parameters</span></span>
-<span id="cb372-4"><a href="dredging-and-the-information-theoretical-approach.html#cb372-4" aria-hidden="true"></a><span class="kw">summary</span>(avgmodel1) <span class="co"># display averaged model</span></span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="dredging-and-the-information-theoretical-approach.html#cb369-1" aria-hidden="true"></a><span class="co"># get models within 4 units of AICc from the best model</span></span>
+<span id="cb369-2"><a href="dredging-and-the-information-theoretical-approach.html#cb369-2" aria-hidden="true"></a>top_models_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">get.models</span>(dd, <span class="dt">subset =</span> delta <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span>)</span>
+<span id="cb369-3"><a href="dredging-and-the-information-theoretical-approach.html#cb369-3" aria-hidden="true"></a>avgmodel1 &lt;-<span class="st"> </span><span class="kw">model.avg</span>(top_models_<span class="dv">1</span>) <span class="co"># compute average parameters</span></span>
+<span id="cb369-4"><a href="dredging-and-the-information-theoretical-approach.html#cb369-4" aria-hidden="true"></a><span class="kw">summary</span>(avgmodel1) <span class="co"># display averaged model</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## model.avg(object = top_models_1)
 ## 
 ## Component model call: 
-## lm(formula = logherp ~ &lt;8 unique rhs&gt;, data = mysub, na.action = 
-##      na.fail)
+## lm(formula = logherp ~ &lt;8 unique rhs&gt;, data = mysub, na.action = na.fail)
 ## 
 ## Component models: 
 ##        df logLik   AICc delta weight
@@ -382,10 +385,8 @@ little empirical support):</p>
 ## 23456   7  25.79 -31.99  3.97   0.05
 ## 
 ## Term codes: 
-##         cpfor2     I(swamp^2)        logarea          swamp         thtden 
-##              1              2              3              4              5 
-##  logarea:swamp logarea:thtden   swamp:thtden 
-##              6              7              8 
+##         cpfor2     I(swamp^2)        logarea          swamp         thtden  logarea:swamp logarea:thtden   swamp:thtden 
+##              1              2              3              4              5              6              7              8 
 ## 
 ## Model-averaged coefficients:  
 ## (full average) 
@@ -413,7 +414,7 @@ little empirical support):</p>
 ## logarea:swamp   4.462e-04  1.664e-03   1.762e-03   0.253   0.8001    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="dredging-and-the-information-theoretical-approach.html#cb374-1" aria-hidden="true"></a><span class="kw">confint</span>(avgmodel1) <span class="co"># display CI for averaged coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="dredging-and-the-information-theoretical-approach.html#cb371-1" aria-hidden="true"></a><span class="kw">confint</span>(avgmodel1) <span class="co"># display CI for averaged coefficients</span></span></code></pre></div>
 <pre><code>##                        2.5 %        97.5 %
 ## (Intercept)    -0.7157333646  0.3007147516
 ## logarea        -0.1080048582  0.3708612563
@@ -488,7 +489,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

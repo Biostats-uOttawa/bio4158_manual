@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.5 The ANCOVA model | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.5 The ANCOVA model | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -340,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In most practical cases, it does not matter unless one has very complex models with a large number of terms and higher level interactions and that many of these terms are not significant. My suggestion is that you use the faster approach first, and use the traditional approach only when you accept the null hypothesis for equal intercepts. Why? Since the faster approach is less powerful, if you nevertheless reject H0, then this conclusion will not be changed, only reinforced, by using the traditional approach.</p>
 <p>Here I will compare the old school and the other approach. Recall that we want to assess equality of intercepts once we determined that slopes are equal. Test for equality of intercepts when slopes differ (or, if you prefer, when there is a significant interaction) are rarely directly meaningful, are often misinterpreted, and should rarely be conducted.</p>
 <p>Going back to <code>anc1dat.csv</code>, comparing the relationships between lfkl and lage among sexes, we obtained the following results for the full model with interactions</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="the-ancova-model.html#cb402-1" aria-hidden="true"></a><span class="kw">Anova</span>(model.full1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="the-ancova-model.html#cb399-1" aria-hidden="true"></a><span class="kw">Anova</span>(model.full1, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -354,8 +358,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We already concluded that the slope of the regression for males and females does not differ (the interaction sex:lage is not significant). Note that the p-values associated with sex (0.4795) is not significant either.</p>
 <p>For the old-school approach, one would fit a reduced model (the <em>sensus stricto</em> ANCOVA model):</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="the-ancova-model.html#cb404-1" aria-hidden="true"></a>model.ancova &lt;-<span class="st"> </span><span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
-<span id="cb404-2"><a href="the-ancova-model.html#cb404-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.ancova, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="the-ancova-model.html#cb401-1" aria-hidden="true"></a>model.ancova &lt;-<span class="st"> </span><span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
+<span id="cb401-2"><a href="the-ancova-model.html#cb401-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.ancova, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -366,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residuals   0.07162 89                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="the-ancova-model.html#cb406-1" aria-hidden="true"></a><span class="kw">summary</span>(model.ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="the-ancova-model.html#cb403-1" aria-hidden="true"></a><span class="kw">summary</span>(model.ancova)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lfkl ~ sex + lage, data = anc1dat)
@@ -392,8 +396,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcode">
 You will notice, in the above analysis that the residuals plots flag three data points (cases 19, 49, and 50) as having high residuals. These points are a bit worrisome, and may be having a disproportionate effect on your analysis. Eliminate these “outliers” and re-run the analysis. Now what do you conclude?
 </div>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="the-ancova-model.html#cb408-1" aria-hidden="true"></a>model.ancova.nooutliers &lt;-<span class="st"> </span><span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>, <span class="dv">-50</span>, <span class="dv">-19</span>),])</span>
-<span id="cb408-2"><a href="the-ancova-model.html#cb408-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.ancova.nooutliers, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="the-ancova-model.html#cb405-1" aria-hidden="true"></a>model.ancova.nooutliers &lt;-<span class="st"> </span><span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>sex <span class="op">+</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>, <span class="dv">-50</span>, <span class="dv">-19</span>),])</span>
+<span id="cb405-2"><a href="the-ancova-model.html#cb405-2" aria-hidden="true"></a><span class="kw">Anova</span>(model.ancova.nooutliers, <span class="dt">type =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: lfkl
@@ -404,7 +408,7 @@ You will notice, in the above analysis that the residuals plots flag three data 
 ## Residuals   0.04950 86                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="the-ancova-model.html#cb410-1" aria-hidden="true"></a><span class="kw">summary</span>(model.ancova.nooutliers)</span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="the-ancova-model.html#cb407-1" aria-hidden="true"></a><span class="kw">summary</span>(model.ancova.nooutliers)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lfkl ~ sex + lage, data = anc1dat[c(-49, -50, -19), 
@@ -438,13 +442,13 @@ You will notice, in the above analysis that the residuals plots flag three data 
 Fit separate regresssions by sex with vs. without the outliers. Pay attention to the intercepts.
 </div>
 <p>Including all data.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="the-ancova-model.html#cb412-1" aria-hidden="true"></a><span class="kw">by</span>(</span>
-<span id="cb412-2"><a href="the-ancova-model.html#cb412-2" aria-hidden="true"></a>  anc1dat,</span>
-<span id="cb412-3"><a href="the-ancova-model.html#cb412-3" aria-hidden="true"></a>  anc1dat[, <span class="st">&quot;sex&quot;</span>],</span>
-<span id="cb412-4"><a href="the-ancova-model.html#cb412-4" aria-hidden="true"></a>  <span class="cf">function</span>(x) {</span>
-<span id="cb412-5"><a href="the-ancova-model.html#cb412-5" aria-hidden="true"></a>    <span class="kw">summary</span>(<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> x))</span>
-<span id="cb412-6"><a href="the-ancova-model.html#cb412-6" aria-hidden="true"></a>  }</span>
-<span id="cb412-7"><a href="the-ancova-model.html#cb412-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="the-ancova-model.html#cb409-1" aria-hidden="true"></a><span class="kw">by</span>(</span>
+<span id="cb409-2"><a href="the-ancova-model.html#cb409-2" aria-hidden="true"></a>  anc1dat,</span>
+<span id="cb409-3"><a href="the-ancova-model.html#cb409-3" aria-hidden="true"></a>  anc1dat[, <span class="st">&quot;sex&quot;</span>],</span>
+<span id="cb409-4"><a href="the-ancova-model.html#cb409-4" aria-hidden="true"></a>  <span class="cf">function</span>(x) {</span>
+<span id="cb409-5"><a href="the-ancova-model.html#cb409-5" aria-hidden="true"></a>    <span class="kw">summary</span>(<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> x))</span>
+<span id="cb409-6"><a href="the-ancova-model.html#cb409-6" aria-hidden="true"></a>  }</span>
+<span id="cb409-7"><a href="the-ancova-model.html#cb409-7" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## anc1dat[, &quot;sex&quot;]: FEMALE      
 ## 
 ## Call:
@@ -465,7 +469,7 @@ Fit separate regresssions by sex with vs. without the outliers. Pay attention t
 ## Multiple R-squared:  0.6063, Adjusted R-squared:  0.5987 
 ## F-statistic: 80.09 on 1 and 52 DF,  p-value: 4.16e-12
 ## 
-## ------------------------------------------------------------ 
+## --------------------------------------------------------------------------------------------------------------------------------- 
 ## anc1dat[, &quot;sex&quot;]: MALE        
 ## 
 ## Call:
@@ -486,13 +490,13 @@ Fit separate regresssions by sex with vs. without the outliers. Pay attention t
 ## Multiple R-squared:  0.7458, Adjusted R-squared:  0.7388 
 ## F-statistic: 105.6 on 1 and 36 DF,  p-value: 2.972e-12</code></pre>
 <p>Difference in intercept is indeed really small. Now let’s have a look when we exclude outliers.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="the-ancova-model.html#cb414-1" aria-hidden="true"></a><span class="kw">by</span>(</span>
-<span id="cb414-2"><a href="the-ancova-model.html#cb414-2" aria-hidden="true"></a>  anc1dat,</span>
-<span id="cb414-3"><a href="the-ancova-model.html#cb414-3" aria-hidden="true"></a>  anc1dat[, <span class="st">&quot;sex&quot;</span>],</span>
-<span id="cb414-4"><a href="the-ancova-model.html#cb414-4" aria-hidden="true"></a>  <span class="cf">function</span>(x) {</span>
-<span id="cb414-5"><a href="the-ancova-model.html#cb414-5" aria-hidden="true"></a>    <span class="kw">summary</span>(<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> x[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>, <span class="dv">-50</span>, <span class="dv">-19</span>), ]))</span>
-<span id="cb414-6"><a href="the-ancova-model.html#cb414-6" aria-hidden="true"></a>  }</span>
-<span id="cb414-7"><a href="the-ancova-model.html#cb414-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="the-ancova-model.html#cb411-1" aria-hidden="true"></a><span class="kw">by</span>(</span>
+<span id="cb411-2"><a href="the-ancova-model.html#cb411-2" aria-hidden="true"></a>  anc1dat,</span>
+<span id="cb411-3"><a href="the-ancova-model.html#cb411-3" aria-hidden="true"></a>  anc1dat[, <span class="st">&quot;sex&quot;</span>],</span>
+<span id="cb411-4"><a href="the-ancova-model.html#cb411-4" aria-hidden="true"></a>  <span class="cf">function</span>(x) {</span>
+<span id="cb411-5"><a href="the-ancova-model.html#cb411-5" aria-hidden="true"></a>    <span class="kw">summary</span>(<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> x[<span class="kw">c</span>(<span class="op">-</span><span class="dv">49</span>, <span class="dv">-50</span>, <span class="dv">-19</span>), ]))</span>
+<span id="cb411-6"><a href="the-ancova-model.html#cb411-6" aria-hidden="true"></a>  }</span>
+<span id="cb411-7"><a href="the-ancova-model.html#cb411-7" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## anc1dat[, &quot;sex&quot;]: FEMALE      
 ## 
 ## Call:
@@ -513,7 +517,7 @@ Fit separate regresssions by sex with vs. without the outliers. Pay attention t
 ## Multiple R-squared:  0.6083, Adjusted R-squared:  0.6003 
 ## F-statistic: 76.11 on 1 and 49 DF,  p-value: 1.526e-11
 ## 
-## ------------------------------------------------------------ 
+## --------------------------------------------------------------------------------------------------------------------------------- 
 ## anc1dat[, &quot;sex&quot;]: MALE        
 ## 
 ## Call:
@@ -596,7 +600,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

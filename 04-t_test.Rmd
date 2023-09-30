@@ -329,7 +329,7 @@ Note that instead of rerunning the t-test specifying a one-tailed test, you can:
 ```
 
 To estimate the power of a paired t-test in R, we can use the function `power.t.test()`as for other t-tests but we need to specify the argument `type = "paired"`.
-You need to specify the mean difference within the pairs as the `delta`and standard deviance of difference within pairs as `sd`.
+You need to specify the mean diference within the pairs as the `delta`and standard deviance of difference within pairs as `sd`.
 
 ```{r, tpaired-pow}
 skull_w$diff <- skull_w$width6 - skull_w$width5

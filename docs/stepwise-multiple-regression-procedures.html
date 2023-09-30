@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.5 Stepwise multiple regression procedures | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.5 Stepwise multiple regression procedures | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -340,8 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcode">
 Still working with the <code>Mregdat</code> data, run a stepwise multiple regression on the same set of variables:
 </div>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="stepwise-multiple-regression-procedures.html#cb316-1" aria-hidden="true"></a><span class="co"># Stepwise Regression</span></span>
-<span id="cb316-2"><a href="stepwise-multiple-regression-procedures.html#cb316-2" aria-hidden="true"></a>step_mtri &lt;-<span class="st"> </span><span class="kw">step</span>(model_mtri, <span class="dt">direction =</span> <span class="st">&quot;both&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="stepwise-multiple-regression-procedures.html#cb313-1" aria-hidden="true"></a><span class="co"># Stepwise Regression</span></span>
+<span id="cb313-2"><a href="stepwise-multiple-regression-procedures.html#cb313-2" aria-hidden="true"></a>step_mtri &lt;-<span class="st"> </span><span class="kw">step</span>(model_mtri, <span class="dt">direction =</span> <span class="st">&quot;both&quot;</span>)</span></code></pre></div>
 <pre><code>## Start:  AIC=-98.27
 ## logherp ~ logarea + cpfor2 + thtden
 ## 
@@ -359,7 +363,7 @@ Still working with the <code>Mregdat</code> data, run a stepwise multiple regres
 ## + cpfor2   1   0.01571 0.62937 -98.267
 ## - thtden   1   0.25092 0.89600 -92.376
 ## - logarea  1   0.40204 1.04712 -88.013</code></pre>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="stepwise-multiple-regression-procedures.html#cb318-1" aria-hidden="true"></a>step_mtri<span class="op">$</span>anova <span class="co"># display results</span></span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="stepwise-multiple-regression-procedures.html#cb315-1" aria-hidden="true"></a>step_mtri<span class="op">$</span>anova <span class="co"># display results</span></span></code></pre></div>
 <pre><code>##       Step Df   Deviance Resid. Df Resid. Dev       AIC
 ## 1          NA         NA        24  0.6293717 -98.26666
 ## 2 - cpfor2  1 0.01570813        25  0.6450798 -99.57640</code></pre>
@@ -370,12 +374,12 @@ Still working with the <code>Mregdat</code> data, run a stepwise multiple regres
 <li>The AIC for models where terms are added or deleted from the model selected in the first step (i.e. <code>logherp ~ logarea + thtden</code>. Note that none of these models are better.</li>
 </ol>
 <p>Instead of starting from the full (saturated) model and removing and possibly re-adding terms (i.e. direction = “both”), one can start from the null model and only add terms:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="stepwise-multiple-regression-procedures.html#cb320-1" aria-hidden="true"></a><span class="co"># Forward selection approach</span></span>
-<span id="cb320-2"><a href="stepwise-multiple-regression-procedures.html#cb320-2" aria-hidden="true"></a>model_null &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mydata)</span>
-<span id="cb320-3"><a href="stepwise-multiple-regression-procedures.html#cb320-3" aria-hidden="true"></a>step_f &lt;-<span class="st"> </span><span class="kw">stepAIC</span>(</span>
-<span id="cb320-4"><a href="stepwise-multiple-regression-procedures.html#cb320-4" aria-hidden="true"></a>  model_null,</span>
-<span id="cb320-5"><a href="stepwise-multiple-regression-procedures.html#cb320-5" aria-hidden="true"></a>  <span class="dt">scope =</span> <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">direction =</span> <span class="st">&quot;forward&quot;</span></span>
-<span id="cb320-6"><a href="stepwise-multiple-regression-procedures.html#cb320-6" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="stepwise-multiple-regression-procedures.html#cb317-1" aria-hidden="true"></a><span class="co"># Forward selection approach</span></span>
+<span id="cb317-2"><a href="stepwise-multiple-regression-procedures.html#cb317-2" aria-hidden="true"></a>model_null &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> mydata)</span>
+<span id="cb317-3"><a href="stepwise-multiple-regression-procedures.html#cb317-3" aria-hidden="true"></a>step_f &lt;-<span class="st"> </span><span class="kw">stepAIC</span>(</span>
+<span id="cb317-4"><a href="stepwise-multiple-regression-procedures.html#cb317-4" aria-hidden="true"></a>  model_null,</span>
+<span id="cb317-5"><a href="stepwise-multiple-regression-procedures.html#cb317-5" aria-hidden="true"></a>  <span class="dt">scope =</span> <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>cpfor2 <span class="op">+</span><span class="st"> </span>thtden, <span class="dt">direction =</span> <span class="st">&quot;forward&quot;</span></span>
+<span id="cb317-6"><a href="stepwise-multiple-regression-procedures.html#cb317-6" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## Start:  AIC=-82.09
 ## logherp ~ 1
 ## 
@@ -399,7 +403,7 @@ Still working with the <code>Mregdat</code> data, run a stepwise multiple regres
 ##          Df Sum of Sq     RSS     AIC
 ## &lt;none&gt;                0.64508 -99.576
 ## + cpfor2  1  0.015708 0.62937 -98.267</code></pre>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="stepwise-multiple-regression-procedures.html#cb322-1" aria-hidden="true"></a>step_f<span class="op">$</span>anova <span class="co"># display results</span></span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="stepwise-multiple-regression-procedures.html#cb319-1" aria-hidden="true"></a>step_f<span class="op">$</span>anova <span class="co"># display results</span></span></code></pre></div>
 <pre><code>## Stepwise Model Path 
 ## Analysis of Deviance Table
 ## 
@@ -482,7 +486,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

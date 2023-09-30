@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.6 Simple linear regression | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.6 Simple linear regression | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -420,7 +424,8 @@ Note that R automatically labels the most extreme cases on each of these 4 plots
 </div>
 <p>The R package <code>performance</code> offers a new and updated version of those graphs with colours and more plots to help visually assess the assumptions with the function <code>model_check()</code></p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="simple-linear-regression.html#cb70-1" aria-hidden="true"></a><span class="kw">check_model</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
-<p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-29-1.svg" width="672" /></p>
+<pre><code>## Not enough model terms in the conditional part of the model to check for multicollinearity.</code></pre>
+<p><img src="Labs_BIO4158_files/figure-html/unnamed-chunk-30-1.svg" width="672" /></p>
 <p>So, what is the verdict about the linear regression between <code>fklngth</code> and <code>age</code> ? It fails the linearity, possibly fails the normality, passes homoscedasticity, and this does not seem to be too strongly affected by some bizarre points.</p>
 </div>
 <div id="formal-tests-of-regression-assumptions" class="section level3 hasAnchor" number="3.6.2">
@@ -428,19 +433,19 @@ Note that R automatically labels the most extreme cases on each of these 4 plots
 <p>In my practice, I seldom use formal tests of regression assumptions and mostly rely on graphs of the residuals to guide my decisions. To my knowledge, this is what most biologists and data analysts do. However, in my early analyst life I was not always confident that I was interpreting these graphs correctly and wished that I had a formal test or a statistic quantifying the degree of deviation from the regression assumptions.</p>
 <p>The <code>lmtest</code> R package, not part of the base R installation, but available from CRAN, contains a number of tests for linearity and homoscedasticity. And one can test for normality using the Shapiro-Wilk test seen previously.</p>
 <p>First, you need to load (and maybe install) the <code>lmtest</code> package.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="simple-linear-regression.html#cb71-1" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="simple-linear-regression.html#cb72-1" aria-hidden="true"></a><span class="kw">library</span>(lmtest)</span></code></pre></div>
 
 <div class="rmdcode">
 Run the following commands
 </div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="simple-linear-regression.html#cb72-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="simple-linear-regression.html#cb73-1" aria-hidden="true"></a><span class="kw">bptest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ##  studentized Breusch-Pagan test
 ## 
 ## data:  RegModel.1
 ## BP = 1.1765, df = 1, p-value = 0.2781</code></pre>
 <p>The Breusch-Pagan test examines whether the variability of the residuals is constant with respect to increasing fitted values. A low p value is indicative of heteroscedasticity. Here, the p value is high, and supports my visual assessment that the homoscedasticity assumption is met by these data.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="simple-linear-regression.html#cb74-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="simple-linear-regression.html#cb75-1" aria-hidden="true"></a><span class="kw">dwtest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Durbin-Watson test
 ## 
@@ -448,14 +453,14 @@ Run the following commands
 ## DW = 2.242, p-value = 0.8489
 ## alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p>The Durbin-Watson test can detect serial autocorrelation in the residuals. Under the assumption of no autocorrelation, the D statistic is 2. This test can detect violation of independence of observations (residuals), although it is not foolproof. Here there is no problem identified.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="simple-linear-regression.html#cb76-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="simple-linear-regression.html#cb77-1" aria-hidden="true"></a><span class="kw">resettest</span>(RegModel<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ##  RESET test
 ## 
 ## data:  RegModel.1
 ## RESET = 14.544, df1 = 2, df2 = 71, p-value = 5.082e-06</code></pre>
 <p>The RESET test is a test of the assumption of linearity. If the linearity assumption is met, the RESET statistic will be close to 1. Here, the statistic is much larger (14.54), and very highly significant. This confirms our visual assessment that the relationship is not linear.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="simple-linear-regression.html#cb78-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="simple-linear-regression.html#cb79-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(RegModel<span class="fl">.1</span>))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -522,7 +527,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

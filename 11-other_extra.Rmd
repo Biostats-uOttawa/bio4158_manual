@@ -1,3 +1,10 @@
+\cleardoublepage
+
+# (APPENDIX) Appendice {-}
+
+sorry just in french for the moment
+
+
 # Note sur les devoirs et Rmarkdown
 
 Pour les devoirs, veuillez soumettre les rapports en utilisant le fichier Rmarkdown fourni.

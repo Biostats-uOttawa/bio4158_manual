@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.6 Comparing model fits | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.6 Comparing model fits | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -337,8 +341,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="rmdcode">
 Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA and common simple regression models::
 </div>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="comparing-model-fits.html#cb416-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
-<span id="cb416-2"><a href="comparing-model-fits.html#cb416-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="comparing-model-fits.html#cb413-1" aria-hidden="true"></a>model.linear&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage, <span class="dt">data =</span> anc1dat)</span>
+<span id="cb413-2"><a href="comparing-model-fits.html#cb413-2" aria-hidden="true"></a><span class="kw">anova</span>(model.ancova, model.linear)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ sex + lage
@@ -351,9 +355,9 @@ Working with the <code>Anc1dat</code> data set, compare the fit of the ANCOVA an
 <div class="rmdcode">
 Repeat the above procedure with the ANC3DAT data, rerunning the full ANCOVA with interaction ( <code>lfkl ~ lage + locate + lage:locate</code> ) and without interaction ( <code>lfkl ~ lage + locate</code> ), saving the model objects as you did above. Compare the fits of the two models. What do you conclude?
 </div>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="comparing-model-fits.html#cb418-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb418-2"><a href="comparing-model-fits.html#cb418-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
-<span id="cb418-3"><a href="comparing-model-fits.html#cb418-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="comparing-model-fits.html#cb415-1" aria-hidden="true"></a>model.full.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate <span class="op">+</span><span class="st"> </span>lage<span class="op">:</span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb415-2"><a href="comparing-model-fits.html#cb415-2" aria-hidden="true"></a>model.ancova.anc3dat&lt;-<span class="kw">lm</span>(lfkl <span class="op">~</span><span class="st"> </span>lage <span class="op">+</span><span class="st"> </span>locate, <span class="dt">data =</span> anc3dat)</span>
+<span id="cb415-3"><a href="comparing-model-fits.html#cb415-3" aria-hidden="true"></a><span class="kw">anova</span>(model.full.anc3dat,model.ancova.anc3dat)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: lfkl ~ lage + locate + lage:locate
@@ -422,7 +426,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

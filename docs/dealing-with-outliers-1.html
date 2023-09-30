@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.4 Dealing with outliers | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.4 Dealing with outliers | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -336,21 +340,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Repeat the original ANOVA of <code>fklngth</code> by <code>year</code> but work with a subset of the data without the outliers. Have any of the conclusions changed?</li>
 </ul>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="dealing-with-outliers-1.html#cb205-1" aria-hidden="true"></a>damsubset &lt;-<span class="st"> </span>dam10dat[<span class="op">-</span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">59</span>, <span class="dv">87</span>), ] <span class="co"># removes obs 23, 59 and 87</span></span>
-<span id="cb205-2"><a href="dealing-with-outliers-1.html#cb205-2" aria-hidden="true"></a>aov_damsubset &lt;-<span class="st"> </span><span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year), damsubset)</span>
-<span id="cb205-3"><a href="dealing-with-outliers-1.html#cb205-3" aria-hidden="true"></a><span class="kw">summary</span>(aov_damsubset)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="dealing-with-outliers-1.html#cb207-1" aria-hidden="true"></a>damsubset &lt;-<span class="st"> </span>dam10dat[<span class="op">-</span><span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">59</span>, <span class="dv">87</span>), ] <span class="co"># removes obs 23, 59 and 87</span></span>
+<span id="cb207-2"><a href="dealing-with-outliers-1.html#cb207-2" aria-hidden="true"></a>aov_damsubset &lt;-<span class="st"> </span><span class="kw">aov</span>(fklngth <span class="op">~</span><span class="st"> </span><span class="kw">as.factor</span>(year), damsubset)</span>
+<span id="cb207-3"><a href="dealing-with-outliers-1.html#cb207-3" aria-hidden="true"></a><span class="kw">summary</span>(aov_damsubset)</span></code></pre></div>
 <pre><code>##                  Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## as.factor(year)   3  367.5  122.50   6.894 0.000267 ***
 ## Residuals       111 1972.4   17.77                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="dealing-with-outliers-1.html#cb207-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(aov_damsubset))</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="dealing-with-outliers-1.html#cb209-1" aria-hidden="true"></a><span class="kw">shapiro.test</span>(<span class="kw">residuals</span>(aov_damsubset))</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  residuals(aov_damsubset)
 ## W = 0.98533, p-value = 0.2448</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="dealing-with-outliers-1.html#cb209-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(fklngth <span class="op">~</span><span class="st"> </span>year, damsubset)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="dealing-with-outliers-1.html#cb211-1" aria-hidden="true"></a><span class="kw">leveneTest</span>(fklngth <span class="op">~</span><span class="st"> </span>year, damsubset)</span></code></pre></div>
 <pre><code>## Levene&#39;s Test for Homogeneity of Variance (center = median)
 ##        Df F value   Pr(&gt;F)   
 ## group   3  4.6237 0.004367 **
@@ -417,7 +421,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

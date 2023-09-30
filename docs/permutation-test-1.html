@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.13 Permutation test | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.13 Permutation test | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -333,22 +337,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="permutation-test-1" class="section level2 hasAnchor" number="7.13">
 <h2><span class="header-section-number">7.13</span> Permutation test<a href="permutation-test-1.html#permutation-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Permutation tests are more rarely performed in multiple regression contexts than bootstrap. But here is code to do it.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="permutation-test-1.html#cb383-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
-<span id="cb383-2"><a href="permutation-test-1.html#cb383-2" aria-hidden="true"></a><span class="co">##########</span></span>
-<span id="cb383-3"><a href="permutation-test-1.html#cb383-3" aria-hidden="true"></a><span class="co"># Permutation in multiple regression</span></span>
-<span id="cb383-4"><a href="permutation-test-1.html#cb383-4" aria-hidden="true"></a><span class="co">#</span></span>
-<span id="cb383-5"><a href="permutation-test-1.html#cb383-5" aria-hidden="true"></a><span class="co"># using lmperm library</span></span>
-<span id="cb383-6"><a href="permutation-test-1.html#cb383-6" aria-hidden="true"></a><span class="kw">library</span>(lmPerm)</span>
-<span id="cb383-7"><a href="permutation-test-1.html#cb383-7" aria-hidden="true"></a><span class="co"># Fit desired model on the desired dataframe</span></span>
-<span id="cb383-8"><a href="permutation-test-1.html#cb383-8" aria-hidden="true"></a>my_model &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb383-9"><a href="permutation-test-1.html#cb383-9" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
-<span id="cb383-10"><a href="permutation-test-1.html#cb383-10" aria-hidden="true"></a>)</span>
-<span id="cb383-11"><a href="permutation-test-1.html#cb383-11" aria-hidden="true"></a>my_model_prob &lt;-<span class="st"> </span><span class="kw">lmp</span>(</span>
-<span id="cb383-12"><a href="permutation-test-1.html#cb383-12" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
-<span id="cb383-13"><a href="permutation-test-1.html#cb383-13" aria-hidden="true"></a>  <span class="dt">data =</span> mydata, <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span></span>
-<span id="cb383-14"><a href="permutation-test-1.html#cb383-14" aria-hidden="true"></a>)</span>
-<span id="cb383-15"><a href="permutation-test-1.html#cb383-15" aria-hidden="true"></a><span class="kw">summary</span>(my_model)</span>
-<span id="cb383-16"><a href="permutation-test-1.html#cb383-16" aria-hidden="true"></a><span class="kw">summary</span>(my_model_prob)</span></code></pre></div>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="permutation-test-1.html#cb380-1" aria-hidden="true"></a><span class="co">############################################################</span></span>
+<span id="cb380-2"><a href="permutation-test-1.html#cb380-2" aria-hidden="true"></a><span class="co">##########</span></span>
+<span id="cb380-3"><a href="permutation-test-1.html#cb380-3" aria-hidden="true"></a><span class="co"># Permutation in multiple regression</span></span>
+<span id="cb380-4"><a href="permutation-test-1.html#cb380-4" aria-hidden="true"></a><span class="co">#</span></span>
+<span id="cb380-5"><a href="permutation-test-1.html#cb380-5" aria-hidden="true"></a><span class="co"># using lmperm library</span></span>
+<span id="cb380-6"><a href="permutation-test-1.html#cb380-6" aria-hidden="true"></a><span class="kw">library</span>(lmPerm)</span>
+<span id="cb380-7"><a href="permutation-test-1.html#cb380-7" aria-hidden="true"></a><span class="co"># Fit desired model on the desired dataframe</span></span>
+<span id="cb380-8"><a href="permutation-test-1.html#cb380-8" aria-hidden="true"></a>my_model &lt;-<span class="st"> </span><span class="kw">lm</span>(logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb380-9"><a href="permutation-test-1.html#cb380-9" aria-hidden="true"></a>  <span class="dt">data =</span> mydata</span>
+<span id="cb380-10"><a href="permutation-test-1.html#cb380-10" aria-hidden="true"></a>)</span>
+<span id="cb380-11"><a href="permutation-test-1.html#cb380-11" aria-hidden="true"></a>my_model_prob &lt;-<span class="st"> </span><span class="kw">lmp</span>(</span>
+<span id="cb380-12"><a href="permutation-test-1.html#cb380-12" aria-hidden="true"></a>  logherp <span class="op">~</span><span class="st"> </span>logarea <span class="op">+</span><span class="st"> </span>thtden <span class="op">+</span><span class="st"> </span>swamp <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(swamp<span class="op">^</span><span class="dv">2</span>),</span>
+<span id="cb380-13"><a href="permutation-test-1.html#cb380-13" aria-hidden="true"></a>  <span class="dt">data =</span> mydata, <span class="dt">perm =</span> <span class="st">&quot;Prob&quot;</span></span>
+<span id="cb380-14"><a href="permutation-test-1.html#cb380-14" aria-hidden="true"></a>)</span>
+<span id="cb380-15"><a href="permutation-test-1.html#cb380-15" aria-hidden="true"></a><span class="kw">summary</span>(my_model)</span>
+<span id="cb380-16"><a href="permutation-test-1.html#cb380-16" aria-hidden="true"></a><span class="kw">summary</span>(my_model_prob)</span></code></pre></div>
 
 </div>
 <!-- </div> -->
@@ -409,7 +413,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

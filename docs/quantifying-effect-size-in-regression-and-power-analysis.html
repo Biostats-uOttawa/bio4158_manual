@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.9 Quantifying effect size in regression and power analysis | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.9 Quantifying effect size in regression and power analysis | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -335,7 +339,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Biological interpretation differs from statistical interpretation. Statistically, we conclude that size increase with age (i.e. the slope is positive and different from 0). But this conclusion alone does not tell if the difference between young and old fish is large. The slope and the scatterplot are more informative than the p-value here. The slope (in log-log space) is 0.34.
 This means that for each unit increase of X (<code>log10(age)</code>), there is an increase of 0.34 units of <code>log10(fklngth)</code>. In other words, when age is multiplied by 10, fork length is multiplied by about 2 (<code>10^0.34^</code>). Humm, length increases more slowly than age. This slope value (0.34) is an estimate of raw effect size. It measure how much length changes with age.</p>
 <p>It would also be important to estimate the confidence interval around the estimate of the slope. This can beobtained using the <code>confint()</code> function.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb104-1" aria-hidden="true"></a><span class="kw">confint</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb106-1" aria-hidden="true"></a><span class="kw">confint</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
 <pre><code>##                 2.5 %   97.5 %
 ## (Intercept) 1.1377151 1.246270
 ## log10(age)  0.2976433 0.384068</code></pre>
@@ -348,7 +352,7 @@ This means that for each unit increase of X (<code>log10(age)</code>), there is 
 <li>Select <strong>Post hoc: Compute achieved power- given <span class="math inline">\(\alpha\)</span>, sample size,and effect size</strong></li>
 </ol>
 <p>For example, suppose that sturgeon biologists deem that a slope of 0.1 for the relationship between <code>log10(fklngth)</code> and <code>log10(age)</code> is meaningful and you wanted to estimate the power to detect such a slope with a sample of 20 sturgeons. Results from the log-log regression contain most of what you need:</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb106-1" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb108-1" aria-hidden="true"></a><span class="kw">summary</span>(RegModel<span class="fl">.2</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log10(fklngth) ~ log10(age), data = sturgeon.male)
@@ -371,7 +375,7 @@ This means that for each unit increase of X (<code>log10(age)</code>), there is 
 <p>Note the Residual standard error value (0.03015). You will need this.
 The other thing you need is an estimate of the standard deviation of <code>log10(age)</code>.
 R can (of course) compute it. Be careful, the <code>sd()</code> function will return <code>NA</code> if there are missing values. You can get around this by adding <code>na.rm=TRUE</code> as an argument ot the <code>sd()</code> function.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb108-1" aria-hidden="true"></a><span class="kw">sd</span>(<span class="kw">log10</span>(sturgeon.male<span class="op">$</span>age), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb110-1" aria-hidden="true"></a><span class="kw">sd</span>(<span class="kw">log10</span>(sturgeon.male<span class="op">$</span>age), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1616675</code></pre>
 <p>You can then enter these values (slope to be detected, sample size, alpha, standard deviation of the independent variable) to calculate another quantity that G*Power needs (standard deviation of y) using the Determine panel. Finally you can calculate Power. The filled panels should look like this</p>
 
@@ -395,10 +399,10 @@ where <span class="math inline">\(b\)</span> is the slope, <span class="math inl
 <p>SE of the slope is 0.02168. The model was fitted using 75 fishes (n=75). We can then estimate <code>d</code>.
 <span class="math display">\[ d = \frac{b}{s_b\sqrt{n-k-1}} = \frac{0.1}{0.02168\sqrt{74-1-1}}=0.54\]</span></p>
 <p>We can simply use the <code>pwr.t.test()</code> function to estimate the power.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb110-1" aria-hidden="true"></a><span class="kw">library</span>(pwr)</span>
-<span id="cb110-2"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb110-2" aria-hidden="true"></a></span>
-<span id="cb110-3"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb110-3" aria-hidden="true"></a><span class="co"># analyse de puissance</span></span>
-<span id="cb110-4"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb110-4" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">d =</span> <span class="fl">0.54</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;one.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-1" aria-hidden="true"></a><span class="kw">library</span>(pwr)</span>
+<span id="cb112-2"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-2" aria-hidden="true"></a></span>
+<span id="cb112-3"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-3" aria-hidden="true"></a><span class="co"># analyse de puissance</span></span>
+<span id="cb112-4"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-4" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">d =</span> <span class="fl">0.54</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;one.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      One-sample t test power calculation 
 ## 
@@ -419,10 +423,10 @@ Figure 3.4: A priori power analysis to estimate the sample size needed to have a
 </p>
 </div>
 <p>In R you can simply do:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-1" aria-hidden="true"></a><span class="kw">library</span>(pwr)</span>
-<span id="cb112-2"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-2" aria-hidden="true"></a></span>
-<span id="cb112-3"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-3" aria-hidden="true"></a><span class="co"># analyse de puissance</span></span>
-<span id="cb112-4"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb112-4" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.99</span>, <span class="dt">d =</span> <span class="fl">0.54</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;one.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb114-1" aria-hidden="true"></a><span class="kw">library</span>(pwr)</span>
+<span id="cb114-2"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb114-2" aria-hidden="true"></a></span>
+<span id="cb114-3"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb114-3" aria-hidden="true"></a><span class="co"># analyse de puissance</span></span>
+<span id="cb114-4"><a href="quantifying-effect-size-in-regression-and-power-analysis.html#cb114-4" aria-hidden="true"></a><span class="kw">pwr.t.test</span>(<span class="dt">power =</span> <span class="fl">0.99</span>, <span class="dt">d =</span> <span class="fl">0.54</span>, <span class="dt">sig.level =</span> <span class="fl">0.05</span>, <span class="dt">type =</span> <span class="st">&quot;one.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      One-sample t test power calculation 
 ## 
@@ -491,7 +495,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

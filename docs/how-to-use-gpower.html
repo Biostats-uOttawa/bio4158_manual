@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.3 How to use G*Power | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.3 How to use G*Power | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -363,8 +367,11 @@ one rejects the null hypothesis, and <span class="math inline">\(\beta\)</span> 
 sample size. Used frequently to help in the interpretation of a test
 that is not statistically significant, but only if an effect size that is
 biologically significant is used (and not the observed effect size). Not
-relevant when the test is significant.
-Sensitivity. Computes the detectable effect size for a given <span class="math inline">\(\beta\)</span> ,<span class="math inline">\(\alpha\)</span>, and
+relevant when the test is significant.</p>
+</div>
+<div id="sensitivity" class="section level4 unnumbered hasAnchor" number="">
+<h4>Sensitivity<a href="how-to-use-gpower.html#sensitivity" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Computes the detectable effect size for a given <span class="math inline">\(\beta\)</span> ,<span class="math inline">\(\alpha\)</span>, and
 sample size. Very useful at the planning stage of an experiment.</p>
 </div>
 </div>
@@ -492,7 +499,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.4 Nested designs | BIO4158 Applied biostats with R</title>
   <meta name="description" content="Laboratory manual for BIO4158 Applied biostatistics" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.4 Nested designs | BIO4158 Applied biostats with R" />
   <meta property="og:type" content="book" />
@@ -118,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -336,12 +340,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>The file <code>Nestdat.csv</code> contains the results of just such an experi ment. The file lists three variables: genotype , chamber and survival . Run a nested ANOVA with survival as the dependent variable, genotype/chamber as the independent variables (this is the shorthand notation for a chamber effect nested under genotype).</li>
 </ul>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="nested-designs.html#cb258-1" aria-hidden="true"></a>nestdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nestdat.csv&quot;</span>)</span>
-<span id="cb258-2"><a href="nested-designs.html#cb258-2" aria-hidden="true"></a>nestdat<span class="op">$</span>chamber &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nestdat<span class="op">$</span>chamber)</span>
-<span id="cb258-3"><a href="nested-designs.html#cb258-3" aria-hidden="true"></a>nestdat<span class="op">$</span>genotype &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nestdat<span class="op">$</span>genotype)</span>
-<span id="cb258-4"><a href="nested-designs.html#cb258-4" aria-hidden="true"></a>anova.nested &lt;-<span class="st"> </span><span class="kw">lm</span>(survival <span class="op">~</span><span class="st"> </span>genotype <span class="op">/</span><span class="st"> </span>chamber, <span class="dt">data =</span> nestdat)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="nested-designs.html#cb255-1" aria-hidden="true"></a>nestdat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/nestdat.csv&quot;</span>)</span>
+<span id="cb255-2"><a href="nested-designs.html#cb255-2" aria-hidden="true"></a>nestdat<span class="op">$</span>chamber &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nestdat<span class="op">$</span>chamber)</span>
+<span id="cb255-3"><a href="nested-designs.html#cb255-3" aria-hidden="true"></a>nestdat<span class="op">$</span>genotype &lt;-<span class="st"> </span><span class="kw">as.factor</span>(nestdat<span class="op">$</span>genotype)</span>
+<span id="cb255-4"><a href="nested-designs.html#cb255-4" aria-hidden="true"></a>anova.nested &lt;-<span class="st"> </span><span class="kw">lm</span>(survival <span class="op">~</span><span class="st"> </span>genotype <span class="op">/</span><span class="st"> </span>chamber, <span class="dt">data =</span> nestdat)</span></code></pre></div>
 <p>What do you conclude from this analysis? What analysis would (should) you do next? (Hint: if there is a non-significant effect of chambers within genotypes, then you can increase the power of between-genotype comparisons by pooling over chambers within genotypes, although not everyone (Dr. Rundle included) agrees with such pooling.) Do it! Make sure you check your assumptions!</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb259-1"><a href="nested-designs.html#cb259-1" aria-hidden="true"></a><span class="kw">anova</span>(anova.nested)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb256-1"><a href="nested-designs.html#cb256-1" aria-hidden="true"></a><span class="kw">anova</span>(anova.nested)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: survival
@@ -351,18 +355,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residuals        36  181.61    5.04                    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb261-1"><a href="nested-designs.html#cb261-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb261-2"><a href="nested-designs.html#cb261-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.nested)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
-<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-68-1.svg" alt="Conditions d'applications du modèle anova.nested" width="672" />
+<div class="sourceCode" id="cb258"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb258-1"><a href="nested-designs.html#cb258-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb258-2"><a href="nested-designs.html#cb258-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.nested)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-69"></span>
+<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-69-1.svg" alt="Conditions d'applications du modèle anova.nested" width="672" />
 <p class="caption">
 Figure 6.6: Conditions d’applications du modèle anova.nested
 </p>
 </div>
 <p>We conclude from this analysis that there is no (significant) variation among chambers within genotypes, but that the null hypothesis that all genotypes have the same dessiccation resistance (as measured by survival) is rejected (Test of genotype using MS genotype:chamber as denominator: F = 1476.11/6.78 = 217.7153, P&lt;0.0001). In other words, genotypes differ in their survival.</p>
 <p>Since the chambers within genotypes effect is non-significant, we may want to pool over chambers to increase our degrees of freedom:</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="nested-designs.html#cb262-1" aria-hidden="true"></a>anova.simple &lt;-<span class="st"> </span><span class="kw">lm</span>(survival <span class="op">~</span><span class="st"> </span>genotype, <span class="dt">data =</span> nestdat)</span>
-<span id="cb262-2"><a href="nested-designs.html#cb262-2" aria-hidden="true"></a><span class="kw">anova</span>(anova.simple)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="nested-designs.html#cb259-1" aria-hidden="true"></a>anova.simple &lt;-<span class="st"> </span><span class="kw">lm</span>(survival <span class="op">~</span><span class="st"> </span>genotype, <span class="dt">data =</span> nestdat)</span>
+<span id="cb259-2"><a href="nested-designs.html#cb259-2" aria-hidden="true"></a><span class="kw">anova</span>(anova.simple)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: survival
@@ -373,29 +377,29 @@ Figure 6.6: Conditions d’applications du modèle anova.nested
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Thus, we conclude that there is significant variation among the three genotypes in dessiccation resistance.</p>
 <p>A box plot of survival across genotypes shows clearly that there is significant variation among the three genotypes in dessiccation resistance. This can be combined with a formal Tukey multiple comparison test:</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="nested-designs.html#cb264-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb264-2"><a href="nested-designs.html#cb264-2" aria-hidden="true"></a><span class="co"># Compute and plot means and Tukey CI</span></span>
-<span id="cb264-3"><a href="nested-designs.html#cb264-3" aria-hidden="true"></a>means &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.simple, <span class="dt">linfct =</span> <span class="kw">mcp</span>(</span>
-<span id="cb264-4"><a href="nested-designs.html#cb264-4" aria-hidden="true"></a>  <span class="dt">genotype =</span></span>
-<span id="cb264-5"><a href="nested-designs.html#cb264-5" aria-hidden="true"></a>    <span class="st">&quot;Tukey&quot;</span></span>
-<span id="cb264-6"><a href="nested-designs.html#cb264-6" aria-hidden="true"></a>))</span>
-<span id="cb264-7"><a href="nested-designs.html#cb264-7" aria-hidden="true"></a>cimeans &lt;-<span class="st"> </span><span class="kw">cld</span>(means)</span>
-<span id="cb264-8"><a href="nested-designs.html#cb264-8" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
-<span id="cb264-9"><a href="nested-designs.html#cb264-9" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
-<span id="cb264-10"><a href="nested-designs.html#cb264-10" aria-hidden="true"></a><span class="co"># plot</span></span>
-<span id="cb264-11"><a href="nested-designs.html#cb264-11" aria-hidden="true"></a><span class="kw">plot</span>(cimeans, <span class="dt">las =</span> <span class="dv">1</span>) <span class="co"># las option to put y-axis labels as God intended them</span></span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-70"></span>
-<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-70-1.svg" alt="Effet du genotype sur la résistance à la dessication avec un test de Tukey " width="672" />
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="nested-designs.html#cb261-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb261-2"><a href="nested-designs.html#cb261-2" aria-hidden="true"></a><span class="co"># Compute and plot means and Tukey CI</span></span>
+<span id="cb261-3"><a href="nested-designs.html#cb261-3" aria-hidden="true"></a>means &lt;-<span class="st"> </span><span class="kw">glht</span>(anova.simple, <span class="dt">linfct =</span> <span class="kw">mcp</span>(</span>
+<span id="cb261-4"><a href="nested-designs.html#cb261-4" aria-hidden="true"></a>  <span class="dt">genotype =</span></span>
+<span id="cb261-5"><a href="nested-designs.html#cb261-5" aria-hidden="true"></a>    <span class="st">&quot;Tukey&quot;</span></span>
+<span id="cb261-6"><a href="nested-designs.html#cb261-6" aria-hidden="true"></a>))</span>
+<span id="cb261-7"><a href="nested-designs.html#cb261-7" aria-hidden="true"></a>cimeans &lt;-<span class="st"> </span><span class="kw">cld</span>(means)</span>
+<span id="cb261-8"><a href="nested-designs.html#cb261-8" aria-hidden="true"></a><span class="co"># use sufficiently large upper margin</span></span>
+<span id="cb261-9"><a href="nested-designs.html#cb261-9" aria-hidden="true"></a>old.par &lt;-<span class="st"> </span><span class="kw">par</span>(<span class="dt">mai =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">1.25</span>, <span class="dv">1</span>))</span>
+<span id="cb261-10"><a href="nested-designs.html#cb261-10" aria-hidden="true"></a><span class="co"># plot</span></span>
+<span id="cb261-11"><a href="nested-designs.html#cb261-11" aria-hidden="true"></a><span class="kw">plot</span>(cimeans, <span class="dt">las =</span> <span class="dv">1</span>) <span class="co"># las option to put y-axis labels as God intended them</span></span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-71"></span>
+<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-71-1.svg" alt="Effet du genotype sur la résistance à la dessication avec un test de Tukey " width="672" />
 <p class="caption">
 Figure 6.7: Effet du genotype sur la résistance à la dessication avec un test de Tukey
 </p>
 </div>
 <p>So, we conclude from the Tukey analysis and plot that dessiccation resistance (R) , as measured by larval survival under hot, dry conditions, varies significantly among all three genotypes with R(AA) &gt; R(Aa) &gt; R(aa).</p>
 <p>Before concluding this, however, we must test the assumptions. Here are the residual plots and diagnostics for the one-way (unnested) design:</p>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb265-1"><a href="nested-designs.html#cb265-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb265-2"><a href="nested-designs.html#cb265-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.simple)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-71"></span>
-<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-71-1.svg" alt="Conditions d'applications du modèle anova.simple" width="672" />
+<div class="sourceCode" id="cb262"><pre class="sourceCode r exer"><code class="sourceCode r"><span id="cb262-1"><a href="nested-designs.html#cb262-1" aria-hidden="true"></a><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb262-2"><a href="nested-designs.html#cb262-2" aria-hidden="true"></a><span class="kw">plot</span>(anova.simple)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
+<img src="Labs_BIO4158_files/figure-html/unnamed-chunk-72-1.svg" alt="Conditions d'applications du modèle anova.simple" width="672" />
 <p class="caption">
 Figure 6.8: Conditions d’applications du modèle anova.simple
 </p>
@@ -459,7 +463,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

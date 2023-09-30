@@ -239,7 +239,7 @@
 \makeatother
 \subtitle{Laboratory manual}
 \author{Julien Martin}
-\date{13-10-2022}
+\date{30-09-2023}
 
 \begin{document}
 \maketitle
@@ -697,30 +697,14 @@ To get summary statistics on the contents of the data frame sturgeon, type the c
 \end{Shaded}
 
 \begin{verbatim}
-##     fklngth         totlngth        drlngth          rdwght     
-##  Min.   :24.96   Min.   :28.15   Min.   :14.33   Min.   : 4.73  
-##  1st Qu.:41.00   1st Qu.:43.66   1st Qu.:25.00   1st Qu.:18.09  
-##  Median :44.06   Median :47.32   Median :27.00   Median :23.10  
-##  Mean   :44.15   Mean   :47.45   Mean   :27.29   Mean   :24.87  
-##  3rd Qu.:48.00   3rd Qu.:51.97   3rd Qu.:29.72   3rd Qu.:30.27  
-##  Max.   :66.85   Max.   :72.05   Max.   :41.93   Max.   :93.72  
-##                  NA's   :85      NA's   :13      NA's   :4      
-##       age            girth           sex              location        
-##  Min.   : 7.00   Min.   :11.50   Length:186         Length:186        
-##  1st Qu.:17.00   1st Qu.:40.00   Class :character   Class :character  
-##  Median :20.00   Median :44.00   Mode  :character   Mode  :character  
-##  Mean   :20.24   Mean   :44.33                                        
-##  3rd Qu.:23.50   3rd Qu.:48.80                                        
-##  Max.   :55.00   Max.   :73.70                                        
-##  NA's   :11      NA's   :85                                           
-##       year     
-##  Min.   :1978  
-##  1st Qu.:1979  
-##  Median :1979  
-##  Mean   :1979  
-##  3rd Qu.:1980  
-##  Max.   :1980  
-## 
+##     fklngth         totlngth        drlngth          rdwght           age            girth           sex              location              year     
+##  Min.   :24.96   Min.   :28.15   Min.   :14.33   Min.   : 4.73   Min.   : 7.00   Min.   :11.50   Length:186         Length:186         Min.   :1978  
+##  1st Qu.:41.00   1st Qu.:43.66   1st Qu.:25.00   1st Qu.:18.09   1st Qu.:17.00   1st Qu.:40.00   Class :character   Class :character   1st Qu.:1979  
+##  Median :44.06   Median :47.32   Median :27.00   Median :23.10   Median :20.00   Median :44.00   Mode  :character   Mode  :character   Median :1979  
+##  Mean   :44.15   Mean   :47.45   Mean   :27.29   Mean   :24.87   Mean   :20.24   Mean   :44.33                                         Mean   :1979  
+##  3rd Qu.:48.00   3rd Qu.:51.97   3rd Qu.:29.72   3rd Qu.:30.27   3rd Qu.:23.50   3rd Qu.:48.80                                         3rd Qu.:1980  
+##  Max.   :66.85   Max.   :72.05   Max.   :41.93   Max.   :93.72   Max.   :55.00   Max.   :73.70                                         Max.   :1980  
+##                  NA's   :85      NA's   :13      NA's   :4       NA's   :11      NA's   :85
 \end{verbatim}
 
 For each variable, R lists:
@@ -1188,7 +1172,12 @@ sample size. Used frequently to help in the interpretation of a test
 that is not statistically significant, but only if an effect size that is
 biologically significant is used (and not the observed effect size). Not
 relevant when the test is significant.
-Sensitivity. Computes the detectable effect size for a given \(\beta\) ,\(\alpha\), and
+
+\hypertarget{sensitivity}{%
+\subsubsection*{Sensitivity}\label{sensitivity}}
+\addcontentsline{toc}{subsubsection}{Sensitivity}
+
+Computes the detectable effect size for a given \(\beta\) ,\(\alpha\), and
 sample size. Very useful at the planning stage of an experiment.
 
 \hypertarget{how-to-calculate-effect-size}{%
@@ -1274,6 +1263,19 @@ w\strut
 
 \hypertarget{power-analysis-for-a-t-test-on-two-independent-means}{%
 \section{Power analysis for a t-test on two independent means}\label{power-analysis-for-a-t-test-on-two-independent-means}}
+
+\begin{rmdimportant}
+All the power analysis presented in this chapter can be done using 2 functions
+in R.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{pwr.t.test()} when the two samples have a similar size
+\item
+  \texttt{pwr.t2n.test()} when samples have different numbers of observations
+\end{itemize}
+\end{rmdimportant}
 
 The objective of this lab is to learn to use G*Power and understand how the 4 parameters of power analyses (\(\alpha\), \(\beta\), sample size and effect size) are related to each other. For this, you will only use the standard t-test to compare two independent means. This is the test most used by biologists, you have all used it, and it will serve admirably for this lab. What you will learn today will be applicable to all other power analyses.
 
@@ -1851,8 +1853,7 @@ None of these distributions are perfectly normal, but deviations are mostly mino
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in applyDefaults(diagonal, defaults = list(method =
-## "adaptiveDensity"), : unnamed diag arguments, will be ignored
+## Warning in applyDefaults(diagonal, defaults = list(method = "adaptiveDensity"), : unnamed diag arguments, will be ignored
 \end{verbatim}
 
 \includegraphics{Labs_BIO4158_files/figure-latex/stur-scatmat-1.pdf}
@@ -1986,8 +1987,7 @@ R are Spearman and Kendall's \(\tau\) (tau).
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in cor.test.default(sturgeon$lfklngth, sturgeon$rdwght, alternative =
-## "two.sided", : Cannot compute exact p-value with ties
+## Warning in cor.test.default(sturgeon$lfklngth, sturgeon$rdwght, alternative = "two.sided", : Cannot compute exact p-value with ties
 \end{verbatim}
 
 \begin{verbatim}
@@ -2198,7 +2198,11 @@ The R package \texttt{performance} offers a new and updated version of those gra
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-29-1.pdf}
+\begin{verbatim}
+## Not enough model terms in the conditional part of the model to check for multicollinearity.
+\end{verbatim}
+
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-30-1.pdf}
 
 So, what is the verdict about the linear regression between \texttt{fklngth} and \texttt{age} ? It fails the linearity, possibly fails the normality, passes homoscedasticity, and this does not seem to be too strongly affected by some bizarre points.
 
@@ -2356,6 +2360,10 @@ Note that by using the log transformed data, the proportion of variation explain
 \KeywordTok{check\_model}\NormalTok{(RegModel}\FloatTok{.2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Not enough model terms in the conditional part of the model to check for multicollinearity.
+\end{verbatim}
 
 \includegraphics{Labs_BIO4158_files/figure-latex/sturtr-3-2.pdf}
 
@@ -2729,8 +2737,8 @@ A non-parametric test for the intercept and slope of a linear regression can be 
 ## 
 ## Bootstrap Statistics :
 ##      original       bias    std. error
-## t1* 1.1919926  0.001715330  0.03352203
-## t2* 0.3408557 -0.001128609  0.02651356
+## t1* 1.1919926  0.002282706  0.03383362
+## t2* 0.3408557 -0.001750596  0.02679474
 \end{verbatim}
 
 For each parameter in the model (here the intercept is labeled \texttt{t1\textbackslash{}*} and the slope of the regression line is labeled \texttt{t2\textbackslash{}*}) , you obtain:
@@ -2776,8 +2784,7 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in boot.ci(results, type = "all", index = 1): bootstrap variances needed
-## for studentized intervals
+## Warning in boot.ci(results, type = "all", index = 1): bootstrap variances needed for studentized intervals
 \end{verbatim}
 
 \begin{verbatim}
@@ -2789,10 +2796,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 1.125,  1.256 )   ( 1.122,  1.258 )  
+## 95%   ( 1.123,  1.256 )   ( 1.123,  1.254 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 1.126,  1.262 )   ( 1.120,  1.258 )  
+## 95%   ( 1.130,  1.261 )   ( 1.122,  1.252 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -2804,8 +2811,7 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in boot.ci(results, type = "all", index = 2): bootstrap variances needed
-## for studentized intervals
+## Warning in boot.ci(results, type = "all", index = 2): bootstrap variances needed for studentized intervals
 \end{verbatim}
 
 \begin{verbatim}
@@ -2817,10 +2823,10 @@ The distribution of the bootstrapped estimates is rather Gaussian, with only sma
 ## 
 ## Intervals : 
 ## Level      Normal              Basic         
-## 95%   ( 0.2900,  0.3939 )   ( 0.2887,  0.3967 )  
+## 95%   ( 0.2901,  0.3951 )   ( 0.2892,  0.3946 )  
 ## 
 ## Level     Percentile            BCa          
-## 95%   ( 0.2850,  0.3930 )   ( 0.2882,  0.3974 )  
+## 95%   ( 0.2871,  0.3925 )   ( 0.2926,  0.3976 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3114,8 +3120,7 @@ How about equality of variance?
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-## factor.
+## Warning in leveneTest.default(y = y, group = group, ...): group coerced to factor.
 \end{verbatim}
 
 \begin{verbatim}
@@ -3198,9 +3203,9 @@ The second section with the \texttt{boot()} command is where the real work is do
 ## 
 ## 
 ## Bootstrap Statistics :
-##      original     bias    std. error
-## t1* 45.084391 0.02813173   0.4228463
-## t2* -1.714546 0.01072471   0.7756338
+##      original      bias    std. error
+## t1* 45.084391  0.01492965   0.4155915
+## t2* -1.714546 -0.01628950   0.7584287
 \end{verbatim}
 
 So we get the original estimates for the two coefficients in this model: the mean at the first (alphabetical) location, Cumberland, and the difference in means between Cumberland and The Pas ). It is the second parameter, the difference between means, which is of interest here.
@@ -3233,7 +3238,7 @@ So we get the original estimates for the two coefficients in this model: the mea
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   (-3.266, -0.279 )  
+## 95%   (-3.291, -0.259 )  
 ## Calculations and Intervals on Original Scale
 \end{verbatim}
 
@@ -3277,7 +3282,7 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 ## 
 ## Coefficients:
 ##           Estimate Iter Pr(Prob)  
-## location1   0.8573 4060   0.0241 *
+## location1   0.8573  979    0.093 .
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3290,9 +3295,9 @@ The \texttt{lmp()} function does all the work for us. Here it is run with the op
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \texttt{Iter} coefficient: the Prob stopping rule stopped after 4060 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
+  \texttt{Iter} coefficient: the Prob stopping rule stopped after 979 iterations. Note that this number will vary each time you run this snippet of code. These are random permutation results, so expect variability.
 \item
-  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.0241 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.0241= about 97.6\%) of the 4060 cases. Mind you, 4060 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
+  \texttt{Pr(Prob)} coefficient: The estimated probability associated to H0 is 0.093 . The observed difference in fklngth between the two locations was larger than the permuted differences in about (1 - 0.093= about 90.7\%) of the 979 cases. Mind you, 979 permutations is not a large number, so small p values can't be expected to be very precise. If it is critical that you get more precise p values, more permutations would be needed. Two parameters can be tweaked: maxIter, the maximum number of iterations (default=5000), and Ca, that stops iterations when estimated standard error of the estimated p is less than Ca*p.~Default 0.1.
 \item
   \texttt{F-statistic}: The rest is the standard output for the model fitted to the data, with the standard parametric test. Here the p-value, assuming all assumptions are met, is 0.034.
 \end{enumerate}
@@ -3426,7 +3431,7 @@ Note that in the former case, we accept the null based on \(p = 0.05\), but in t
 \end{Shaded}
 
 \begin{verbatim}
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 \end{verbatim}
 
 \begin{figure}
@@ -3453,8 +3458,7 @@ With \emph{r} = 0.9930841. In the presence of correlation, the standard error of
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in wilcox.test.default(skull_w$width5, skull_w$width6, alternative =
-## "two.sided", : cannot compute exact p-value with ties
+## Warning in wilcox.test.default(skull_w$width5, skull_w$width6, alternative = "two.sided", : cannot compute exact p-value with ties
 \end{verbatim}
 
 \begin{verbatim}
@@ -3503,8 +3507,7 @@ But, wait a minute. We have used two-tailed tests here. But, given what we know 
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in wilcox.test.default(skull_w$width5, skull_w$width6, alternative =
-## "less", : cannot compute exact p-value with ties
+## Warning in wilcox.test.default(skull_w$width5, skull_w$width6, alternative = "less", : cannot compute exact p-value with ties
 \end{verbatim}
 
 \begin{verbatim}
@@ -3529,7 +3532,7 @@ Note that instead of rerunning the t-test specifying a one-tailed test, you can:
 \end{rmdwarning}
 
 To estimate the power of a paired t-test in R, we can use the function \texttt{power.t.test()}as for other t-tests but we need to specify the argument \texttt{type\ =\ "paired"}.
-You need to specify the mean difference within the pairs as the \texttt{delta}and standard deviance of difference within pairs as \texttt{sd}.
+You need to specify the mean diference within the pairs as the \texttt{delta}and standard deviance of difference within pairs as \texttt{sd}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3674,8 +3677,8 @@ In 1960-1962, the Grand Rapids Dam was built on the Saskatchewan River upstream 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-38-1.pdf}
-\caption{\label{fig:unnamed-chunk-38}Boxplot of sturgeon length per year}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-39-1.pdf}
+\caption{\label{fig:unnamed-chunk-39}Boxplot of sturgeon length per year}
 \end{figure}
 
 It appears as though there may have been a small drop in \texttt{fklngth} after the construction of the dam, but the data are variable and the effects are not clear. There might also be some problems with normality in the 1954 and 1966 samples, and it looks as though there are outliers in the 1958 and 1966 samples. Let's proceed with testing the assumptions of the ANOVA by running the analysis and looking at the residuals.
@@ -4018,18 +4021,18 @@ The confidence intervals, corrected for multiple tests by the Tukey method, are 
 ## 
 ## Fit: aov(formula = fklngth ~ myyear, data = dam10dat)
 ## 
-## Quantile = 2.5931
+## Quantile = 2.5945
 ## 95% family-wise confidence level
 ##  
 ## 
 ## Linear Hypotheses:
 ##                    Estimate lwr      upr     
-## m1958 - m1954 == 0   0.1872  -3.2706   3.6450
-## m1965 - m1954 == 0  -5.5077  -9.9964  -1.0189
-## m1966 - m1954 == 0  -3.3127  -6.3426  -0.2828
-## m1965 - m1958 == 0  -5.6949 -10.4104  -0.9793
-## m1966 - m1958 == 0  -3.4999  -6.8567  -0.1431
-## m1966 - m1965 == 0   2.1950  -2.2164   6.6063
+## m1958 - m1954 == 0   0.1872  -3.2725   3.6469
+## m1965 - m1954 == 0  -5.5077  -9.9989  -1.0164
+## m1966 - m1954 == 0  -3.3127  -6.3443  -0.2811
+## m1965 - m1958 == 0  -5.6949 -10.4131  -0.9767
+## m1966 - m1958 == 0  -3.4999  -6.8586  -0.1413
+## m1966 - m1965 == 0   2.1950  -2.2189   6.6088
 \end{verbatim}
 
 \begin{Shaded}
@@ -4363,39 +4366,9 @@ For this lab you need:
 \KeywordTok{library}\NormalTok{(multcomp)}
 \KeywordTok{library}\NormalTok{(car)}
 \KeywordTok{library}\NormalTok{(tidyverse)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## -- Attaching packages --------------------------------------------------------------------------------------------------------------------------------- tidyverse 1.3.1 --
-\end{verbatim}
-
-\begin{verbatim}
-## v tibble  3.1.7     v dplyr   1.0.9
-## v tidyr   1.2.0     v stringr 1.4.0
-## v readr   2.1.2     v forcats 0.5.1
-## v purrr   0.3.4
-\end{verbatim}
-
-\begin{verbatim}
-## -- Conflicts ------------------------------------------------------------------------------------------------------------------------------------ tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-## x dplyr::recode() masks car::recode()
-## x dplyr::select() masks MASS::select()
-## x purrr::some()   masks car::some()
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(effects)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## lattice theme set by effectsTheme()
-## See ?effectsTheme for details.
-\end{verbatim}
 
 \hypertarget{two-way-factorial-design-with-replication}{%
 \section{Two-way factorial design with replication}\label{two-way-factorial-design-with-replication}}
@@ -4414,10 +4387,10 @@ Suppose that we are interested in the effects of two factors: \texttt{location} 
 \end{itemize}
 
 \begin{verbatim}
-## Warning: Removed 4 rows containing non-finite values (stat_boxplot).
+## Warning: Removed 4 rows containing non-finite values (`stat_boxplot()`).
 \end{verbatim}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-41-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 From this, it appears as though females might be larger at both locations. It's difficult to get an idea of whether fish differ in size between the two locations. The presence of outliers on these plots suggests there might be problems meeting normality assumptions for the residuals.
 
@@ -4435,16 +4408,11 @@ From this, it appears as though females might be larger at both locations. It's 
 \end{Shaded}
 
 \begin{verbatim}
-##            sex     location rdwght.Min. rdwght.1st Qu. rdwght.Median
-## 1 FEMALE       CUMBERLAND      15.10000       20.40000      26.80000
-## 2 MALE         CUMBERLAND      14.00000       19.22500      20.85000
-## 3 FEMALE       THE_PAS         12.54000       19.14000      27.39000
-## 4 MALE         THE_PAS          4.73000       14.63000      20.79000
-##   rdwght.Mean rdwght.3rd Qu. rdwght.Max.
-## 1    27.37347       31.40000    55.60000
-## 2    22.14118       23.90000    35.60000
-## 3    27.97717       33.88000    93.72000
-## 4    20.64652       24.94250    49.94000
+##            sex     location rdwght.Min. rdwght.1st Qu. rdwght.Median rdwght.Mean rdwght.3rd Qu. rdwght.Max.
+## 1 FEMALE       CUMBERLAND      15.10000       20.40000      26.80000    27.37347       31.40000    55.60000
+## 2 MALE         CUMBERLAND      14.00000       19.22500      20.85000    22.14118       23.90000    35.60000
+## 3 FEMALE       THE_PAS         12.54000       19.14000      27.39000    27.97717       33.88000    93.72000
+## 4 MALE         THE_PAS          4.73000       14.63000      20.79000    20.64652       24.94250    49.94000
 \end{verbatim}
 
 The summary statistics confirm our interpretation of the box plots: females appear to be larger than males, and differences in fish size between locations are small.
@@ -4519,8 +4487,8 @@ On the basis of the ANOVA, there is no reason to reject two null hypotheses: (1)
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-46-1.pdf}
-\caption{\label{fig:unnamed-chunk-46}Checking model assumptions for ANOVA model1}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-47-1.pdf}
+\caption{\label{fig:unnamed-chunk-47}Checking model assumptions for ANOVA model1}
 \end{figure}
 
 As usual, we cannot accept the above results without first ensuring that the assumptions of ANOVA are met. Examination of the residuals plots above shows that the residuals are reasonably normally distributed, with the exception of three potential outliers flagged on the QQ plot (cases 101, 24, \& 71; the latter two are on top of one another). However, Cook's distances are not large for these (the 0.5 contour is not even visible on the plot), so there is little indication that these are a concern.The residuals vs fit plot shows that the spread of residuals is about equal over the range of the fitted values, again with the exception of a few cases. When we test for normality of residuals we get:
@@ -4638,8 +4606,8 @@ In this case, the interaction term \texttt{sex:location} is significant but the 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-53-1.pdf}
-\caption{\label{fig:unnamed-chunk-53}Effet du sexe et du lieu sur le poids des esturgeons}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-54-1.pdf}
+\caption{\label{fig:unnamed-chunk-54}Effet du sexe et du lieu sur le poids des esturgeons}
 \end{figure}
 
 \begin{Shaded}
@@ -4666,8 +4634,8 @@ In this case, the interaction term \texttt{sex:location} is significant but the 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-54-1.pdf}
-\caption{\label{fig:unnamed-chunk-54}Effet du sexe et du lieu sur le poids des esturgeons}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-55-1.pdf}
+\caption{\label{fig:unnamed-chunk-55}Effet du sexe et du lieu sur le poids des esturgeons}
 \end{figure}
 
 There is a very large difference between the results from \texttt{Stu2wdat} and \texttt{Stu2mdat}. In the former case, because there is no significant interaction, we can essentially pool over the levels of factor 1 (\texttt{sex}, say) to test for the effects of location , or over the levels of factor 2 (\texttt{location}) to test for the effects of sex . In fact, if we do so and simply run a one-way ANOVA on the \texttt{Stu2wdat} data with sex as the grouping variable, we get:
@@ -4810,8 +4778,8 @@ Assuming that this is a Model III ANOVA ( \texttt{date} random, \texttt{depth} f
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-63-1.pdf}
-\caption{\label{fig:unnamed-chunk-63}Effet du mois et de la profondeur sur la température}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-64-1.pdf}
+\caption{\label{fig:unnamed-chunk-64}Effet du mois et de la profondeur sur la température}
 \end{figure}
 
 There is a highly significant decrease in temperature as depth increases. To test the effect of month (the (assumed) random factor), we must assume that there is no interaction between depth and month, i.e.~that the change in temperature with depth is the same for each month. This is a dubious assumption: if you plot temperature against depth for each month, you should see that the temperature profile becomes increasingly non-linear as the summer progresses (i.e.~the thermocline develops), from almost a linear decline in early spring to what amounts to a step decline in August. In other words, the relationship between temperature and depth does change with month, so that if you were to use the above fitted model to estimate, say, the temperature at a depth of 5 m in July, you would not get a particularly good estimate.
@@ -4827,8 +4795,8 @@ In terms of residual diagnostics, have a look at the residuals probability plot 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-64-1.pdf}
-\caption{\label{fig:unnamed-chunk-64}Conditions d'applications du modèle anova.model4}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-65-1.pdf}
+\caption{\label{fig:unnamed-chunk-65}Conditions d'applications du modèle anova.model4}
 \end{figure}
 
 \begin{Shaded}
@@ -4854,8 +4822,7 @@ Testing the residuals for normality, we get \texttt{p\ =\ 0.16}, so that the nor
 \end{Shaded}
 
 \begin{verbatim}
-## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-## factor.
+## Warning in leveneTest.default(y = y, group = group, ...): group coerced to factor.
 \end{verbatim}
 
 \begin{verbatim}
@@ -4905,8 +4872,8 @@ What do you conclude from this analysis? What analysis would (should) you do nex
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-68-1.pdf}
-\caption{\label{fig:unnamed-chunk-68}Conditions d'applications du modèle anova.nested}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-69-1.pdf}
+\caption{\label{fig:unnamed-chunk-69}Conditions d'applications du modèle anova.nested}
 \end{figure}
 
 We conclude from this analysis that there is no (significant) variation among chambers within genotypes, but that the null hypothesis that all genotypes have the same dessiccation resistance (as measured by survival) is rejected (Test of genotype using MS genotype:chamber as denominator: F = 1476.11/6.78 = 217.7153, P\textless0.0001). In other words, genotypes differ in their survival.
@@ -4953,8 +4920,8 @@ A box plot of survival across genotypes shows clearly that there is significant 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-70-1.pdf}
-\caption{\label{fig:unnamed-chunk-70}Effet du genotype sur la résistance à la dessication avec un test de Tukey}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-71-1.pdf}
+\caption{\label{fig:unnamed-chunk-71}Effet du genotype sur la résistance à la dessication avec un test de Tukey}
 \end{figure}
 
 So, we conclude from the Tukey analysis and plot that dessiccation resistance (R) , as measured by larval survival under hot, dry conditions, varies significantly among all three genotypes with R(AA) \textgreater{} R(Aa) \textgreater{} R(aa).
@@ -4963,8 +4930,8 @@ Before concluding this, however, we must test the assumptions. Here are the resi
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-71-1.pdf}
-\caption{\label{fig:unnamed-chunk-71}Conditions d'applications du modèle anova.simple}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-72-1.pdf}
+\caption{\label{fig:unnamed-chunk-72}Conditions d'applications du modèle anova.simple}
 \end{figure}
 
 So, all the assumptions appear to be valid, and the conclusion reached above still holds. Note that if you compare the residual mean squares of the nested and one-way ANOVAs (5.04 vs 5.29), they are almost identical. This is not surprising, given the small contribution of the chamber \%in\% genotype effect to the explained sum of squares.
@@ -5126,7 +5093,7 @@ The ANOVA table is shown below. Technically, because the sample sizes in individ
 
 Look at the diagnostic plots:
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-78-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-79-1.pdf}
 
 Homoscedasticity looks ok, but normality less so.. Testing for
 normality, we get:
@@ -5187,8 +5154,8 @@ Overall, we conclude that there are no differences among species, and that the e
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-81-1.pdf}
-\caption{\label{fig:unnamed-chunk-81}Comparaison de Tukey des moyennes de consommation d'oxygèn en fonction del la concentration}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-82-1.pdf}
+\caption{\label{fig:unnamed-chunk-82}Comparaison de Tukey des moyennes de consommation d'oxygèn en fonction del la concentration}
 \end{figure}
 
 \begin{Shaded}
@@ -5232,7 +5199,7 @@ an interaction plot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-84-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-85-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -5288,7 +5255,7 @@ I find these outputs rather unsatisfying because they show only p-values, but no
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-87-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5558,8 +5525,8 @@ We will focus on herptiles for this exercise, so we better first have a look at 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-88-1.pdf}
-\caption{\label{fig:unnamed-chunk-88}Matrice de rélation et densité pour la richesse spécifique des amphibiens et reptiles}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-89-1.pdf}
+\caption{\label{fig:unnamed-chunk-89}Matrice de rélation et densité pour la richesse spécifique des amphibiens et reptiles}
 \end{figure}
 
 \hypertarget{multiple-regression-models-from-scratch}{%
@@ -5611,8 +5578,8 @@ On the basis of the regression, what do you conclude?
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-90-1.pdf}
-\caption{\label{fig:unnamed-chunk-90}Checking model asusmptions for regression of \emph{logherp} as a function of \emph{logarea}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-91-1.pdf}
+\caption{\label{fig:unnamed-chunk-91}Checking model asusmptions for regression of \emph{logherp} as a function of \emph{logarea}}
 \end{figure}
 
 It looks like there is a positive relationship between herptile species richness and wetland area: the larger the wetland, the greater the number of species. Note, however, that about 2/3 of the observed variability in species richness among wetlands is not ``explained'' by wetland area (R\textsuperscript{2} = 0.355). Residual analysis shows no major problems with normality, heteroscedasticity or independence of residuals.
@@ -5983,13 +5950,13 @@ regression and \texttt{swamp}.
 \end{rmdcode}
 
 \begin{verbatim}
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
 \end{verbatim}
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-107-1.pdf}
-\caption{\label{fig:unnamed-chunk-107}Relation entre swamp et les résidus de la régression entre logherp et logarea}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-108-1.pdf}
+\caption{\label{fig:unnamed-chunk-108}Relation entre swamp et les résidus de la régression entre logherp et logarea}
 \end{figure}
 
 Visual inspection of this graph suggests that there is a strong, but highly nonlinear, relationship between these two variables.
@@ -6052,7 +6019,7 @@ What do you conclude? What does examination of the residuals from this multiple 
 ## F-statistic: 19.82 on 2 and 25 DF,  p-value: 6.972e-06
 \end{verbatim}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-111-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-112-1.pdf}
 
 It is clear that once the effects of area are controlled for, a considerable amount of the remaining variability in herptile richness is explained by \texttt{swamp} , in a nonlinear fashion. If you examine model assumptions, you will see that compared to the linear model, the fit is much better.
 
@@ -6136,10 +6103,10 @@ VIF for the two swamp terms are much higher than the standard threshold of 5. Ho
 All the model selection techniques or the manual model crafting assumes that the standard assumptions (independence, normality, homoscedasticity, linearity) are met. Given that a large number of models can be fitted, it may seem that testing the assumptions at each step would be an herculean task. However, it is generally sufficient to examine the residuals of the full (saturated) model and of the final model. Terms not contributing significantly to the fit do not affect residuals much, and therefore, the residuals to the full model, or the residuals to the final model, are generally sufficient.
 
 Let's have a look at the diagnostic plots for the final model. Here we use the \texttt{check\_model()} function from the \texttt{performance} 📦.
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-115-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-116-1.pdf}
 
 Alternatively it can be done with the classic method
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-116-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-117-1.pdf}
 Everything looks about right here. For the skeptic, let's run the formal tests.
 
 \begin{Shaded}
@@ -6223,8 +6190,8 @@ How about effect size? How is that measured or viewed? The regression coefficien
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-121-1.pdf}
-\caption{\label{fig:unnamed-chunk-121}Graphiques de résidus partiels du modèle \texttt{model\_poly2}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-122-1.pdf}
+\caption{\label{fig:unnamed-chunk-122}Graphiques de résidus partiels du modèle \texttt{model\_poly2}}
 \end{figure}
 
 Note that the vertical scale varies among plots. For \texttt{thtden}, the dependent variable (log10(herptile richness)) varies by about 0.4 units over the range of \texttt{thtden} in the sample. For \texttt{logarea}, the variation is about 0.6 log units. For \texttt{swamp}, it is a bit tricky since there are two terms and they have opposite effect (leading to a peaked relationship), so the plots are less informative. However, there is no deviation from linearity to be seen.
@@ -6233,8 +6200,8 @@ To illustrate what these graphs would look like if there was deviation from line
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-122-1.pdf}
-\caption{\label{fig:unnamed-chunk-122}Graphiques de résidus partiels du modèle \texttt{model\_nopoly}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-123-1.pdf}
+\caption{\label{fig:unnamed-chunk-123}Graphiques de résidus partiels du modèle \texttt{model\_nopoly}}
 \end{figure}
 
 The lack of linearity along the gradient of swamp becomes obvious.
@@ -6397,16 +6364,12 @@ If you look at the individual coefficients, some weird things happen: for exampl
 
 \begin{verbatim}
 ## there are higher-order terms (interactions) in this model
-## consider setting terms = 'marginal' or 'high-order'; see ?vif
+## consider setting type = 'predictor'; see ?vif
 \end{verbatim}
 
 \begin{verbatim}
-##        logarea         cpfor2         thtden          swamp     I(swamp^2) 
-##       49.86060       78.49622      101.42437       90.47389      115.08457 
-## logarea:cpfor2 logarea:thtden  logarea:swamp  cpfor2:thtden   cpfor2:swamp 
-##       66.97792       71.69894       67.27034       14.66814       29.41422 
-##   thtden:swamp 
-##       20.04410
+##        logarea         cpfor2         thtden          swamp     I(swamp^2) logarea:cpfor2 logarea:thtden  logarea:swamp  cpfor2:thtden   cpfor2:swamp   thtden:swamp 
+##       49.86060       78.49622      101.42437       90.47389      115.08457       66.97792       71.69894       67.27034       14.66814       29.41422       20.04410
 \end{verbatim}
 
 Ouch. All VIF are above 5, not only the ones involving the swamp terms. This model is not very satisfying it seems. Indeed the AIC for the two models indicate that the model with interactions has less information than the full model (remember, models with the lowest AIC value are to be preferred):
@@ -6530,8 +6493,7 @@ little empirical support):
 ## model.avg(object = top_models_1)
 ## 
 ## Component model call: 
-## lm(formula = logherp ~ <8 unique rhs>, data = mysub, na.action = 
-##      na.fail)
+## lm(formula = logherp ~ <8 unique rhs>, data = mysub, na.action = na.fail)
 ## 
 ## Component models: 
 ##        df logLik   AICc delta weight
@@ -6545,10 +6507,8 @@ little empirical support):
 ## 23456   7  25.79 -31.99  3.97   0.05
 ## 
 ## Term codes: 
-##         cpfor2     I(swamp^2)        logarea          swamp         thtden 
-##              1              2              3              4              5 
-##  logarea:swamp logarea:thtden   swamp:thtden 
-##              6              7              8 
+##         cpfor2     I(swamp^2)        logarea          swamp         thtden  logarea:swamp logarea:thtden   swamp:thtden 
+##              1              2              3              4              5              6              7              8 
 ## 
 ## Model-averaged coefficients:  
 ## (full average) 
@@ -6659,8 +6619,8 @@ You can then plot the results using the follwoing code. When run, it will pause 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-137-1.pdf}
-\caption{\label{fig:unnamed-chunk-137}Distribution of bootstrapped estimates for \texttt{logarea}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-138-1.pdf}
+\caption{\label{fig:unnamed-chunk-138}Distribution of bootstrapped estimates for \texttt{logarea}}
 \end{figure}
 
 The top plot is the probability density function and the bottom one is the histogram of the bootstrap estimates for the coefficient. On these plots, the red line indicate the value of the parameter in the ordinary analysis, and the two vertical black lines mark the limits of the 95\% confidence interval. Here the CI does not include 0 and one can conclude that the effect of logarea on logherp is significantly positive.
@@ -6676,15 +6636,15 @@ Precise values for the limits can be obtained by:
 \end{Shaded}
 
 \begin{verbatim}
-##       (Intercept)   logarea       thtden      swamp    I(swamp^2)
-## 0.5%  -0.73588966 0.1245537 -0.046259412 0.01625846 -0.0003481962
-## 1%    -0.70076380 0.1448210 -0.044842055 0.01743348 -0.0003438435
-## 2.5%  -0.64819530 0.1559929 -0.042025186 0.01914700 -0.0003322231
-## 5%    -0.60402664 0.1637566 -0.039792139 0.02112919 -0.0003170451
-## 95%   -0.08396235 0.2773623 -0.011309560 0.03783268 -0.0001830793
-## 97.5% -0.03440503 0.2917303 -0.009043622 0.03974768 -0.0001639824
-## 99%    0.02016002 0.3116052 -0.005992926 0.04099485 -0.0001513758
-## 99.5%  0.07264298 0.3148842 -0.005135428 0.04195361 -0.0001453837
+##        (Intercept)   logarea       thtden      swamp    I(swamp^2)
+## 0.5%  -0.755194629 0.1275886 -0.045180599 0.01764777 -0.0003513934
+## 1%    -0.726482362 0.1349996 -0.044585511 0.01814751 -0.0003435072
+## 2.5%  -0.671940550 0.1467760 -0.041979305 0.01996303 -0.0003300269
+## 5%    -0.610995306 0.1640262 -0.039173060 0.02155185 -0.0003169131
+## 95%   -0.078154290 0.2847735 -0.010408416 0.03798729 -0.0001837010
+## 97.5% -0.039451842 0.2928653 -0.007997281 0.03941383 -0.0001691290
+## 99%    0.003640081 0.3040145 -0.003952532 0.04125716 -0.0001559841
+## 99.5%  0.033698932 0.3111522 -0.002040744 0.04221834 -0.0001501225
 \end{verbatim}
 
 These confidence limits are not reliable when the distribution of the bootstrap estimates deviate from Gaussian. If they do,, then it is preferable to compute so-called bias-corrected accelerated (BCa) confidence limits. The following code does just that:
@@ -6742,12 +6702,11 @@ For \texttt{logarea}, we get:
 ## 
 ## Intervals : 
 ## Level       BCa          
-## 95%   ( 0.1293,  0.3293 )  
+## 95%   ( 0.1188,  0.3194 )  
 ## Calculations and Intervals on Original Scale
-## Some BCa intervals may be unstable
 \end{verbatim}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-141-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-142-1.pdf}
 
 Note that the BCa interval is from 0.12 to 0.32, whereas the simpler percentile interval is 0.16 to 0.29. BCa interval here is longer on the low side, and shorter on the high side, which it should be given the distribution of bootstrap estimates.
 
@@ -6870,8 +6829,8 @@ First, let's have a look at the data. It would help to draw the regression line 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-145-1.pdf}
-\caption{\label{fig:unnamed-chunk-145}Sturgeon length as a function of age}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-146-1.pdf}
+\caption{\label{fig:unnamed-chunk-146}Sturgeon length as a function of age}
 \end{figure}
 
 The log-log transformation makes the relationship linear and, at first glance, there is no issues with assumptions of LMs (although this should be confirmed by appropriate examination of the residuals). Let's fit the full model with both main effects and the interaction:
@@ -6918,8 +6877,8 @@ But before accepting these conclusions, we should test the assumptions in the us
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-148-1.pdf}
-\caption{\label{fig:unnamed-chunk-148}Model assumptions for \texttt{model.full1}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-149-1.pdf}
+\caption{\label{fig:unnamed-chunk-149}Model assumptions for \texttt{model.full1}}
 \end{figure}
 
 With respect to normality, things look O.K., although there are several points in the top right corner that appear to lie off the line. We could also run a Wilk-Shapiro normality test and find \emph{W = 0.9764}, \emph{p = 0.09329}, also suggesting this assumption is valid. Homoscedasticity seems fine too, but if you want further evidence of this, you can run one of the tests. Here I use the Breusch-Pagan test, which is appropriate when some of the independent variables are continuous (Levene's test is for categorical independent variables only):
@@ -7003,8 +6962,8 @@ The file \texttt{anc3dat.csv} records data on male sturgeon collected at two loc
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-154-1.pdf}
-\caption{\label{fig:unnamed-chunk-154}Longueur des esturgeons en fonction de l'age d'après \texttt{anc3dat}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-155-1.pdf}
+\caption{\label{fig:unnamed-chunk-155}Longueur des esturgeons en fonction de l'age d'après \texttt{anc3dat}}
 \end{figure}
 
 \begin{Shaded}
@@ -7032,8 +6991,8 @@ In this case, we reject the null hypotheses that (1) the slopes of the regressio
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-155-1.pdf}
-\caption{\label{fig:unnamed-chunk-155}Conditions d'applications du modèle \texttt{model.full2}}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-156-1.pdf}
+\caption{\label{fig:unnamed-chunk-156}Conditions d'applications du modèle \texttt{model.full2}}
 \end{figure}
 
 If you analyze the residuals (in the way described above), you will find that there is no problem with the linearity assumption, nor the homoscedasticity assumption (BP = 1.2267, p = 0.268). However, Wilk-Shapiro test of normality of residuals is suspicious (W=0.97, p = 0.03). Given the relatively large sample size (\(N = 92\)), this normality test has high power and the magnitude of deviation from normality does not appear to be large. Considering the robustness of GLM to non-normality with large samples, we should not be overly concerned with this violation.
@@ -7053,10 +7012,8 @@ full model:
 ## lm(formula = lfkl ~ lage + locate + lage:locate, data = anc3dat)
 ## 
 ## Coefficients:
-##             (Intercept)                     lage       locateNELSON        
-##                  1.2284                   0.3253                   0.2207  
-## lage:locateNELSON        
-##                 -0.1656
+##             (Intercept)                     lage       locateNELSON        lage:locateNELSON        
+##                  1.2284                   0.3253                   0.2207                  -0.1656
 \end{verbatim}
 
 By default, the variable \texttt{locate} in the model is internally encoded as 0 for the location that comes first alphabetically (LofW) and 1 for the other (Nelson). So the regression equations for each location become:
@@ -7092,7 +7049,7 @@ separately.
 ## (Intercept)         lage  
 ##      1.2284       0.3253  
 ## 
-## ------------------------------------------------------------ 
+## --------------------------------------------------------------------------------------------------------------------------------- 
 ## anc3dat$locate: NELSON      
 ## 
 ## Call:
@@ -7308,7 +7265,7 @@ Including all data.
 ## Multiple R-squared:  0.6063, Adjusted R-squared:  0.5987 
 ## F-statistic: 80.09 on 1 and 52 DF,  p-value: 4.16e-12
 ## 
-## ------------------------------------------------------------ 
+## --------------------------------------------------------------------------------------------------------------------------------- 
 ## anc1dat[, "sex"]: MALE        
 ## 
 ## Call:
@@ -7365,7 +7322,7 @@ Difference in intercept is indeed really small. Now let's have a look when we ex
 ## Multiple R-squared:  0.6083, Adjusted R-squared:  0.6003 
 ## F-statistic: 76.11 on 1 and 49 DF,  p-value: 1.526e-11
 ## 
-## ------------------------------------------------------------ 
+## --------------------------------------------------------------------------------------------------------------------------------- 
 ## anc1dat[, "sex"]: MALE        
 ## 
 ## Call:
@@ -7730,8 +7687,8 @@ The \texttt{vcd} 📦 includes a \texttt{mosaic()} function useful to graphicall
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-176-1.pdf}
-\caption{\label{fig:unnamed-chunk-176}Mosaic plot of sex classes per age}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-177-1.pdf}
+\caption{\label{fig:unnamed-chunk-177}Mosaic plot of sex classes per age}
 \end{figure}
 
 Mosaic plots represent the proportion of observations in each combination of categories (here there are 18 categories, 2 sexes x 9 age classes). Categories with a higher proportion of observations are represented by larger rectangles. Visually, one can see that males and females are approximately equal for young age classes, but that the proportion of females increases quite a bit amongst the elders.
@@ -7766,8 +7723,8 @@ The mosaic plot from the \texttt{vcd} 📦 can be shaded to show the categories 
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-178-1.pdf}
-\caption{\label{fig:unnamed-chunk-178}Mosaic plot of sex by age with colours}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-179-1.pdf}
+\caption{\label{fig:unnamed-chunk-179}Mosaic plot of sex by age with colours}
 \end{figure}
 
 The shading of each rectangle is proportional to the extent that observed frequencies deviate from what would be expected if sex and age class were independent. The age classes 40-49 and 50-59 have a sex ratio about equal to the overall sex:ratio for the entire dataset, and appear in grey. There are more young males and old females than expected if sex ratio did not change with age, and these rectangles are coded in blue. On the other hand, there are fewer young females and old males than if sex ratio did not change with age, and these rectangles are red coded. Note that the p-value printed on the right of the graph is for the chi-square test that assumes that observations are independent.
@@ -7783,8 +7740,7 @@ The estimation of p-value associated with the chi square statistic is less than 
 
 \begin{verbatim}
 ## 
-##  Pearson's Chi-squared test with simulated p-value (based on 10000
-##  replicates)
+##  Pearson's Chi-squared test with simulated p-value (based on 10000 replicates)
 ## 
 ## data:  USTable
 ## X-squared = 1162.6, df = NA, p-value = 9.999e-05
@@ -7814,8 +7770,7 @@ But this test will fail for large samples, like in this example:
 
 \begin{verbatim}
 ## 
-##  Fisher's Exact Test for Count Data with simulated p-value (based on
-##  10000 replicates)
+##  Fisher's Exact Test for Count Data with simulated p-value (based on 10000 replicates)
 ## 
 ## data:  USTable
 ## p-value = 9.999e-05
@@ -7843,9 +7798,6 @@ The \texttt{glm()} function with the option \texttt{family=poisson()} allows the
 ## Call:
 ## glm(formula = frequency ~ sex * ageclass, family = poisson(), 
 ##     data = USPopSurvey)
-## 
-## Deviance Residuals: 
-##  [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 ## 
 ## Coefficients:
 ##                        Estimate Std. Error  z value Pr(>|z|)    
@@ -7966,8 +7918,8 @@ These data are not particularly good for testing the null hypothesis that the se
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-186-1.pdf}
-\caption{\label{fig:unnamed-chunk-186}Proportion de plantes infectées en fonction de la température er la lumière}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-187-1.pdf}
+\caption{\label{fig:unnamed-chunk-187}Proportion de plantes infectées en fonction de la température er la lumière}
 \end{figure}
 
 The principle of testing for independence through interactions can be extended to multi-way tables, that is, tables in which more than two criteria are used to classify observations. For example, suppose that we wanted to test the effect of temperature (two levels: high and low) and light (two levels: high irradiance and low irradiance) on the number of plants infected by a plant pathogen (two levels: infected and non-infected). In this case we would need a three-way table with three criteria (infection status, temperature, and light).
@@ -7986,7 +7938,7 @@ The file \texttt{loglin.csv} contains the frequencies ( \texttt{frequency} ) of 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-187-1.pdf}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-188-1.pdf}
 
 The symmetrical experimental design with the same number of observations made at the two levels of light and of temperature is apparent in the above plot in the overall equal area occupied by the observations in each of the four quadrants. What is of interest, the infected status, appears to vary among the quadrants (i.e.~levels of light and temperature). For example, the red rectangles in the lower left and upper right quadrants indicates that there were fewer infected plants at high light and low temperature (bottom left), and fewer uninfected plants at low light and high temperature than if the infected level was not affected by light and temperature. The p-value at the bottom of the color scale represents a test of independence equivalent to testing the full model against a reduced model including only the main effect of temperature, light, and infected status on the (ln) number of observations.
 
@@ -8100,8 +8052,8 @@ Open \texttt{sturgdat.csv} , then use the table() function to summarize the data
 
 \begin{figure}
 \centering
-\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-190-1.pdf}
-\caption{\label{fig:unnamed-chunk-190}Frequency of female and male sturgeon as a function of year and location}
+\includegraphics{Labs_BIO4158_files/figure-latex/unnamed-chunk-191-1.pdf}
+\caption{\label{fig:unnamed-chunk-191}Frequency of female and male sturgeon as a function of year and location}
 \end{figure}
 
 \begin{rmdcode}
@@ -8122,36 +8074,20 @@ Using the frequency form of the table, fit the full log-linear model just as we 
 ## glm(formula = Freq ~ sex * year * location, family = "poisson", 
 ##     data = sturgdat.freq)
 ## 
-## Deviance Residuals: 
-##  [1]  0  0  0  0  0  0  0  0  0  0  0  0
-## 
 ## Coefficients:
-##                                               Estimate Std. Error z value
-## (Intercept)                                    2.30259    0.31623   7.281
-## sexMALE                                        0.33647    0.41404   0.813
-## year1979                                       1.09861    0.36515   3.009
-## year1980                                       0.09531    0.43693   0.218
-## locationTHE_PAS                               -0.69315    0.54772  -1.266
-## sexMALE        :year1979                      -1.09861    0.52554  -2.090
-## sexMALE        :year1980                      -0.94261    0.65498  -1.439
-## sexMALE        :locationTHE_PAS                0.82668    0.65873   1.255
-## year1979:locationTHE_PAS                      -0.22314    0.64550  -0.346
-## year1980:locationTHE_PAS                       1.93284    0.64593   2.992
-## sexMALE        :year1979:locationTHE_PAS      -0.06454    0.83986  -0.077
-## sexMALE        :year1980:locationTHE_PAS      -0.96776    0.87942  -1.100
-##                                               Pr(>|z|)    
-## (Intercept)                                    3.3e-13 ***
-## sexMALE                                        0.41641    
-## year1979                                       0.00262 ** 
-## year1980                                       0.82732    
-## locationTHE_PAS                                0.20569    
-## sexMALE        :year1979                       0.03658 *  
-## sexMALE        :year1980                       0.15011    
-## sexMALE        :locationTHE_PAS                0.20950    
-## year1979:locationTHE_PAS                       0.72957    
-## year1980:locationTHE_PAS                       0.00277 ** 
-## sexMALE        :year1979:locationTHE_PAS       0.93875    
-## sexMALE        :year1980:locationTHE_PAS       0.27114    
+##                                               Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                                    2.30259    0.31623   7.281  3.3e-13 ***
+## sexMALE                                        0.33647    0.41404   0.813  0.41641    
+## year1979                                       1.09861    0.36515   3.009  0.00262 ** 
+## year1980                                       0.09531    0.43693   0.218  0.82732    
+## locationTHE_PAS                               -0.69315    0.54772  -1.266  0.20569    
+## sexMALE        :year1979                      -1.09861    0.52554  -2.090  0.03658 *  
+## sexMALE        :year1980                      -0.94261    0.65498  -1.439  0.15011    
+## sexMALE        :locationTHE_PAS                0.82668    0.65873   1.255  0.20950    
+## year1979:locationTHE_PAS                      -0.22314    0.64550  -0.346  0.72957    
+## year1980:locationTHE_PAS                       1.93284    0.64593   2.992  0.00277 ** 
+## sexMALE        :year1979:locationTHE_PAS      -0.06454    0.83986  -0.077  0.93875    
+## sexMALE        :year1980:locationTHE_PAS      -0.96776    0.87942  -1.100  0.27114    
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
