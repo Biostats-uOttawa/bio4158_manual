@@ -5,8 +5,7 @@
 <meta name="generator" content="quarto-1.4.544">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Julien Martin">
-<meta name="dcterms.date" content="2024-01-22">
-<title>Bio4158 manual</title>
+<title>Bio4158 manual - Appendix A — Software Tools</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -53,27 +52,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -82,7 +61,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-introR_4.html" rel="next">
+<link href="./99-references.html" rel="prev">
 <link href="./cover.jpg" rel="icon" type="image/jpeg">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -205,7 +184,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-software.html">Appendices</a></li><li class="breadcrumb-item"><a href="./10-software.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Tools</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -215,7 +194,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -284,7 +263,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-software.html" class="sidebar-item-text sidebar-link">
+  <a href="./10-software.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Tools</span></span></a>
   </div>
 </li>
@@ -298,197 +277,106 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a>
-  <ul class="collapse">
-<li><a href="#general-points-to-keep-in-mind" id="toc-general-points-to-keep-in-mind" class="nav-link" data-scroll-target="#general-points-to-keep-in-mind">General points to keep in mind</a></li>
-  <li><a href="#what-is-r-and-why-use-it-in-this-course" id="toc-what-is-r-and-why-use-it-in-this-course" class="nav-link" data-scroll-target="#what-is-r-and-why-use-it-in-this-course">What is R and why use it in this course?</a></li>
-  <li>
-<a href="#software-installation" id="toc-software-installation" class="nav-link" data-scroll-target="#software-installation">Software installation</a>
-  <ul class="collapse">
-<li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r">R</a></li>
-  <li><a href="#rstudio-or-vs-code" id="toc-rstudio-or-vs-code" class="nav-link" data-scroll-target="#rstudio-or-vs-code">Rstudio or VS code</a></li>
-  <li><a href="#r-libraries" id="toc-r-libraries" class="nav-link" data-scroll-target="#r-libraries">R libraries</a></li>
-  </ul>
-</li>
-  <li><a href="#general-laboratory-instructions" id="toc-general-laboratory-instructions" class="nav-link" data-scroll-target="#general-laboratory-instructions">General laboratory instructions</a></li>
-  <li>
-<a href="#notes-about-the-manual" id="toc-notes-about-the-manual" class="nav-link" data-scroll-target="#notes-about-the-manual">Notes about the manual</a>
-  <ul class="collapse">
-<li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
-  </ul>
-</li>
-  </ul>
-</li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_course/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<li><a href="#r-and-r-packages" id="toc-r-and-r-packages" class="nav-link active" data-scroll-target="#r-and-r-packages"><span class="header-section-number">A.1</span> R and R packages</a></li>
+  <li><a href="#pandoc" id="toc-pandoc" class="nav-link" data-scroll-target="#pandoc"><span class="header-section-number">A.2</span> Pandoc</a></li>
+  <li><a href="#latex" id="toc-latex" class="nav-link" data-scroll-target="#latex"><span class="header-section-number">A.3</span> LaTeX</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_course/edit/main/10-software.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">Bio4158 manual</h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-software.html">Appendices</a></li><li class="breadcrumb-item"><a href="./10-software.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Software Tools</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title">Appendix A — Software Tools</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Julien Martin </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2024-01-22</p>
-    </div>
-  </div>
   
     
   </div>
   
 
 
-</header>
-<section id="welcome" class="level1 unnumbered"><h1 class="unnumbered">Welcome</h1><p><img src="images/blue_dragon.jpg" title="Bio4158 manual" class="quarto-cover-image img-fluid"></p>
-<p>The laboratory exercises outlined in the following pages are designed to allow you to develop some expertise in using statistical software (R) to analyze data. R is powerful statistical software but, like all software, it has its limitations. In particular, it is dumb: it cannot think for you, it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your results. The manual was written with the help of Rmarkfdown <span class="citation" data-cites="xie2015">Xie (<a href="99-references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span>.</p>
-<section id="general-points-to-keep-in-mind" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="general-points-to-keep-in-mind">General points to keep in mind</h2>
-<ul>
-<li><p>Before attempting any statistical procedure, you must familiarize yourself with what the procedure is actually doing. This does not mean you actually have to know the underlying mathematics (although this certainly helps!), but you should at least understand the principles involved in the analysis. Therefore, before doing a laboratory exercise, read the appropriate section(s) in the lecture notes. Otherwise, the output from your analyses - even if done correctly - will seem like drivel.</p></li>
-<li><p>The laboratories are designed to complement the lectures, and vice versa. Owing to scheduling constraints, it may not be possible to synchronize the two perfectly. But feel free to bring questions about the laboratories to class, or questions about the lectures to the labs.</p></li>
-<li><p>Work on the laboratories at your own speed: some can be donemuch more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratorieswe have allotted two laboratory sessions. Although you will notbe “graded” on the laboratories per se, be aware that completingthe labs is essential. If you do not complete the labs, it is veryunlikely that you will be able to complete the assignments and thefinal exam/term paper. So take these laboratories seriously!</p></li>
-<li>
-<p>The objective of the first lab is to allow you to acquire or reviewthe minimum knowledge required to complete the following laboratory exercises with R. There are always several methods toaccomplish something in R, but you will only find simple ways inthis manual. Those amongst you that want to go further will easilyfind many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:</p>
-<ul>
-<li>R for beginners http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf</li>
-<li>An introduction to R http://cran.r-project.org/doc/manuals/R-intro.html</li>
-<li>If you prefer paper books, the CRAN web site has a commented list at : http://www.r-project.org/doc/bib/R-books.html</li>
-<li>Excellent list of R books https://www.bigbookofr.com/</li>
-<li>R reference card by Tom Short http://cran.r-project.org/doc/contrib/Short-refcard.pdf</li>
-</ul>
-</li>
-</ul></section><section id="what-is-r-and-why-use-it-in-this-course" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="what-is-r-and-why-use-it-in-this-course">What is R and why use it in this course?</h2>
-<p>R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design intreface that some find convivial.</p>
-<p>R has 2 major advantages for this course. Initially, you will find that it also has one inconvenience. However, this “inconvenience” will rapidly force you to acquire very good working habits. So, I see it as a third advantage.</p>
-<p>The first advantage is that you can install it freely on you personal computer(s). This is important because it is by doing analyses that you will learn and eventually master biostatistics. This implies that you have easy and unlimited access to a statistical software package. The second advantage is that R can do everything in statistics. R was conceived to be extensible and has become the preferred tool for statisticians around the world. The question is not “Can R do this?” but rather “How can I do this in R?”. And search engine are your friends.</p>
-<p>No other software package offers you these two advantages.</p>
-<p>The inconvenience of R is that one has to type commands (or copy and paste code) rather than use a menu and select options. If you do not know what command to use, nothing will happen. It is therefore not that easy when you start. However, it is possible to rapidly learn to make basic operations (open a data file, plot data, and run a simple analysis). And once you understand the operating principle, you can easily find examples on the Web for more complex analyses and graphs for which you can adapt the code.</p>
-<p>This is exactly what you will do in the first lab to familiarize yourself with R.</p>
-<p>Why is this inconvenience really an advantage in my mind? Because this way of doing things is more efficient and will save you time on the long run. I guarantee it. Believe me, you will never do an analysis only once. As you’ll proceed through analyses, you will find data entry errors, discover that the analysis must be run separately for subgroups, find extra data, have to rerun the analysis on transformed data, or you will make some analytical error along the way. If you use a graphical interface with menus, redoing an analysis implies that you reclick here, enter values there, select some options, etc. Each of these steps is a potential source of error. If, instead, you use lines of codes, you only have to fix the code and submit to repeat instantaneously the entire analysis. And you can perfectly document what you did, leaving an audit trail for the future. This is how pros work and can document the quality of the results of their analyses.</p>
-</section><section id="software-installation" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="software-installation">Software installation</h2>
-<section id="r" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="r">R</h3>
-<p>To install R on a computer, go to http://cran.r-project.org/. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).</p>
-<p>Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).</p>
-</section><section id="rstudio-or-vs-code" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="rstudio-or-vs-code">Rstudio or VS code</h3>
-<p>RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux</p>
-<ul>
-<li>RStudio: https://www.rstudio.com/products/rstudio/download/</li>
-<li>VScode: https://code.visualstudio.com/download</li>
-</ul></section><section id="r-libraries" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="r-libraries">R libraries</h3>
-<p>R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.</p>
-<ul>
-<li>Rmarkdown</li>
-<li>tinytex</li>
-</ul>
-<p>Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.</p>
+</header><p>For those who are not familiar with software packages required for using R Markdown, we give a brief introduction to the installation and maintenance of these packages.</p>
+<section id="r-and-r-packages" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="r-and-r-packages">
+<span class="header-section-number">A.1</span> R and R packages</h2>
+<p>R can be downloaded and installed from any CRAN (the Comprehensive R Archive Network) mirrors, e.g., https://cran.rstudio.com. Please note that there will be a few new releases of R every year, and you may want to upgrade R occasionally.</p>
+<p>To install the <strong>bookdown</strong> package, you can type this in R:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rmarkdown"</span>, <span class="st">"tinytex"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bookdown"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!-- ### G\*Power {.unnumbered}
-
-G\*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
-Le programme existe en version Mac et Windows.
-Il peut cependant être utilisé sous linux via Wine.
-G\*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.
-
-Téléchargez le programme  sur le site https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html
- -->
-</section></section><section id="general-laboratory-instructions" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="general-laboratory-instructions">General laboratory instructions</h2>
-<ul>
-<li>Bring a USB key or equivalent so you can save your work. Alternatively, email your results to yourself.</li>
-<li>Read the lab exercise before coming to the lab. Read the R code and come with questions about the code.</li>
-<li>During pre-labs, listen to the special instructions</li>
-<li>Do the laboratory exercises at your own rhythm, in teams. Then, I recommend that you start (complete?) the lab assignment so that you can benefit from the presence of the TA or prof.</li>
-<li>During your analyses, copy and paste results in a separate document, for example in your preferred word processing program. Annotate abundantly</li>
-<li>Each time you shut down R, save the history of your commands (ex: labo1.1 rHistory, labo1.2.rHistory, etc). You will be able to redo the lab rapidly, get code fragments, or more easily identify errors.</li>
-<li>Create your own “library” of code fragments (snippets). Annotate it abundantly. You will thank yourself later.</li>
-</ul></section><section id="notes-about-the-manual" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="notes-about-the-manual">Notes about the manual</h2>
-<p>You will find explanations on the theory, R code and functions, IDE best practice and exercises with R.</p>
-<p>The manual tries to highlight some part of the text using the following boxes and icons.</p>
-<div class="callout callout-style-simple callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>This installs all required R packages. You can also choose to install all optional packages as well, if you do not care too much about whether these packages will actually be used to compile your book (such as <strong>htmlwidgets</strong>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bookdown"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Exercises
+<p>If you want to test the development version of <strong>bookdown</strong> on GitHub, you need to install <strong>devtools</strong> first:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"rstudio/bookdown"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>R packages are also often constantly updated on CRAN or GitHub, so you may want to update them once in a while:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/update.packages.html">update.packages</a></span><span class="op">(</span>ask <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-body-container callout-body">
-
+<p>Although it is not required, the RStudio IDE can make a lot of things much easier when you work on R-related projects. The RStudio IDE can be downloaded from https://www.rstudio.com.</p>
+</section><section id="pandoc" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="pandoc">
+<span class="header-section-number">A.2</span> Pandoc</h2>
+<p>An R Markdown document (<code>*.Rmd</code>) is first compiled to Markdown (<code>*.md</code>) through the <strong>knitr</strong> package, and then Markdown is compiled to other output formats (such as LaTeX or HTML) through Pandoc. This process is automated by the <strong>rmarkdown</strong> package. You do not need to install <strong>knitr</strong> or <strong>rmarkdown</strong> separately, because they are the required packages of <strong>bookdown</strong> and will be automatically installed when you install <strong>bookdown</strong>. However, Pandoc is not an R package, so it will not be automatically installed when you install <strong>bookdown</strong>. You can follow the installation instructions on the Pandoc homepage (http://pandoc.org) to install Pandoc, but if you use the RStudio IDE, you do not really need to install Pandoc separately, because RStudio includes a copy of Pandoc. The Pandoc version number can be obtained via:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/pandoc_available.html">pandoc_version</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">## [1] '3.1.11.1'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>If you find this version too low and there are Pandoc features only in a later version, you can install the later version of Pandoc, and <strong>rmarkdown</strong> will call the newer version instead of its built-in version.</p>
+</section><section id="latex" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="latex">
+<span class="header-section-number">A.3</span> LaTeX</h2>
+<p>LaTeX is required only if you want to convert your book to PDF. You may see https://www.latex-project.org/get/ for more information about LaTeX and its installation, but we strongly recommend that you install the lightweight and cross-platform LaTeX distribution named <a href="https://yihui.org/tinytex/">TinyTeX</a> and based on TeX Live. TinyTeX can be easily installed through the R package <strong>tinytex</strong> (which should be automatically installed when you install <strong>bookdown</strong>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">install_tinytex</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-simple callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>With TinyTeX, you should never see error messages like this:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>! LaTeX Error: File `titling.sty' not found.</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Type X to quit or &lt;RETURN&gt; to proceed,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>or enter new name. (Default extension: sty)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>Enter file name:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>! Emergency stop.</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>&lt;read *&gt;</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>l.107 ^^M</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>pandoc: Error producing PDF</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>Error: pandoc document conversion failed with error 43</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Execution halted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The above error means you used a package that contains <code>titling.sty</code>, but it was not installed. LaTeX package names are often the same as the <code>*.sty</code> filenames, so in this case, you can try to install the <code>titling</code> package. If you use TinyTeX with R Markdown, missing LaTeX packages will be installed automatically, so you never need to worry about such problems.</p>
+<p>LaTeX distributions and packages are also updated from time to time, and you may consider updating them especially when you run into LaTeX problems. You can find out the version of your LaTeX distribution by:</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span><span class="op">(</span><span class="st">"pdflatex --version"</span><span class="op">)</span></span>
+<span><span class="co">## pdfTeX 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian)</span></span>
+<span><span class="co">## kpathsea version 6.3.4/dev</span></span>
+<span><span class="co">## Copyright 2021 Han The Thanh (pdfTeX) et al.</span></span>
+<span><span class="co">## There is NO warranty.  Redistribution of this software is</span></span>
+<span><span class="co">## covered by the terms of both the pdfTeX copyright and</span></span>
+<span><span class="co">## the Lesser GNU General Public License.</span></span>
+<span><span class="co">## For more information about these matters, see the file</span></span>
+<span><span class="co">## named COPYING and the pdfTeX source.</span></span>
+<span><span class="co">## Primary author of pdfTeX: Han The Thanh (pdfTeX) et al.</span></span>
+<span><span class="co">## Compiled with libpng 1.6.37; using libpng 1.6.37</span></span>
+<span><span class="co">## Compiled with zlib 1.2.11; using zlib 1.2.11</span></span>
+<span><span class="co">## Compiled with xpdf version 4.03</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Solutions
+<p>To update TinyTeX, you may run:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/tlmgr.html">tlmgr_update</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
-<div class="callout callout-style-simple callout-warning">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>warnings</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>important points</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>notes</p>
-</div>
-</div>
-</div>
-<section id="resources" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="resources">Resources</h3>
-<p>The manual is based on the previous lab manual <em>Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158</em>.</p>
-</section><section id="license" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="license">License</h3>
-<p>The document is available follwoing the license <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">License Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/icons/license_cc.png" class="img-fluid figure-img"></p>
-<figcaption>License Creative Commons</figcaption></figure>
+<p>From year to year, you may need to upgrade TinyTeX, too (otherwise you cannot install or update any LaTeX packages), in which case you may reinstall TinyTeX:</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html">reinstall_tinytex</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-xie2015" class="csl-entry" role="listitem">
-Xie, Y. 2015. <a href="http://yihui.name/knitr/">Dynamic documents with <span>R</span> and knitr</a>. 2nd edition. Chapman; Hall/CRC, Boca Raton, Florida.
-</div>
-</div>
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1019,11 +907,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./99-references.html" class="pagination-link  aria-label=" references="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-introR_4.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Introduction to R</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -1033,7 +921,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_course/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_course/edit/main/10-software.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
