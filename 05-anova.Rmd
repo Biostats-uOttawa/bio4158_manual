@@ -1,5 +1,14 @@
 # One-way ANOVA
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
+
 After completing this laboratory exercise, you should be able to:
 
 * Use R to do a one-way parametric ANOVA with multiple comparisons
@@ -35,15 +44,22 @@ In 1960-1962, the Grand Rapids Dam was built on the Saskatchewan River upstream 
 numerical variable year , so that R recognizes that we wish to treat this
 variable as a factor variable and not a continuous variable.
 
-```{r, ano-1, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse="true"}
+# Solution
+
+```{r, ano-1}
 dam10dat <- read.csv("data/Dam10dat.csv")
 dam10dat$year <- as.factor(dam10dat$year)
 str(dam10dat)
 ```
+:::
 
 - Next, have a look at the fklngth data, just as we did in the last lab for t-tests. Create a histogram with density line grouped by year to get a feel for what’s happening with your data and a boxplot of length per year. What can you say about these data?
 
-```{r, ano-2, warning = FALSE, message = FALSE, fig.cap = "Distribution of sturgeon length per year", echo = params$echo_sol, class.source = "exer" }
+::: {.callout-tip collapse="true"}
+# Solution
+
+```{r, ano-2, warning = FALSE, message = FALSE, fig.cap = "Distribution of sturgeon length per year"}
 
 mygraph <- ggplot(dam10dat, aes(x = fklngth)) +
   labs(x = "Fork length (cm)") +
@@ -66,9 +82,10 @@ mygraph <- ggplot(dam10dat, aes(x = fklngth)) +
 mygraph + facet_wrap(~year, ncol = 2)
 ```
 
-```{r, fig.cap = "Boxplot of sturgeon length per year", echo = params$echo_sol, class.source = "exer" }
+```{r, fig.cap = "Boxplot of sturgeon length per year"}
 boxplot(fklngth ~ year, data = dam10dat)
 ```
+:::
 
 It appears as though there may have been a small drop in `fklngth` after the construction of the dam, but the data are variable and the effects are not clear. There might also be some problems with normality in the 1954 and 1966 samples, and it looks as though there are outliers in the 1958 and 1966 samples. Let’s proceed with testing the assumptions of the ANOVA by running the analysis and looking at the residuals.
 
@@ -93,13 +110,13 @@ par(mfrow = c(2, 2))
 plot(anova.model1)
 ```
 
-```{block2, type="rmdwarning"}
+::: {.callout-warning}
 Double check that the independent variable is a **factor**. If the dependent variable is a **character**, then you will obtain only 3 graphs and an error message like:
 
 `hat values (leverages) are all = 0.1
 
  and there are no factor predictors; no plot no. 5`
-```
+:::
 
 D’après les graphiques, on peut douter de la normalité et de l’homogénéité des variances. Judging from the plots, it looks as though there may be problems with both normality and variance heterogeneity. Note that there is one point (case 59) with large expected values and a large residual that appear to lie well off the line: this is the outlier we noted earlier. This point might be expected to inflate the variance for the group it belongs to. Formal tests may also provide some insight as to whether we should be concerned about normality and variance heterogeneity. 
 

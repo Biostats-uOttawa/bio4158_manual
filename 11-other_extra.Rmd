@@ -1,6 +1,7 @@
 \cleardoublepage
 
-# (APPENDIX) Appendice {-}
+# (APPENDIX) Appendice {.unnumbered}
+
 
 sorry just in french for the moment
 

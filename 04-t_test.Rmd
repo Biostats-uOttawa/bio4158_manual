@@ -1,5 +1,13 @@
 # Two - sample comparisons
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 
 After completing this laboratory exercise, you should be able to:
 
@@ -23,6 +31,20 @@ For this la b you need:
 * data:
   * sturgeon.csv
   * skulldat_2020.csv
+
+```{r}
+#| echo: false
+
+library(car)
+library(lmtest)
+library(boot)
+library(pwr)
+library(ggplot2)
+library(performance)
+
+sturgeon <- read.csv("data/sturgeon.csv")
+skull <- read.csv("data/skulldat_2020.csv")
+```
 
 You need to load the packages in R with `library()` and if need needed install them first with `install.packages()`
 For the data, load them using the `read.csv()` function.
@@ -320,13 +342,13 @@ wilcox.test(skull_w$width5, skull_w$width6,
 )
 ```
 
-```{block2, type="rmdwarning"}
+::: {.callout-note}
 Note that instead of rerunning the t-test specifying a one-tailed test, you can:
 
 - if the sign of the estimate goes in the same direction as the alternative hypothesis, simply divide by 2 the probability you obtain with the two-tailed test
 - if not the sign of the estimate is in the opposite direction of the alternative hypothesis, use $1 - p/2$
 
-```
+:::
 
 To estimate the power of a paired t-test in R, we can use the function `power.t.test()`as for other t-tests but we need to specify the argument `type = "paired"`.
 You need to specify the mean diference within the pairs as the `delta`and standard deviance of difference within pairs as `sd`.

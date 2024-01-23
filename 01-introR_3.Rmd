@@ -1,5 +1,14 @@
 ## Analyse de 2 variables
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
+
 Faire une analyse bivariée, c'est étudier la relation entre deux variables : sont-elles liées ? les valeurs de l'une influencent-elles les valeurs de l'autre ? ou sont-elles au contraire indépendantes ?
 
 À noter qu'on va parler ici d'influence ou de lien, mais pas de relation de cause à effet : les outils présentés permettent de visualiser ou de déterminer une relation, mais des liens de causalité proprement dit sont plus difficiles à mettre en évidence. Il faut en effet vérifier que c'est bien telle variable qui influence telle autre et pas l'inverse, qu'il n'y a pas de "variable cachée", etc.
@@ -459,7 +468,9 @@ mosaicplot(tab, shade = TRUE)
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 library(questionr)
 data(hdv2003)
 tab <- table(hdv2003$qualif, hdv2003$clso)
@@ -468,16 +479,21 @@ tab <- table(hdv2003$qualif, hdv2003$clso)
 ## les pourcentages lignes
 lprop(tab)
 ```
-
+:::
 
 
 <!--
 Faire un test du χ². Peut-on rejeter l'hypothèse d'indépendance ?
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 chisq.test(tab)
 ```
+:::
+
+
 ## On peut rejeter l'hypothèse d'indépendance au seuil de 0.05,
 ## et même au seuil de 0.001
 -->
@@ -485,10 +501,12 @@ chisq.test(tab)
 Représenter ce tableau croisé sous la forme d'un `mosaicplot` en colorant les cases selon les résidus du test du χ².
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 mosaicplot(tab, shade = TRUE)
 ```
-
+:::
 
 
 
@@ -498,38 +516,49 @@ mosaicplot(tab, shade = TRUE)
 Toujours sur le jeu de données `hdv2003`, faire le boxplot qui croise le nombre d'heures passées devant la télévision (variable `heures.tv`) avec le statut d'occupation (variable `occup`).
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 boxplot(hdv2003$heures.tv ~ hdv2003$occup)
 ```
-
-
+:::
 
 
 
 Calculer la durée moyenne devant la télévision en fonction du statut d'occupation à l'aide de `tapply`.
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 tapply(hdv2003$heures.tv, hdv2003$occup, mean, na.rm = TRUE)
 ```
+:::
 
 **Exercice 3**
 
 Sur le jeu de données `rp2012`, représenter le nuage de points croisant le pourcentage de personnes sans diplôme (variable `dipl_aucun`) et le pourcentage de propriétaires (variable `proprio`).
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 library(questionr)
 data(rp2012)
 plot(rp2012$dipl_aucun, rp2012$proprio)
 ## ou
 plot(proprio ~ dipl_aucun, data = rp2012)
 ```
+:::
 
 <!--
 Calculer le coefficient de corrélation linéaire correspondant.
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 cor(rp2012$dipl_aucun, rp2012$proprio)
 ```
+:::
+
 -->

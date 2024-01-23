@@ -1,21 +1,10 @@
----
-title: "BIO4158 Applied biostats with R"
-subtitle: "Laboratory manual"
-author: "Julien Martin"
-date: "`r format(Sys.Date(), '%d-%m-%Y')`"
-site: bookdown::bookdown_site
-documentclass: book
-#lot: yes
-#lof: yes
-fontsize: 12pt
-#monofont: "Source Code Pro"
-monofontoptions: "Scale=0.7"
-description: "Laboratory manual for BIO4158 Applied biostatistics"
-github-repo: "Bio4158-4558-uottawa/lab_manual/"
-cover-image: "images/missing.png"
-params:
-  echo_sol: true
----
+# Welcome {.unnumbered}
+
+The laboratory exercises outlined in the following pages are designed to allow you to develop some expertise in using statistical software (R)
+to analyze data. R is powerful statistical software but, like all software, it has its limitations. In particular, it is dumb: it cannot think for you,
+it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your
+results. The manual was written with the help of Rmarkfdown @xie2015.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)
 # knitr::opts_chunk$set(out.extra = 'class="plot"')
@@ -33,19 +22,8 @@ library(pwr)
 library(performance)
 # svglite
 ```
-# Note {-}
-Development version. Lab material will appear slowly during the Fall 2021 term.
 
-
-# Preface {-}
-<!-- {-} pour enlever num/rotation -->
-
-The laboratory exercises outlined in the following pages are designed to allow you to develop some expertise in using statistical software (R)
-to analyze data. R is powerful statistical software but, like all software, it has its limitations. In particular, it is dumb: it cannot think for you,
-it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your
-results.
-
-## General points to keep in mind {-}
+## General points to keep in mind {.unnumbered}
 
 * Before attempting any statistical procedure, you must familiarize yourself with what the procedure is actually doing. This does not mean you actually have to know the underlying mathematics (although this certainly helps!), but you should at least understand the principles involved in the analysis. Therefore, before doing a laboratory exercise, read the appropriate section(s) in the lecture notes. Otherwise, the output from your analyses - even if done correctly - will seem like drivel. 
 * The laboratories are designed to complement the lectures, and vice versa. Owing to scheduling constraints, it may not be possible to synchronize the two perfectly. But feel free to bring questions about the laboratories to class, or questions about the lectures to the labs.
@@ -63,7 +41,7 @@ https://www.bigbookofr.com/
   * R reference card by Tom Short
 http://cran.r-project.org/doc/contrib/Short-refcard.pdf
 
-## What is R and why use it in this course? {-}
+## What is R and why use it in this course? {.unnumbered}
 R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design intreface that some find convivial.
 
 R has 2 major advantages for this course. Initially, you will find that it also has one inconvenience. However, this “inconvenience” will rapidly force you to acquire very good working habits. So, I see it as a third advantage.
@@ -78,21 +56,21 @@ This is exactly what you will do in the first lab to familiarize yourself with R
 
 Why is this inconvenience really an advantage in my mind? Because this way of doing things is more efficient and will save you time on the long run. I guarantee it. Believe me, you will never do an analysis only once. As you’ll proceed through analyses, you will find data entry errors, discover that the analysis must be run separately for subgroups, find extra data, have to rerun the analysis on transformed data, or you will make some analytical error along the way. If you use a graphical interface with menus, redoing an analysis implies that you reclick here, enter values there, select some options, etc. Each of these steps is a potential source of error. If, instead, you use lines of codes, you only have to fix the code and submit to repeat instantaneously the entire analysis. And you can perfectly document what you did, leaving an audit trail for the future. This is how pros work and can document the quality of the results of their analyses.
 
-## Software installation {-}
-### R{-}
+## Software installation {.unnumbered}
+### R {.unnumbered}
 
 To install R on a computer, go to http://cran.r-project.org/. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).
 
 Note : R has already been installed on the lab computers (the version may be slightly different, but this should not matter).
 
-### Rstudio or VS code {-}
+### Rstudio or VS code {.unnumbered}
 
 RStudio and VS code are integrated development environment software or IDE. RStudio was develop specifically to work with R. VScode is more generela but work extremely well with R. Both are available on Windows, OS X and Linux
 
 * RStudio: https://www.rstudio.com/products/rstudio/download/
 * VScode: https://code.visualstudio.com/download
 
-### R libraries{-}
+### R libraries {.unnumbered}
 
 R is essentially unlimited in terms of functions that can be used, because is relies on functions packages that can be added as extra components to use in R.
  
@@ -106,16 +84,17 @@ install.packages(c("rmarkdown", "tinytex"))
 ```
 
 
-### G\*Power {-}
+<!-- ### G\*Power {.unnumbered}
+
 G\*Power est un programme gratuit, développé par des psychologues de l’Université de Dusseldorf en Allemagne.
 Le programme existe en version Mac et Windows.
 Il peut cependant être utilisé sous linux via Wine.
 G\*Power vous permettra d’effectuer une analyse de puissance pour la majorité des tests que nous verrons au cours de la session sans avoir à effectuer des calculs complexes ou farfouiller dans des tableaux ou des figures décrivant des distributions ou des courbes de puissance.
 
 Téléchargez le programme  sur le site https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html
+ -->
 
-
-## General laboratory instructions {-}
+## General laboratory instructions {.unnumbered}
 
 - Bring a USB key or equivalent so you can save your work. Alternatively, email your results to yourself.
 - Read the lab exercise before coming to the lab. Read the R code and come with questions about the code.
@@ -127,42 +106,40 @@ recommend that you start (complete?) the lab assignment so that you can benefit 
 - Create your own “library” of code fragments (snippets). Annotate
 it abundantly. You will thank yourself later.
 
-## Notes about the manual {-}
+## Notes about the manual {.unnumbered}
 
 You will find explanations on the theory, R code and functions, IDE best practice and exercises with R.
 
 The manual tries to highlight some part of the text using the following boxes and icons.
 
 
-```{block2, type = "rmdcode"}
-Exercises,
-```
+::: {.callout-caution}
+# Exercises
+:::
 
-```{block2, type = "rmdcaution"}
-warnings,
-```
+::: {.callout-note}
+# Solutions
+:::
 
-```{block2, type = "rmdwarning"}
-warnings,
-```
+::: {.callout-warning}
+warnings
+:::
 
-```{block2, type = "rmdimportant"}
+::: {.callout-important}
 important points
-```
+:::
 
-```{block2, type = "rmdnote"}
+::: {.callout-note}
 notes
-```
-
-```{block2, type = "rmdtip"}
-and tips
-```
-### Resources {-}
-
-This document was developped using the excellent [bookdown](https://bookdown.org/) `r emo::ji("package")` de [Yihui Xie](https://yihui.name/). The manual is based on the previous lab manual *Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158*.
+:::
 
 
-### License {-}
+### Resources {.unnumbered}
+
+The manual is based on the previous lab manual *Findlay, Morin and Rundle, BIO4158 Laboratory manual for BIO4158*.
+
+
+### License {.unnumbered}
 
 The document is available follwoing the license [License Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 

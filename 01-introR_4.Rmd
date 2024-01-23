@@ -1,6 +1,13 @@
-<!-- # (PART) Introduction à R {-} -->
-
 # Introduction to R
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 
 After completing this laboratory exercise, you should be able to:
 
@@ -36,9 +43,9 @@ Data for exercises and labs are provides in `.csv`.
 
 ### Working directory
 
-```{block2, type='rmdwarning'}
+::: {.callout-warning}
 Potentially the most frequent error when starting with R is link to loading data or reading data from an external file in R.
-```
+:::
 
 A typical error message is:
 
@@ -57,13 +64,13 @@ This type of error simply means that R cannot find the file you specified. By de
 
 To know which folder is the workind directory simply type `getwd()`
 
-```{block2, type='rmdtip'}
+::: {.callout-note}
 When opening Rstudio by double-clicking on a file, it will automatically set the working irectory to the folder where this file is located. This can be super handy.
-```
+:::
 
-```{block2, type = "rmdimportant"}
+::: {.callout-important}
 For all labs, I strongly recommend you to make a folder where you will save all your R scripts and data and use it as your working directory in R. For better organisation I suggest to save your data in a subfolder named `data All R code for data loading in the manual is based on that structure. This is why dat loading or saving code look like `data/my_file.xxx`. If you follow it also all code for data loading can be simply copy-pasted and should work.
-```
+:::
 
 ### Opening a `.Rdata` file
 
@@ -83,17 +90,17 @@ For example, to create a R object named `erables` which contain the data from th
 erables <- read.csv("data/ErablesGatineau.csv")
 ```
 
-```{block2, type='rmdwarning'}
+::: {.callout-warning}
 Beware of the coma. If you are working in adifferent language (other than english), be careful because the decimal symbol might ot be the same.
 By default R use the point for the decimal sign. If the dat use the coma for the decimal then R would not be able to read the file correctly. In this case you can use `read.csv2()` or `read.data()` which should solve the problem.
-```
+:::
 
 To verify that the data were read and loaded properly, you can list all objects in memory with the `ls()` function, or get a more detailed description with `ls.str()`:
 
-```{block2, type = "rmdtip"}
+::: {.callout-note}
 I do not recommend to use `ls.str()` since it can produce really long R ouputs when you have multiple R object loaded.
 I suggest instead to use the combination of `ls()` to get the list of all R objects and then `str()` only for the objects you want to look at.
-```
+:::
 
 ```{r ls}
 ls()
@@ -163,11 +170,11 @@ For each variable, R lists:
 
 Note that several variables have missing values (NA). Only the variables `fklngth` (fork length), `sex` , `location` , and `year` have 186 observations.
 
-```{block2, type='rmdwarning'}
+::: {.callout-warning}
 **Beware of missing values**
 
 Several R functions are sensitive to missing values and you will frequently have to do your analyses on data subsets without missing data, or by using optional parameters in various commands. We will get back to this, but you should always pay attention and take note of missing data when you do analyses.
-```
+:::
 
 ### Histogram, empirical probability density, boxplot, and visual assessment of normality
 
@@ -180,11 +187,10 @@ hist(sturgeon$fklngth)
 
 The data appear to be approximately normal. This is good to know.
 
-```{block2, type = "rmdnote"}
-
+::: {.callout-note}
 Note that this syntax is a bit heavy as you need to prefix variable names by the data frame name `sturgeon$`. You can lighten the syntax by making the variables directly accessible by commands by typing the command `attach()`.
 However, I **strongly recommend not to use** it because it can lead to many problems hard to detect compare to the little benfit is provides
-```
+:::
 
 This histogram (Fig. \@ref(fig:hist-stur)) is a very classical representation of the distribution. Histograms are not perfect however because their shape partly depends on the number of bins used, more so for small samples. One can do better, especially if you want to visually compare the observed distribution to a normal distribution. But you need to come up with a bit of extra R code based on the `ggplot2` `r emo::ji("package")`.
 
@@ -269,9 +275,10 @@ Bars (whiskers) extend above and below the boxes from the minimum to the maximum
 In addition to histograms and other univariate plots, it is often informative to examine scatter plots.
 The command `plot(y~x)` produces a scatter plot of y on the vertical axis (the ordinate) vs x on the horizontal axis (abscissa).
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
  Create a scatterplot of fklngth vs age using the plot() command.
-```
+:::
 
 You should obtain:
 
@@ -301,11 +308,11 @@ sturgeon_female_1978 <- subset(sturgeon, sex == "FEMALE" & year == "1978")
 sturgeon_female_1978
 ```
 
-```{block2, type = "rmdcaution"}
+::: {.callout-warning}
 When using criteria to select cases, be careful of the `==` syntax to mean equal to.
 In this context, if you use a single `=`, you will not get what you want.
 The following table lists the most common criteria to create expressions and their R syntax.
-```
+:::
 
 Operator | Explanation | Operator | Explanation
 ----------|----------|----------|----------
@@ -316,17 +323,22 @@ Operator | Explanation | Operator | Explanation
  \&\& | And (control) | \|\| | Or (control)
  ! | Not | |
 
-```{block2, type ="rmdcode"}
+::: {.callout-caution}
+# Exercise
 Using the commands `subset()` and `hist()` , create a histogram for females caught in 1979 and 1980 (hint: `sex=="FEMALE" & (year
 =="1979" | year=="1980")`)
-```
+:::
 
 
-```{r intror-subex, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution of fluke length of female sturgeons in 1979 and 1980"}
+::: {.callout-tip collapse='true'}
+# Solution
+
+```{r intror-subex, warning = FALSE, message = FALSE, fig.cap = "Distibution of fluke length of female sturgeons in 1979 and 1980"}
 
 sub_female_7980 <- subset(sturgeon, sex == "FEMALE" & (year == "1979" | year == "1980"))
 hist(sub_female_7980$fklngth)
 ```
+:::
 
 ## Data transformation
 
@@ -375,8 +387,9 @@ called ratio for two environments (`milieu`: `IN VITRO` or `IN VIVO`)
 and for 3 strains (`souche`).
 Examine the ratio variable and make a graph to visually assess normality for the wild (SAUVAGE) strain.
 
-
-```{r intror-exer, warning = FALSE, message = FALSE, echo = params$echo_sol, class.source = "exer", fig.cap = "Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella"}
+::: {.callout-tip collapse="true"}
+# Solution
+```{r intror-exer, warning = FALSE, message = FALSE, fig.cap = "Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella"}
 ## load the data
 salmonella <- read.csv("data/salmonella.csv")
 
@@ -406,3 +419,5 @@ mygraph <- mygraph +
 ## plot the graph
 mygraph
 ```
+:::
+

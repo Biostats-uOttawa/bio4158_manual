@@ -1,5 +1,13 @@
 # Analysis of frequency data: Contingency Tables, Log-Linear Models, and Poisson Regression
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 After completing this laboratory exercise, you should be able to:
 
 * Create and manipulate data files in R to analyze count data
@@ -168,14 +176,18 @@ chisq.test(Popn0.9, correct = F) ### X2 without Yates
 chisq.test(Popn0.9) ### X2 with Yates
 ```
 
-```{block2, type= "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Test the null hypothesis that the proportion of male and female at birth is equal. What is your conclusion? Do you think the data is appropriate to test this hypothesis?
-```
+:::
 
-```{r, echo = params$echo_sol, class.source="exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r}
 chisq.test(Popn0.9, correct = F)
 chisq.test(Popn0.9)
 ```
+:::
 
 In the past, for 2 X 2 tables Yates's correction was frequently employed (first test above, but it has since been shown to be overly conservative and is no longer recommended (although it doesn't affect the results in this particular instance). Better is a Fisher's exact test if the total number of cases is <200 (which is not the case here), or a randomization. Given that we cannot use a Fisher's exact test here we are using a Yate's correction.
 
@@ -229,9 +241,10 @@ There are therefore only 3 terms of interest:
 
 We will now work with the `sturgdat` data set to test the hypothesis that number of fish caught is independent of location, year, and gender. Before the analysis, the data will have to be reshaped to be in suitable format for fitting a log-linear model.
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Open `sturgdat.csv` , then use the table() function to summarize the data according to number of individuals by `sex` , `location` , and `year` . Save this object as sturgdat.table . Make a mosaic plot of the data.
-```
+:::
 
 
 ```{r, fig.cap = "Frequency of female and male sturgeon as a function of year and location"}
@@ -249,9 +262,10 @@ sturgdat.freq
 mosaic(sturgdat.table, shade = TRUE)
 ```
 
-```{block2,type="rmdcode"}
+{.callout-caution}
+# Exercise
 Using the frequency form of the table, fit the full log-linear model just as we did with the loglin data set and produce the anova table with chi square statistics for the terms in the model. Is the 3-way interaction significant ( location:year:sex )? Does sex ratio change between locations or among years?
-```
+::
 
 ```{r}
 # Fit full model
@@ -266,10 +280,13 @@ What does this mean? It means that, if there are any 2-way interactions, they do
 
 - If we adjust the model without the 3-way interaction, we get:
 
-```{r, echo = params$echo_sol, class.source="exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r}
 o2int.model <- glm(Freq ~ sex + year + location + sex:year + sex:location + year:location, data = sturgdat.freq, family = "poisson")
 Anova(o2int.model, type = 3)
 ```
+:::
 
 We can see that the sex:location interaction does not explain a significant portion of the deviance, whereas the two others do. Sex ratio does not vary among locations, but it does among years. The year:location is also significant (see below for its meaning).
 
@@ -277,10 +294,13 @@ Should you try to simplify the model further? Real statisticians are divided on 
 
 - Refit the model, this time excluding the sex:location interaction.
 
-```{r, echo = params$echo_sol, class.source="exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r}
 o2int.model2 <- glm(Freq ~ sex + year + location + sex:year + year:location, data = sturgdat.freq, family = "poisson")
 Anova(o2int.model2, type = 3)
 ```
+:::
 
 Now the remaining two interactions are significant. It looks as though this is the "best" model. On the basis of the above analysis, the simplest model is:
 

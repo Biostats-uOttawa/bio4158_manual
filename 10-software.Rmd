@@ -1,7 +1,3 @@
-\cleardoublepage
-
-# (APPENDIX) Appendix {-}
-
 # Software Tools
 
 For those who are not familiar with software packages required for using R Markdown, we give a brief introduction to the installation and maintenance of these packages.

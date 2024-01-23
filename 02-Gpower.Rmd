@@ -1,4 +1,5 @@
-<!-- # (PART) Analyse de puissance {-} -->
+<!-- # (PART) Analyse de puissance {.unnumbered}
+ -->
 
 # Power Analysis with R and G\*Power
 
@@ -17,15 +18,18 @@ After completing this laboratory, you should :
 
 ### Why do a power analysis?
 
-#### Assess the strength of evidence {-}
+#### Assess the strength of evidence {.unnumbered}
+
 
 Power analysis, performed after accepting a null hypothesis, can help assess the probability of rejecting the null if it were false, and if the magnitude of the effect was equal to that observed (or to any other given magnitude). This type of *a posteriori* analysis is very common.
 
-#### Design better experiments {-}
+#### Design better experiments {.unnumbered}
+
 
 Power analysis, performed prior to conducting an experiment (but most often after a preliminary experiment), can be used to determine the number of observations required to detect an effect of a given magnitude with some probability (the power). This type of *a priori* experiment should be more common.
 
-#### Estimate minimum detectable effect {-}
+#### Estimate minimum detectable effect {.unnumbered}
+
 
 Sampling effort is often predetermined (when you are handed data of an experiment already completed), or extremely constrained (when logistics dictates what can be done). Whether it is *a priori* or *a posteriori*, power analysis can help you estimate, for a fixed sample size and a given power, what is the minimum effect size that can be detected.
 
@@ -33,16 +37,19 @@ Sampling effort is often predetermined (when you are handed data of an experimen
 
 For a given statistical test, there are 3 factors that affect power.
 
-#### Decision criteria {-}
+#### Decision criteria {.unnumbered}
+
 
 Power is related to $\alpha$, the probability level at which one rejects the null hypothesis. If this decision criteria is made very strict (i.e. if critical $\alpha$ is set to a very low value, like 0.1% or $p = 0.001$), then power will be lower than if the critical $\alpha$ was less strict.
 
 
-#### Sample size {-}
+#### Sample size {.unnumbered}
+
 
 The larger the sample size, the larger the power. As sample size increases, one’s ability to detect small effect sizes as being statistically significant gets better.
 
-#### Effect size {-}
+#### Effect size {.unnumbered}
+
 
 The larger the effect size, the larger the power. For a given sample size, the ability to detect an effect as being significant is higher for large effects than for small ones. Effect size measures how false the null hypothesis is.
 
@@ -56,9 +63,10 @@ G\*Power will allow you to do power analyses for the majority of statistical tes
 
 It is possible to perform all analysis made by G\*Power in R, but it requires a bit more code, and a better understanding of the process since everything should be coded by hand. In simple cases, R code is also provided.
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Download the software **[here](https://www.psychologie.hhu.de/arbeitsgruppen/allgemeine-psychologie-und-arbeitspsychologie/gpower.html)** and install it on your computer and your workstation (if it is not there already).
-```
+:::
 
 ## How to use G\*Power
 
@@ -75,19 +83,23 @@ Using G\*Power generally involves 3 steps:
 First, $\alpha$ is define as the probability level at which
 one rejects the null hypothesis, and $\beta$ is $1 - power$. 
 
-#### A priori  {-}
+#### A priori  {.unnumbered}
+
 
 Computes the sample size required given $\beta$, $\alpha$, and the effect size. This type of analysis is useful when planning experiments.
 
-#### Compromise  {-}
+#### Compromise  {.unnumbered}
+
 
 Computes $\alpha$ and $\beta$ for a given $\alpha$/$\beta$ ratio, sample size, and effect size. Less commonly used (I have never used it myself) although it can be useful when the $\alpha$/$\beta$ ratio has meaning, for example when the cost of type I and type II errors can be quantified.
 
-#### Criterion {-}
+#### Criterion {.unnumbered}
+
 
 Computes $\alpha$ for a given $\beta$, sample size, and effect size. In practice, I see little interest in this. Let me know if you see something I don’t!
 
-#### Post-hoc {-}
+#### Post-hoc {.unnumbered}
+
 
 Computes the power for a given $\alpha$, effect size, and
 sample size. Used frequently to help in the interpretation of a test
@@ -95,7 +107,8 @@ that is not statistically significant, but only if an effect size that is
 biologically significant is used (and not the observed effect size). Not
 relevant when the test is significant.
 
-#### Sensitivity {-}
+#### Sensitivity {.unnumbered}
+
 
 Computes the detectable effect size for a given $\beta$ ,$\alpha$, and
 sample size. Very useful at the planning stage of an experiment.
@@ -123,14 +136,13 @@ Chi-square test | w | $w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2 }{ p_{0
 
 ## Power analysis for a t-test on two independent means
 
-```{block2, type = "rmdimportant"}
+::: {.callout-important}
 All the power analysis presented in this chapter can be done using 2 functions
 in R.
 
 * `pwr.t.test()` when the two samples have a similar size
 * `pwr.t2n.test()` when samples have different numbers of observations
-
-```
+:::
 
 The objective of this lab is to learn to use G*Power and understand how the 4 parameters of power analyses ($\alpha$, $\beta$, sample size and effect size) are related to each other. For this, you will only use the standard t-test to compare two independent means. This is the test most used by biologists, you have all used it, and it will serve admirably for this lab. What you will learn today will be applicable to all other power analyses.
 
@@ -217,9 +229,10 @@ Let’s examine the figure \@ref(fig:gpower-1).
 
 **Indeed, a post hoc power analysis using the observed effect size is not useful**. It is much more informative to conduct a post hoc power analysis for an effect size that is different from the observed effect size. But what effect size to use? It is the biology of the system under study that will guide you. For example, with respect to fish biomass in streams, one could argue that a two fold change in biomass (say from 2.64 to 5.28 g/m^2^ ) has ecologically significant repercussions. We would therefore want to know if Jaynie had a good chance of detecting a difference as large as this before accepting her conclusion that the biomass is the same in the two regions. So, what were the odds that Jaynie could detect a difference of 2.64 g/m^2^ between the two regions? G\*Power can tell you if you cajole it the right way.
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Change the mean of group 2 to 5.28, recalculate effect size, and click on Calculate to obtain figure \@ref(fig:gpower-2).
-```
+:::
 
 ```{r, gpower-2, fig.cap = "Post-hoc analysis using an effect size different from the one estimated", out.width = "100%", echo = FALSE  }
 knitr::include_graphics("images/gpower_2.png")
@@ -243,9 +256,10 @@ Note that this post hoc power analysis, done for an effect size considered biolo
 
 Suppose that a difference in biomass of $3.31-2.64 = 0.67 g/m^2$ can be ecologically significant. The next field season should be planned so that Jaynie would have a good chance of detecting such a difference in fish biomass between regions. How many streams should Jaynie sample in each region to have 80% of detecting such a difference (given the observed variability)?
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Change the type of power analysis in G*Power to **A priori: Compute sample size - given $\alpha$ , power, and effect size**. Ensure that the values for means and standard deviations are those obtained by Jaynie. Recalculate the effect size metric and enter 0.8 for power and you will obtain (\@ref(fig:gpower-3).
-```
+:::
 
 ```{r, gpower-3, fig.cap = "A priori analysis", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/gpower_3.png")
@@ -275,9 +289,10 @@ pwr.t.test(
 ### Sensitivity analysis - Calculate the detectable effect size
 Given the observed variability, a sampling effort of 18 streams per region, and with $\alpha$ = 0.05, what effect size could Jaynie detect with 80% probability $\beta=0.2$)?
 
-```{block2, type = "rmdcode"}
+::: {.callout-caution}
+# Exercise
 Change analysis type in G\*Power to **Sensitivity: Compute required effect size - given $\alpha$ , power, and sample size** and size is 18 in each region.
-```
+:::
 
 ```{r, gpower-4, fig.cap = "Analyse de sensitivité", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/gpower_4.png")
@@ -293,9 +308,9 @@ pwr.t.test(
 
 The detectable effect size for this sample size, $\alpha = 0.05$ and $\beta = 0.2$ (or power of 80%) is 0.961296.
 
-```{block2, type = "rmdcaution"}
+::: {.callout-warning}
 Attention, this effect size is the metric `d` and is dependent on sampling variability.
-```
+:::
 
 Here, `d` is approximately equal to
 

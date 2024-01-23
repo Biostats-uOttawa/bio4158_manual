@@ -1,5 +1,13 @@
 ## Premier travail avec des données
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 
 ### Jeu de données d'exemple
 
@@ -79,9 +87,9 @@ knitr::include_graphics("images/screenshots/rstudio_view.png")
 Il est important de comprendre que l'objet `hdv2003` contient *l'intégralité* des données du tableau.
 On voit donc qu'un objet peut contenir des données de types très différents (simple nombre, texte, vecteur, tableau de données entier), et être potentiellement de très grande taille^[La seule limite pour la taille d'un objet étant la mémoire vive (RAM) de la machine sur laquelle tourne la session R.].
 
-```{block2, type='rmdnote'}
+::: {.callout-note}
 Sous R, on peut importer ou créer autant de tableaux de données qu'on le souhaite, dans les limites des capacités de sa machine.
-```
+:::
 
 Un *data frame* peut être manipulé comme les autres objets vus précédemment. On peut par exemple faire :
 
@@ -351,9 +359,9 @@ tab <- table(d$qualif)
 sort(tab)
 ```
 
-```{block2, type='rmdimportant'}
+::: {.callout-important}
 Attention, par défaut la fonction `table` n'affiche pas les valeurs manquantes (`NA`). Si on souhaite les inclure il faut utiliser l'argument `useNA = "always"`, soit : `table(d$qualif, useNA = "always")`.
-```
+:::
 
 À noter qu'on peut aussi appliquer `summary` à une variable qualitative. Le résultat est également le tri à plat de la variable, avec en plus le nombre de valeurs manquantes éventuelles :
 
@@ -438,7 +446,9 @@ Créer un nouveau script qui effectue les actions suivantes :
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 library(questionr)
 
 data(hdv2003)
@@ -447,7 +457,7 @@ df <- hdv2003
 dim(df)
 names(df)
 ```
-
+:::
 
 
 
@@ -458,14 +468,15 @@ On souhaite étudier la répartition du temps passé devant la télévision par 
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 summary(df$heures.tv)
 sd(df$heures.tv)
 
 hist(df$heures.tv, breaks = 10)
 ```
-
-
+:::
 
 
 
@@ -476,11 +487,12 @@ On s'intéresse maintenant à l'importance accordée par les enquêtés à leur 
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 table(df$trav.imp)
 ```
-
-
+:::
 
 
 
@@ -489,11 +501,12 @@ Faites un tri à plat affichant à la fois les effectifs et les pourcentages de 
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 freq(df$trav.imp)
 ```
-
-
+:::
 
 
 
@@ -503,24 +516,29 @@ Représentez graphiquement les effectifs des modalités à l'aide d'un graphique
 
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 tab <- sort(table(df$trav.imp))
 barplot(tab)
 ```
-
-
+:::
 
 
 Utilisez l'argument `col` de la fonction `barplot` pour modifier la couleur du graphique en
 `tomato`.
 
 
-```{r, eval = FALSE, echo = params$echo_sol, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
+```{r, eval = FALSE}
 barplot(tab, col = "tomato")
 ```
+:::
 
 Tapez `colors()` dans la console pour afficher l'ensemble des noms de couleurs disponibles dans R. Testez chaque couleur une à une pour trouver votre couleur préférée.
 
-```{block2, echo = params$echo_sol, type = "exer"}
+::: {.callout-tip collapse='true'}
+# Solution
 C'est une blague, hein ! Cela dit `moccasin` ou `palevioletred` sont pas mal, si vous voulez essayer :-)
-```
+:::
