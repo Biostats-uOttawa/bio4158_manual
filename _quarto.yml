@@ -22,8 +22,8 @@ book:
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/blue_dragon.jpg
   favicon: cover.jpg
-  site-url: https://biostats-uottawa.github.io/bio4158_course/
-  repo-url: https://github.com/biostats-uottawa/bio4158_course/
+  site-url: https://biostats-uottawa.github.io/bio4158_manual/
+  repo-url: https://github.com/biostats-uottawa/bio4158_manual/
   repo-actions: [edit, issue]
   downloads: [pdf, epub]
   navbar:
