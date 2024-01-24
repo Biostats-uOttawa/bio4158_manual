@@ -9,7 +9,9 @@ execute:
   freeze: auto
 
 book:
-  title: "Bio4158 manual"
+  title: "Applied biostatistics"
+  subtitle: "Lab manual for BIO4158"
+  description: "Include extra information and exercises"
   author: Julien Martin
   date: today
   date-format: iso #"`r format(Sys.Date(), '%d-%m-%Y')`"
@@ -17,7 +19,7 @@ book:
   search: true
   page-footer:
     left: |
-      Written by Julien Martin.
+      By Julien Martin.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/blue_dragon.jpg
@@ -71,8 +73,7 @@ book:
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 csl: ecology.csl
-params:
-  echo_sol: true
+
 format:
   html:
     theme:
