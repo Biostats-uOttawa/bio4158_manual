@@ -70,7 +70,7 @@ book:
   appendices:
     - 10-software.Rmd
 
-bibliography: [book.bib, packages.bib]
+bibliography: [book.bib, grateful-refs.bib]
 biblio-style: apalike
 csl: ecology.csl
 
