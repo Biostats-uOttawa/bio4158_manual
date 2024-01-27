@@ -211,7 +211,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-introR_4.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-introR.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -227,7 +227,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-introR_4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./01-introR.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R</span></span></a>
   </div>
 </li>
@@ -327,7 +327,7 @@ window.Quarto = {
   <li><a href="#creating-data-subsets" id="toc-creating-data-subsets" class="nav-link" data-scroll-target="#creating-data-subsets"><span class="header-section-number">1.4</span> Creating data subsets</a></li>
   <li><a href="#data-transformation" id="toc-data-transformation" class="nav-link" data-scroll-target="#data-transformation"><span class="header-section-number">1.5</span> Data transformation</a></li>
   <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"><span class="header-section-number">1.6</span> Exercice</a></li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/01-introR_4.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/01-introR.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -573,7 +573,7 @@ In file(file, "rt") :
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sturgeon</span><span class="op">$</span><span class="va">fklngth</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/hist-stur-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/hist-stur-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Histogram of fluke length of sturgeons</figcaption></figure>
 </div>
 </div>
@@ -622,7 +622,7 @@ In file(file, "rt") :
 <span><span class="va">mygraph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/stur-g1-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/stur-g1-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Distribution of fluke length in sturgeon plotted with ggplot</figcaption></figure>
 </div>
 </div>
@@ -633,7 +633,7 @@ In file(file, "rt") :
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mygraph</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">year</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/aventure-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/aventure-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -645,7 +645,7 @@ In file(file, "rt") :
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">sturgeon</span><span class="op">$</span><span class="va">fklngth</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/stur-norm-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/stur-norm-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -668,7 +668,7 @@ W = 0.97225, p-value = 0.0009285</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">fklngth</span> <span class="op">~</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">sturgeon</span>, notch <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/boxplot-stur-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/boxplot-stur-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Boxplot of fluke length in strugeon by sex</figcaption></figure>
 </div>
 </div>
@@ -695,7 +695,7 @@ Exercise
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fklngth</span> <span class="op">~</span> <span class="va">age</span>, data <span class="op">=</span> <span class="va">sturgeon</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/stur-biv-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/stur-biv-plot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -705,7 +705,7 @@ Exercise
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="va">sturgeon</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, panel <span class="op">=</span> <span class="va">panel.smooth</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/pairs-stur-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/pairs-stur-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -821,7 +821,7 @@ Solution
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">sub_female_7980</span><span class="op">$</span><span class="va">fklngth</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/intror-subex-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/intror-subex-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Distibution of fluke length of female sturgeons in 1979 and 1980</figcaption></figure>
 </div>
 </div>
@@ -900,7 +900,7 @@ Solution
 <span><span class="va">mygraph</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="01-introR_4_files/figure-html/intror-exer-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="01-introR_files/figure-html/intror-exer-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella</figcaption></figure>
 </div>
 </div>
@@ -1458,7 +1458,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/01-introR_4.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/01-introR.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

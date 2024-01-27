@@ -130,7 +130,7 @@ par(mfrow = c(1, 1)) # redefine plotting area to 1 plot
 None of these distributions are perfectly normal, but deviations are mostly minor.
 
 
-- To generate a scatterplot matrix of all pairs of variables, with linear regression and lowess traces, you can use `scatterplotMatrix` from `car` `r emo::ji("package").
+- To generate a scatterplot matrix of all pairs of variables, with linear regression and lowess traces, you can use `scatterplotMatrix` from `car` `r emo::ji("package")`.
 
 ```{r, stur-scatmat}
 scatterplotMatrix(
