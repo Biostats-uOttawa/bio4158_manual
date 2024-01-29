@@ -5,7 +5,7 @@ to analyze data. R is powerful statistical software but, like all software, it h
 it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your
 results. The manual was written with the help of Rmarkfdown @xie2015.
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, cache = FALSE}
 knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)
 # knitr::opts_chunk$set(out.extra = 'class="plot"')
 # knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
@@ -20,6 +20,16 @@ library(simpleboot)
 library(svglite)
 library(pwr)
 library(performance)
+library(grateful)
+
+library(grateful)
+library(tidyverse)
+
+pkgs_dep <- cite_packages(
+  output = "table",
+  out.dir = ".",
+  dependencies = TRUE
+)
 # svglite
 ```
 
