@@ -9,6 +9,7 @@ execute:
   freeze: auto
 
 book:
+  google-analytics: G-6LLMGL3T2Q
   title: "Applied biostatistics"
   subtitle: "Lab manual for BIO4158"
   description: "Include extra information and exercises"
