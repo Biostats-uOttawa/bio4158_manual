@@ -183,7 +183,7 @@ should get the following:
 knitr::include_graphics("images/gpower_1.png")
 ```
 
-Similar analysis can be done in R. You first need to calculate the effect size `d` for a t-test comparing 2 means, and then use the `pwr.t.test()` function from the `pwr` `r emo::ji("package")`.
+Similar analysis can be done in R. You first need to calculate the effect size `d` for a t-test comparing 2 means, and then use the `pwr.t.test()` function from the `pwr` `r emoji::emoji("package")`.
 The easiest is to create anew function in R to estimate the effect size `d`since we are going to reuse it multiple times during the lab. 
 
 ```{r, r-power, fig.cap = "Post-hoc analysis with estimated effect size in R"}

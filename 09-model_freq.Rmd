@@ -48,7 +48,7 @@ USPopSurvey
 
 Note that there are 18 lines and 3 columns in this file. Each line lists the number of individuals (`frequency`) of a given sex and age class. There are (sum(USPopSurvey$frequency)) 239539 individuals that were classified into the 18 (2 sexes x 9 age classes) categories. This way of presenting data is the **frequency form**. It is a compact way to present the data when there are only categorical variables.
 
-When there are continuous variables, the frequency form can’t be utilized (or provides no gain since each observation could possibly have a different values for the continuous variable(s)). Data have therefore to be stored in **case form** where each observation (`individual`) represents one line in the data file, and each variable is a column. Conveniently, the `vcdExtra` `r emo::ji("package")` includes the `expand.dft()` function to convert from the frequency to case form. For example, to create a data frame with 239539 lines and 2 columns (sex and ageclass):
+When there are continuous variables, the frequency form can’t be utilized (or provides no gain since each observation could possibly have a different values for the continuous variable(s)). Data have therefore to be stored in **case form** where each observation (`individual`) represents one line in the data file, and each variable is a column. Conveniently, the `vcdExtra` `r emoji::emoji("package")` includes the `expand.dft()` function to convert from the frequency to case form. For example, to create a data frame with 239539 lines and 2 columns (sex and ageclass):
 
 
 ```{r}
@@ -80,7 +80,7 @@ Table: (\#tab:unnamed-chunk-1)Tools for converting among different forms for cat
 
 Contingency tables can be used to test for independence. By this we mean to answer the question: Is the classification of observations according to one variable (say, sex) independent from the classification by another variable (say, ageclass). In other words, is the proportion of males and females independent of age, or does it vary among age classes?
 
-The `vcd` `r emo::ji("package")` includes a `mosaic()` function useful to graphically display contingency tables:
+The `vcd` `r emoji::emoji("package")` includes a `mosaic()` function useful to graphically display contingency tables:
 
 
 ```{r, fig.cap = "Mosaic plot of sex classes per age"}
@@ -101,7 +101,7 @@ chisq.test(USTable) # runs chi square test of independence of sex and age class
 
 From this we conclude there is ample evidence to reject the null hypothesis that ageclass and sex are independent, which isn’t particularly surprising.
 
-The mosaic plot from the `vcd` `r emo::ji("package")` can be shaded to show the categories that contribute most to the lack of independence:
+The mosaic plot from the `vcd` `r emoji::emoji("package")` can be shaded to show the categories that contribute most to the lack of independence:
 
 
 ```{r, fig.cap = "Mosaic plot of sex by age with colours"}

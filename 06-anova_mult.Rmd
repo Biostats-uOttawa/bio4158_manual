@@ -94,7 +94,7 @@ anova(anova.model1)
 Be careful here. R gives you the sequential sums of squares (Type I) and associated Mean squares and probabilities. These are not to be trusted unless the design is perfectly balanced. In this case, there are varying numbers of observations across sex and location combinations and therefore the design is not balanced.
 :::
 
-What you want are the partial sums of squares (type III). The easiest way to get them is to use the Anova() function in the `car` `r emo::ji("package")` package (note the subtle difference, `Anova()` is not the same as `anova()`, remember case matters in R.). However, this is not enough by itself. To get the proper values for the type III sums of square, one also needs to specify contrasts, hence the cryptic  `contrasts = list(sex = contr.sum,location = contr.sum)`.
+What you want are the partial sums of squares (type III). The easiest way to get them is to use the Anova() function in the `car` `r emoji::emoji("package")` package (note the subtle difference, `Anova()` is not the same as `anova()`, remember case matters in R.). However, this is not enough by itself. To get the proper values for the type III sums of square, one also needs to specify contrasts, hence the cryptic  `contrasts = list(sex = contr.sum,location = contr.sum)`.
 
 ```{r}
 library(car)
@@ -156,7 +156,7 @@ Anova(anova.model2, type = 3)
 
 In this case, the interaction term `sex:location` is significant but the main effects are not significant.
 
-* You might find it useful here to generate plots for the two data files to compare the interactions between `sex` and `location`. The effect plot shows the relationship between means for each combination of factors (also called cell means). Generate an effect plot for the two models using the `allEffects()` command from the `effects` `r emo::ji("package")` package:
+* You might find it useful here to generate plots for the two data files to compare the interactions between `sex` and `location`. The effect plot shows the relationship between means for each combination of factors (also called cell means). Generate an effect plot for the two models using the `allEffects()` command from the `effects` `r emoji::emoji("package")` package:
 
 ```{r, fig.cap = "Effet du sexe et du lieu sur le poids des esturgeons"}
 library(effects)

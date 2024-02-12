@@ -181,7 +181,7 @@ leveneTest(m1)
 bptest(m1)
 ```
 
-The above are the results of two tests implemented in R (in the `car` and `lmtest` packages `r emo::ji("package")` that can be used to test for equal variances in t-tests or linear models involving only discontinuous or categorical independent variables. __Doing the two of them is overkill__. There is not much to prefer one test over another. Levene test is possibly the
+The above are the results of two tests implemented in R (in the `car` and `lmtest` packages `r emoji::emoji("package")` that can be used to test for equal variances in t-tests or linear models involving only discontinuous or categorical independent variables. __Doing the two of them is overkill__. There is not much to prefer one test over another. Levene test is possibly the
 better known. It tests whether the mean of absolute values of the residuals differs among groups. The Breusch-Pagan test has the advantage of being applicable to more linear models (it can deal with regression-type continuous independent variables, at least to some extent). It tests whether the studentized (i.e. scaled by their sd estimate) squared residuals vary with the independent variables in a linear model. In this case, both indicate that variances are unequal.
 
 On the basis of these results, we conclude that there is evidence (albeit weak) to reject the null hypothesis of no difference in `fklngth` by `location`. We have modified the `t-test` to accommodate unequal variances, and are satisfied that the assumption of normally distributed residuals is sufficiently met. Thus, it appears that `fklngth` at Cumberland is greater than `fklngth` at The Pas.
@@ -235,7 +235,7 @@ The 95% CI for the difference between the two means does not include 0. Hence, t
 
 ### Permutation
 
-Permutation tests for linear models can easily be done using the `lmPerm` package `r emo::ji("package")`.
+Permutation tests for linear models can easily be done using the `lmPerm` package `r emoji::emoji("package")`.
 
 ```{r, tp-1}
 m1Perm <- lmp(

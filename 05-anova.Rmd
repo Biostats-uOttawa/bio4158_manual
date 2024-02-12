@@ -206,7 +206,7 @@ par(mar = c(4, 7, 2, 1))
 plot(TukeyHSD(aov(fklngth ~ myyear, data = dam10dat)), las = 2)
 ```
 
-The confidence intervals, corrected for multiple tests by the Tukey method, are plotted for differences among years. Unfortunately, the labels are not all printed because they would overlap, but the order is the same as in the preceding table. The `multcomp` `r emo::ji("package")` can produce a better plot version, but requires a bit more code:
+The confidence intervals, corrected for multiple tests by the Tukey method, are plotted for differences among years. Unfortunately, the labels are not all printed because they would overlap, but the order is the same as in the preceding table. The `multcomp` `r emoji::emoji("package")` can produce a better plot version, but requires a bit more code:
 
 ```{r, ano-14, fig.cap = "Inter-annual differences in sturgeon length"}
 # Alternative way to compute Tukey multiple comparisons

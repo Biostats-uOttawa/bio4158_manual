@@ -192,7 +192,7 @@ Note that this syntax is a bit heavy as you need to prefix variable names by the
 However, I **strongly recommend not to use** it because it can lead to many problems hard to detect compare to the little benfit is provides
 :::
 
-This histogram (Fig. \@ref(fig:hist-stur)) is a very classical representation of the distribution. Histograms are not perfect however because their shape partly depends on the number of bins used, more so for small samples. One can do better, especially if you want to visually compare the observed distribution to a normal distribution. But you need to come up with a bit of extra R code based on the `ggplot2` `r emo::ji("package")`.
+This histogram (Fig. \@ref(fig:hist-stur)) is a very classical representation of the distribution. Histograms are not perfect however because their shape partly depends on the number of bins used, more so for small samples. One can do better, especially if you want to visually compare the observed distribution to a normal distribution. But you need to come up with a bit of extra R code based on the `ggplot2` `r emoji::emoji("package")`.
 
 ```{r stur-g1, fig.cap = "Distribution of fluke length in sturgeon plotted with ggplot",warning = FALSE, message =  FALSE}
 ## load ggplot2 if needed
