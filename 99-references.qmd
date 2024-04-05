@@ -8,28 +8,31 @@ This book was produced using all the following R packages
 #| echo: FALSE
 #| cache: false
 #| message: false
+#| tbl-cap: List of packages used in this book
 library(grateful)
 library(tidyverse)
 pkgs <- cite_packages(
   output = "table",
-  out.dir = ".")
-pkgs_dep <- cite_packages(
-  output = "table",
   out.dir = ".",
-  dependencies = TRUE) %>%
-  filter(!(Package %in% pkgs$Package))
-knitr::kable(
-  pkgs,
-  captions = "List of packages used in this book"
-  )
+  omit = ""
+)
+# pkgs_dep <- cite_packages(
+#  output = "table",
+#  out.dir = ".",
+#  dependencies = TRUE) %>%
+#  filter(!(Package %in% pkgs$Package))
 
 knitr::kable(
-  pkgs_dep,
-  captions = "List of dependencies of packages used in this book"
-  )
+  pkgs
+)
+
+# knitr::kable(
+#  pkgs_dep,
+#  captions = "List of dependencies of packages used in this book"
+#  )
 ```
 
-### Bibliography  {.unnumbered}
+## Bibliography  {.unnumbered}
 
 ::: {#refs}
 :::
