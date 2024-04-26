@@ -44,7 +44,7 @@ Au premier lancement de RStudio, l'écran principal est découpé en trois grand
 <!-- ![Interface de Rstudio](images/screenshots/rstudio_start.png) -->
 
 
-```{r, fig.cap = "Interface de RStudio", out.width = "100%", echo = FALSE }
+```{r, fig.cap = "Interface de RStudio", out.width = "100%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_start.png")
 ```
 
@@ -463,7 +463,7 @@ Pour installer une extension, si on dispose d'une connexion Internet, on peut ut
 
 <!-- ![Installer une extension](images/screenshots/rstudio_package_install.png) -->
 
-```{r, fig.cap = "Installer une extension", out.width = "50%", echo = FALSE }
+```{r, fig.cap = "Installer une extension", out.width = "50%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_package_install.png")
 ```
 
@@ -471,7 +471,7 @@ Il suffit alors d'indiquer le nom de l'extension dans le champ *Package* et de c
 
 <!-- ![Installation d'une extension](images/screenshots/rstudio_package_install2.png) -->
 
-```{r, fig.cap = "Installation une extension", out.width = "50%", echo = FALSE }
+```{r, fig.cap = "Installation une extension", out.width = "50%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_package_install2.png")
 ```
 
@@ -518,7 +518,7 @@ x
 ```
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 x <- c(120, 134, 256, 12)
@@ -535,7 +535,7 @@ x * 2
 ```
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 x + 100
@@ -559,7 +559,7 @@ Calculer le revenu total de chaque ménage, puis diviser par le nombre de person
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 revenu_total <- conjoint1 + conjoint2
@@ -580,7 +580,7 @@ conjoint1 <- c(1200, 1180, 1750, 2100)
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 range(conjoint1)
@@ -597,7 +597,7 @@ conjoint1 <- c(1200, 1180, 1750, NA)
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 range(conjoint1, na.rm = TRUE)
@@ -621,7 +621,7 @@ Calculer la température moyenne sur l'année.
 Calculer la quantité totale de précipitations sur l'année.
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 mean(temperature)
@@ -644,7 +644,7 @@ diff(temperature)
 ```
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 `cumsum(precipitations)` correspond à la somme cumulée des précipitations sur l'année. Par exemple, la 6e valeur du vecteur résultat correspond au total de précipitations de janvier à juin.
 
@@ -669,7 +669,7 @@ Calculer la moyenne des élèves de la classe en anglais.
 Calculer la moyenne générale de chaque élève.
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 mean(anglais)
@@ -690,7 +690,7 @@ pmax(maths, anglais, sport)
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 `pmin` et `pmax` renvoient les minimum et maximum "parallèles" des trois vecteurs passés en argument. Ainsi, `pmin` renvoie pour chaque élève la note minimale dans les trois matières, et `pmax` la note maximale.
 :::

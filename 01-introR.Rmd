@@ -330,7 +330,7 @@ Using the commands `subset()` and `hist()` , create a histogram for females caug
 :::
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 
 ```{r intror-subex, warning = FALSE, message = FALSE, fig.cap = "Distibution of fluke length of female sturgeons in 1979 and 1980"}
@@ -387,7 +387,7 @@ called ratio for two environments (`milieu`: `IN VITRO` or `IN VIVO`)
 and for 3 strains (`souche`).
 Examine the ratio variable and make a graph to visually assess normality for the wild (SAUVAGE) strain.
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 ```{r intror-exer, warning = FALSE, message = FALSE, fig.cap = "Distibution of infection ratios by the wild (SAUVAGE) strain of salmonella"}
 ## load the data

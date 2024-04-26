@@ -93,10 +93,10 @@ It looks like there is a positive relationship between herptile species richness
 Rerun the above regression, this time replacing `logarea` with `cpfor2` as the independent variable, such that the expression in the formula field reads: `logherp ~ cpfor2` . What do you conclude? 
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_logcp <- lm(logherp ~ cpfor2, data = mydata)
 summary(model_logcp)
 ```
@@ -109,10 +109,10 @@ According to this result, we would accept the null hypothesis, and conclude that
 Rerun the above regression one more time, this time adding both independent variables into the model at once, such that `logherp ~ logarea + cpfor2` . What do you conclude?
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_mcp <- lm(logherp ~ logarea + cpfor2, data = mydata)
 summary(model_mcp)
 ```
@@ -127,10 +127,10 @@ Why is `cpfor2` a significant predictor of `logherp` in the combined model when 
 Run another multiple regression, this time substituting `thtden` for `cpfor2` as an independent variable (`logherp ~ logarea + thtden`).
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_mden <- lm(logherp ~ logarea + thtden, data = mydata)
 summary(model_mden)
 ```
@@ -147,10 +147,10 @@ Thus far, it appears that herptile richness is related to wetland area ( `logare
 Fit a regression model with logherp as the dependent variable and logarea , cpfor2 and thtden as the independent variables. What do you conclude?
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_mtri <- lm(logherp ~ logarea + cpfor2 + thtden, data = mydata)
 summary(model_mtri)
 ```
@@ -272,7 +272,7 @@ Plot the relationship between the residuals of the `logherp ~ logarea`
 regression and `swamp`.
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r , fig.cap = "Relation entre swamp et les résidus de la régression entre logherp et logarea"}
@@ -294,7 +294,7 @@ Try regressing the residuals of the `logherp ~ logarea` regression on `swamp`.
 What do you conclude?
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r , fig.cap = "Relation entre swamp et les résidus de la régression entre logherp et logarea"}
@@ -316,10 +316,10 @@ $$ residuals ~ swamp + I(swamp^2)$$.
 What do you conclude? What does examination of the residuals from this multiple regression tell you?
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_resloga2 <- lm(resloga ~ swamp + I(swamp^2), mysub)
 summary(model_resloga2)
 par(mfrow = c(2, 2))
@@ -333,10 +333,10 @@ Based on the results from the above analyses, how would you modify the regressio
 
 In light of these results, we might want to try and fit a model which includes `logarea`, `thtden`, `cpfor2`, `swamp` and `swamp^2^` :
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_poly1 <- lm(
   logherp ~ logarea + cpfor2 + thtden + swamp + I(swamp^2),
   data = mydata
@@ -347,10 +347,10 @@ summary(model_poly1)
 
 Note that on the basis of this analysis, we could potentially drop `cpfor2` and refit using the remaining variables:
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 model_poly2 <- lm(
   logherp ~ logarea + thtden + swamp + I(swamp^2),
   data = mydata
@@ -374,7 +374,7 @@ All the model selection techniques or the manual model crafting assumes that the
 
 Let’s have a look at the diagnostic plots for the final model. Here we use the `check_model()` function from the `performance` `r emoji::emoji("package")`.
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r , fig.cap = "Conditions d'application du modèle `model_poly2`"}
@@ -385,7 +385,7 @@ check_model(model_poly2)
 
 Alternatively it can be done with the classic method
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Code
 
 ```{r , fig.cap = "Conditions d'application du modèle `model_poly2`"}
@@ -434,7 +434,7 @@ Note that the vertical scale varies among plots. For `thtden`, the dependent var
 
 To illustrate what these graphs would look like if there was deviation from linearity, let’s drop swamp^2^ term and produce the graphs and run the RESET test 
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r , fig.cap = "Graphiques de résidus partiels du modèle `model_nopoly`"}

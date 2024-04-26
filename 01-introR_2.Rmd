@@ -42,7 +42,7 @@ Cette commande ne renvoie aucun résultat particulier (sauf en cas d'erreur), ma
 
 <!-- ![Onglet *Environment*](images/screenshots/rstudio_environment.png) -->
 
-```{r, fig.cap = "Onglet Environment", out.width = "75%", echo = FALSE }
+```{r, fig.cap = "Onglet Environment", out.width = "75%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_environment.png")
 ```
 
@@ -66,7 +66,7 @@ Une autre manière d'afficher le contenu du tableau est de cliquer sur l'icône 
 
 <!-- ![Icone view](images/screenshots/rstudio_view_icon.png) -->
 
-```{r, fig.cap = "Icone view", out.width = "75%", echo = FALSE }
+```{r, fig.cap = "Icone view", out.width = "75%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_view_icon.png")
 ```
 
@@ -80,7 +80,7 @@ Dans les deux cas votre tableau devrait s'afficher dans RStudio avec une interfa
 
 <!-- ![Interface "View"](images/screenshots/rstudio_view.png) -->
 
-```{r, fig.cap = "Interface View", out.width = "100%", echo = FALSE }
+```{r, fig.cap = "Interface View", out.width = "100%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_view.png")
 ```
 
@@ -147,7 +147,7 @@ Sous RStudio, on peut afficher à tout moment la structure d'un objet en cliquan
 
 <!-- ![Structure d'un objet](images/screenshots/rstudio_environment_str.png) -->
 
-```{r, fig.cap = "Structure d'un objet", out.width = "100%", echo = FALSE }
+```{r, fig.cap = "Structure d'un objet", out.width = "100%", echo = FALSE}
 knitr::include_graphics("images/screenshots/rstudio_environment_str.png")
 ```
 
@@ -446,7 +446,7 @@ Créer un nouveau script qui effectue les actions suivantes :
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 library(questionr)
@@ -468,7 +468,7 @@ On souhaite étudier la répartition du temps passé devant la télévision par 
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 summary(df$heures.tv)
@@ -487,7 +487,7 @@ On s'intéresse maintenant à l'importance accordée par les enquêtés à leur 
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 table(df$trav.imp)
@@ -501,7 +501,7 @@ Faites un tri à plat affichant à la fois les effectifs et les pourcentages de 
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 freq(df$trav.imp)
@@ -516,7 +516,7 @@ Représentez graphiquement les effectifs des modalités à l'aide d'un graphique
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 tab <- sort(table(df$trav.imp))
@@ -529,7 +529,7 @@ Utilisez l'argument `col` de la fonction `barplot` pour modifier la couleur du g
 `tomato`.
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 barplot(tab, col = "tomato")
@@ -538,7 +538,7 @@ barplot(tab, col = "tomato")
 
 Tapez `colors()` dans la console pour afficher l'ensemble des noms de couleurs disponibles dans R. Testez chaque couleur une à une pour trouver votre couleur préférée.
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 C'est une blague, hein ! Cela dit `moccasin` ou `palevioletred` sont pas mal, si vous voulez essayer :-)
 :::

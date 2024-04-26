@@ -58,7 +58,7 @@ http://alain-leger.lescigales.org/textes/lignecolonne.pdf
 En résumé, quand on fait un tableau croisé, celui-ci est parfaitement symétrique : on peut inverser les lignes et les colonnes, ça ne change pas son interprétation. Par contre, on a toujours en tête un "sens" de lecture dans le sens où on considère que l'une des variables *dépend* de l'autre. Par exemple, si on croise sexe et type de profession, on dira que le type de profession dépend du sexe, et non l'inverse : le type de profession est alors la variable *dépendante* (à expliquer), et le sexe la variable *indépendante* (explicative).
 
 Pour faciliter la lecture d'un tableau croisé, il est recommandé de **faire les pourcentages sur la variable indépendante**. Dans notre exemple, la variable indépendante est le sexe, elle est en colonne, on calcule donc les pourcentages colonnes qui permettent de comparer directement, pour chaque sexe, la répartition des catégories socio-professionnelles.
-```
+:::
 
 <!--### Test du χ²
 
@@ -126,7 +126,7 @@ boxplot(age ~ sport, data = d)
 
 ::: {.callout-note}
 Cette syntaxe de `boxplot` utilise une nouvelle notation de type "formule". Celle-ci est utilisée notamment pour la spécification des modèles de régression. Ici le `~` peut se lire comme "en fonction de" : on veut représenter le boxplot de l'âge en fonction du sport.
-```
+:::
 
 Ce qui va nous donner le résultat suivant :
 
@@ -137,7 +137,7 @@ boxplot(age ~ sport, data = d)
 
 ::: {.callout-note}
 L'interprétation d'un boxplot est la suivante : Les bords inférieurs et supérieurs du carré central représentent le premier et le troisième quartile de la variable représentée sur l'axe vertical. On a donc 50% de nos observations dans cet intervalle. Le trait horizontal dans le carré représente la médiane. Enfin, des "moustaches" s'étendent de chaque côté du carré, jusqu'aux valeurs minimales et maximales, avec une exception : si des valeurs sont éloignées du carré de plus de 1,5 fois l'écart interquartile (la hauteur du carré), alors on les représente sous forme de points (symbolisant des valeurs considérées comme "extrêmes").
-```
+:::
 
 Dans le graphique ci-dessus, on voit que ceux qui ont pratiqué un sport au cours des douze derniers mois ont l'air d'être sensiblement plus jeunes que les autres.
 
@@ -425,7 +425,7 @@ lm(rp2012$cadres ~ rp2012$dipl_sup)
 
 ::: {.callout-note}
 On retrouve avec `lm` la syntaxe "formule" déjà rencontrée avec `boxplot`. Elle permet ici de spécifier des modèles de régression : la variable dépendante se place à gauche du `~`, et la variable indépendante à droite. Si on souhaite faire une régression multiple avec plusieurs variables indépendantes, on aura une formule du type `dep ~ indep1 + indep2`. Il est également possible de spécifier des termes plus complexes, des interactions, etc.
-```
+:::
 
 `lm` nous renvoie par défaut les coefficients de la droite de régression :
 
@@ -468,7 +468,7 @@ mosaicplot(tab, shade = TRUE)
 
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 library(questionr)
@@ -486,7 +486,7 @@ lprop(tab)
 Faire un test du χ². Peut-on rejeter l'hypothèse d'indépendance ?
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 chisq.test(tab)
@@ -501,7 +501,7 @@ chisq.test(tab)
 Représenter ce tableau croisé sous la forme d'un `mosaicplot` en colorant les cases selon les résidus du test du χ².
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 mosaicplot(tab, shade = TRUE)
@@ -516,7 +516,7 @@ mosaicplot(tab, shade = TRUE)
 Toujours sur le jeu de données `hdv2003`, faire le boxplot qui croise le nombre d'heures passées devant la télévision (variable `heures.tv`) avec le statut d'occupation (variable `occup`).
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 boxplot(hdv2003$heures.tv ~ hdv2003$occup)
@@ -528,7 +528,7 @@ boxplot(hdv2003$heures.tv ~ hdv2003$occup)
 Calculer la durée moyenne devant la télévision en fonction du statut d'occupation à l'aide de `tapply`.
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 tapply(hdv2003$heures.tv, hdv2003$occup, mean, na.rm = TRUE)
@@ -539,7 +539,7 @@ tapply(hdv2003$heures.tv, hdv2003$occup, mean, na.rm = TRUE)
 
 Sur le jeu de données `rp2012`, représenter le nuage de points croisant le pourcentage de personnes sans diplôme (variable `dipl_aucun`) et le pourcentage de propriétaires (variable `proprio`).
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 library(questionr)
@@ -554,7 +554,7 @@ plot(proprio ~ dipl_aucun, data = rp2012)
 Calculer le coefficient de corrélation linéaire correspondant.
 
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 cor(rp2012$dipl_aucun, rp2012$proprio)

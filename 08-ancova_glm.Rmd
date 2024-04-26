@@ -95,7 +95,7 @@ On the basis of this analysis, we would accept the null hypotheses that:
 
 But before accepting these conclusions, we should test the assumptions in the usual way
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 ```{r, fig.cap="Model assumptions for `model.full1`"}
 par(mfrow = c(2, 2))
@@ -124,8 +124,8 @@ The last assumption in this sort of analysis is that the covariate (in this case
 You will notice that there is one datum with a large studentized residual, i.e. an outlier (case 49). Eliminate this datum from your data file and rerun the analysis. Do your conclusions change?
 :::
 
-::: {.callout-tip collapse="true"}
-```{r }
+::: {.callout-tip}
+```{r}
 model.full.no49 <- lm(lfkl ~ sex + lage + sex:lage, data = anc1dat[c(-49), ])
 Anova(model.full.no49, type = 3)
 ```
@@ -159,8 +159,8 @@ Anova(model.full2, type = 3)
 
 In this case, we reject the null hypotheses that (1) the slopes of the regressions are the same in the two locations; and (2) that the intercepts are the same in the two locations. In other words, if we want to predict the fork length of a sturgeon of a particular age (accurately) we need to know from which location it came. The fact that we reject the null hypothesis that the slopes of the lfkl - lage regressions are the same in both locations means that we should be doing individual regressions for each location separately (that is in fact what the full model is fitting). But we are jumping the gun here. Before you can trust these p values, you need to confirm that assumptions are met:
 
-::: {.callout-tip collapse="true"}
-```{r, fig.cap = "Conditions d'applications du modèle `model.full2`" }
+::: {.callout-tip}
+```{r, fig.cap = "Conditions d'applications du modèle `model.full2`"}
 par(mfrow = c(2, 2))
 plot(model.full2)
 ```
@@ -260,7 +260,7 @@ by(
   anc1dat[, "sex"],
   function(x) {
     summary(lm(lfkl ~ lage, data = x))
-  }
+ }
 )
 ```
 
@@ -272,7 +272,7 @@ by(
   anc1dat[, "sex"],
   function(x) {
     summary(lm(lfkl ~ lage, data = x[c(-49, -50, -19), ]))
-  }
+ }
 )
 ```
 Differences in intercepts are really small and similar than in previous models but now the precision (i.e. standard error) is much smaller for the models without outliers.

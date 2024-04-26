@@ -54,7 +54,7 @@ Suppose that we are interested in the effects of two factors: `location` (Cumber
 
 * Begin by having a look at the data by generating box plots of `rdwght` for `sex` and `location` from the file `Stu2wdat.csv` .
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r}
@@ -129,10 +129,10 @@ If the assumption of homogeneity of variances was valid, we would be accepting t
 Repeat this procedure using the data file Stu2mdat.Rdata . Now what do you conclude? Suppose you wanted to compare the sizes of males and females: in what way would these comparisons differ between Stu2wdat.Rdata and Stu2mdat.Rdata ?
 :::
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r, results = 'hide' }
+```{r, results = 'hide'}
 Stu2mdat <- read.csv("data/Stu2mdat.csv")
 anova.model2 <- lm(
   formula = rdwght ~ sex + location + sex:location,
@@ -192,7 +192,7 @@ We have neglected an important component in the above analyses, and that is rela
 for the situation in which `location` is a random factor and `sex` is a
 fixed factor. To do this, you need to recalculate the F-ratio for sex using the `sex:location` interaction mean square instead of the residual mean square. This is most easily accomplished by hand, making sure you are working with the Type III Sums of squares ANOVA table.
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r, eval = FALSE}
 Anova(anova.model1, type = 3)
@@ -283,10 +283,10 @@ anova.nested <- lm(survival ~ genotype / chamber, data = nestdat)
 What do you conclude from this analysis? What analysis would (should) you do next? (Hint: if there is a non-significant effect of chambers within genotypes, then you can increase the power of between-genotype comparisons by pooling over chambers within genotypes, although not everyone (Dr. Rundle included) agrees with such pooling.) Do it! Make sure you check your assumptions!
 
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r, fig.cap = "Conditions d'applications du modèle anova.nested" }
+```{r, fig.cap = "Conditions d'applications du modèle anova.nested"}
 anova(anova.nested)
 par(mfrow = c(2, 2))
 plot(anova.nested)
@@ -324,10 +324,10 @@ So, we conclude from the Tukey analysis and plot that dessiccation resistance (R
 
 Before concluding this, however, we must test the assumptions. Here are the residual plots and diagnostics for the one-way (unnested) design:
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r, fig.cap = "Conditions d'applications du modèle anova.simple" }
+```{r, fig.cap = "Conditions d'applications du modèle anova.simple"}
 par(mfrow = c(2, 2))
 plot(anova.simple)
 ```
@@ -396,10 +396,10 @@ The file `wmcdat2.csv` shows measured oxygen consumption ( `o2cons` ) of two spe
 
 - Run a 2-way factorial ANOVA on `wmcdat2` data, using `o2cons` as the dependent variable and species and conc as the factors. What do you conclude?
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r, results = "hide" }
+```{r, results = "hide"}
 wmcdat2 <- read.csv("data/wmcdat2.csv")
 wmcdat2$species <- as.factor(wmcdat2$species)
 wmcdat2$conc <- as.factor(wmcdat2$conc)
@@ -417,10 +417,10 @@ Anova(anova.model5, type = 3)
 
 Look at the diagnostic plots:
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 par(mfrow = c(2, 2))
 plot(anova.model5)
 ```
@@ -429,10 +429,10 @@ plot(anova.model5)
 Homoscedasticity looks ok, but normality less so.. Testing for
 normality, we get:
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 shapiro.test(residuals(anova.model5))
 ```
 :::
@@ -441,7 +441,7 @@ So there is evidence of non-normality, but otherwise everything looks O.K. Since
 
 - On the basis of the ANOVA results obtained above, which means would you proceed to compare? Why?
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 Need to add an explnation here
 :::
@@ -472,10 +472,10 @@ So there is evidence of a significant difference in oxygen consumption at a redu
 - Repeat the analysis described above using `wmc2dat2.csv` . How do
 your results compare with those obtained for `wmcdat2.csv` ?
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
-```{r }
+```{r}
 wmc2dat2 <- read.csv("data/wmc2dat2.csv")
 wmc2dat2$species <- as.factor(wmc2dat2$species)
 wmc2dat2$conc <- as.factor(wmc2dat2$conc)

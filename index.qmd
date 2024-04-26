@@ -5,54 +5,36 @@ to analyze data. R is powerful statistical software but, like all software, it h
 it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your
 results. The manual was written with the help of Rmarkfdown @xie2015.
 
-```{r setup, include=FALSE, cache = FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| cache: false
 knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)
 # knitr::opts_chunk$set(out.extra = 'class="plot"')
 # knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
-library(ggplot2)
-library(car)
-library(lmtest)
-library(boot)
-library(lmPerm)
-library(multcomp)
-library(questionr)
-library(simpleboot)
-library(svglite)
-library(pwr)
-library(performance)
-library(grateful)
-
-library(grateful)
-library(tidyverse)
-
-pkgs_dep <- cite_packages(
-  output = "table",
-  out.dir = ".",
-  dependencies = TRUE
-)
-# svglite
 ```
 
 ## General points to keep in mind {.unnumbered}
 
 * Before attempting any statistical procedure, you must familiarize yourself with what the procedure is actually doing. This does not mean you actually have to know the underlying mathematics (although this certainly helps!), but you should at least understand the principles involved in the analysis. Therefore, before doing a laboratory exercise, read the appropriate section(s) in the lecture notes. Otherwise, the output from your analyses - even if done correctly - will seem like drivel. 
 * The laboratories are designed to complement the lectures, and vice versa. Owing to scheduling constraints, it may not be possible to synchronize the two perfectly. But feel free to bring questions about the laboratories to class, or questions about the lectures to the labs.
-* Work on the laboratories at your own speed: some can be donemuch more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratorieswe have allotted two laboratory sessions. Although you will notbe "graded" on the laboratories per se, be aware that completingthe labs is essential. If you do not complete the labs, it is veryunlikely that you will be able to complete the assignments and thefinal exam/term paper. So take these laboratories seriously!
-* The objective of the first lab is to allow you to acquire or reviewthe minimum knowledge required to complete the following laboratory exercises with R. There are always several methods toaccomplish something in R, but you will only find simple ways inthis manual. Those amongst you that want to go further will easilyfind many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:
+* Work on the laboratories at your own speed: some can be done much more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratories we have allotted two laboratory sessions. Although you will not be "graded" on the laboratories per se, be aware that completing the labs is essential. If you do not complete the labs, it is very unlikely that you will be able to complete the assignments and the final exam/term paper. So take these laboratories seriously!
+* The objective of the first lab is to allow you to acquire or review the minimum knowledge required to complete the following laboratory exercises with R. There are always several methods to accomplish something in R, but you will only find simple ways in this manual. Those amongst you that want to go further will easily find many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:
 
   * R for beginners
-http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf
+<http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf>
   * An introduction to R
-http://cran.r-project.org/doc/manuals/R-intro.html
+<http://cran.r-project.org/doc/manuals/R-intro.html>
   * If you prefer paper books, the CRAN web site has a commented list at :
-http://www.r-project.org/doc/bib/R-books.html
+<http://www.r-project.org/doc/bib/R-books.html>
   * Excellent list of R books
-https://www.bigbookofr.com/
+<https://www.bigbookofr.com/>
   * R reference card by Tom Short
-http://cran.r-project.org/doc/contrib/Short-refcard.pdf
+<http://cran.r-project.org/doc/contrib/Short-refcard.pdf>
 
 ## What is R and why use it in this course? {.unnumbered}
-R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design intreface that some find convivial.
+
+R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design interface that some find convivial.
 
 R has 2 major advantages for this course. Initially, you will find that it also has one inconvenience. However, this “inconvenience” will rapidly force you to acquire very good working habits. So, I see it as a third advantage.
 
@@ -67,6 +49,7 @@ This is exactly what you will do in the first lab to familiarize yourself with R
 Why is this inconvenience really an advantage in my mind? Because this way of doing things is more efficient and will save you time on the long run. I guarantee it. Believe me, you will never do an analysis only once. As you’ll proceed through analyses, you will find data entry errors, discover that the analysis must be run separately for subgroups, find extra data, have to rerun the analysis on transformed data, or you will make some analytical error along the way. If you use a graphical interface with menus, redoing an analysis implies that you reclick here, enter values there, select some options, etc. Each of these steps is a potential source of error. If, instead, you use lines of codes, you only have to fix the code and submit to repeat instantaneously the entire analysis. And you can perfectly document what you did, leaving an audit trail for the future. This is how pros work and can document the quality of the results of their analyses.
 
 ## Software installation {.unnumbered}
+
 ### R {.unnumbered}
 
 To install R on a computer, go to http://cran.r-project.org/. You will find compiled versions (binairies) for your preferred operating system (Windows, MacOS, Linux).
@@ -89,7 +72,9 @@ R is essentially unlimited in terms of functions that can be used, because is re
 
 Those 2 packages should be installed automatically with RStudio but I recommend to install them manually in case they are not. To do so, just copy-paste the text below in R terminal.
 
-```{r, ind-install, eval = FALSE}
+```{r}
+#| label: install1
+#| eval: false
 install.packages(c("rmarkdown", "tinytex"))
 ```
 
@@ -124,11 +109,13 @@ The manual tries to highlight some part of the text using the following boxes an
 
 
 ::: {.callout-caution}
-# Exercises
+# Exercice
+ Stuff to do
 :::
 
-::: {.callout-note}
-# Solutions
+::: {.callout-tip}
+# Solution
+solutions
 :::
 
 ::: {.callout-warning}
@@ -136,11 +123,11 @@ warnings
 :::
 
 ::: {.callout-important}
-important points
+Important points
 :::
 
 ::: {.callout-note}
-notes
+Notes
 :::
 
 

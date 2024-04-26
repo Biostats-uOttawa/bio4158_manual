@@ -44,7 +44,7 @@ In 1960-1962, the Grand Rapids Dam was built on the Saskatchewan River upstream 
 numerical variable year , so that R recognizes that we wish to treat this
 variable as a factor variable and not a continuous variable.
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r, ano-1}
@@ -56,7 +56,7 @@ str(dam10dat)
 
 - Next, have a look at the fklngth data, just as we did in the last lab for t-tests. Create a histogram with density line grouped by year to get a feel for what’s happening with your data and a boxplot of length per year. What can you say about these data?
 
-::: {.callout-tip collapse="true"}
+::: {.callout-tip}
 # Solution
 
 ```{r, ano-2, warning = FALSE, message = FALSE, fig.cap = "Distribution of sturgeon length per year"}
@@ -250,7 +250,7 @@ In the above example to examine differences in fklngth among years , we detected
 
 - Repeat the one-way ANOVA in the section above, but this time run the analysis on the log 10 fklngth . With this transformation, do some of the problems encountered previously disappear?
 
-```{r, ano-16, fig.cap = "Diagnostic plots for the ANOVA of sturgeon length by year" }
+```{r, ano-16, fig.cap = "Diagnostic plots for the ANOVA of sturgeon length by year"}
 # Fit anova model on log10 of fklngth and plot residual diagnostics
 par(mfrow = c(2, 2))
 anova.model2 <- lm(log10(fklngth) ~ year, data = dam10dat)

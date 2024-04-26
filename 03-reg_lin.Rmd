@@ -489,7 +489,7 @@ estimated from the observed scatter around the line and the
 hypothesized slope).
 :::
 
-```{r, lm-pow-fig-1, fig.cap = "Power analysis for age-length in sturgeon with N = 20 and slope = 0.1", out.width = "100%", echo = FALSE  }
+```{r, lm-pow-fig-1, fig.cap = "Power analysis for age-length in sturgeon with N = 20 and slope = 0.1", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/pow_lm1_en.png")
 ```
 
@@ -519,7 +519,7 @@ You can see that the results is really similar but not exactly the same than wit
 
 To estimate the sample size required to achieve 99% power to detect a slope of 0.1 (in log-log space), with alpha=0.05, you simply change the type of analysis:
 
-```{r, lm-pow-fig-2, fig.cap = "A priori power analysis to estimate the sample size needed to have a power of 0.99", out.width = "100%", echo = FALSE  }
+```{r, lm-pow-fig-2, fig.cap = "A priori power analysis to estimate the sample size needed to have a power of 0.99", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/pow_lm2_en.png")
 ```
 

@@ -1,8 +1,6 @@
 project:
   type: book
   output-dir: _book
-  resources:
-    - .nojekyll
 
 execute: 
   cache: true
@@ -23,8 +21,7 @@ book:
       By Julien Martin.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
-  cover-image: images/blue_dragon.jpg
-  favicon: cover.jpg
+  cover-image: images/hex/logo_hex.png
   site-url: https://biostats-uottawa.github.io/bio4158_manual/
   repo-url: https://github.com/biostats-uottawa/bio4158_manual/
   repo-actions: [edit, issue]
@@ -55,10 +52,7 @@ book:
             href: https://biostats-uottawa.github.io/R/fr/
 
   chapters:
-    - index.Rmd
-    #- "01-introR_1.Rmd"
-    #- "01-introR_2.Rmd"
-    #- "01-introR_3.Rmd"
+    - index.qmd
     - 01-introR.Rmd
     - 02-Gpower.Rmd
     - 03-reg_lin.Rmd
@@ -82,7 +76,7 @@ format:
       light: cosmo
       dark: [cosmo, css/theme-dark.scss]
       #- r4ds.scss
-    css: css/style.css
+#    css: css/style.css
     code-link: true
 
     author-meta: "Julien Martin"

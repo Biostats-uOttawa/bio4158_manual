@@ -131,7 +131,7 @@ other t-tests | d | $d = \frac{\mu}{\sigma}$
 F-test (ANOVA) | f | $f = \frac{\frac{\sqrt{\sum_{i=1}^k (\mu_i - \mu)^2}}{k}}{\sigma}$
 other F-tests | $f^2$ | $f^2 = \frac{{R_p}^2}{1-{R_p}^2}$
  | | | ${R_p}$ is the squared partial correlation coefficient
-Chi-square test | w | $w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2 }{ p_{0i}} }$
+Chi-square test | w | $w = \sqrt{ \sum_{i=1}^m \frac{(p_{0i} - p_{1i})^2}{ p_{0i}}}$
  | | | $p_{0i}$ and $p_{1i}$ are theporportion in category $i$ predicted by the null, $_0$, and alternative, $_1$, hypothesis
 
 ## Power analysis for a t-test on two independent means
@@ -179,7 +179,7 @@ Start G\*Power.
 6. After you click on the **Calculate button** in the main window, you
 should get the following:
 
-```{r, gpower-1, fig.cap = "Post-hoc analysis with estimated effect size", out.width = "100%", echo = FALSE  }
+```{r, gpower-1, fig.cap = "Post-hoc analysis with estimated effect size", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/gpower_1.png")
 ```
 
@@ -234,7 +234,7 @@ Let’s examine the figure \@ref(fig:gpower-1).
 Change the mean of group 2 to 5.28, recalculate effect size, and click on Calculate to obtain figure \@ref(fig:gpower-2).
 :::
 
-```{r, gpower-2, fig.cap = "Post-hoc analysis using an effect size different from the one estimated", out.width = "100%", echo = FALSE  }
+```{r, gpower-2, fig.cap = "Post-hoc analysis using an effect size different from the one estimated", out.width = "100%", echo = FALSE }
 knitr::include_graphics("images/gpower_2.png")
 ```
 
@@ -261,7 +261,7 @@ Suppose that a difference in biomass of $3.31-2.64 = 0.67 g/m^2$ can be ecologic
 Change the type of power analysis in G*Power to **A priori: Compute sample size - given $\alpha$ , power, and effect size**. Ensure that the values for means and standard deviations are those obtained by Jaynie. Recalculate the effect size metric and enter 0.8 for power and you will obtain (\@ref(fig:gpower-3).
 :::
 
-```{r, gpower-3, fig.cap = "A priori analysis", out.width = "100%", echo = FALSE }
+```{r, gpower-3, fig.cap = "A priori analysis", out.width = "100%", echo = FALSE}
 knitr::include_graphics("images/gpower_3.png")
 ```
 
@@ -294,7 +294,7 @@ Given the observed variability, a sampling effort of 18 streams per region, and 
 Change analysis type in G\*Power to **Sensitivity: Compute required effect size - given $\alpha$ , power, and sample size** and size is 18 in each region.
 :::
 
-```{r, gpower-4, fig.cap = "Analyse de sensitivité", out.width = "100%", echo = FALSE }
+```{r, gpower-4, fig.cap = "Analyse de sensitivité", out.width = "100%", echo = FALSE}
 knitr::include_graphics("images/gpower_4.png")
 ```
 

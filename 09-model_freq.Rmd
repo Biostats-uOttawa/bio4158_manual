@@ -181,7 +181,7 @@ chisq.test(Popn0.9) ### X2 with Yates
 Test the null hypothesis that the proportion of male and female at birth is equal. What is your conclusion? Do you think the data is appropriate to test this hypothesis?
 :::
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r}
 chisq.test(Popn0.9, correct = F)
@@ -280,7 +280,7 @@ What does this mean? It means that, if there are any 2-way interactions, they do
 
 - If we adjust the model without the 3-way interaction, we get:
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r}
 o2int.model <- glm(Freq ~ sex + year + location + sex:year + sex:location + year:location, data = sturgdat.freq, family = "poisson")
@@ -294,7 +294,7 @@ Should you try to simplify the model further? Real statisticians are divided on 
 
 - Refit the model, this time excluding the sex:location interaction.
 
-::: {.callout-tip collapse='true'}
+::: {.callout-tip}
 # Solution
 ```{r}
 o2int.model2 <- glm(Freq ~ sex + year + location + sex:year + year:location, data = sturgdat.freq, family = "poisson")
