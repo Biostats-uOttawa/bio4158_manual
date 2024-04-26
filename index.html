@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.5.31">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Julien Martin">
-<meta name="dcterms.date" content="2024-04-04">
+<meta name="dcterms.date" content="2024-04-26">
 <meta name="description" content="Include extra information and exercises">
 <title>Applied biostatistics</title>
 <style>
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./01-introR.html" rel="next">
-<link href="./cover.jpg" rel="icon" type="image/jpeg">
+<link href="./images/hex/logo_hex.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -127,7 +127,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
-</script><link rel="stylesheet" href="css/style.css">
+</script>
 </head>
 <body class="nav-sidebar floating nav-fixed">
 
@@ -135,7 +135,7 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">BIO4158: manual</span>
+    <span class="navbar-title"><img src="images/hex/logo_hex.png" class="img-fluid" width="50"> BIO4158: manual</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -181,20 +181,20 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
 </li>
 </ul>
 </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools tools-wide">
+            <div class="quarto-navbar-tools tools-wide">
     <a href="https://github.com/biostats-uottawa/bio4158_manual/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="./Applied-biostatistics.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="./Applied-biostatistics.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -328,7 +328,7 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
 </li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -355,7 +355,7 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-04-04</p>
+      <p class="date">2024-04-26</p>
     </div>
   </div>
   
@@ -365,25 +365,30 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
 
 
 </header>
-<section id="welcome" class="level1 unnumbered"><h1 class="unnumbered">Welcome</h1><p><img src="images/blue_dragon.jpg" title="Applied biostatistics" class="quarto-cover-image img-fluid"></p>
+<section id="welcome" class="level1 unnumbered"><h1 class="unnumbered">Welcome</h1><p><img src="images/hex/logo_hex.png" title="Applied biostatistics" class="quarto-cover-image img-fluid"></p>
 <p>The laboratory exercises outlined in the following pages are designed to allow you to develop some expertise in using statistical software (R) to analyze data. R is powerful statistical software but, like all software, it has its limitations. In particular, it is dumb: it cannot think for you, it cannot tell you whether the analysis you are attempting to do is appropriate or even makes any sense, and it cannot interpret your results. The manual was written with the help of Rmarkfdown <span class="citation" data-cites="xie2015">Xie (<a href="99-references.html#ref-xie2015" role="doc-biblioref">2015</a>)</span>.</p>
 <section id="general-points-to-keep-in-mind" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="general-points-to-keep-in-mind">General points to keep in mind</h2>
 <ul>
 <li><p>Before attempting any statistical procedure, you must familiarize yourself with what the procedure is actually doing. This does not mean you actually have to know the underlying mathematics (although this certainly helps!), but you should at least understand the principles involved in the analysis. Therefore, before doing a laboratory exercise, read the appropriate section(s) in the lecture notes. Otherwise, the output from your analyses - even if done correctly - will seem like drivel.</p></li>
 <li><p>The laboratories are designed to complement the lectures, and vice versa. Owing to scheduling constraints, it may not be possible to synchronize the two perfectly. But feel free to bring questions about the laboratories to class, or questions about the lectures to the labs.</p></li>
-<li><p>Work on the laboratories at your own speed: some can be donemuch more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratorieswe have allotted two laboratory sessions. Although you will notbe “graded” on the laboratories per se, be aware that completingthe labs is essential. If you do not complete the labs, it is veryunlikely that you will be able to complete the assignments and thefinal exam/term paper. So take these laboratories seriously!</p></li>
+<li><p>Work on the laboratories at your own speed: some can be done much more quickly than others, and one laboratory need not correspond to one laboratory session. In fact, for some laboratories we have allotted two laboratory sessions. Although you will not be “graded” on the laboratories per se, be aware that completing the labs is essential. If you do not complete the labs, it is very unlikely that you will be able to complete the assignments and the final exam/term paper. So take these laboratories seriously!</p></li>
 <li>
-<p>The objective of the first lab is to allow you to acquire or reviewthe minimum knowledge required to complete the following laboratory exercises with R. There are always several methods toaccomplish something in R, but you will only find simple ways inthis manual. Those amongst you that want to go further will easilyfind many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:</p>
+<p>The objective of the first lab is to allow you to acquire or review the minimum knowledge required to complete the following laboratory exercises with R. There are always several methods to accomplish something in R, but you will only find simple ways in this manual. Those amongst you that want to go further will easily find many examples of more detailed and sophisticated methods.In particular, I point you to the following resources:</p>
 <ul>
-<li>R for beginners http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf</li>
-<li>An introduction to R http://cran.r-project.org/doc/manuals/R-intro.html</li>
-<li>If you prefer paper books, the CRAN web site has a commented list at : http://www.r-project.org/doc/bib/R-books.html</li>
-<li>Excellent list of R books https://www.bigbookofr.com/</li>
-<li>R reference card by Tom Short http://cran.r-project.org/doc/contrib/Short-refcard.pdf</li>
+<li>R for beginners <a href="http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf" class="uri">http://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf</a>
+</li>
+<li>An introduction to R <a href="http://cran.r-project.org/doc/manuals/R-intro.html" class="uri">http://cran.r-project.org/doc/manuals/R-intro.html</a>
+</li>
+<li>If you prefer paper books, the CRAN web site has a commented list at : <a href="http://www.r-project.org/doc/bib/R-books.html" class="uri">http://www.r-project.org/doc/bib/R-books.html</a>
+</li>
+<li>Excellent list of R books <a href="https://www.bigbookofr.com/" class="uri">https://www.bigbookofr.com/</a>
+</li>
+<li>R reference card by Tom Short <a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf" class="uri">http://cran.r-project.org/doc/contrib/Short-refcard.pdf</a>
+</li>
 </ul>
 </li>
 </ul></section><section id="what-is-r-and-why-use-it-in-this-course" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="what-is-r-and-why-use-it-in-this-course">What is R and why use it in this course?</h2>
-<p>R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design intreface that some find convivial.</p>
+<p>R is multiplatform free software forming a system for statistical computation and graphics. R is also a programming language specially designed for statistical data analysis. It is a dialect of the S language. S- Plus is another dialect of the S language, very similar to R, incorporated into a commercial package. S-Plus has a built-in graphical design interface that some find convivial.</p>
 <p>R has 2 major advantages for this course. Initially, you will find that it also has one inconvenience. However, this “inconvenience” will rapidly force you to acquire very good working habits. So, I see it as a third advantage.</p>
 <p>The first advantage is that you can install it freely on you personal computer(s). This is important because it is by doing analyses that you will learn and eventually master biostatistics. This implies that you have easy and unlimited access to a statistical software package. The second advantage is that R can do everything in statistics. R was conceived to be extensible and has become the preferred tool for statisticians around the world. The question is not “Can R do this?” but rather “How can I do this in R?”. And search engine are your friends.</p>
 <p>No other software package offers you these two advantages.</p>
@@ -436,24 +441,24 @@ Téléchargez le programme  sur le site https://www.psychologie.hhu.de/arbeitsgr
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercises
+Exercice
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<p>Stuff to do</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solutions
+Solution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<p>solutions</p>
 </div>
 </div>
 <div class="callout callout-style-simple callout-warning">
@@ -466,23 +471,14 @@ Solutions
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>important points</p>
-</div>
-</div>
-</div>
+<p>Important points :::</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>notes</p>
+<p>Notes</p>
 </div>
 </div>
 </div>
@@ -680,18 +676,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -723,7 +708,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/biostats-uottawa\.github\.io\/bio4158_manual\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -758,7 +783,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1046,7 +1075,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/biostats-uottawa/bio4158_manual/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio4158_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This book was built with <a href="https://quarto.org/">Quarto</a>.</p>
 </div>

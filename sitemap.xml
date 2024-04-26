@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://biostats-uottawa.github.io/bio4158_manual/index.html</loc>
-    <lastmod>2024-01-29T14:39:26.662Z</lastmod>
-  </url>
-  <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/01-introR.html</loc>
-    <lastmod>2024-02-09T17:28:27.449Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.584Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/02-Gpower.html</loc>
-    <lastmod>2024-02-09T17:28:27.433Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.592Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/03-reg_lin.html</loc>
-    <lastmod>2024-02-09T17:28:27.465Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.596Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/04-t_test.html</loc>
@@ -22,34 +18,38 @@
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/05-anova.html</loc>
-    <lastmod>2024-02-09T17:28:27.433Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.592Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/06-anova_mult.html</loc>
-    <lastmod>2024-02-09T17:28:27.433Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.592Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/07-reg_mult.html</loc>
-    <lastmod>2024-02-09T17:28:27.437Z</lastmod>
+    <lastmod>2024-04-26T02:22:34.596Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/08-ancova_glm.html</loc>
-    <lastmod>2024-01-29T14:33:02.242Z</lastmod>
-  </url>
-  <url>
-    <loc>https://biostats-uottawa.github.io/bio4158_manual/99-references.html</loc>
-    <lastmod>2024-04-05T03:16:26.527Z</lastmod>
+    <lastmod>2024-04-26T02:23:46.964Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/10-software.html</loc>
     <lastmod>2024-01-29T14:33:02.242Z</lastmod>
   </url>
   <url>
+    <loc>https://biostats-uottawa.github.io/bio4158_manual/index.html</loc>
+    <lastmod>2024-04-26T13:23:16.987Z</lastmod>
+  </url>
+  <url>
+    <loc>https://biostats-uottawa.github.io/bio4158_manual/99-references.html</loc>
+    <lastmod>2024-04-05T03:16:26.527Z</lastmod>
+  </url>
+  <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/Applied-biostatistics.pdf</loc>
-    <lastmod>2024-04-05T03:22:12.750Z</lastmod>
+    <lastmod>2024-04-26T13:34:13.412Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio4158_manual/Applied-biostatistics.epub</loc>
-    <lastmod>2024-04-05T03:22:19.226Z</lastmod>
+    <lastmod>2024-04-26T13:34:20.348Z</lastmod>
   </url>
 </urlset>
